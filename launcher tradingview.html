@@ -111,6 +111,7 @@ body {font-family: Arial;}
 		<li class="list-group-item" onclick="liClick('DJ:DJI')">DJI</a></li>
 		<li class="list-group-item" onclick="liClick('CBOT_MINI:YM1!')">YM1! (Mini Dow Jones, para ver el volumen real)</a></li>
 		<li class="list-group-item" onclick="liClick('AMEX:IWM')">IWM</a></li>
+		<li class="list-group-item" onclick="liClick('TVC:NYA')">NYA</a></li>
 		<li class="list-group-item" onclick="liClick('AMEX:RSP')">RSP (Invesco S&P 500 Equal Weight ETF)</a></li>
 		<li class="list-group-item" onclick="liClick('XETR:DAX')">DAX</a></li>
 		<li class="list-group-item" onclick="liClick('CURRENCYCOM:EU50')">EU50</a></li>
@@ -123,8 +124,11 @@ body {font-family: Arial;}
 
 <!---- Market Timming   ---->
 <div id="MarketTimming" class="tabcontent">
-  <ul class="list-group">
-		<li class="list-group-item" onclick="liClick('TVC:US10Y-TVC:US02Y')">TVC:US10Y-TVC:US02Y</a></li>
+	<ul class="list-group">
+		<li class="list-group-item" onclick="liClick('CBOE:VIX')">VIX</a></li>
+		<li class="list-group-item" onclick="liClick('CBOE:VVIX')">VVIX</a></li>
+		<li class="list-group-item" onclick="liClick('USI:PCCE')">PCCE (Put / Call Ratio Equities)</a></li>
+		<li class="list-group-item" onclick="liClick('TVC:US10Y-TVC:US02Y')">US10Y-US02Y</a></li>
 		
 		<li class="list-group-item" onclick="liClick('AMEX:TIP')">TIP</a></li>
 		
@@ -233,7 +237,7 @@ function openTab(evt, cityName) {
 		
 //}
 function liClick(ticket){
-	window.open("https://www.tradingview.com/chart/"+selectTV.options[selectTV.selectedIndex].value+"/?symbol="+ticket, "tv");
+	window.open("https://www.tradingview.com/chart/"+selectTV.options[selectTV.selectedIndex].value+"/?symbol="+encodeURIComponent(ticket), "tv");
 }
 </script>
    
