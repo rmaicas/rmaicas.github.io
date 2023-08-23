@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <title>Launcher Trading View</title>
@@ -6,19 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 
-a:link {
-  text-decoration: none;
+li {
+    cursor: pointer;
+	width: fit-content;
 }
-
-a:visited {
-  text-decoration: none;
-}
-
-a:hover {
+li:hover {
   text-decoration: underline;
 }
 
-a:active {
+li:active {
   text-decoration: underline;
 }
 
@@ -74,80 +69,88 @@ body {font-family: Arial;}
 }
 </style>
 </head>
-<body>
+<body onload="changeTV()">
 
-<h2>Launcher of Trading View</h2>
-
-<div class="divBtn">
-<a class="btn" style="background-color: purple;" target="tv" href="https://www.tradingview.com/markets/indices/quotes-us/">US Indices</a>
+<!---- Cabecera ---->
+<div style="width:100%;">
+  <div style="width:50%; float:left;"><h2>Launcher of Trading View</h2></div>
+  <div style="width:50%; float:right;padding-top: 20px;">
+	User: 
+	<select id="selectTV" >
+		  <option value="dL2YkoyI"> rmaicas </option>
+		  <option value="tkhYAjkG"> jrmaicas </option>
+	</select>
+	<!-- <input type="hidden" id="oldSelectedTV" name="oldSelectedTV" value="tkhYAjkG"> -->
+  </div>
 </div>
-<hr>
-<div class="divBtn">
-<a class="btn" style="background-color: blue;" target="tv" href="https://www.tradingview.com/heatmap/stock/?color=change&dataset=SPX500&group=sector&size=market_cap_basic">Stock Heatmap (SP500)</a>
+<div style="clear: both;"></div>
 
-<a class="btn" style="background-color: blue;" target="tv" href="https://www.tradingview.com/screener/">Stock Screener</a>
-</div>
-<hr>
-<div class="divBtn">
-<a class="btn" target="tv" href="https://www.tradingview.com/markets/indices/quotes-currency/">Currency Indices</a>
-<a class="btn" target="tv" href="https://www.tradingview.com/forex-screener/">Forex Screener</a>
-</div>
 
+<!---- Contenido ---->
 <div class="tab">
   <button class="tablinks" onclick="openTab(event, 'Indexes')">Indices</button>
   <button class="tablinks" onclick="openTab(event, 'MarketTimming')">Market Timming</button>
   <button class="tablinks" onclick="openTab(event, 'Forex')">Forex</button>
   <button class="tablinks" onclick="openTab(event, 'BasicMaterials')">Basic Materials</button>
   <button class="tablinks" onclick="openTab(event, 'Sectors')">Sectors</button>
+  <button class="tablinks" onclick="openTab(event, 'USAStocks')">USA Stocks</button>
+  
 </div>
 
 <!---- Indexes   ---->
 <div id="Indexes" class="tabcontent">
+	<div class="divBtn">
+		<a class="btn" style="background-color: purple;" target="tv" href="https://www.tradingview.com/markets/indices/quotes-us/">US Indices</a>
+	</div>
 	<ul class="list-group">
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=OANDA%3ASPX500USD">SPX500USD</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=AMEX:SPY">SPY</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=NASDAQ:QQQ">QQQ</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=CME_MINI:NQ1!">NQ1!</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=DJ:DJI">DJI</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=CBOT_MINI:YM1!">YM1! (Mini Dow Jones, para ver el volumen real)</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=AMEX:IWM">IWM</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=AMEX:RSP">RSP (Invesco S&P 500 Equal Weight ETF)</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=XETR:DAX">DAX</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=CURRENCYCOM:EU50">EU50</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=OANDA:EU50EUR">EU50EUR</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=CURRENCYCOM:FR40">FR40</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=TVC:UKX">UKX</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=TVC:IBEX35">IBEX35</a></li>
+		<li class="list-group-item" onclick="liClick('OANDA:SPX500USD')">SPX500USD</li>
+		<li class="list-group-item" onclick="liClick('AMEX:SPY')">SPY</a></li>
+		<li class="list-group-item" onclick="liClick('NASDAQ:QQQ')">QQQ</a></li>
+		<li class="list-group-item" onclick="liClick('CME_MINI:NQ1!')">NQ1!</a></li>
+		<li class="list-group-item" onclick="liClick('DJ:DJI')">DJI</a></li>
+		<li class="list-group-item" onclick="liClick('CBOT_MINI:YM1!')">YM1! (Mini Dow Jones, para ver el volumen real)</a></li>
+		<li class="list-group-item" onclick="liClick('AMEX:IWM')">IWM</a></li>
+		<li class="list-group-item" onclick="liClick('AMEX:RSP')">RSP (Invesco S&P 500 Equal Weight ETF)</a></li>
+		<li class="list-group-item" onclick="liClick('XETR:DAX')">DAX</a></li>
+		<li class="list-group-item" onclick="liClick('CURRENCYCOM:EU50')">EU50</a></li>
+		<li class="list-group-item" onclick="liClick('OANDA:EU50EUR')">EU50EUR</a></li>
+		<li class="list-group-item" onclick="liClick('CURRENCYCOM:FR40')">FR40</a></li>
+		<li class="list-group-item" onclick="liClick('TVC:UKX')">UKX</a></li>
+		<li class="list-group-item" onclick="liClick('TVC:IBEX35')">IBEX35</a></li>
 	</ul>
 </div>
 
 <!---- Market Timming   ---->
 <div id="MarketTimming" class="tabcontent">
   <ul class="list-group">
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=TVC:US10Y-TVC:US02Y">TVC:US10Y-TVC:US02Y</a></li>
+		<li class="list-group-item" onclick="liClick('TVC:US10Y-TVC:US02Y')">TVC:US10Y-TVC:US02Y</a></li>
 	</ul> 
 </div>
 
 <!---- Forex   ---->
 <div id="Forex" class="tabcontent">
-  <ul class="list-group">
-	<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=TVC:DXY">DXY</a></li>
-	<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=AMEX:UUP">UUP (para ver el volumen del DXY)</a></li>
-	<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=INDEX:BTCUSD">BTCUSD</a></li>
-	<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=BINANCE:ETHUSD">ETHUSD</a></li>
-	<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=OANDA:AUDUSD">AUDUSD</a></li>
-	<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=OANDA:CADCHF">CADCHF</a></li>
-	<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=OANDA:EURCHF">EURCHF</a></li>
-	<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=OANDA:EURGBP">EURGBP</a></li>
-	<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=OANDA:EURJPY">EURJPY</a></li>
-	<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=OANDA:EURNOK">EURNOK</a></li>
-	<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=OANDA:EURUSD">EURUSD</a></li>
-	<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=OANDA:GBPUSD">GBPUSD</a></li>
-	<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=OANDA:NZDUSD">NZDUSD</a></li>
-	<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=OANDA:USDCAD">USDCAD</a></li>
-	<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=OANDA:USDJPY">USDJPY</a></li>
-	
-  </ul>
+	<div class="divBtn">
+		<a class="btn" target="tv" href="https://www.tradingview.com/markets/indices/quotes-currency/">Currency Indices</a>
+		<a class="btn" target="tv" href="https://www.tradingview.com/forex-screener/">Forex Screener</a>
+	</div>
+	<ul class="list-group">
+		<li class="list-group-item" onclick="liClick('TVC:DXY')">DXY</a></li>
+		<li class="list-group-item" onclick="liClick('AMEX:UUP')">UUP (para ver el volumen del DXY)</a></li>
+		<li class="list-group-item" onclick="liClick('INDEX:BTCUSD')">BTCUSD</a></li>
+		<li class="list-group-item" onclick="liClick('BINANCE:ETHUSD')">ETHUSD</a></li>
+		<li class="list-group-item" onclick="liClick('OANDA:AUDUSD')">AUDUSD</a></li>
+		<li class="list-group-item" onclick="liClick('OANDA:CADCHF')">CADCHF</a></li>
+		<li class="list-group-item" onclick="liClick('OANDA:EURCHF')">EURCHF</a></li>
+		<li class="list-group-item" onclick="liClick('OANDA:EURGBP')">EURGBP</a></li>
+		<li class="list-group-item" onclick="liClick('OANDA:EURJPY')">EURJPY</a></li>
+		<li class="list-group-item" onclick="liClick('OANDA:EURNOK')">EURNOK</a></li>
+		<li class="list-group-item" onclick="liClick('OANDA:EURUSD')">EURUSD</a></li>
+		<li class="list-group-item" onclick="liClick('OANDA:GBPUSD')">GBPUSD</a></li>
+		<li class="list-group-item" onclick="liClick('OANDA:NZDUSD')">NZDUSD</a></li>
+		<li class="list-group-item" onclick="liClick('OANDA:USDCAD')">USDCAD</a></li>
+		<li class="list-group-item" onclick="liClick('OANDA:USDJPY')">USDJPY</a></li>
+		
+	</ul>
 </div>
 
 
@@ -164,21 +167,36 @@ body {font-family: Arial;}
 
 <!---- Sectors   ---->
 <div id="Sectors" class="tabcontent">
+	<div class="divBtn">
+		<a class="btn" style="background-color: blue;" target="tv" href="https://www.tradingview.com/markets/indices/quotes-snp/">S&P Sectors</a>
+	</div>
 	<ul class="list-group">
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=AMEX:XLY/AMEX:XLP">XLY/XLP</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=AMEX:XLB">XLB (Materials)</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=AMEX:XLC">XLC (Communication Services)</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=AMEX:XLE">XLE (Energy)</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=AMEX:XLF">XLF (Financial)</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=AMEX:XLI">XLI (Industrial)</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=AMEX:XLK">XLK (Technology)</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=AMEX:XLP">XLP (Consumer Staples)</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=AMEX:XLU">XLU (Utilities)</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=AMEX:XLV">XLV (Health Care)</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=AMEX:XLY">XLY (Consumer Discretionary)</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/chart/tkhYAjkG/?symbol=AMEX:GDX">GDX (VanEck Gold Miners ETF)</a></li>
+		<li class="list-group-item" onclick="liClick('AMEX:XLY/AMEX:XLP')">XLY/XLP</a></li>
+		<li class="list-group-item" onclick="liClick('AMEX:XLB')">XLB (Materials)</a></li>
+		<li class="list-group-item" onclick="liClick('AMEX:XLC')">XLC (Communication Services)</a></li>
+		<li class="list-group-item" onclick="liClick('AMEX:XLE')">XLE (Energy)</a></li>
+		<li class="list-group-item" onclick="liClick('AMEX:XLF')">XLF (Financial)</a></li>
+		<li class="list-group-item" onclick="liClick('AMEX:XLI')">XLI (Industrial)</a></li>
+		<li class="list-group-item" onclick="liClick('AMEX:XLK')">XLK (Technology)</a></li>
+		<li class="list-group-item" onclick="liClick('AMEX:XLP')">XLP (Consumer Staples)</a></li>
+		<li class="list-group-item" onclick="liClick('AMEX:XLU')">XLU (Utilities)</a></li>
+		<li class="list-group-item" onclick="liClick('AMEX:XLV')">XLV (Health Care)</a></li>
+		<li class="list-group-item" onclick="liClick('AMEX:XLY')">XLY (Consumer Discretionary)</a></li>
+		<li class="list-group-item" onclick="liClick('AMEX:GDX')">GDX (VanEck Gold Miners ETF)</a></li>
 	</ul>
 </div>
+
+<!---- USA Stocks   ---->
+<div id="USAStocks" class="tabcontent">
+	<ul class="list-group">
+		<div class="divBtn">
+			<a class="btn" style="background-color: blue;" target="tv" href="https://www.tradingview.com/heatmap/stock/?color=change&dataset=SPX500&group=sector&size=market_cap_basic">Stock Heatmap (SP500)</a>
+
+			<a class="btn" style="background-color: blue;" target="tv" href="https://www.tradingview.com/screener/">Stock Screener</a>
+		</div>
+	</ul>
+</div>
+
 
 <script>
 function openTab(evt, cityName) {
@@ -193,6 +211,23 @@ function openTab(evt, cityName) {
   }
   document.getElementById(cityName).style.display = "block";
   evt.currentTarget.className += " active";
+}
+
+//function changeTV(){
+	//var idx = selectTV.selectedIndex;
+	//var value = selectTV.options[idx].value;
+	//var oldValue = document.getElementById("oldSelectedTV").value
+	//const collection = document.getElementsByClassName("list-group-item");
+	//for (let i = 0; i < collection.length; i++) {
+	//	url = collection[i].firstChild.href;
+	//	collection[i].firstChild.href = url.replace(oldValue, value);
+	//}
+	//Change oldSelectedTV
+	//document.getElementById("oldSelectedTV").value = value;
+		
+//}
+function liClick(ticket){
+	window.open("https://www.tradingview.com/chart/"+selectTV.options[selectTV.selectedIndex].value+"/?symbol="+ticket, "tv");
 }
 </script>
    
