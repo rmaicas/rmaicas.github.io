@@ -82,12 +82,14 @@ body {font-family: Arial;}
 .flag{
     border-top-width: 0px;
     border-bottom-width: 0px;
+	border-right-width: 0px;
+    border-left-width: 0px;
     padding-left: 0px;
     padding-right: 0px;
-    border-right-width: 0px;
-    border-left-width: 0px;
     padding-top: 0px;
     padding-bottom: 0px;
+	background-color: transparent;
+	cursor: pointer;
 }
 </style>
 </head>
@@ -129,22 +131,22 @@ body {font-family: Arial;}
 		<button id="set" onclick="setNote()">SAVE</button>
 	</div>
 	<div style="width:55%; float:left;padding-top:20px;">
-		<textarea style="max-width: 100%;" name="note" cols="150" id="note" rows="40"></textarea>
+		<textarea style="max-width: 98%;" name="note" cols="150" id="note" rows="40"></textarea>
 	</div>
 	
 	<div style="width:15%; float:right;;padding-top:20px;">
 		<label for="blueList">🟦 Blue List:</label>
-		<ul name="blueList" id="blueList">
+		<ul class="list-group" name="blueList" id="blueList">
 		</ul>
 	</div>
 	<div style="width:15%; float:right;;padding-top:20px;">
 		<label for="greenList">🟩 Green List:</label>
-		<ul name="greenList" id="greenList">
+		<ul class="list-group" name="greenList" id="greenList">
 		</ul>
 	</div>
 	<div style="width:15%; float:right;;padding-top:20px;">
 		<label for="redList">🟥 Red List:</label>
-		<ul name="redList" id="redList">
+		<ul class="list-group" name="redList" id="redList">
 		</ul>
 	</div>
 </div>
@@ -572,14 +574,31 @@ function setFlagsOnPage(listId, array, charFlag) {
 	for(var i = 0; i < array.length; i++) {
 		var opt = array[i];
 
-		var el = document.createElement("li");
-		//el.text = opt;
-		//el.id = opt;
-		el.innerHTML = opt;
-		el.addEventListener('click',()=>liClick(opt));
-
+		el = document.createElement("li");
 		colorList.append(el);
+		elSpan = document.createElement("span");
+		elSpan.text = opt;
+		elSpan.innerHTML = opt;
+		elSpan.addEventListener('click',(event)=>liClick(event.srcElement.text));
+		el.append(elSpan);
+		
+		elButton = document.createElement("button");
+		elButton.classList.add("flag");
+		elButton.innerHTML = "✖";
+		elButton.text=opt;
+		elButton.addEventListener('click',(event)=>removeFlag(event.srcElement.text));
+		el.append(' ');
+		el.append(elButton);
 	}
+}
+
+function removeFlag(ticket){
+	document.getElementById(ticket).previousElementSibling.innerText = "⬜";
+	deleteItemInArray(arrayRed,ticket);
+	deleteItemInArray(arrayGreen,ticket);
+	deleteItemInArray(arrayBlue,ticket);
+	saveFlags();
+	setAllFlagsOnPage();
 }
 
 function setFlag(ticket){
