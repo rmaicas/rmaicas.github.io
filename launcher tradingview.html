@@ -27,6 +27,10 @@ li:active {
 
 body {font-family: Arial;}
 
+.list-group {
+  list-style-type: none;
+}
+
 /* Style the tab */
 .tab {
   overflow: hidden;
@@ -75,9 +79,19 @@ body {font-family: Arial;}
     margin-top: 20px;
     margin-bottom: 20px;
 }
+.flag{
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
 </style>
 </head>
-<body onload="changeTV()">
+<body>
 
 <!---- Cabecera ---->
 <div style="width:100%;">
@@ -88,7 +102,10 @@ body {font-family: Arial;}
 		  <option value="dL2YkoyI"> rmaicas </option>
 		  <option value="tkhYAjkG"> jrmaicas </option>
 	</select>
-	<!-- <input type="hidden" id="oldSelectedTV" name="oldSelectedTV" value="tkhYAjkG"> -->
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button onclick="backupLocalStorageToClipboard()">Backup Local Storage to Clipboard</button>
+	<button onclick="restoreLocalStorageFromClipboard()">Restore Local Storage from Clipboard</button>
+	
   </div>
 </div>
 <div style="clear: both;"></div>
@@ -96,15 +113,40 @@ body {font-family: Arial;}
 
 <!---- Contenido ---->
 <div class="tab">
-  <button class="tablinks" onclick="openTab(event, 'Indexes')">Indices</button>
-  <button class="tablinks" onclick="openTab(event, 'MarketTimming')">Market Timming</button>
-  <button class="tablinks" onclick="openTab(event, 'Forex')">Forex</button>
-  <button class="tablinks" onclick="openTab(event, 'BasicMaterials')">Basic Materials</button>
-  <button class="tablinks" onclick="openTab(event, 'Sectors')">Sectors</button>
-  <button class="tablinks" onclick="openTab(event, 'USAStocks')">USA Stocks</button>
-  <button class="tablinks" onclick="openTab(event, 'WorldStocks')">World Stocks</button>
-  
-  
+	<button id="tabNotes" class="tablinks" onclick="openTab(event, 'Notes')">Notes</button>
+	<button class="tablinks" onclick="openTab(event, 'Indexes')">Indices</button>
+	<button class="tablinks" onclick="openTab(event, 'MarketTimming')">Market Timming</button>
+	<button class="tablinks" onclick="openTab(event, 'Forex')">Forex</button>
+	<button class="tablinks" onclick="openTab(event, 'BasicMaterials')">Basic Materials</button>
+	<button class="tablinks" onclick="openTab(event, 'Sectors')">Sectors</button>
+	<button class="tablinks" onclick="openTab(event, 'USAStocks')">USA Stocks</button>
+	<button class="tablinks" onclick="openTab(event, 'WorldStocks')">World Stocks</button>
+</div>
+
+<!---- Notes   ---->
+<div id="Notes" class="tabcontent">
+	<div style="text-align: left; width:100%; padding-top: 10px;">
+		<button id="set" onclick="setNote()">SAVE</button>
+	</div>
+	<div style="width:55%; float:left;padding-top:20px;">
+		<textarea style="max-width: 100%;" name="note" cols="150" id="note" rows="40"></textarea>
+	</div>
+	
+	<div style="width:15%; float:right;;padding-top:20px;">
+		<label for="blueList">🟦 Blue List:</label>
+		<ul name="blueList" id="blueList">
+		</ul>
+	</div>
+	<div style="width:15%; float:right;;padding-top:20px;">
+		<label for="greenList">🟩 Green List:</label>
+		<ul name="greenList" id="greenList">
+		</ul>
+	</div>
+	<div style="width:15%; float:right;;padding-top:20px;">
+		<label for="redList">🟥 Red List:</label>
+		<ul name="redList" id="redList">
+		</ul>
+	</div>
 </div>
 
 <!---- Indexes   OK---->
@@ -113,30 +155,30 @@ body {font-family: Arial;}
 		<a class="btn" style="background-color: purple;" target="tv" href="https://www.tradingview.com/markets/indices/quotes-us/">US Indices</a>
 	</div>
 	<ul class="list-group">
-		<li class="list-group-item" onclick="liClick('OANDA:SPX500USD')">SPX500USD</li>
-		<li class="list-group-item" onclick="liClick('AMEX:SPY')">SPY</a></li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:QQQ')">QQQ</a></li>
-		<li class="list-group-item" onclick="liClick('CME_MINI:NQ1!')">NQ1!</a></li>
-		<li class="list-group-item" onclick="liClick('DJ:DJI')">DJI</a></li>
-		<li class="list-group-item" onclick="liClick('CBOT_MINI:YM1!')">YM1! (Mini Dow Jones, para ver el volumen real)</a></li>
-		<li class="list-group-item" onclick="liClick('AMEX:IWM')">IWM</a></li>
-		<li class="list-group-item" onclick="liClick('TVC:NYA')">NYA (NYSE Composite Index)</a></li>
-		<li class="list-group-item" onclick="liClick('AMEX:RSP')">RSP (Invesco S&P 500 Equal Weight ETF)</a></li>
-		<li class="list-group-item" onclick="liClick('XETR:DAX')">DAX</a></li>
-		<li class="list-group-item" onclick="liClick('CURRENCYCOM:EU50')">EU50</a></li>
-		<li class="list-group-item" onclick="liClick('OANDA:EU50EUR')">EU50EUR</a></li>
-		<li class="list-group-item" onclick="liClick('CURRENCYCOM:FR40')">FR40</a></li>
-		<li class="list-group-item" onclick="liClick('TVC:UKX')">UKX</a></li>
-		<li class="list-group-item" onclick="liClick('TVC:IBEX35')">IBEX35</a></li>
-		<li class="list-group-item" onclick="liClick('EURONEXT:MIB')">MIB</a></li>
-		<li class="list-group-item" onclick="liClick('TVC:NI225')">NI225</a></li>
-		<li class="list-group-item" onclick="liClick('OANDA:CN50USD')">CN50USD (China A50)</a></li>
-		<li class="list-group-item" onclick="liClick('HKEX:HSI1!')">HSI1! (HANG SENG INDEX FUTURES)</a></li>
-		<li class="list-group-item" onclick="liClick('FTSE:XIN9')">XIN9 (FTSE China A50 Index)</a></li>
-		<li class="list-group-item" onclick="liClick('AMEX:FXI')">FXI (iShares China Large-Cap ETF)</a></li>
-		<li class="list-group-item" onclick="liClick('AMEX:ARGT')">ARGT</a></li>
-		<li class="list-group-item" onclick="liClick('BCBA:IMV/(BCBA:GGAL/NASDAQ:GGAL*10)')">Simil Merval en dolares</a></li>
-		<li class="list-group-item" onclick="liClick('AMEX:EWZ')">EWZ</a></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:SPX500USD">SPX500USD</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:SPY">SPY</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:QQQ">QQQ</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CME_MINI:NQ1!">NQ1!</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="DJ:DJI">DJI</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CBOT_MINI:YM1!">YM1! (Mini Dow Jones, para ver el volumen real)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:IWM">IWM</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="TVC:NYA">NYA (NYSE Composite Index)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:RSP">RSP (Invesco S&P 500 Equal Weight ETF)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="XETR:DAX">DAX</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CURRENCYCOM:EU50">EU50</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:EU50EUR">EU50EUR</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CURRENCYCOM:FR40">FR40</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="TVC:UKX">UKX</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="TVC:IBEX35">IBEX35</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="EURONEXT:MIB">MIB</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="TVC:NI225">NI225</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:CN50USD">CN50USD (China A50)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="HKEX:HSI1!">HSI1! (HANG SENG INDEX FUTURES)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="FTSE:XIN9">XIN9 (FTSE China A50 Index)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:FXI">FXI (iShares China Large-Cap ETF)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:ARGT">ARGT</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="BCBA:IMV/(BCBA:GGAL/NASDAQ:GGAL*10)">Simil Merval en dolares</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:EWZ">EWZ</span></li>
 	</ul>
 </div>
 
@@ -144,55 +186,55 @@ body {font-family: Arial;}
 <div id="MarketTimming" class="tabcontent">
 	<ul class="list-group">
 		<h4>Stocks</h4>
-		<li class="list-group-item" onclick="liClick('CBOE:VIX')">VIX</li>
-		<li class="list-group-item" onclick="liClick('CBOE:VVIX')">VVIX</li>
-		<li class="list-group-item" onclick="liClick('CBOE:VIX/CBOE:VIX3M')">Volatilidad 1 mes / Volatilidad 3 meses (Por encima de 1 => DANGER!!!)</li>
-		<li class="list-group-item" onclick="liClick('CBOE:VIX3M/CBOE:VIX')">VRatio: is the ratio of VIX3M and VIX. (Arriba 1.1 -> Bear market, luego decrece y llega a estar debajo de 1)</li>
-		<li class="list-group-item" onclick="liClick('USI:PCCE')">PCCE (Put / Call Ratio Equities)</li>
-		<li class="list-group-item" onclick="liClick('INDEX:HIGN-INDEX:LOWN')">New Highs - New Lows (NYSE market) ( >0 = bullish / <0 = bearish)</li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CBOE:VIX">VIX</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CBOE:VVIX">VVIX</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CBOE:VIX/CBOE:VIX3M">Volatilidad 1 mes / Volatilidad 3 meses (Por encima de 1 => DANGER!!!)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CBOE:VIX3M/CBOE:VIX">VRatio: is the ratio of VIX3M and VIX. (Arriba 1.1 -> Bear market, luego decrece y llega a estar debajo de 1)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="USI:PCCE">PCCE (Put / Call Ratio Equities)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="INDEX:HIGN-INDEX:LOWN">New Highs - New Lows (NYSE market) ( >0 = bullish / <0 = bearish)</span></li>
 		
-		<li class="list-group-item" onclick="liClick('INDEX:S5FI')">S&P 500 Stocks Above 50-Day Average</li>
-		<li class="list-group-item" onclick="liClick('INDEX:S5TH')">S&P 500 Stocks Above 200-Day Average</li>
-		<li class="list-group-item" onclick="liClick('AMEX:SPY/AMEX:SPLV')">SP500/SP500 Low Volatility. (Anticipa/confirma posibles movimientos hacia arriba/abajo del SP500)</li>
-		<li class="list-group-item" onclick="liClick('AMEX:RSP/AMEX:SPY')">SP500 equal weight / SP500</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:QQEW/NASDAQ:QQQ')">QQQ equal weight / QQQ</li>
-		<li class="list-group-item" onclick="liClick('AMEX:SPHB')">SPHB (Invesco S&P 500 High Beta ETF)</li>
-		<li class="list-group-item" onclick="liClick('AMEX:SPHB/AMEX:SPLV')">ETF High Beta / Low Volatility</li>
-		<li class="list-group-item" onclick="liClick('AMEX:VUG/AMEX:VTV')">ETF Vanguard Growth / Value</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:QQEW')">QQEW (First Trust NASDAQ-100 Equal Weighted Index Fund)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:SQQQ')">SQQQ (ProShares UltraPro Short QQQ)</li>
-		<li class="list-group-item" onclick="liClick('AMEX:ARKK/AMEX:XLK')">ARK / XLK (Tecnologia con perdida / Sector Tecnologico)</li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="INDEX:S5FI">S&P 500 Stocks Above 50-Day Average</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="INDEX:S5TH">S&P 500 Stocks Above 200-Day Average</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:SPY/AMEX:SPLV">SP500/SP500 Low Volatility. (Anticipa/confirma posibles movimientos hacia arriba/abajo del SP500)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:RSP/AMEX:SPY">SP500 equal weight / SP500</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:QQEW/NASDAQ:QQQ">QQQ equal weight / QQQ</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:SPHB">SPHB (Invesco S&P 500 High Beta ETF)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:SPHB/AMEX:SPLV">ETF High Beta / Low Volatility</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:VUG/AMEX:VTV">ETF Vanguard Growth / Value</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:QQEW">QQEW (First Trust NASDAQ-100 Equal Weighted Index Fund)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:SQQQ">SQQQ (ProShares UltraPro Short QQQ)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:ARKK/AMEX:XLK">ARK / XLK (Tecnologia con perdida / Sector Tecnologico)</span></li>
 		
 		<h4>Bonds</h4>
-		<li class="list-group-item" onclick="liClick('TVC:US02Y')">US Government Bonds 2 YR Yield</li>
-		<li class="list-group-item" onclick="liClick('TVC:US10Y')">US Government Bonds 10 YR Yield</li>
-		<li class="list-group-item" onclick="liClick('TVC:US30Y')">US Government Bonds 30 YR Yield</li>
-		<li class="list-group-item" onclick="liClick('TVC:US10Y-TVC:US02Y')">US10Y-US02Y (Si cae debajo de cero --> RECESIÓN !!!)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:TLT')">Ishares 20+ Year Treasury Bond ETF</li>
-		<li class="list-group-item" onclick="liClick('TVC:MOVE')">MOVE</li>
-		<li class="list-group-item" onclick="liClick('AMEX:TIP')">iShares TIPS Bond ETF (10 YR Tips Yield = 10 YR yield - 10 YR Breakeven inflation rate (inflacion esperada a 10 años))</li>
-		<li class="list-group-item" onclick="liClick('AMEX:AGG/NASDAQ:IEF')">AGG/IEF (simula el comportamiento de los bonos de gobierno USA 7/10YRS(IEF) en el conjunto del universo de bonos (AGG))</li>
-		<li class="list-group-item" onclick="liClick('AMEX:LQD')">LQD (iShares iBoxx $ Investment Grade Corporate Bond ETF)</li>
-		<li class="list-group-item" onclick="liClick('AMEX:HYG')">HYG (iShares iBoxx $ High Yield Corporate Bond ETF, "bonos basura")</li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="TVC:US02Y">US Government Bonds 2 YR Yield</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="TVC:US10Y">US Government Bonds 10 YR Yield</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="TVC:US30Y">US Government Bonds 30 YR Yield</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="TVC:US10Y-TVC:US02Y">US10Y-US02Y (Si cae debajo de cero --> RECESIÓN !!!)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:TLT">Ishares 20+ Year Treasury Bond ETF</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="TVC:MOVE">MOVE</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:TIP">iShares TIPS Bond ETF (10 YR Tips Yield = 10 YR yield - 10 YR Breakeven inflation rate (inflacion esperada a 10 años))</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:AGG/NASDAQ:IEF">AGG/IEF (simula el comportamiento de los bonos de gobierno USA 7/10YRS(IEF) en el conjunto del universo de bonos (AGG))</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:LQD">LQD (iShares iBoxx $ Investment Grade Corporate Bond ETF)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:HYG">HYG (iShares iBoxx $ High Yield Corporate Bond ETF, "bonos basura")</span></li>
 		
 		<h4>Economy</h4>
-		<li class="list-group-item" onclick="liClick('COMEX:HG1!/COMEX:GC1!')">Cobre/Oro (Si sube, la economia va bien. Si baja, la economia va mal)</li>
-		<li class="list-group-item" onclick="liClick('AMEX:DBB/AMEX:DBP')">Metales Bases / Metales Preciosos.(Si baja es porque la economia esta debil. Si sube, la economia esta fuerte.)</li>
-		<li class="list-group-item" onclick="liClick('OANDA:SPX500USD/TVC:DXY')">SPX500USD/DXY (Simula el movimiento real del SP500 sin considerar la cotización del dolar)</li>
-		<li class="list-group-item" onclick="liClick('FRED:BAMLH0A0HYM2')">BAMLH0A0HYM2 (Indice de probabilidad de no pago de deuda)</li>
-		<li class="list-group-item" onclick="liClick('CBOE:SKEW')">CBOE SKEW INDEX</li>
-		<li class="list-group-item" onclick="liClick('AMEX:BKLN')">BKLN (Invesco Senior Loan ETF, Prestamos apalancados)</li>
-		<li class="list-group-item" onclick="liClick('FRED:T5YIE')">T5YIE (5-Year Breakeven Inflation Rate ((Expectativas de inflación futura)))</li>
-		<li class="list-group-item" onclick="liClick('AMEX:JNK/AMEX:QLTA')">Bonos basura / Bonos calidad</li>
-		<li class="list-group-item" onclick="liClick('AMEX:RSP/NASDAQ:TLT')">Invesco S&P 500 Equal Weight ETF / IShares 20+ Year Treasury Bond ETF (Bolsa vs. Bonos)</li>
-		<li class="list-group-item" onclick="liClick('AMEX:RSPD/AMEX:RSPS')">ETF Discretionary / Staples (Igual ponderacion)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:PEZ/NASDAQ:PSL')">Consumer Ciclicas/ Defensivas = PMI</li>
-		<li class="list-group-item" onclick="liClick('AMEX:IWM/AMEX:SPY')">Small Caps / Big Caps (Si las small caps caen, eso significa que hay mayor preocupación por la economia. Los inversores solo invierten en grandes empresas.)</li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="COMEX:HG1!/COMEX:GC1!">Cobre/Oro (Si sube, la economia va bien. Si baja, la economia va mal)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:DBB/AMEX:DBP">Metales Bases / Metales Preciosos.(Si baja es porque la economia esta debil. Si sube, la economia esta fuerte.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:SPX500USD/TVC:DXY">SPX500USD/DXY (Simula el movimiento real del SP500 sin considerar la cotización del dolar)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="FRED:BAMLH0A0HYM2">BAMLH0A0HYM2 (Indice de probabilidad de no pago de deuda)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CBOE:SKEW">CBOE SKEW INDEX</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:BKLN">BKLN (Invesco Senior Loan ETF, Prestamos apalancados)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="FRED:T5YIE">T5YIE (5-Year Breakeven Inflation Rate ((Expectativas de inflación futura)))</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:JNK/AMEX:QLTA">Bonos basura / Bonos calidad</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:RSP/NASDAQ:TLT">Invesco S&P 500 Equal Weight ETF / IShares 20+ Year Treasury Bond ETF (Bolsa vs. Bonos)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:RSPD/AMEX:RSPS">ETF Discretionary / Staples (Igual ponderacion)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:PEZ/NASDAQ:PSL">Consumer Ciclicas/ Defensivas = PMI</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:IWM/AMEX:SPY">Small Caps / Big Caps (Si las small caps caen, eso significa que hay mayor preocupación por la economia. Los inversores solo invierten en grandes empresas.)</span></li>
 		
 		
 		
-		<li class="list-group-item" onclick="liClick('FRED:WALCL+FRED:ECBASSETSW*1.07+ECONOMICS:GBCBBS*OANDA:GBPUSD+FRED:JPNASSETS/OANDA:USDJPY+ECONOMICS:CNCBBS*FX_IDC:CNYUSD-(FRED:WTREGEN+FRED:RRPONTSYD)')">Liquidez Global ( USA + EURO + GB + JP + CH)</li>
-		<li class="list-group-item" onclick="liClick('FRED:WRESBAL')">WRESBAL (Liabilities and Capital: Other Factors Draining Reserve Balances: Reserve Balances with Federal Reserve Banks: Week Average)</li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="FRED:WALCL+FRED:ECBASSETSW*1.07+ECONOMICS:GBCBBS*OANDA:GBPUSD+FRED:JPNASSETS/OANDA:USDJPY+ECONOMICS:CNCBBS*FX_IDC:CNYUSD-(FRED:WTREGEN+FRED:RRPONTSYD)">Liquidez Global ( USA + EURO + GB + JP + CH)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="FRED:WRESBAL">WRESBAL (Liabilities and Capital: Other Factors Draining Reserve Balances: Reserve Balances with Federal Reserve Banks: Week Average)</span></li>
 	</ul> 
 </div>
 
@@ -203,26 +245,26 @@ body {font-family: Arial;}
 		<a class="btn" target="tv" href="https://www.tradingview.com/forex-screener/">Forex Screener</a>
 	</div>
 	<ul class="list-group">
-		<li class="list-group-item" onclick="liClick('TVC:DXY')">DXY</li>
-		<li class="list-group-item" onclick="liClick('AMEX:UUP')">UUP (para ver el volumen del DXY)</li>
-		<li class="list-group-item" onclick="liClick('INDEX:BTCUSD')">BTCUSD</li>
-		<li class="list-group-item" onclick="liClick('BINANCE:ETHUSD')">ETHUSD</li>
-		<li class="list-group-item" onclick="liClick('OANDA:AUDCAD')">AUDCAD</li>
-		<li class="list-group-item" onclick="liClick('OANDA:AUDUSD')">AUDJPY</li>
-		<li class="list-group-item" onclick="liClick('OANDA:AUDUSD')">AUDUSD (Suele anticipar/seguir movimientos SP500)</li>
-		<li class="list-group-item" onclick="liClick('OANDA:CADCHF')">CADCHF</li>
-		<li class="list-group-item" onclick="liClick('OANDA:EURCAD')">EURCAD</li>
-		<li class="list-group-item" onclick="liClick('OANDA:EURCHF')">EURCHF</li>
-		<li class="list-group-item" onclick="liClick('OANDA:EURGBP')">EURGBP</li>
-		<li class="list-group-item" onclick="liClick('OANDA:EURJPY')">EURJPY</li>
-		<li class="list-group-item" onclick="liClick('OANDA:EURNOK')">EURNOK</li>
-		<li class="list-group-item" onclick="liClick('OANDA:EURNZD')">EURNZD</li>
-		<li class="list-group-item" onclick="liClick('OANDA:EURSGD')">EURSGD</li>
-		<li class="list-group-item" onclick="liClick('OANDA:EURUSD')">EURUSD</li>
-		<li class="list-group-item" onclick="liClick('OANDA:GBPUSD')">GBPUSD</li>
-		<li class="list-group-item" onclick="liClick('OANDA:NZDUSD')">NZDUSD</li>
-		<li class="list-group-item" onclick="liClick('OANDA:USDCAD')">USDCAD</li>
-		<li class="list-group-item" onclick="liClick('OANDA:USDJPY')">USDJPY</li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="TVC:DXY">DXY</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:UUP">UUP (para ver el volumen del DXY)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="INDEX:BTCUSD">BTCUSD</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="BINANCE:ETHUSD">ETHUSD</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:AUDCAD">AUDCAD</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:AUDUSD">AUDJPY</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:AUDUSD">AUDUSD (Suele anticipar/seguir movimientos SP500)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:CADCHF">CADCHF</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:EURCAD">EURCAD</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:EURCHF">EURCHF</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:EURGBP">EURGBP</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:EURJPY">EURJPY</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:EURNOK">EURNOK</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:EURNZD">EURNZD</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:EURSGD">EURSGD</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:EURUSD">EURUSD</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:GBPUSD">GBPUSD</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:NZDUSD">NZDUSD</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:USDCAD">USDCAD</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:USDJPY">USDJPY</span></li>
 	</ul>
 </div>
 
@@ -232,67 +274,67 @@ body {font-family: Arial;}
 	
 	<ul class="list-group">
 		<h3>Trading View List Futures</h3>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/markets/futures/quotes-metals/">Metals</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/markets/futures/quotes-energy/">Energy</a></li>
-		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/markets/futures/quotes-agricultural/">Agricultural</a></li>
+		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/markets/futures/quotes-metals/">Metals</span></span></li>
+		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/markets/futures/quotes-energy/">Energy</span></span></li>
+		<li class="list-group-item"><a target="tv" href="https://www.tradingview.com/markets/futures/quotes-agricultural/">Agricultural</span></span></li>
 	</ul>
 	<ul class="list-group">
 		<h3>Indices</h3>
-		<li class="list-group-item" onclick="liClick('NYSE:DBC')">Invesco DB Commodity Index Tracking Fund</li>
-		<li class="list-group-item" onclick="liClick('AMEX:DBB')">Metales Bases</li>
-		<li class="list-group-item" onclick="liClick('AMEX:DBP')">Metales Preciosos</li>
-		<li class="list-group-item" onclick="liClick('DJ:DJCIGR')">Dow Jones Commodity Index Grains</li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:DBC">Invesco DB Commodity Index Tracking Fund</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:DBB">Metales Bases</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:DBP">Metales Preciosos</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="DJ:DJCIGR">Dow Jones Commodity Index Grains</span></li>
 	</ul>
 	
 	<ul class="list-group">
 		<h3>Timming</h3>
-		<li class="list-group-item" onclick="liClick('COMEX:SI1!/COMEX:GC1!')">Ratio Silver/Gold (Si el ratio sube -> Mercado alcista para los metales preciosos (No es verdad del todo). Quizas un arranque alcista de la plata ayude a anticipar futuros arranques alcistas del oro...)</li>
-		<li class="list-group-item" onclick="liClick('AMEX:GDX/COMEX:GC1!')">VanEck Gold Miners ETF/Gold (Referencia guia para el oro. En teoria deberia estar correlacionado, en caso contrario, priorizar lo que indica esta relación.)</li>
-		<li class="list-group-item" onclick="liClick('AMEX:SIL/COMEX:SI1!')">Global X Silver Miners ETF/Silver (Referencia guia para la plata. En teoria deberia estar correlacionado, en caso contrario, priorizar lo que indica esta relación.)</li>
-		<li class="list-group-item" onclick="liClick('CBOT:ZM1!/CBOT:ZL1!')">CBOT:ZM1!(Meal)/CBOT:ZL1!(Oil)(Cuando baja desde sus maximos hasta 6.0-5.9 la soja (ZS) experimenta una subida importante)</li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="COMEX:SI1!/COMEX:GC1!">Ratio Silver/Gold (Si el ratio sube -> Mercado alcista para los metales preciosos (No es verdad del todo). Quizas un arranque alcista de la plata ayude a anticipar futuros arranques alcistas del oro...)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:GDX/COMEX:GC1!">VanEck Gold Miners ETF/Gold (Referencia guia para el oro. En teoria deberia estar correlacionado, en caso contrario, priorizar lo que indica esta relación.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:SIL/COMEX:SI1!">Global X Silver Miners ETF/Silver (Referencia guia para la plata. En teoria deberia estar correlacionado, en caso contrario, priorizar lo que indica esta relación.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CBOT:ZM1!/CBOT:ZL1!">CBOT:ZM1!(Meal)/CBOT:ZL1!(Oil)(Cuando baja desde sus maximos hasta 6.0-5.9 la soja (ZS) experimenta una subida importante)</span></li>
 		
 	</ul>
 	
 	<ul class="list-group">
 		<h3>Futures</h3>
-		<li class="list-group-item" onclick="liClick('COMEX:GC1!')">GC1! (Gold Futures) (- Cierta relacion inversa con los rendimientos del bono a 10 años. En los pico altos de los bonos se producen picos bajos del oro.
-- Correlacion inversa bastante alta con los rendimientos de los TIPS a 10 años. Esto hace que el oro sea proteccion contra inflación futura, no la inflacion actual.)</li>
-		<li class="list-group-item" onclick="liClick('COMEX:SI1!')">SI1! (Silver Futures)</li>
-		<li class="list-group-item" onclick="liClick('MCX:ALUMINIUM1!')">ALUMINIUM1! (Aluminium Futures, India)</li>
-		<li class="list-group-item" onclick="liClick('COMEX:HG1!')">HG1! (Copper Futures)</li>
-		<li class="list-group-item" onclick="liClick('ICEUS:CC1!')">CC1! (Cocoa Futures)</li>
-		<li class="list-group-item" onclick="liClick('NYMEX:CL1!')">CL1! (Light Crude Oil Futures)</li>
-		<li class="list-group-item" onclick="liClick('ICEUS:CT1!')">CT1! (Cotton No.2 Futures)</li>
-		<li class="list-group-item" onclick="liClick('ICEUS:KC1!')">KC1! (Coffee C Futures)</li>
-		<li class="list-group-item" onclick="liClick('CME:LBR1!')">LBR1! (Lumber Futures)</li>
-		<li class="list-group-item" onclick="liClick('CME:LE1!')">LE1! (Live Cattle Futures, Tiene un delay aproximadamente de 8 meses respecto al Wheat)</li>
-		<li class="list-group-item" onclick="liClick('NYMEX:NG1!')">NG1! (Natural Gas Futures)</li>
-		<li class="list-group-item" onclick="liClick('MCX:NICKEL1!')">NICKEL1! (Nickel Futures, India)</li>
-		<li class="list-group-item" onclick="liClick('ICEUS:OJ1!')">OJ1! (FCOJ-A, Orange Juice Futures)</li>
-		<li class="list-group-item" onclick="liClick('NYMEX:PL1!')">PL1! (Platinum Futures)</li>
-		<li class="list-group-item" onclick="liClick('NYMEX:RB1!')">RB1! (RBOB Gasoline Futures)</li>
-		<li class="list-group-item" onclick="liClick('ICEUS:SB1!')">SB1! (Sugar No.11 Futures)</li>
-		<li class="list-group-item" onclick="liClick('CBOT:ZC1!')">ZC1! (Corn Futures)</li>
-		<li class="list-group-item" onclick="liClick('MCX:ZINC1!')">ZINC1! (ZINC Futures)</li>
-		<li class="list-group-item" onclick="liClick('CBOT:ZS1!')">ZS1! (Soybean Futures)</li>
-		<li class="list-group-item" onclick="liClick('CBOT:ZW1!')">ZW1! (Wheat Futures, Se adelanta aproximadamente 8 meses al movimiento futuro del Live Cattle)</li>
-		<li class="list-group-item" onclick="liClick('SGX:FEF1!')">FEF1! (SGX TSI IRON ORE CFR CHINA (62% FE FINES) INDEX Futures, Singapore)</li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="COMEX:GC1!">GC1! (Gold Futures) (- Cierta relacion inversa con los rendimientos del bono a 10 años. En los pico altos de los bonos se producen picos bajos del oro.
+- Correlacion inversa bastante alta con los rendimientos de los TIPS a 10 años. Esto hace que el oro sea proteccion contra inflación futura, no la inflacion actual.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="COMEX:SI1!">SI1! (Silver Futures)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="MCX:ALUMINIUM1!">ALUMINIUM1! (Aluminium Futures, India)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="COMEX:HG1!">HG1! (Copper Futures)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="ICEUS:CC1!">CC1! (Cocoa Futures)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYMEX:CL1!">CL1! (Light Crude Oil Futures)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="ICEUS:CT1!">CT1! (Cotton No.2 Futures)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="ICEUS:KC1!">KC1! (Coffee C Futures)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CME:LBR1!">LBR1! (Lumber Futures)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CME:LE1!">LE1! (Live Cattle Futures, Tiene un delay aproximadamente de 8 meses respecto al Wheat)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYMEX:NG1!">NG1! (Natural Gas Futures)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="MCX:NICKEL1!">NICKEL1! (Nickel Futures, India)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="ICEUS:OJ1!">OJ1! (FCOJ-A, Orange Juice Futures)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYMEX:PL1!">PL1! (Platinum Futures)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYMEX:RB1!">RB1! (RBOB Gasoline Futures)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="ICEUS:SB1!">SB1! (Sugar No.11 Futures)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CBOT:ZC1!">ZC1! (Corn Futures)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="MCX:ZINC1!">ZINC1! (ZINC Futures)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CBOT:ZS1!">ZS1! (Soybean Futures)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CBOT:ZW1!">ZW1! (Wheat Futures, Se adelanta aproximadamente 8 meses al movimiento futuro del Live Cattle)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="SGX:FEF1!">FEF1! (SGX TSI IRON ORE CFR CHINA (62% FE FINES) INDEX Futures, Singapore)</span></li>
 	</ul>
 	
 	<ul class="list-group">
 		<h3>Spot</h3>
-		<li class="list-group-item" onclick="liClick('OANDA:XAUUSD')">XAUUSD (Gold Spot)</li>
-		<li class="list-group-item" onclick="liClick('OANDA:XAGUSD')">XAGUSD (Silver Spot)</li>
-		<li class="list-group-item" onclick="liClick('OANDA:WTICOUSD')">WTICOUSD (West Texas Oil)</li>
-		<li class="list-group-item" onclick="liClick('OANDA:BCOUSD')">BCOUSD (Brent Crude Oil)</li>
-		<li class="list-group-item" onclick="liClick('OANDA:XPTUSD')">XPTUSD (Platinum)</li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:XAUUSD">XAUUSD (Gold Spot)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:XAGUSD">XAGUSD (Silver Spot)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:WTICOUSD">WTICOUSD (West Texas Oil)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:BCOUSD">BCOUSD (Brent Crude Oil)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:XPTUSD">XPTUSD (Platinum)</span></li>
 	</ul>
 	
 	<ul class="list-group">
 		<h3>ETF</h3>
-		<li class="list-group-item" onclick="liClick('MIL:TINM')">MIL:TINM (WISDOMTREE TIN, ETF Estaño, Milano)</li>
-		<li class="list-group-item" onclick="liClick('MIL:XAD1')">MIL:XAD1 (XTRACKERS PHYSICAL GOLD EUR HEDGED ETC, Milano)</li>
-		<li class="list-group-item" onclick="liClick('MIL:PHAG')">MIL:PHAG (WISDOMTREE PHYSICAL SILVER, Milano)</li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="MIL:TINM">MIL:TINM (WISDOMTREE TIN, ETF Estaño, Milano)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="MIL:XAD1">MIL:XAD1 (XTRACKERS PHYSICAL GOLD EUR HEDGED ETC, Milano)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="MIL:PHAG">MIL:PHAG (WISDOMTREE PHYSICAL SILVER, Milano)</span></li>
 	</ul>
 </div>
 
@@ -302,18 +344,18 @@ body {font-family: Arial;}
 		<a class="btn" style="background-color: blue;" target="tv" href="https://www.tradingview.com/markets/indices/quotes-snp/">S&P Sectors</a>
 	</div>
 	<ul class="list-group">
-		<li class="list-group-item" onclick="liClick('AMEX:XLY/AMEX:XLP')">XLY/XLP</li>
-		<li class="list-group-item" onclick="liClick('AMEX:XLB')">XLB (Materials)</li>
-		<li class="list-group-item" onclick="liClick('AMEX:XLC')">XLC (Communication Services)</li>
-		<li class="list-group-item" onclick="liClick('AMEX:XLE')">XLE (Energy)</li>
-		<li class="list-group-item" onclick="liClick('AMEX:XLF')">XLF (Financial)</li>
-		<li class="list-group-item" onclick="liClick('AMEX:XLI')">XLI (Industrial)</li>
-		<li class="list-group-item" onclick="liClick('AMEX:XLK')">XLK (Technology)</li>
-		<li class="list-group-item" onclick="liClick('AMEX:XLP')">XLP (Consumer Staples)</li>
-		<li class="list-group-item" onclick="liClick('AMEX:XLU')">XLU (Utilities)</li>
-		<li class="list-group-item" onclick="liClick('AMEX:XLV')">XLV (Health Care)</li>
-		<li class="list-group-item" onclick="liClick('AMEX:XLY')">XLY (Consumer Discretionary)</li>
-		<li class="list-group-item" onclick="liClick('AMEX:GDX')">GDX (VanEck Gold Miners ETF)</li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:XLY/AMEX:XLP">XLY/XLP</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:XLB">XLB (Materials)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:XLC">XLC (Communication Services)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:XLE">XLE (Energy)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:XLF">XLF (Financial)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:XLI">XLI (Industrial)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:XLK">XLK (Technology)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:XLP">XLP (Consumer Staples)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:XLU">XLU (Utilities)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:XLV">XLV (Health Care)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:XLY">XLY (Consumer Discretionary)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="AMEX:GDX">GDX (VanEck Gold Miners ETF)</span></li>
 	</ul>
 </div>
 
@@ -329,78 +371,78 @@ body {font-family: Arial;}
 	<hr>
 	<ul class="list-group">
 		<h3>Stocks</h3>
-		<li class="list-group-item" onclick="liClick('NASDAQ:AAL')">AAL (NASDAQ: American Airlines Group, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:ABBV')">ABBV (NYSE: AbbVie Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:AAPL')">AAPL (NASDAQ: Apple Inc)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:ABT')">ABT (NYSE: Abbott Laboratories)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:ACN')">ACN (NYSE: Accenture plc)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:ADBE')">ADBE (NASDAQ: Adobe Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:AMD')">AMD (NASDAQ: Advanced Micro Devices Inc)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:AMZN')">AMZN (NASDAQ: Amazon.com, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:ATVI')">ATVI (NASDAQ: Activision Blizzard, Inc)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:AZN')">AZN (NASDAQ: AstraZeneca PLC)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:BA')">BA (NASDAQ: Boeing Company (The))</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:BKNG')">BKNG (NASDAQ: Booking Holdings Inc. Common Stock)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:BRK.B')">BRK.B (NYSE: Berkshire Hathaway Inc. New)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:CAT')">CAT (NYSE: Caterpillar, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:CCL')">CCL (NYSE: Carnival Corporation)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:CL')">CL (NYSE: Colgate-Palmolive Company)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:COIN')">COIN (NASDAQ: Coinbase Global, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:COST')">COST (NASDAQ: Costco Wholesale Corporation)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:CRM')">CRM (NYSE: Salesforce, Inc.)</li>		
-		<li class="list-group-item" onclick="liClick('NASDAQ:CSCO')">CSCO (NASDAQ: Cisco Systems, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:CVX')">CVX (NYSE: Chevron Corporation)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:DG')">DG (NYSE: Dollar General Corporation)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:DIS')">DIS (NYSE: Walt Disney Company (The))</li>
-		<li class="list-group-item" onclick="liClick('NYSE:DPZ')">DPZ (NYSE: Domino's Pizza Inc)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:DXCM')">DXCM (NASDAQ: DexCom, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:EBAY')">EBAY (NASDAQ: eBay Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:F')">F (NYSE: FORD MTR CO DEL)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:FCEL')">FCEL (NASDAQ: FuelCell Energy, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:FDX')">FDX (NYSE: FedEx Corporation)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:GE')">GE (NYSE: General Electric Company)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:GILD')">GILD (NASDAQ: Gilead Sciences, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:GOOGL')">GOOGL (NASDAQ: Alphabet Inc (Google) Class A)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:HD')">HD (NYSE: Home Depot, Inc. (The))</li>
-		<li class="list-group-item" onclick="liClick('NYSE:HOG')">HOG (NYSE: Harley-Davidson, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:IBM')">IBM (NYSE: International Business Machines Corporation)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:INTC')">INTC (NASDAQ: Intel Corporation)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:JNJ')">JNJ (NYSE: Johnson & Johnson)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:JPM')">JPM (NYSE: JP Morgan Chase & Co.)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:KO')">KO (NYSE: Coca-Cola Company (The))</li>
-		<li class="list-group-item" onclick="liClick('NYSE:LMT')">LMT (NYSE: Lockheed Martin Corporation)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:MA')">MA (NYSE: Mastercard Incorporated)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:MAR')">MAR (NASDAQ: Marriott International)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:MCD')">MCD (NYSE: McDonald's Corporation)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:MELI')">MELI (NASDAQ: MercadoLibre, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:META')">META (NASDAQ: Meta Platforms, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:MRK')">MRK (NYSE: Merck & Company, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:MSFT')">MSFT (NASDAQ: Microsoft Corp.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:MU')">MU (NASDAQ: Micron Technology, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:NEM')">NEM (NYSE: Newmont Corporation) (La compañía minera estadounidense, no solo fue la mayor productora mundial de oro en 2020, sino que ocupó el cuarto puesto en cuanto a producción de plata.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:NFLX')">NFLX (NASDAQ: Netflix, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:NIO')">NIO (NYSE: NIO Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:NVDA')">NVDA (NASDAQ: NVIDIA Corporation)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:ORCL')">ORCL (NYSE: Oracle Corporation)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:PEP')">PEP (NASDAQ: PepsiCo, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:PFE')">PFE (NYSE: Pfizer, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:PG')">PG (NYSE: Procter & Gamble Company (The))</li>
-		<li class="list-group-item" onclick="liClick('NYSE:PLTR')">PLTR (NYSE: Palantir Technologies Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:PYPL')">PYPL (NASDAQ: PayPal Holdings, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:PZZA')">PZZA (NASDAQ: Papa John's International, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:QCOM')">QCOM (NASDAQ: QUALCOMM Incorporated)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:ROKU')">ROKU (NASDAQ: Roku, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:SBUX')">SBUX (NASDAQ: Starbucks Corporation)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:T')">T (NYSE: AT&T Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:TMUS')">TMUS (NASDAQ: T-Mobile US, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:TSLA')">TSLA (NASDAQ: Tesla, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:TXN')">TXN (NASDAQ: Texas Instruments Incorporated)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:UAL')">UAL (NASDAQ: United Airlines Holdings, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:UNH')">UNH (NYSE: UnitedHealth Group Incorporated)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:UNP')">UNP (NYSE: Union Pacific Corporation)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:V')">V (NYSE: Visa Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:VZ')">VZ (NYSE: Verizon Communications Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:XOM')">XOM (NYSE: Exxon Mobil Corporation)</li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:AAL">AAL (NASDAQ: American Airlines Group, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:ABBV">ABBV (NYSE: AbbVie Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:AAPL">AAPL (NASDAQ: Apple Inc)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:ABT">ABT (NYSE: Abbott Laboratories)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:ACN">ACN (NYSE: Accenture plc)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:ADBE">ADBE (NASDAQ: Adobe Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:AMD">AMD (NASDAQ: Advanced Micro Devices Inc)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:AMZN">AMZN (NASDAQ: Amazon.com, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:ATVI">ATVI (NASDAQ: Activision Blizzard, Inc)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:AZN">AZN (NASDAQ: AstraZeneca PLC)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:BA">BA (NASDAQ: Boeing Company (The))</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:BKNG">BKNG (NASDAQ: Booking Holdings Inc. Common Stock)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:BRK.B">BRK.B (NYSE: Berkshire Hathaway Inc. New)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:CAT">CAT (NYSE: Caterpillar, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:CCL">CCL (NYSE: Carnival Corporation)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:CL">CL (NYSE: Colgate-Palmolive Company)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:COIN">COIN (NASDAQ: Coinbase Global, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:COST">COST (NASDAQ: Costco Wholesale Corporation)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:CRM">CRM (NYSE: Salesforce, Inc.)</span></li>		
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:CSCO">CSCO (NASDAQ: Cisco Systems, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:CVX">CVX (NYSE: Chevron Corporation)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:DG">DG (NYSE: Dollar General Corporation)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:DIS">DIS (NYSE: Walt Disney Company (The))</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:DPZ">DPZ (NYSE: Domino's Pizza Inc)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:DXCM">DXCM (NASDAQ: DexCom, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:EBAY">EBAY (NASDAQ: eBay Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:F">F (NYSE: FORD MTR CO DEL)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:FCEL">FCEL (NASDAQ: FuelCell Energy, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:FDX">FDX (NYSE: FedEx Corporation)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:GE">GE (NYSE: General Electric Company)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:GILD">GILD (NASDAQ: Gilead Sciences, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:GOOGL">GOOGL (NASDAQ: Alphabet Inc (Google) Class A)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:HD">HD (NYSE: Home Depot, Inc. (The))</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:HOG">HOG (NYSE: Harley-Davidson, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:IBM">IBM (NYSE: International Business Machines Corporation)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:INTC">INTC (NASDAQ: Intel Corporation)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:JNJ">JNJ (NYSE: Johnson & Johnson)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:JPM">JPM (NYSE: JP Morgan Chase & Co.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:KO">KO (NYSE: Coca-Cola Company (The))</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:LMT">LMT (NYSE: Lockheed Martin Corporation)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:MA">MA (NYSE: Mastercard Incorporated)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:MAR">MAR (NASDAQ: Marriott International)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:MCD">MCD (NYSE: McDonald's Corporation)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:MELI">MELI (NASDAQ: MercadoLibre, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:META">META (NASDAQ: Meta Platforms, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:MRK">MRK (NYSE: Merck & Company, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:MSFT">MSFT (NASDAQ: Microsoft Corp.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:MU">MU (NASDAQ: Micron Technology, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:NEM">NEM (NYSE: Newmont Corporation) (La compañía minera estadounidense, no solo fue la mayor productora mundial de oro en 2020, sino que ocupó el cuarto puesto en cuanto a producción de plata.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:NFLX">NFLX (NASDAQ: Netflix, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:NIO">NIO (NYSE: NIO Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:NVDA">NVDA (NASDAQ: NVIDIA Corporation)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:ORCL">ORCL (NYSE: Oracle Corporation)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:PEP">PEP (NASDAQ: PepsiCo, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:PFE">PFE (NYSE: Pfizer, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:PG">PG (NYSE: Procter & Gamble Company (The))</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:PLTR">PLTR (NYSE: Palantir Technologies Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:PYPL">PYPL (NASDAQ: PayPal Holdings, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:PZZA">PZZA (NASDAQ: Papa John's International, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:QCOM">QCOM (NASDAQ: QUALCOMM Incorporated)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:ROKU">ROKU (NASDAQ: Roku, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:SBUX">SBUX (NASDAQ: Starbucks Corporation)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:T">T (NYSE: AT&T Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:TMUS">TMUS (NASDAQ: T-Mobile US, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:TSLA">TSLA (NASDAQ: Tesla, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:TXN">TXN (NASDAQ: Texas Instruments Incorporated)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:UAL">UAL (NASDAQ: United Airlines Holdings, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:UNH">UNH (NYSE: UnitedHealth Group Incorporated)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:UNP">UNP (NYSE: Union Pacific Corporation)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:V">V (NYSE: Visa Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:VZ">VZ (NYSE: Verizon Communications Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:XOM">XOM (NYSE: Exxon Mobil Corporation)</span></li>
 		
 	</ul>
 </div>
@@ -417,66 +459,170 @@ body {font-family: Arial;}
 	<hr>
 	<ul class="list-group">
 		<h3>China</h3>
-		<li class="list-group-item" onclick="liClick('HKEX:9988')"> (HKEX: ALIBABA GROUP HOLDING LTD)</li>
-		<li class="list-group-item" onclick="liClick('NYSE:BABA')">BABA (NYSE: Alibaba Group Holdings Ltd.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:BIDU')">BIDU (NASDAQ: Baidu, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('NASDAQ:JD')">JD (NASDAQ: JD.com, Inc.)</li>
-		<li class="list-group-item" onclick="liClick('OTC:TCEHY')">TCEHY (OTC: Tencent Holding Ltd.)</li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="HKEX:9988"> (HKEX: ALIBABA GROUP HOLDING LTD)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NYSE:BABA">BABA (NYSE: Alibaba Group Holdings Ltd.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:BIDU">BIDU (NASDAQ: Baidu, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="NASDAQ:JD">JD (NASDAQ: JD.com, Inc.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OTC:TCEHY">TCEHY (OTC: Tencent Holding Ltd.)</span></li>
 		
 		<h3>Europe</h3>
-		<li class="list-group-item" onclick="liClick('EURONEXT:AIR')">AIR (EURONEXT: AIRBUS SE, Paris)</li>
-		<li class="list-group-item" onclick="liClick('BME:AMS')">AMS (BME: AMADEUS IT GROUP, S.A., Madrid)</li>
-		<li class="list-group-item" onclick="liClick('XETR:BAS')">BAS (XETR: BASF SE NA O.N., Xetra)</li>
-		<li class="list-group-item" onclick="liClick('XETR:EOAN')">EOAN (XETR: E.ON SE NA O.N., Xetra)</li>
-		<li class="list-group-item" onclick="liClick('XETR:FTK')">FTK (XETR: FLATEXDEGIRO AG NA O N, Xetra)</li>
-		<li class="list-group-item" onclick="liClick('EURONEXT:HEIA')">HEIA (EURONEXT: HEINEKEN, Amsterdam)</li>
-		<li class="list-group-item" onclick="liClick('BME:IBE')">IBE (BME: ACCIONES IBERDROLA, Madrid)</li>
-		<li class="list-group-item" onclick="liClick('BME:ITX')">ITX (BME: INDUSTRIA DE DISENO TEXTIL S.A. INDITEX, Madrid)</li>
-		<li class="list-group-item" onclick="liClick('XETR:LHA')">LHA (XETR: LUFTHANSA AG VNA O.N., Xetra)</li>
-		<li class="list-group-item" onclick="liClick('EURONEXT:MC')">MC (EURONEXT: LVMH, Paris)</li>
-		<li class="list-group-item" onclick="liClick('XETR:MRK')">MRK (XETR: MERCK KGAA O.N., Xetra)</li>
-		<li class="list-group-item" onclick="liClick('OMXHEX:NOKIA')">NOKIA (OMXHEX: NOKIA CORPORATION, Helsinki)</li>
-		<li class="list-group-item" onclick="liClick('EURONEXT:PHIA')">PHIA (EURONEXT: KON.PHILIPS N.V., Amsterdam)</li>
-		<li class="list-group-item" onclick="liClick('MIL:RACE')">RACE (MIL: FERRARI, Milan)</li>
-		<li class="list-group-item" onclick="liClick('BME:SAN')">SAN (BME: BANCO SANTANDER S.A., Madrid)</li>
-		<li class="list-group-item" onclick="liClick('XETR:SAP')">SAP (XETR: SAP SE O.N., Xetra)</li>
-		<li class="list-group-item" onclick="liClick('LSE:SHEL')">SHEL (LSE: SHELL PLC ORD EUR0.07, London)</li>
-		<li class="list-group-item" onclick="liClick('LSE:FRES')">FRES (LSE: FRESNILLO PLC ORD USD0.50, London) (Minera de Plata. Es la mayor de México y del mundo en cuanto a volumen de producción.)</li>
-		<li class="list-group-item" onclick="liClick('LSE:GLEN')">GLEN (LSE: GLENCORE PLC ORD USD0.01, London) (La primera empresa privada del mundo dedicada a la compraventa y producción de materias primas y alimentos.)</li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="EURONEXT:AIR">AIR (EURONEXT: AIRBUS SE, Paris)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="BME:AMS">AMS (BME: AMADEUS IT GROUP, S.A., Madrid)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="XETR:BAS">BAS (XETR: BASF SE NA O.N., Xetra)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="XETR:EOAN">EOAN (XETR: E.ON SE NA O.N., Xetra)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="XETR:FTK">FTK (XETR: FLATEXDEGIRO AG NA O N, Xetra)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="EURONEXT:HEIA">HEIA (EURONEXT: HEINEKEN, Amsterdam)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="BME:IBE">IBE (BME: ACCIONES IBERDROLA, Madrid)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="BME:ITX">ITX (BME: INDUSTRIA DE DISENO TEXTIL S.A. INDITEX, Madrid)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="XETR:LHA">LHA (XETR: LUFTHANSA AG VNA O.N., Xetra)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="EURONEXT:MC">MC (EURONEXT: LVMH, Paris)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="XETR:MRK">MRK (XETR: MERCK KGAA O.N., Xetra)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OMXHEX:NOKIA">NOKIA (OMXHEX: NOKIA CORPORATION, Helsinki)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="EURONEXT:PHIA">PHIA (EURONEXT: KON.PHILIPS N.V., Amsterdam)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="MIL:RACE">RACE (MIL: FERRARI, Milan)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="BME:SAN">SAN (BME: BANCO SANTANDER S.A., Madrid)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="XETR:SAP">SAP (XETR: SAP SE O.N., Xetra)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="LSE:SHEL">SHEL (LSE: SHELL PLC ORD EUR0.07, London)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="LSE:FRES">FRES (LSE: FRESNILLO PLC ORD USD0.50, London) (Minera de Plata. Es la mayor de México y del mundo en cuanto a volumen de producción.)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="LSE:GLEN">GLEN (LSE: GLENCORE PLC ORD USD0.01, London) (La primera empresa privada del mundo dedicada a la compraventa y producción de materias primas y alimentos.)</span></li>
 	</ul>
 </div>
 
 <script>
-function openTab(evt, cityName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
+const body = document.querySelector('body');
+body.onload = onLoad;
+
+var arrayRed = [];
+var arrayGreen = [];
+var arrayBlue = [];
+
+function onLoad() {
+	getNote();
+	const el = document.querySelector('#tabNotes');
+	el.dispatchEvent(new PointerEvent("click"));
+	getFlags();
+	setAllFlagsOnPage();
 }
 
-//function changeTV(){
-	//var idx = selectTV.selectedIndex;
-	//var value = selectTV.options[idx].value;
-	//var oldValue = document.getElementById("oldSelectedTV").value
-	//const collection = document.getElementsByClassName("list-group-item");
-	//for (let i = 0; i < collection.length; i++) {
-	//	url = collection[i].firstChild.href;
-	//	collection[i].firstChild.href = url.replace(oldValue, value);
-	//}
-	//Change oldSelectedTV
-	//document.getElementById("oldSelectedTV").value = value;
-		
-//}
+function openTab(evt, tabItem) {
+	setNote();
+	var i, tabcontent, tablinks;
+	tabcontent = document.getElementsByClassName("tabcontent");
+	for (i = 0; i < tabcontent.length; i++) {
+	tabcontent[i].style.display = "none";
+	}
+	tablinks = document.getElementsByClassName("tablinks");
+	for (i = 0; i < tablinks.length; i++) {
+	tablinks[i].className = tablinks[i].className.replace(" active", "");
+	}
+	document.getElementById(tabItem).style.display = "block";
+	evt.currentTarget.className += " active";
+}
+
 function liClick(ticket){
 	window.open("https://www.tradingview.com/chart/"+selectTV.options[selectTV.selectedIndex].value+"/?symbol="+encodeURIComponent(ticket), "tv");
 }
+
+function getNote() {
+	document.getElementById("note").value = localStorage.getItem("note");
+}
+
+function setNote() {
+	 localStorage.setItem("note", document.getElementById("note").value);
+}
+
+// Manage Flags
+function setItemInArray(array, ticket) {
+    var index = array.indexOf(ticket);
+    if (index === -1) array.push(ticket);
+    return array;
+}
+
+function deleteItemInArray(array, ticket) {
+    var index = array.indexOf(ticket);
+    if (index !== -1) array.splice(index, 1);
+    return array;
+}
+
+function saveFlags() {
+	localStorage.redFlags = JSON.stringify(arrayRed);
+	localStorage.greenFlags = JSON.stringify(arrayGreen);
+	localStorage.blueFlags = JSON.stringify(arrayBlue);
+}
+
+function getFlags() {
+	document.getElementById("note").value = localStorage.note;
+	arrayRed = JSON.parse(localStorage.redFlags);
+	arrayGreen = JSON.parse(localStorage.greenFlags);
+	arrayBlue = JSON.parse(localStorage.blueFlags);
+}
+
+function setAllFlagsOnPage() {
+	setFlagsOnPage("redList", arrayRed, "🟥");
+	setFlagsOnPage("greenList", arrayGreen, "🟩");
+	setFlagsOnPage("blueList", arrayBlue, "🟦");
+}
+
+function setFlagsOnPage(listId, array, charFlag) {
+	for (ticketRed of array) {
+		document.getElementById(ticketRed).previousElementSibling.innerText = charFlag;
+	}
+	var colorList = document.getElementById(listId);
+	colorList.innerHTML = '';
+	for(var i = 0; i < array.length; i++) {
+		var opt = array[i];
+
+		var el = document.createElement("li");
+		//el.text = opt;
+		//el.id = opt;
+		el.innerHTML = opt;
+		el.addEventListener('click',()=>liClick(opt));
+
+		colorList.append(el);
+	}
+}
+
+function setFlag(ticket){
+	if (document.getElementById(ticket).previousElementSibling.innerText == "⬜") {  //Pasa a RED
+		document.getElementById(ticket).previousElementSibling.innerText = "🟥";
+		setItemInArray(arrayRed,ticket);
+	} else if (document.getElementById(ticket).previousElementSibling.innerText == "🟥") { // Pasa a GREEN
+		document.getElementById(ticket).previousElementSibling.innerText = "🟩";
+		setItemInArray(arrayGreen,ticket);
+		deleteItemInArray(arrayRed,ticket);
+	} else if (document.getElementById(ticket).previousElementSibling.innerText == "🟩") { // Pasa a BLUE
+		document.getElementById(ticket).previousElementSibling.innerText = "🟦";
+		setItemInArray(arrayBlue,ticket);
+		deleteItemInArray(arrayGreen,ticket);
+	} else if (document.getElementById(ticket).previousElementSibling.innerText == "🟦") { // Pasa a WHITE
+		document.getElementById(ticket).previousElementSibling.innerText = "⬜";
+		deleteItemInArray(arrayBlue,ticket);
+	}	
+	saveFlags();
+	setAllFlagsOnPage();
+}
+
+function backupLocalStorageToClipboard() {
+	backup= JSON.stringify(JSON.stringify(localStorage));
+	navigator.clipboard.writeText(backup);
+}
+
+function restoreLocalStorageFromClipboard() {
+	navigator.clipboard.readText()
+	  .then(text => {
+		var data = JSON.parse(JSON.parse(text));
+		Object.keys(data).forEach(function (k) {
+		  localStorage.setItem(k, data[k]);
+		});
+		getFlags();
+		setAllFlagsOnPage();
+	  })
+	  .catch(err => {
+		console.error('Failed to read clipboard contents: ', err);
+	  });
+	
+}
+
 </script>
    
 </body>
