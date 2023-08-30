@@ -92,6 +92,12 @@ body {font-family: Arial;}
 	background-color: transparent;
 	cursor: pointer;
 }
+div.flagList{
+	width: 50%;
+	padding-top:20px;
+	display: inline-block;
+	vertical-align: top;
+}
 </style>
 </head>
 <body>
@@ -128,27 +134,45 @@ body {font-family: Arial;}
 
 <!---- Notes   ---->
 <div id="Notes" class="tabcontent">
-	<div style="text-align: left; width:100%; padding-top: 10px;">
-		<button id="set" onclick="setNote()">SAVE</button>
-	</div>
-	<div style="width:55%; float:left;padding-top:20px;">
-		<textarea style="max-width: 98%;" name="note" cols="150" id="note" rows="40"></textarea>
-	</div>
-	
-	<div style="width:15%; float:right;;padding-top:20px;">
-		<label for="blueList">🟦 Blue List:</label>
-		<ul class="list-group" name="blueList" id="blueList">
-		</ul>
-	</div>
-	<div style="width:15%; float:right;;padding-top:20px;">
-		<label for="greenList">🟩 Green List:</label>
-		<ul class="list-group" name="greenList" id="greenList">
-		</ul>
-	</div>
-	<div style="width:15%; float:right;;padding-top:20px;">
-		<label for="redList">🟥 Red List:</label>
-		<ul class="list-group" name="redList" id="redList">
-		</ul>
+	<div style="display: flex;flex-wrap: wrap;">
+		<div style="text-align: left; width:100%; padding-top: 10px;">
+			<button id="set" style="background-color: red;color: white;border-color: red;" onclick="saveNote()">SAVE</button>
+		</div>
+		<div style="width: 100%;">
+			<div style="width:49.99999%;padding-top:10px;display: flex;float: left;">
+				<textarea style="max-width: 98%;" name="note" cols="150" id="note" rows="40"></textarea>
+			</div>
+			<div style="width:49.99999%;padding-top:10px;display: flex;float: left;">
+				
+				<div class="flagList">
+					<label for="purpleList">🟪 Purple List:</label>
+					<ul class="list-group" name="purpleList" id="purpleList" style="font-size: small;">
+					</ul>
+				</div>
+				
+				<div class="flagList"">
+					<label for="blueList">🟦 Blue List:</label>
+					<ul class="list-group" name="blueList" id="blueList" style="font-size: small;">
+					</ul>
+				</div>
+				
+			</div>
+			<div style="width:49.99999%;padding-top:10px;display: flex;float: right;">
+				
+				<div class="flagList">
+					<label for="redList">🟥 Red List:</label>
+					<ul class="list-group" name="redList" id="redList" style="font-size: small;">
+					</ul>
+				</div>
+				
+				<div class="flagList">
+					<label for="greenList">🟩 Green List:</label>
+					<ul class="list-group" name="greenList" id="greenList" style="font-size: small;">
+					</ul>
+				</div>
+				
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -254,7 +278,7 @@ body {font-family: Arial;}
 		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="BINANCE:ETHUSD">ETHUSD</span></li>
 		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:AUDCAD">AUDCAD</span></li>
 		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:AUDCHF">AUDCHF</span></li>
-		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:AUDUSD">AUDJPY</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:AUDJPY">AUDJPY</span></li>
 		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:AUDUSD">AUDUSD (Suele anticipar/seguir movimientos SP500)</span></li>
 		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:CADCHF">CADCHF</span></li>
 		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="OANDA:CADJPY">CADJPY</span></li>
@@ -519,6 +543,7 @@ body.onload = onLoad;
 var arrayRed = [];
 var arrayGreen = [];
 var arrayBlue = [];
+var arrayPurple = [];
 
 function onLoad() {
 	getNote();
@@ -529,7 +554,7 @@ function onLoad() {
 }
 
 function openTab(evt, tabItem) {
-	setNote();
+	saveNote();
 	var i, tabcontent, tablinks;
 	tabcontent = document.getElementsByClassName("tabcontent");
 	for (i = 0; i < tabcontent.length; i++) {
@@ -551,7 +576,7 @@ function getNote() {
 	document.getElementById("note").value = localStorage.getItem("note");
 }
 
-function setNote() {
+function saveNote() {
 	 localStorage.setItem("note", document.getElementById("note").value);
 }
 
@@ -569,9 +594,11 @@ function deleteItemInArray(array, ticket) {
 }
 
 function saveFlags() {
+	saveNote();
 	localStorage.redFlags = JSON.stringify(arrayRed);
 	localStorage.greenFlags = JSON.stringify(arrayGreen);
 	localStorage.blueFlags = JSON.stringify(arrayBlue);
+	localStorage.purpleFlags = JSON.stringify(arrayPurple);
 }
 
 function getFlags() {
@@ -579,17 +606,19 @@ function getFlags() {
 	arrayRed = JSON.parse(localStorage.redFlags);
 	arrayGreen = JSON.parse(localStorage.greenFlags);
 	arrayBlue = JSON.parse(localStorage.blueFlags);
+	arrayPurple = JSON.parse(localStorage.purpleFlags);
 }
 
 function setAllFlagsOnPage() {
 	setFlagsOnPage("redList", arrayRed, "🟥");
 	setFlagsOnPage("greenList", arrayGreen, "🟩");
 	setFlagsOnPage("blueList", arrayBlue, "🟦");
+	setFlagsOnPage("purpleList", arrayPurple, "🟪");
 }
 
 function setFlagsOnPage(listId, array, charFlag) {
-	for (ticketRed of array) {
-		document.getElementById(ticketRed).previousElementSibling.innerText = charFlag;
+	for (ticket of array) {
+		document.getElementById(ticket).previousElementSibling.innerText = charFlag;
 	}
 	var colorList = document.getElementById(listId);
 	colorList.innerHTML = '';
@@ -619,6 +648,7 @@ function removeFlag(ticket){
 	deleteItemInArray(arrayRed,ticket);
 	deleteItemInArray(arrayGreen,ticket);
 	deleteItemInArray(arrayBlue,ticket);
+	deleteItemInArray(arrayPurple,ticket);
 	saveFlags();
 	setAllFlagsOnPage();
 }
@@ -635,9 +665,13 @@ function setFlag(ticket){
 		document.getElementById(ticket).previousElementSibling.innerText = "🟦";
 		setItemInArray(arrayBlue,ticket);
 		deleteItemInArray(arrayGreen,ticket);
-	} else if (document.getElementById(ticket).previousElementSibling.innerText == "🟦") { // Pasa a WHITE
-		document.getElementById(ticket).previousElementSibling.innerText = "⬜";
+	} else if (document.getElementById(ticket).previousElementSibling.innerText == "🟦") { // Pasa a PURPLE
+		document.getElementById(ticket).previousElementSibling.innerText = "🟪";
+		setItemInArray(arrayPurple,ticket);
 		deleteItemInArray(arrayBlue,ticket);
+	} else if (document.getElementById(ticket).previousElementSibling.innerText == "🟪") { // Pasa a WHITE
+		document.getElementById(ticket).previousElementSibling.innerText = "⬜";
+		deleteItemInArray(arrayPurple,ticket);
 	}	
 	saveFlags();
 	setAllFlagsOnPage();
