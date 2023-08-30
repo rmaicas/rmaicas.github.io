@@ -130,6 +130,7 @@ div.flagList{
 	<button class="tablinks" onclick="openTab(event, 'Sectors')">Sectors</button>
 	<button class="tablinks" onclick="openTab(event, 'USAStocks')">USA Stocks</button>
 	<button class="tablinks" onclick="openTab(event, 'WorldStocks')">World Stocks</button>
+	<button class="tablinks" onclick="openTab(event, 'ETFs')">ETFs</button>
 </div>
 
 <!---- Notes   ---->
@@ -535,6 +536,18 @@ div.flagList{
 		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="LSE:GLEN">GLEN (LSE: GLENCORE PLC ORD USD0.01, London) (La primera empresa privada del mundo dedicada a la compraventa y producción de materias primas y alimentos.)</span></li>
 	</ul>
 </div>
+
+<!---- ETFs   ---->
+<div id="ETFs" class="tabcontent">
+	<ul class="list-group">
+		
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="MIL:VUAA">MIL:VUAA (VANGUARD S&P 500 UCITS ETF ACC, Milano)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="MIL:PHAG">MIL:PHAG (WISDOMTREE PHYSICAL SILVER, Milano)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="MIL:GBSE">MIL:GBSE (WISDOMTREE PHYSICAL GOLD EUR DAILY HEDGE, Milano)</span></li>
+		
+	</ul>
+</div>
+
 
 <script>
 const body = document.querySelector('body');
