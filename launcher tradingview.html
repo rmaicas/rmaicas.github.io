@@ -131,6 +131,7 @@ div.flagList{
 	<button class="tablinks" onclick="openTab(event, 'USAStocks')">USA Stocks</button>
 	<button class="tablinks" onclick="openTab(event, 'WorldStocks')">World Stocks</button>
 	<button class="tablinks" onclick="openTab(event, 'ETFs')">ETFs</button>
+	<button class="tablinks" onclick="openTab(event, 'Researches')">Researches</button>
 </div>
 
 <!---- Notes   ---->
@@ -554,6 +555,26 @@ div.flagList{
 	</ul>
 </div>
 
+<!---- Sectors   OK---->
+<div id="Researches" class="tabcontent">
+	<ul class="list-group">
+		<h3>Inflation</h3>
+		<li class="list-group-item"><a target="research" href="https://truflation.com/">Truflation</a></li>
+		<li class="list-group-item"><a target="research" href="https://www.clevelandfed.org/indicators-and-data/inflation-nowcasting">Previsión Fed Cleveland</a></li>
+		<h3>Ciclos Economicos</h3>
+		<li class="list-group-item"><a target="research" href="https://www.conference-board.org/topics/business-cycle-indicators">Ciclos Economicos Conference Board</a></li>
+		<li class="list-group-item"><a target="research" href="https://www.yardeni.com/pub/stmkteqmardebt.pdf">Margin Debt</a></li>
+		<li class="list-group-item"><a target="research" href="https://www.gurufocus.com/yield_curve.php">Curva de tipos</a></li>
+		<li class="list-group-item"><a target="research" href="https://marketcharts.com/ii/sp500-vs-put-call-ratio-equity-1d-sma-params-20200916_20220916-x-x-5ma">SP500 vs Ratio Put/Call</a></li>
+		<li class="list-group-item"><a target="research" href="https://stockcharts.com/h-sc/ui?s=%24NYAD&p=D&yr=0&mn=11&dy=0&id=p79881806903">Oscilador NYAD (Advance/Decline) (Simil a lo que tengo implementado en el indicador de Market)</a></li>
+		<li class="list-group-item"><a target="research" href="https://fred.stlouisfed.org/series/DRTSCILM">FRED St. Luis - Tightening Standards for Commercial and Industrial Loans</a></li>
+		<li class="list-group-item"><a target="research" href="https://fred.stlouisfed.org/series/EFFR#0">FRED St.Luis - Effective Federal Funds Rate</a></li>
+		<li class="list-group-item"><a target="research" href="https://fred.stlouisfed.org/series/EFFR#0">FRED St.Luis - Effective Federal Funds Rate</a></li>
+		<li class="list-group-item"><a target="research" href="https://fred.stlouisfed.org/series/T10Y3M">FRED St.Luis - 10-Year Treasury Constant Maturity Minus 3-Month Treasury Constant Maturity</a></li>
+		<li class="list-group-item"><a target="research" href="https://fred.stlouisfed.org/series/SAHMREALTIME">FRED St.Luis - Real-time Sahm Rule Recession Indicator</a></li>
+	</ul>
+	
+</div>
 
 <script>
 const body = document.querySelector('body');
