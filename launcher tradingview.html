@@ -217,6 +217,7 @@ div.flagList{
 		<h4>Stocks</h4>
 		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CBOE:VIX">VIX</span></li>
 		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CBOE:VVIX">VVIX</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CBOE:VX2!-CBOE:VX1!">VX2!-VX1! (Si hay contango (>0, , VX2>VX1) -> OK, normal. Si hay backwardation (<0, VX2<VX1)-> Mal, nevios)</span></li>
 		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CBOE:VIX/CBOE:VIX3M">Volatilidad 1 mes / Volatilidad 3 meses (Por encima de 1 => DANGER!!!)</span></li>
 		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="CBOE:VIX3M/CBOE:VIX">VRatio: is the ratio of VIX3M and VIX. (Arriba 1.1 -> Bear market, luego decrece y llega a estar debajo de 1)</span></li>
 		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="USI:PCCE">PCCE (Put / Call Ratio Equities)</span></li>
