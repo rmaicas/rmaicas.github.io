@@ -594,12 +594,17 @@ div.flagList{
 	</ul>
 </div>
 
-<!---- Sectors   OK---->
+<!---- Researches   OK---->
 <div id="Researches" class="tabcontent">
 	<ul class="list-group">
 		<h3>Inflation</h3>
 		<li class="list-group-item"><a target="research" href="https://truflation.com/">Truflation</a></li>
 		<li class="list-group-item"><a target="research" href="https://www.clevelandfed.org/indicators-and-data/inflation-nowcasting">Previsión Fed Cleveland</a></li>
+		
+		<h3>Jobs</h3>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="ECONOMICS:USIJC">ECONOMICS:USIJC (United States Initial Jobless Claims)</span></li>
+		<li><button type="button" class="flag" onclick="setFlag(this.nextElementSibling.id);">⬜</button>&nbsp;<span onclick="liClick(this.id)" id="ECONOMICS:USCJC">ECONOMICS:USCJC (United States Continuing Jobless Claims)</span></li>
+		
 		<h3>Ciclos Economicos</h3>
 		<li class="list-group-item"><a target="research" href="https://www.conference-board.org/topics/business-cycle-indicators">Ciclos Economicos Conference Board</a></li>
 		<li class="list-group-item"><a target="research" href="https://www.yardeni.com/pub/stmkteqmardebt.pdf">Margin Debt</a></li>
