@@ -119,6 +119,17 @@ div.flagList{
 	display: inline-block;
 	vertical-align: top;
 }
+
+.firstImage{
+	position: relative;
+	z-index:10;
+}
+.secondImage{
+	position: relative;
+	transform: translate(-10%, 10%);
+	min-width: 5px;
+	z-index:8;
+}
 </style>
 </head>
 <body>
@@ -163,10 +174,10 @@ div.flagList{
 			<button id="set" style="background-color: red;color: white;border-color: red;" onclick="saveNote()">SAVE</button>
 		</div>
 		<div style="width: 100%;">
-			<div style="width:49.99999%;padding-top:10px;display: flex;float: left;">
-				<textarea style="max-width: 98%;" name="note" cols="150" id="note" rows="40" onblur="saveNote()"></textarea>
+			<div style="width:45%;padding-top:10px;display: flex;float: left;">
+				<textarea style="max-width: 98%;" name="note" cols="122" id="note" rows="40" onblur="saveNote()"></textarea>
 			</div>
-			<div style="width:49.99999%;padding-top:10px;display: flex;float: left;">
+			<div style="width:55%;padding-top:10px;display: flex;float: left;">
 				
 				<div class="flagList">
 					<label for="purpleList">&#129002; Purple List:</label>
@@ -179,7 +190,7 @@ div.flagList{
 				</div>
 				
 			</div>
-			<div style="width:49.99999%;padding-top:10px;display: flex;float: right;">
+			<div style="width:55%;padding-top:10px;display: flex;float: right;">
 				
 				<div class="flagList">
 					<label for="redList">&#128997; Red List:</label>
@@ -767,11 +778,12 @@ function setTabContentListTV(tabId, listTV, arrListTV){
 	listTV.innerHTML += `<tr style="font-size: small;"><th>Name</th><th>Change</th><th>Ch.M</th><th>Ch.Y</th><th>Description</th></tr>`
 	for (item of arrListTV) {
 		listTV.innerHTML += `<tr><td style="width: 180px;"><button type="button" class="flag" onclick="setFlag('` +item.id+ `', '`+item.refDataTV+`');">&#11036;</button>`
-			+`&nbsp;<img src="" logoid="${item.refDataTV}">&nbsp;<span class="pointAndCall" onclick="liClick('`+item.id+`')" id="`+item.id+`" style="font-size: small;">`+item.id+`</span></td>`
-			+`<td style="width: 220px; text-align: right;"> <span style="font-size: xx-small;">`+ (item.id!=item.refDataTV?item.refDataTV:``)+`</span>&nbsp;<span class="`+tabId+`" refDataTV="`+item.refDataTV+`" style="font-size: small;"></span></td>`
-			+`<td style="font-size: x-small; text-align: right;" refMonthlyDataTV="`+item.refDataTV+`"></td>`
-			+`<td style="font-size: x-small; text-align: right;" refYearlyDataTV="`+item.refDataTV+`"></td>`
-			+`<td style="font-size: small;">`+item.desc+`</td> </tr>`;
+			+`&nbsp;<img src="" logoid="${item.refDataTV}" class="firstImage"/><img src="" class="secondImage"/>`
+			+`<span class="pointAndCall" onclick="liClick('${item.id}')" id="${item.id}" style="font-size: small;">${item.id}</span></td>`
+			+`<td style="width: 220px; text-align: right;"> <span style="font-size: xx-small;">${(item.id!=item.refDataTV?item.refDataTV:'')}</span>&nbsp;<span class="${tabId}" refDataTV="${item.refDataTV}" style="font-size: small;"></span></td>`
+			+`<td style="font-size: x-small; text-align: right;" refMonthlyDataTV="${item.refDataTV}"></td>`
+			+`<td style="font-size: x-small; text-align: right;" refYearlyDataTV="${item.refDataTV}"></td>`
+			+`<td style="font-size: small;">${item.desc}</td> </tr>`;
 	}
 }
 
@@ -844,12 +856,13 @@ function setFlagsOnPage(listId, array, charFlag) {
 	var colorList = document.getElementById(listId);
 	if (array.length>0){
 		for (ticket of array) {
-			document.getElementById(ticket.id).previousElementSibling.innerText = charFlag;
+			document.getElementById(ticket.id).previousElementSibling.previousElementSibling.previousElementSibling.innerText = charFlag;
 		}
 		colorList.innerHTML = `<tr style="font-size: small;"><th>Name</th><th>Change</th><th>Ch.M</th><th>Ch.Y</th><th></th></tr>`
 		for(var i = 0; i < array.length; i++) {
 			var item = array[i];
-			colorList.innerHTML += `<tr><td style="width: 150px;"><img src="" logoid="${item.refDataTV}">&nbsp;<span class="pointAndCall" onclick="liClick('`+item.id+`')" style="font-size: small;">`+item.id+`</span></td>`
+			colorList.innerHTML += `<tr><td style="width: 160px;">&nbsp;<img src="" logoid="${item.refDataTV}" class="firstImage"/><img src="" class="secondImage"/>`
+				+`<span class="pointAndCall" onclick="liClick('`+item.id+`')" style="font-size: small;">`+item.id+`</span></td>`
 				+`<td style="width: 220px; text-align: right;"> <span style="font-size: xx-small;">`+ (item.id!=item.refDataTV?item.refDataTV:``)+`</span>&nbsp;<span class="tabNotes" refDataTV="`+item.refDataTV+`" style="font-size: small;"></span></td>`
 				+`<td style="font-size: x-small; text-align: right;" refMonthlyDataTV="`+item.refDataTV+`"></td>`
 				+`<td style="font-size: x-small; text-align: right;" refYearlyDataTV="`+item.refDataTV+`"></td>`
@@ -872,23 +885,23 @@ function removeFlag(ticket, refDataTV){
 }
 
 function setFlag(ticket, refDataTV){
-	if (document.getElementById(ticket).previousElementSibling.innerText == String.fromCodePoint( 11036 )) {  // WHITE pasa a RED
-		document.getElementById(ticket).previousElementSibling.innerText = String.fromCodePoint( 128997 );
+	if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == String.fromCodePoint( 11036 )) {  // WHITE pasa a RED
+		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = String.fromCodePoint( 128997 );
 		setItemInArray(arrayRed, ticket, refDataTV);
-	} else if (document.getElementById(ticket).previousElementSibling.innerText == String.fromCodePoint( 128997 )) { // RED pasa a GREEN
-		document.getElementById(ticket).previousElementSibling.innerText = String.fromCodePoint( 129001 );
+	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == String.fromCodePoint( 128997 )) { // RED pasa a GREEN
+		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = String.fromCodePoint( 129001 );
 		setItemInArray(arrayGreen, ticket, refDataTV);
 		deleteItemInArray(arrayRed,ticket);
-	} else if (document.getElementById(ticket).previousElementSibling.innerText == String.fromCodePoint( 129001 )) { // GREEN pasa a BLUE
-		document.getElementById(ticket).previousElementSibling.innerText = String.fromCodePoint( 128998 );
+	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == String.fromCodePoint( 129001 )) { // GREEN pasa a BLUE
+		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = String.fromCodePoint( 128998 );
 		setItemInArray(arrayBlue, ticket, refDataTV);
 		deleteItemInArray(arrayGreen,ticket);
-	} else if (document.getElementById(ticket).previousElementSibling.innerText == String.fromCodePoint( 128998 )) { // BLUE pasa a PURPLE
-		document.getElementById(ticket).previousElementSibling.innerText = String.fromCodePoint( 129002 );
+	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == String.fromCodePoint( 128998 )) { // BLUE pasa a PURPLE
+		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = String.fromCodePoint( 129002 );
 		setItemInArray(arrayPurple, ticket, refDataTV);
 		deleteItemInArray(arrayBlue,ticket);
-	} else if (document.getElementById(ticket).previousElementSibling.innerText == String.fromCodePoint( 129002 )) { // PURPLE pasa a WHITE
-		document.getElementById(ticket).previousElementSibling.innerText = String.fromCodePoint( 11036 );
+	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == String.fromCodePoint( 129002 )) { // PURPLE pasa a WHITE
+		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = String.fromCodePoint( 11036 );
 		deleteItemInArray(arrayPurple,ticket);
 	}	
 	saveFlags();
@@ -966,6 +979,12 @@ const callApiTV = async (symbol) => {
 			for (item of arrLogo) {
 				if ((jsonResponse["logoid"]!=null) && (jsonResponse["logoid"]!=="")){
 					item.src = `https://s3-symbol-logo.tradingview.com/${(jsonResponse["logoid"])}.svg`;
+				} else if (jsonResponse["market"]=="forex"){
+					tickerName=symbol.split(':')[1];
+					firstFlag= tickerName.substring(0,2).toUpperCase();
+					secondFlag= tickerName.substring(3,5).toUpperCase();
+					item.src = `https://s3-symbol-logo.tradingview.com/country/${firstFlag}.svg`;
+					item.nextElementSibling.src = `https://s3-symbol-logo.tradingview.com/country/${secondFlag}.svg`;
 				}
 			}
 			
