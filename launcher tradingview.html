@@ -3,8 +3,10 @@
 	<title>Launcher Trading View</title>
 	<link rel="icon" type="image/x-icon" href="favicon.ico">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+
 <style>
+
 h2 {
     margin-top: 5px;
 }
@@ -36,17 +38,12 @@ li:active {
 }
 
 table, th, td {
-  border: 1px solid;
+  border: 1px solid silver;
   border-collapse: collapse;
   padding-left: 5px;
   padding-right: 5px;
 }
-table{
-  border-color: silver;
-}
-th, td {
-  border-color: silver;
-}
+
 
 body {font-family: Arial;}
 
@@ -172,12 +169,12 @@ div.flagList{
 			<div style="width:49.99999%;padding-top:10px;display: flex;float: left;">
 				
 				<div class="flagList">
-					<label for="purpleList">🟪 Purple List:</label>
+					<label for="purpleList">&#129002; Purple List:</label>
 					<table class="list-group" name="purpleList" id="purpleList" style="font-size: small;"></table>
 				</div>
 				
 				<div class="flagList"">
-					<label for="blueList">🟦 Blue List:</label>
+					<label for="blueList">&#128998; Blue List:</label>
 					<table class="list-group" name="blueList" id="blueList" style="font-size: small;"></table>
 				</div>
 				
@@ -185,12 +182,12 @@ div.flagList{
 			<div style="width:49.99999%;padding-top:10px;display: flex;float: right;">
 				
 				<div class="flagList">
-					<label for="redList">🟥 Red List:</label>
+					<label for="redList">&#128997; Red List:</label>
 					<table class="list-group" name="redList" id="redList" style="font-size: small;"></table>
 				</div>
 				
 				<div class="flagList">
-					<label for="greenList">🟩 Green List:</label>
+					<label for="greenList">&#129001; Green List:</label>
 					<table class="list-group" name="greenList" id="greenList" style="font-size: small;"></table>
 				</div>
 				
@@ -202,7 +199,7 @@ div.flagList{
 <!---- Indices   OK---->
 <script>
 arrIndices=[
-{id:"OANDA:SPX500USD"	,refDataTV:"OANDA:SPX500USD"	,desc:"CBOE EURO CURRENCY VOLATILITY INDEX (Nivel de riesgo: <7 Alto / >7 Bajo.  Evitar USD)"},
+{id:"OANDA:SPX500USD"	,refDataTV:"CME_MINI:ES1!"		,desc:""},
 {id:"AMEX:SPY"			,refDataTV:"AMEX:SPY"			,desc:"(EU: MIL:SPY5)"},
 {id:"NASDAQ:QQQ"		,refDataTV:"NASDAQ:QQQ"			,desc:"para ver el volumen del DXY"}, 		
 {id:"CME_MINI:NQ1!"		,refDataTV:"CME_MINI:NQ1!"		,desc:""},
@@ -770,7 +767,7 @@ function setTabContentListTV(tabId, listTV, arrListTV){
 	var listTV = document.getElementById(listTV);
 	listTV.innerHTML += `<tr style="font-size: small;"><th>Name</th><th>Change</th><th>Ch.M</th><th>Ch.Y</th><th>Description</th></tr>`
 	for (item of arrListTV) {
-		listTV.innerHTML += `<tr><td style="width: 180px;"><button type="button" class="flag" onclick="setFlag('` +item.id+ `', '`+item.refDataTV+`');">⬜</button>`
+		listTV.innerHTML += `<tr><td style="width: 180px;"><button type="button" class="flag" onclick="setFlag('` +item.id+ `', '`+item.refDataTV+`');">&#11036;</button>`
 			+`&nbsp;<span class="pointAndCall" onclick="liClick('`+item.id+`')" id="`+item.id+`" style="font-size: small;">`+item.id+`</span></td>`
 			+`<td style="width: 220px; text-align: right;"> <span style="font-size: xx-small;">`+ (item.id!=item.refDataTV?item.refDataTV:``)+`</span>&nbsp;<span class="`+tabId+`" refDataTV="`+item.refDataTV+`" style="font-size: small;"></span></td>`
 			+`<td style="font-size: x-small; text-align: right;" refMonthlyDataTV="`+item.refDataTV+`"></td>`
@@ -838,10 +835,10 @@ function getFlags() {
 }
 
 function setAllFlagsOnPage() {
-	setFlagsOnPage("redList", arrayRed, "🟥");
-	setFlagsOnPage("greenList", arrayGreen, "🟩");
-	setFlagsOnPage("blueList", arrayBlue, "🟦");
-	setFlagsOnPage("purpleList", arrayPurple, "🟪");
+	setFlagsOnPage("redList", arrayRed, String.fromCodePoint( 128997 ));
+	setFlagsOnPage("greenList", arrayGreen, String.fromCodePoint( 129001 ));
+	setFlagsOnPage("blueList", arrayBlue, String.fromCodePoint( 128998 ));
+	setFlagsOnPage("purpleList", arrayPurple, String.fromCodePoint( 129002 ));
 }
 
 function setFlagsOnPage(listId, array, charFlag) {
@@ -857,7 +854,7 @@ function setFlagsOnPage(listId, array, charFlag) {
 				+`<td style="width: 220px; text-align: right;"> <span style="font-size: xx-small;">`+ (item.id!=item.refDataTV?item.refDataTV:``)+`</span>&nbsp;<span class="tabNotes" refDataTV="`+item.refDataTV+`" style="font-size: small;"></span></td>`
 				+`<td style="font-size: x-small; text-align: right;" refMonthlyDataTV="`+item.refDataTV+`"></td>`
 				+`<td style="font-size: x-small; text-align: right;" refYearlyDataTV="`+item.refDataTV+`"></td>`
-				+`<td><button type="button" class="flag" onclick="removeFlag('`+item.id+`')">✖</button></td></tr>`;
+				+`<td><button type="button" class="flag" onclick="removeFlag('`+item.id+`')">&#10006;</button></td></tr>`;
 		}
 	} else {
 		colorList.innerHTML = ``;
@@ -865,7 +862,7 @@ function setFlagsOnPage(listId, array, charFlag) {
 }
 
 function removeFlag(ticket, refDataTV){
-	document.getElementById(ticket).previousElementSibling.innerText = "⬜";
+	document.getElementById(ticket).previousElementSibling.innerText = String.fromCodePoint( 11036 );
 	deleteItemInArray(arrayRed,ticket);
 	deleteItemInArray(arrayGreen,ticket);
 	deleteItemInArray(arrayBlue,ticket);
@@ -876,23 +873,23 @@ function removeFlag(ticket, refDataTV){
 }
 
 function setFlag(ticket, refDataTV){
-	if (document.getElementById(ticket).previousElementSibling.innerText == "⬜") {  //Pasa a RED
-		document.getElementById(ticket).previousElementSibling.innerText = "🟥";
+	if (document.getElementById(ticket).previousElementSibling.innerText == String.fromCodePoint( 11036 )) {  // WHITE pasa a RED
+		document.getElementById(ticket).previousElementSibling.innerText = String.fromCodePoint( 128997 );
 		setItemInArray(arrayRed, ticket, refDataTV);
-	} else if (document.getElementById(ticket).previousElementSibling.innerText == "🟥") { // Pasa a GREEN
-		document.getElementById(ticket).previousElementSibling.innerText = "🟩";
+	} else if (document.getElementById(ticket).previousElementSibling.innerText == String.fromCodePoint( 128997 )) { // RED pasa a GREEN
+		document.getElementById(ticket).previousElementSibling.innerText = String.fromCodePoint( 129001 );
 		setItemInArray(arrayGreen, ticket, refDataTV);
 		deleteItemInArray(arrayRed,ticket);
-	} else if (document.getElementById(ticket).previousElementSibling.innerText == "🟩") { // Pasa a BLUE
-		document.getElementById(ticket).previousElementSibling.innerText = "🟦";
+	} else if (document.getElementById(ticket).previousElementSibling.innerText == String.fromCodePoint( 129001 )) { // GREEN pasa a BLUE
+		document.getElementById(ticket).previousElementSibling.innerText = String.fromCodePoint( 128998 );
 		setItemInArray(arrayBlue, ticket, refDataTV);
 		deleteItemInArray(arrayGreen,ticket);
-	} else if (document.getElementById(ticket).previousElementSibling.innerText == "🟦") { // Pasa a PURPLE
-		document.getElementById(ticket).previousElementSibling.innerText = "🟪";
+	} else if (document.getElementById(ticket).previousElementSibling.innerText == String.fromCodePoint( 128998 )) { // BLUE pasa a PURPLE
+		document.getElementById(ticket).previousElementSibling.innerText = String.fromCodePoint( 129002 );
 		setItemInArray(arrayPurple, ticket, refDataTV);
 		deleteItemInArray(arrayBlue,ticket);
-	} else if (document.getElementById(ticket).previousElementSibling.innerText == "🟪") { // Pasa a WHITE
-		document.getElementById(ticket).previousElementSibling.innerText = "⬜";
+	} else if (document.getElementById(ticket).previousElementSibling.innerText == String.fromCodePoint( 129002 )) { // PURPLE pasa a WHITE
+		document.getElementById(ticket).previousElementSibling.innerText = String.fromCodePoint( 11036 );
 		deleteItemInArray(arrayPurple,ticket);
 	}	
 	saveFlags();
