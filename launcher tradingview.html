@@ -199,16 +199,16 @@ div.flagList{
 <!---- Indices   OK---->
 <script>
 arrIndices=[
-{id:"OANDA:SPX500USD"	,refDataTV:"CME_MINI:ES1!"		,desc:""},
+{id:"OANDA:SPX500USD"		,refDataTV:"CME_MINI:ES1!"		,desc:""},
 {id:"AMEX:SPY"			,refDataTV:"AMEX:SPY"			,desc:"(EU: MIL:SPY5)"},
 {id:"NASDAQ:QQQ"		,refDataTV:"NASDAQ:QQQ"			,desc:"para ver el volumen del DXY"}, 		
 {id:"CME_MINI:NQ1!"		,refDataTV:"CME_MINI:NQ1!"		,desc:""},
 {id:"DJ:DJI"			,refDataTV:"DJ:DJI"			,desc:""},
-{id:"CBOT_MINI:YM1!"		,refDataTV:"CBOT_MINI:YM1!"		,desc:"(Mini Dow Jones, para ver el volumen real)"},
+{id:"CBOT_MINI:YM1!"		,refDataTV:"CBOT_MINI:YM1!"		,desc:"Mini Dow Jones (para ver el volumen real)"},
 {id:"AMEX:IWM"			,refDataTV:"AMEX:IWM"			,desc:""},
 {id:"TVC:NYA"			,refDataTV:"TVC:NYA"			,desc:"NYSE Composite Index"},
-{id:"AMEX:RSP"			,refDataTV:"AMEX:RSP"			,desc:"(Invesco S&P 500 Equal Weight ETF"},
-{id:"NASDAQ:ACWI"		,refDataTV:"NASDAQ:ACWI"		,desc:"dicen que es bastante fiel al AT"},
+{id:"AMEX:RSP"			,refDataTV:"AMEX:RSP"			,desc:"Invesco S&P 500 Equal Weight ETF"},
+{id:"NASDAQ:ACWI"		,refDataTV:"NASDAQ:ACWI"		,desc:"iShares MSCI ACWI ETF (offers a broad portfolio of global large- and mid-cap stocks that matches the market well)"},
 {id:"XETR:DAX"			,refDataTV:"XETR:DAX"			,desc:"DAX"},
 {id:"TVC:SX5E"			,refDataTV:"TVC:SX5E"			,desc:"Euro Stoxx 50 Index"},
 {id:"EURONEXT:PX1"		,refDataTV:"EURONEXT:PX1"		,desc:"CAC 40 Index"},
@@ -221,7 +221,7 @@ arrIndices=[
 {id:"FTSE:XIN9"			,refDataTV:"FTSE:XIN9"			,desc:"FTSE China A50 Index (chosen from Shanghai Stock Exchange and Shenzhen Stock Exchange)"},
 {id:"AMEX:FXI"			,refDataTV:"AMEX:FXI"			,desc:"iShares China Large-Cap ETF"},
 {id:"AMEX:ARGT"			,refDataTV:"AMEX:ARGT"			,desc:""},
-{id:"BCBA:IMV/(BCBA:GGAL/NASDAQ:GGAL*10)",	refDataTV:"",desc:"Simil Merval en dolares"},
+{id:"BCBA:IMV/(BCBA:GGAL/NASDAQ:GGAL*10)",	refDataTV:""		,desc:"Simil Merval en dolares"},
 {id:"AMEX:EWZ"			,refDataTV:"AMEX:EWZ"			,desc:""},
 ];
 </script>
@@ -310,9 +310,9 @@ arrMarketTimmingEconomy=[
 <!---- Forex   OK---->
 <script>
 arrForex=[
-{id:"CBOE:EVZ", 			refDataTV:"CBOE:EVZ",			desc:"CBOE EURO CURRENCY VOLATILITY INDEX (Nivel de riesgo: <7 Alto / >7 Bajo.  Evitar USD)"},
-{id:"TVC:DXY", 				refDataTV:"TVC:DXY",			desc:""},
-{id:"AMEX:UUP", 			refDataTV:"AMEX:UUP",			desc:"para ver el volumen del DXY"}, 		
+{id:"CBOE:EVZ", 		refDataTV:"CBOE:EVZ",			desc:"CBOE EURO CURRENCY VOLATILITY INDEX (Nivel de riesgo: <7 Alto / >7 Bajo.  Evitar USD)"},
+{id:"TVC:DXY", 			refDataTV:"TVC:DXY",			desc:""},
+{id:"AMEX:UUP", 		refDataTV:"AMEX:UUP",			desc:"para ver el volumen del DXY"}, 		
 {id:"INDEX:BTCUSD", 		refDataTV:"BINANCE:BTCUSD",		desc:""},
 {id:"BINANCE:ETHUSD", 		refDataTV:"BINANCE:ETHUSD",		desc:""},
 {id:"OANDA:AUDCAD", 		refDataTV:"FX_IDC:AUDCAD",		desc:""},
@@ -383,13 +383,13 @@ arrBasicMaterialsTimming=[
 arrBasicMaterialsFutures=[
 {id:"COMEX:GC1!"		,refDataTV:"COMEX:GC1!"			,desc:"Gold Futures (- Cierta relacion inversa con los rendimientos del bono a 10 años. En los pico altos de los bonos se producen picos bajos del oro.<br> - Correlacion inversa bastante alta con los rendimientos de los TIPS a 10 años. Esto hace que el oro sea proteccion contra inflación futura, no la inflacion actual.)"},
 {id:"COMEX:SI1!"		,refDataTV:"COMEX:SI1!"			,desc:"Silver Futures"},
-{id:"MCX:ALUMINIUM1!"	,refDataTV:"MCX:ALUMINIUM1!"	,desc:"Aluminium Futures (India)"}, 		
+{id:"MCX:ALUMINIUM1!"		,refDataTV:"MCX:ALUMINIUM1!"		,desc:"Aluminium Futures (India)"}, 		
 {id:"COMEX:HG1!"		,refDataTV:"COMEX:HG1!"			,desc:"Copper Futures"},
 {id:"ICEUS:CC1!"		,refDataTV:"ICEUS:CC1!"			,desc:"Cocoa Futures"},
 {id:"NYMEX:CL1!"		,refDataTV:"NYMEX:CL1!"			,desc:"Light Crude Oil Futures"},
 {id:"ICEUS:CT1!"		,refDataTV:"ICEUS:CT1!"			,desc:"Cotton No.2 Futures"},
 {id:"ICEUS:KC1!"		,refDataTV:"ICEUS:KC1!"			,desc:"Coffee C Futures"},
-{id:"CME:LBR1!" 	    ,refDataTV:"CME:LBR1!" 	    	,desc:"Lumber Futures"},
+{id:"CME:LBR1!" 	    	,refDataTV:"CME:LBR1!" 	    		,desc:"Lumber Futures"},
 {id:"CME:LE1!"			,refDataTV:"CME:LE1!"			,desc:"Live Cattle Futures (Tiene un delay aproximadamente de 8 meses respecto al Wheat)"},
 {id:"NYMEX:NG1!"		,refDataTV:"NYMEX:NG1!"			,desc:"Natural Gas Futures"},
 {id:"MCX:NICKEL1!"		,refDataTV:"MCX:NICKEL1!"		,desc:"Nickel Futures (India)"},
@@ -408,7 +408,7 @@ arrBasicMaterialsFutures=[
 arrBasicMaterialsSpot=[
 {id:"OANDA:XAUUSD"		,refDataTV:"OANDA:XAUUSD"		,desc:"Gold Spot"},
 {id:"OANDA:XAGUSD"		,refDataTV:"OANDA:XAGUSD"	  	,desc:"Silver Spot"},
-{id:"OANDA:WTICOUSD"	,refDataTV:"OANDA:WTICOUSD"  	,desc:"West Texas Oil"}, 		
+{id:"OANDA:WTICOUSD"		,refDataTV:"OANDA:WTICOUSD"  		,desc:"West Texas Oil"}, 		
 {id:"OANDA:BCOUSD"		,refDataTV:"OANDA:BCOUSD"	  	,desc:"Brent Crude Oil"},
 {id:"OANDA:XPTUSD"	 	,refDataTV:"OANDA:XPTUSD"	  	,desc:"Platinum"},
 ];
@@ -449,7 +449,7 @@ arrBasicMaterialsEtf=[
 <!---- Sectors   OK---->
 <script>
 arrSectors=[
-{id:"AMEX:XLY/AMEX:XLP"	,refDataTV:"AMEX:XLY/AMEX:XLP"	,desc:"Consumer Discretionary/Consumer Staples"},
+{id:"AMEX:XLY/AMEX:XLP"		,refDataTV:"AMEX:XLY/AMEX:XLP"		,desc:"Consumer Discretionary/Consumer Staples"},
 {id:"AMEX:XLB"			,refDataTV:"AMEX:XLB"			,desc:"Materials"},
 {id:"AMEX:XLC"			,refDataTV:"AMEX:XLC"			,desc:"Communication Services"}, 		
 {id:"AMEX:XLE"			,refDataTV:"AMEX:XLE"			,desc:"Energy"},
@@ -502,7 +502,7 @@ arrUsaStocks=[
 {id:"NASDAQ:DXCM",	refDataTV:"NASDAQ:DXCM",	desc:"DexCom, Inc."},
 {id:"NASDAQ:EBAY",	refDataTV:"NASDAQ:EBAY",	desc:"eBay Inc."},
 {id:"NYSE:EFX",		refDataTV:"NYSE:EFX",		desc:"Equifax [Servicio de consulta de situacion financiera. Se lo considera como un lead indicator de la economia]"},
-{id:"NYSE:F",		refDataTV:"NYSE:F",			desc:"Ford Mtr Co Del"},
+{id:"NYSE:F",		refDataTV:"NYSE:F",		desc:"Ford Mtr Co Del"},
 {id:"NASDAQ:FCEL",	refDataTV:"NASDAQ:FCEL",	desc:"FuelCell Energy, Inc."},
 {id:"NYSE:FDX",		refDataTV:"NYSE:FDX",		desc:"FedEx Corporation"},
 {id:"NYSE:GE",		refDataTV:"NYSE:GE",		desc:"General Electric Company"},
@@ -523,7 +523,7 @@ arrUsaStocks=[
 {id:"NASDAQ:META",	refDataTV:"NASDAQ:META",	desc:"Meta Platforms, Inc."},
 {id:"NYSE:MRK",		refDataTV:"NYSE:MRK",		desc:"Merck & Company, Inc."},
 {id:"NASDAQ:MSFT",	refDataTV:"NASDAQ:MSFT",	desc:"Microsoft Corp."},
-{id:"NASDAQ:MU",	refDataTV:"NASDAQ:MU",	    desc:"Micron Technology, Inc."},
+{id:"NASDAQ:MU",	refDataTV:"NASDAQ:MU",	    	desc:"Micron Technology, Inc."},
 {id:"NYSE:NEE",		refDataTV:"NYSE:NEE",		desc:"NextEra Energy, Inc. [Sector: Utilities]"},
 {id:"NYSE:NEM",		refDataTV:"NYSE:NEM",		desc:"Newmont Corporation (La compañía minera estadounidense, no solo fue la mayor productora mundial de oro en 2020, sino que ocupó el cuarto puesto en cuanto a producción de plata."},
 {id:"NASDAQ:NFLX",	refDataTV:"NASDAQ:NFLX",	desc:"Netflix, Inc."},
@@ -531,12 +531,12 @@ arrUsaStocks=[
 {id:"NYSE:NKE",		refDataTV:"NYSE:NKE",		desc:"Nike, Inc."},
 {id:"NASDAQ:NVDA",	refDataTV:"NASDAQ:NVDA",	desc:"NVIDIA Corporation"},
 {id:"NYSE:NVO",		refDataTV:"NYSE:NVO",		desc:"Novo Nordisk A/S"},
-{id:"NYSE:ORCL",	refDataTV:"NYSE:ORCL",	    desc:"Oracle Corporation"},
+{id:"NYSE:ORCL",	refDataTV:"NYSE:ORCL",	    	desc:"Oracle Corporation"},
 {id:"NYSE:PCG",		refDataTV:"NYSE:PCG",		desc:"Pacific Gas & Electric Co."},
-{id:"NASDAQ:PEP",	refDataTV:"NASDAQ:PEP",	    desc:"PepsiCo, Inc."},
+{id:"NASDAQ:PEP",	refDataTV:"NASDAQ:PEP",	    	desc:"PepsiCo, Inc."},
 {id:"NYSE:PFE",		refDataTV:"NYSE:PFE",		desc:"Pfizer, Inc."},
 {id:"NYSE:PG",		refDataTV:"NYSE:PG",		desc:"Procter & Gamble Company (The)"},
-{id:"NYSE:PLTR",	refDataTV:"NYSE:PLTR",	    desc:"Palantir Technologies Inc."},
+{id:"NYSE:PLTR",	refDataTV:"NYSE:PLTR",	  	desc:"Palantir Technologies Inc."},
 {id:"NASDAQ:PYPL",	refDataTV:"NASDAQ:PYPL",	desc:"PayPal Holdings, Inc."},
 {id:"NASDAQ:PZZA",	refDataTV:"NASDAQ:PZZA",	desc:"Papa John's International, Inc."},
 {id:"NASDAQ:QCOM",	refDataTV:"NASDAQ:QCOM",	desc:"Qualcomm Incorporated"},
@@ -544,7 +544,7 @@ arrUsaStocks=[
 {id:"NASDAQ:SBUX",	refDataTV:"NASDAQ:SBUX",	desc:"Starbucks Corporation"},
 {id:"NYSE:SO",		refDataTV:"NYSE:SO",		desc:"Southern Company (The)"},
 {id:"NYSE:SWN",		refDataTV:"NYSE:SWN",		desc:"Southwestern Energy Company"},
-{id:"NYSE:T",		refDataTV:"NYSE:T",		    desc:"AT&T Inc."},
+{id:"NYSE:T",		refDataTV:"NYSE:T",		desc:"AT&T Inc."},
 {id:"NASDAQ:TMUS",	refDataTV:"NASDAQ:TMUS",	desc:"T-Mobile US, Inc."},
 {id:"NYSE:TRU",		refDataTV:"NYSE:TRU",		desc:"TransUnion) [Servicio de consulta de estados financiera. Se lo considera como un lead indicator de la economia]"},
 {id:"NASDAQ:TSLA",	refDataTV:"NASDAQ:TSLA",	desc:"Tesla, Inc."},
