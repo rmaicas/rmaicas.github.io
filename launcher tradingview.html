@@ -749,6 +749,12 @@ arrResearches=[
 const body = document.querySelector('body');
 body.onload = onLoad;
 
+const CHAR_RED   = String.fromCodePoint( 128997 )
+const CHAR_GREEN = String.fromCodePoint( 129001 )
+const CHAR_BLUE  = String.fromCodePoint( 128998 )
+const CHAR_PURPLE  = String.fromCodePoint( 129002 )
+const CHAR_WHITE  = String.fromCodePoint( 11036 )
+
 var arrayRed = [];
 var arrayGreen = [];
 var arrayBlue = [];
@@ -858,10 +864,21 @@ function getFlags() {
 }
 
 function setAllFlagsOnPage() {
-	setFlagsOnPage("redList", arrayRed, String.fromCodePoint( 128997 ));
-	setFlagsOnPage("greenList", arrayGreen, String.fromCodePoint( 129001 ));
-	setFlagsOnPage("blueList", arrayBlue, String.fromCodePoint( 128998 ));
-	setFlagsOnPage("purpleList", arrayPurple, String.fromCodePoint( 129002 ));
+	setFlagsOnPage("redList", arrayRed, CHAR_RED);
+	setFlagsOnPage("greenList", arrayGreen, CHAR_GREEN);
+	setFlagsOnPage("blueList", arrayBlue, CHAR_BLUE);
+	setFlagsOnPage("purpleList", arrayPurple, CHAR_PURPLE);
+}
+
+function changeFlag(ticket, refDataTV, charFlagOrig, charFlagTarget){
+	arrayOrig = charFlagOrig===CHAR_RED? arrayRed : charFlagOrig===CHAR_GREEN? arrayGreen : charFlagOrig===CHAR_BLUE? arrayBlue : arrayPurple;
+	arrayDest = charFlagTarget===CHAR_RED? arrayRed : charFlagTarget===CHAR_GREEN? arrayGreen : charFlagTarget===CHAR_BLUE? arrayBlue : arrayPurple;
+	deleteItemInArray(arrayOrig,ticket);
+	document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = charFlagTarget;
+	setItemInArray(arrayDest, ticket, refDataTV);
+	saveFlags();
+	setAllFlagsOnPage();
+	callsTVForTab(currentTab)
 }
 
 function setFlagsOnPage(listId, array, charFlag) {
@@ -870,7 +887,7 @@ function setFlagsOnPage(listId, array, charFlag) {
 		for (ticket of array) {
 			document.getElementById(ticket.id).previousElementSibling.previousElementSibling.previousElementSibling.innerText = charFlag;
 		}
-		colorList.innerHTML = `<tr style="font-size: small;"><th>Name</th><th>Change</th><th>Ch.M</th><th>Ch.Y</th><th></th></tr>`
+		colorList.innerHTML = `<tr style="font-size: small;"><th>Name</th><th>Change</th><th>Ch.M</th><th>Ch.Y</th><th></th><th></th></tr>`
 		for(var i = 0; i < array.length; i++) {
 			var item = array[i];
 			colorList.innerHTML += `<tr><td style="width: 160px;">&nbsp;<img src="" logoid="${item.refDataTV}" class="firstImage"/><img src="" class="secondImage"/>`
@@ -878,6 +895,14 @@ function setFlagsOnPage(listId, array, charFlag) {
 				+`<td style="width: 220px; text-align: right;"> <span style="font-size: xx-small;">`+ (item.id!=item.refDataTV?item.refDataTV:``)+`</span>&nbsp;<span class="tabNotes" refDataTV="`+item.refDataTV+`" style="font-size: small;"></span></td>`
 				+`<td style="font-size: x-small; text-align: right;" refMonthlyDataTV="`+item.refDataTV+`"></td>`
 				+`<td style="font-size: x-small; text-align: right;" refYearlyDataTV="`+item.refDataTV+`"></td>`
+				+`<td style="font-size: x-small; text-align: right;" >
+				<select id="${'select_'+item.id}" onChange="changeFlag( '${item.id}', '${item.refDataTV}', '${charFlag}', document.getElementById('${'select_'+item.id}').value)">
+						<option value="${CHAR_RED}"    ${charFlag == CHAR_RED? "selected":""}>${CHAR_RED}</option>
+						<option value="${CHAR_GREEN}"  ${charFlag == CHAR_GREEN? "selected":""}>${CHAR_GREEN}</option>
+						<option value="${CHAR_BLUE}"   ${charFlag == CHAR_BLUE? "selected":""}>${CHAR_BLUE}</option>
+						<option value="${CHAR_PURPLE}" ${charFlag == CHAR_PURPLE? "selected":""}>${CHAR_PURPLE}</option>
+    			</select>
+				</td>`
 				+`<td><button type="button" class="flag" onclick="removeFlag('`+item.id+`')">&#10006;</button></td></tr>`;
 		}
 	} else {
@@ -885,8 +910,10 @@ function setFlagsOnPage(listId, array, charFlag) {
 	}
 }
 
+
+
 function removeFlag(ticket, refDataTV){
-	document.getElementById(ticket).previousElementSibling.innerText = String.fromCodePoint( 11036 );
+	document.getElementById(ticket).previousElementSibling.innerText = CHAR_WHITE;
 	deleteItemInArray(arrayRed,ticket);
 	deleteItemInArray(arrayGreen,ticket);
 	deleteItemInArray(arrayBlue,ticket);
@@ -897,23 +924,23 @@ function removeFlag(ticket, refDataTV){
 }
 
 function setFlag(ticket, refDataTV){
-	if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == String.fromCodePoint( 11036 )) {  // WHITE pasa a RED
-		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = String.fromCodePoint( 128997 );
+	if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == CHAR_WHITE) {  // WHITE pasa a RED
+		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = CHAR_RED;
 		setItemInArray(arrayRed, ticket, refDataTV);
-	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == String.fromCodePoint( 128997 )) { // RED pasa a GREEN
-		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = String.fromCodePoint( 129001 );
+	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == CHAR_RED) { // RED pasa a GREEN
+		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = CHAR_GREEN;
 		setItemInArray(arrayGreen, ticket, refDataTV);
 		deleteItemInArray(arrayRed,ticket);
-	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == String.fromCodePoint( 129001 )) { // GREEN pasa a BLUE
-		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = String.fromCodePoint( 128998 );
+	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == CHAR_GREEN) { // GREEN pasa a BLUE
+		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = CHAR_BLUE;
 		setItemInArray(arrayBlue, ticket, refDataTV);
 		deleteItemInArray(arrayGreen,ticket);
-	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == String.fromCodePoint( 128998 )) { // BLUE pasa a PURPLE
-		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = String.fromCodePoint( 129002 );
+	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == CHAR_BLUE) { // BLUE pasa a PURPLE
+		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = CHAR_PURPLE;
 		setItemInArray(arrayPurple, ticket, refDataTV);
 		deleteItemInArray(arrayBlue,ticket);
-	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == String.fromCodePoint( 129002 )) { // PURPLE pasa a WHITE
-		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = String.fromCodePoint( 11036 );
+	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == CHAR_PURPLE) { // PURPLE pasa a WHITE
+		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = CHAR_WHITE;
 		deleteItemInArray(arrayPurple,ticket);
 	}	
 	saveFlags();
