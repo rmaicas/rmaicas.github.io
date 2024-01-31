@@ -692,6 +692,13 @@ arrEtfVariableIncome=[
 {id:"XETR:SXRV"		,refDataTV:"XETR:SXRV"		,desc:"iShares Nasdaq 100 UCITS ETF (Acc), Xetra"},
 {id:"XETR:EUN5"		,refDataTV:"XETR:EUN5"		,desc:"iShares Core Euro Corporate Bond UCITS ETF (Dist), Xetra"},
 ];
+
+arrEtfVariableIncomeDividend=[
+{id:"XETR:ISPA"		,refDataTV:"XETR:ISPA"		,desc:"ISHARES STOXX GLOBAL SELECT DIVIDEND 100 UCITS ETF (DE) (Dividendos en todo el mundo (mas invierte: EEUU HK)), Xetra"},
+{id:"XETR:SPYD"		,refDataTV:"XETR:SPYD"		,desc:"SPDR S&P US DIVIDEND ARISTOCRATS UCITS ETF (Aristocratas de Dividendos en el SP500), Xetra"},
+{id:"EURONEXT:VEUR"	,refDataTV:"EURONEXT:VEUR"	,desc:"VANGUARD FTSE DEVELOPED EUROPE UCITS ETF (Dividendos en Europa), Amsterdam"},
+{id:"XETR:EHDL"		,refDataTV:"XETR:EHDL"		,desc:"INVESCO FTSE EMERGING MARKETS HIGH DIVIDEND LOW VOL UCITS ETF (Dividendos en paises emergentes), Xetra"},
+];
 </script>
 <div id="tabETFs" class="tabcontent">
 	<ul class="list-group">
@@ -710,6 +717,9 @@ arrEtfVariableIncome=[
 				
 	<h3>Variable Income</h3>
 	<table class="list-group" id="etfVariableIncomeListTV"></table>
+
+	<h3>High Dividends</h3>
+	<table class="list-group" id="etfVariableIncomeDividendListTV"></table>
 
 </div>
 
@@ -783,6 +793,7 @@ function onLoad() {
 	setTabContentListTV("tabETFs", "etfIndicesListTV", arrEtfIndices);
 	setTabContentListTV("tabETFs", "etfFixedIncomeListTV", arrEtfFixedIncome);
 	setTabContentListTV("tabETFs", "etfVariableIncomeListTV", arrEtfVariableIncome);
+	setTabContentListTV("tabETFs", "etfVariableIncomeDividendListTV", arrEtfVariableIncomeDividend);
 	setTabContentListTV("tabResearches", "researchesListTV", arrResearches);
 	getFlags();
 	setAllFlagsOnPage();
@@ -896,12 +907,12 @@ function setFlagsOnPage(listId, array, charFlag) {
 				+`<td style="font-size: x-small; text-align: right;" refMonthlyDataTV="`+item.refDataTV+`"></td>`
 				+`<td style="font-size: x-small; text-align: right;" refYearlyDataTV="`+item.refDataTV+`"></td>`
 				+`<td style="font-size: x-small; text-align: right;" >
-				<select id="${'select_'+item.id}" onChange="changeFlag( '${item.id}', '${item.refDataTV}', '${charFlag}', document.getElementById('${'select_'+item.id}').value)">
+					<select id="${'select_'+item.id}" onChange="changeFlag( '${item.id}', '${item.refDataTV}', '${charFlag}', document.getElementById('${'select_'+item.id}').value)" style="border: 0;">
 						<option value="${CHAR_RED}"    ${charFlag == CHAR_RED? "selected":""}>${CHAR_RED}</option>
 						<option value="${CHAR_GREEN}"  ${charFlag == CHAR_GREEN? "selected":""}>${CHAR_GREEN}</option>
 						<option value="${CHAR_BLUE}"   ${charFlag == CHAR_BLUE? "selected":""}>${CHAR_BLUE}</option>
 						<option value="${CHAR_PURPLE}" ${charFlag == CHAR_PURPLE? "selected":""}>${CHAR_PURPLE}</option>
-    			</select>
+    					</select>
 				</td>`
 				+`<td><button type="button" class="flag" onclick="removeFlag('`+item.id+`')">&#10006;</button></td></tr>`;
 		}
