@@ -916,7 +916,7 @@ function setFlagsOnPage(listId, array, charFlag) {
 				+`<td style="font-size: x-small; text-align: right;" refMonthlyDataTV="`+item.refDataTV+`"></td>`
 				+`<td style="font-size: x-small; text-align: right;" refYearlyDataTV="`+item.refDataTV+`"></td>`
 				+`<td style="font-size: x-small; text-align: right;" >
-					<select id="${'select_'+item.id}" onChange="changeFlag( '${item.id}', '${item.refDataTV}', '${charFlag}', document.getElementById('${'select_'+item.id}').value)" style="border: 0;background-color: black;color: lightgray;">
+					<select id="${'select_'+item.id}" onChange="changeFlag( '${item.id}', '${item.refDataTV}', '${charFlag}', document.getElementById('${'select_'+item.id}').value)" style="border: 0;background-color: transparent;color: lightgray;">
 						<option value="${CHAR_RED}"    ${charFlag == CHAR_RED? "selected":""}>${CHAR_RED}</option>
 						<option value="${CHAR_GREEN}"  ${charFlag == CHAR_GREEN? "selected":""}>${CHAR_GREEN}</option>
 						<option value="${CHAR_BLUE}"   ${charFlag == CHAR_BLUE? "selected":""}>${CHAR_BLUE}</option>
