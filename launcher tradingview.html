@@ -14,6 +14,9 @@ h2 {
 h3 {
 	margin-bottom: 5px;
 }
+a {
+	color: lightsteelblue;
+}
 
 li {
     cursor: pointer;
@@ -45,7 +48,11 @@ table, th, td {
 }
 
 
-body {font-family: Arial;}
+body {
+	font-family: Arial;
+	background-color: black;
+	color: lightgray;
+}
 
 .list-group {
   list-style-type: none;
@@ -56,7 +63,7 @@ body {font-family: Arial;}
 .tab {
   overflow: hidden;
   border: 1px solid #ccc;
-  background-color: #f1f1f1;
+  background-color: lightsteelblue;
   margin-top: 5px;
 }
 
@@ -175,7 +182,7 @@ div.flagList{
 		</div>
 		<div style="width: 100%;">
 			<div style="width:45%;padding-top:10px;display: flex;float: left;">
-				<textarea style="max-width: 98%;" name="note" cols="122" id="note" rows="40" onblur="saveNote()"></textarea>
+				<textarea style="max-width: 98%;background-color: lightgray;" name="note" cols="122" id="note" rows="40" onblur="saveNote()"></textarea>
 			</div>
 			<div style="width:55%;padding-top:10px;display: flex;float: left;">
 				
@@ -907,7 +914,7 @@ function setFlagsOnPage(listId, array, charFlag) {
 				+`<td style="font-size: x-small; text-align: right;" refMonthlyDataTV="`+item.refDataTV+`"></td>`
 				+`<td style="font-size: x-small; text-align: right;" refYearlyDataTV="`+item.refDataTV+`"></td>`
 				+`<td style="font-size: x-small; text-align: right;" >
-					<select id="${'select_'+item.id}" onChange="changeFlag( '${item.id}', '${item.refDataTV}', '${charFlag}', document.getElementById('${'select_'+item.id}').value)" style="border: 0;">
+					<select id="${'select_'+item.id}" onChange="changeFlag( '${item.id}', '${item.refDataTV}', '${charFlag}', document.getElementById('${'select_'+item.id}').value)" style="border: 0;background-color: black;color: white;">
 						<option value="${CHAR_RED}"    ${charFlag == CHAR_RED? "selected":""}>${CHAR_RED}</option>
 						<option value="${CHAR_GREEN}"  ${charFlag == CHAR_GREEN? "selected":""}>${CHAR_GREEN}</option>
 						<option value="${CHAR_BLUE}"   ${charFlag == CHAR_BLUE? "selected":""}>${CHAR_BLUE}</option>
@@ -989,7 +996,7 @@ const callApiTV = async (symbol) => {
 			for (item of arrPrices) {
 				item.innerHTML = `${jsonResponse.close}`+ ` <b>(${(jsonResponse.change).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}%)</b>`;
 				if (jsonResponse.change>0){
-					item.style.color="green";
+					item.style.color="lightgreen";
 				} else if (jsonResponse.change<0){
 					item.style.color="red";
 				} else {
@@ -1002,7 +1009,7 @@ const callApiTV = async (symbol) => {
 				if (jsonResponse["Perf.1M"]!=null){
 					item.innerHTML = `${(jsonResponse["Perf.1M"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}%`;
 					if (jsonResponse["Perf.1M"]>0){
-						item.style.color="green";
+						item.style.color="lightgreen";
 					} else if (jsonResponse["Perf.1M"]<0){
 						item.style.color="red";
 					} else {
@@ -1016,7 +1023,7 @@ const callApiTV = async (symbol) => {
 				if (jsonResponse["Perf.Y"]!=null){
 					item.innerHTML = `${(jsonResponse["Perf.Y"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}%`;
 					if (jsonResponse["Perf.Y"]>0){
-						item.style.color="green";
+						item.style.color="lightgreen";
 					} else if (jsonResponse["Perf.Y"]<0){
 						item.style.color="red";
 					} else {
