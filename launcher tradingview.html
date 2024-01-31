@@ -999,7 +999,7 @@ const callApiTV = async (symbol) => {
 				if (jsonResponse.change>0){
 					item.style.color="lightgreen";
 				} else if (jsonResponse.change<0){
-					item.style.color="lightred";
+					item.style.color="orangered";
 				} else {
 					item.style.color="lightblue";
 				}
@@ -1012,7 +1012,7 @@ const callApiTV = async (symbol) => {
 					if (jsonResponse["Perf.1M"]>0){
 						item.style.color="lightgreen";
 					} else if (jsonResponse["Perf.1M"]<0){
-						item.style.color="lightred";
+						item.style.color="orangered";
 					} else {
 						item.style.color="lightblue";
 					}
@@ -1026,7 +1026,7 @@ const callApiTV = async (symbol) => {
 					if (jsonResponse["Perf.Y"]>0){
 						item.style.color="lightgreen";
 					} else if (jsonResponse["Perf.Y"]<0){
-						item.style.color="lightred";
+						item.style.color="orangered";
 					} else {
 						item.style.color="lightblue";
 					}
