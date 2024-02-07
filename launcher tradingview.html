@@ -546,6 +546,7 @@ arrUsaStocks=[
 {id:"NYSE:JNJ",		refDataTV:"NYSE:JNJ",		desc:"Johnson & Johnson"},
 {id:"NYSE:JPM",		refDataTV:"NYSE:JPM",		desc:"JP Morgan Chase & Co."},
 {id:"NYSE:KO",		refDataTV:"NYSE:KO",		desc:"Coca-Cola Company (The)"},
+{id:"NYSE:LLY",		refDataTV:"NYSE:LLY",		desc:"Eli Lilly and Company"},
 {id:"NYSE:LMT",		refDataTV:"NYSE:LMT",		desc:"Lockheed Martin Corporation"},
 {id:"NYSE:M",		refDataTV:"NYSE:M",		desc:"Macy's Inc"},
 {id:"NYSE:MA",		refDataTV:"NYSE:MA",		desc:"Mastercard Incorporated"},
@@ -949,8 +950,8 @@ function setFlagsOnPage(listId, array, charFlag) {
 
 
 
-function removeFlag(ticket, refDataTV){
-	document.getElementById(ticket).previousElementSibling.innerText = CHAR_WHITE;
+function removeFlag(ticket){
+	document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = CHAR_WHITE;
 	deleteItemInArray(arrayRed,ticket);
 	deleteItemInArray(arrayGreen,ticket);
 	deleteItemInArray(arrayBlue,ticket);
