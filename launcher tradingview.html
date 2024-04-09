@@ -680,6 +680,10 @@ arrEuropeStocks=[
 {id:"XETR:VOW3"		,refDataTV:"XETR:VOW3"		,desc:"Volkswagen AG VZO O.N., Xetra"},
 {id:"XETR:ZAL"		,refDataTV:"XETR:ZAL"		,desc:"Zalando SE, Xetra"},
 ];
+
+arrCanadaStocks=[
+{id:"TSX:ARG"		,refDataTV:"TSX:ARG"		,desc:"AMERIGO RESOURCES LTD (Producción y venta de cobre y molybdenum "},
+];
 </script>
 
 <div id="tabWorldStocks" class="tabcontent">
@@ -697,6 +701,9 @@ arrEuropeStocks=[
 
 	<h3>Europe</h3>
 	<table class="list-group" id="europeStocksListTV"></table>
+
+	<h3>Canada</h3>
+	<table class="list-group" id="canadaStocksListTV"></table>
 
 </div>
 
@@ -867,6 +874,7 @@ function onLoad() {
 	setTabContentListTV("tabUsaStocks", "usaStocksListTV", arrUsaStocks);
 	setTabContentListTV("tabWorldStocks", "chinaStocksListTV", arrChinaStocks);
 	setTabContentListTV("tabWorldStocks", "europeStocksListTV", arrEuropeStocks);
+	setTabContentListTV("tabWorldStocks", "canadaStocksListTV", arrCanadaStocks);
 	setTabContentListTV("tabETFs", "etfIndicesListTV", arrEtfIndices);
 	setTabContentListTV("tabETFs", "etfFixedIncomeListTV", arrEtfFixedIncome);
 	setTabContentListTV("tabETFs", "etfVariableIncomeListTV", arrEtfVariableIncome);
