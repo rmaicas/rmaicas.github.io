@@ -8,7 +8,8 @@
 <style>
 
 h2 {
-    margin-top: 5px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 h3 {
@@ -64,7 +65,7 @@ body {
   overflow: hidden;
   border: 1px solid #ccc;
   background-color: lightsteelblue;
-  margin-top: 5px;
+  margin-top: 0px;
 }
 
 /* Style the buttons inside the tab */
@@ -148,9 +149,9 @@ select option {
 <body>
 
 <!---- Cabecera ---->
-<div style="width:100%;">
+<div style="width:100%;position: sticky;top: 0;background-color: black;z-index: 99;">
   <div style="width:50%; float:left;"><h2>Launcher of Trading View</h2></div>
-  <div style="width:50%; float:right;padding-top: 10px;">
+  <div style="width:50%; float:right;padding-top: 0px;">
 	User: 
 	<select id="selectTV" >
 		  <option value="dL2YkoyI"> rmaicas </option>
@@ -162,24 +163,24 @@ select option {
 	<a target="develop" href="https://github.com/rmaicas/rmaicas.github.io/tree/main">Develop</a>
 	<a target="tvList" href="https://tvdb.brianthe.dev/">TradingView List</a>
   </div>
+
+	<div style="clear: both;"></div>
+
+
+	<!---- Contenido ---->
+	<div class="tab">
+		<button id="mainTab" class="tablinks" onclick="openTab(event, 'tabNotes')">Notes</button>
+		<button class="tablinks" onclick="openTab(event, 'tabIndices')">Indices</button>
+		<button class="tablinks" onclick="openTab(event, 'tabMarketTimming')">Market Timming</button>
+		<button class="tablinks" onclick="openTab(event, 'tabForex')">Forex</button>
+		<button class="tablinks" onclick="openTab(event, 'tabBasicMaterials')">Basic Materials</button>
+		<button class="tablinks" onclick="openTab(event, 'tabSectors')">Sectors</button>
+		<button class="tablinks" onclick="openTab(event, 'tabUsaStocks')">USA Stocks</button>
+		<button class="tablinks" onclick="openTab(event, 'tabWorldStocks')">World Stocks</button>
+		<button class="tablinks" onclick="openTab(event, 'tabETFs')">ETFs</button>
+		<button class="tablinks" onclick="openTab(event, 'tabResearches')">Researches</button>
+	</div>
 </div>
-<div style="clear: both;"></div>
-
-
-<!---- Contenido ---->
-<div class="tab">
-	<button id="mainTab" class="tablinks" onclick="openTab(event, 'tabNotes')">Notes</button>
-	<button class="tablinks" onclick="openTab(event, 'tabIndices')">Indices</button>
-	<button class="tablinks" onclick="openTab(event, 'tabMarketTimming')">Market Timming</button>
-	<button class="tablinks" onclick="openTab(event, 'tabForex')">Forex</button>
-	<button class="tablinks" onclick="openTab(event, 'tabBasicMaterials')">Basic Materials</button>
-	<button class="tablinks" onclick="openTab(event, 'tabSectors')">Sectors</button>
-	<button class="tablinks" onclick="openTab(event, 'tabUsaStocks')">USA Stocks</button>
-	<button class="tablinks" onclick="openTab(event, 'tabWorldStocks')">World Stocks</button>
-	<button class="tablinks" onclick="openTab(event, 'tabETFs')">ETFs</button>
-	<button class="tablinks" onclick="openTab(event, 'tabResearches')">Researches</button>
-</div>
-
 <!---- Notes   ---->
 <div id="tabNotes" class="tabcontent">
 	<div style="display: flex;flex-wrap: wrap;">
