@@ -389,6 +389,9 @@ arrForex=[
 {id:"OANDA:USDSEK", 		refDataTV:"FX_IDC:USDSEK",		desc:""},
 {id:"OANDA:USDZAR", 		refDataTV:"FX_IDC:USDZAR",		desc:""},
 ];
+arrYields=[
+{id:"TVC:JP10Y", 		refDataTV:"TVC:JP10Y",			desc:"Japan 10 Year Government Bonds Yield"},
+];
 </script>
 <div id="tabForex" class="tabcontent">
 	<div class="divBtn">
@@ -396,6 +399,7 @@ arrForex=[
 		<a class="btn" target="tv" href="https://www.tradingview.com/forex-screener/">Forex Screener</a>
 	</div>
 	<table class="list-group" id="forexListTV"></table>
+	<table class="list-group" id="yieldListTV"></table>
 </div>
 
 
@@ -877,6 +881,7 @@ function onLoad() {
 	setTabContentListTV("tabMarketTimming", "marketTimmingBondsListTV", arrMarketTimmingBonds);
 	setTabContentListTV("tabMarketTimming", "marketTimmingEconomyListTV", arrMarketTimmingEconomy);
 	setTabContentListTV("tabForex", "forexListTV", arrForex);
+	setTabContentListTV("tabForex", "yieldListTV", arrYields);
 	setTabContentListTV("tabBasicMaterials", "basicMaterialsIndicesListTV", arrBasicMaterialsIndices);
 	setTabContentListTV("tabBasicMaterials", "basicMaterialsTimmingListTV", arrBasicMaterialsTimming);
 	setTabContentListTV("tabBasicMaterials", "basicMaterialsFuturesListTV", arrBasicMaterialsFutures);
