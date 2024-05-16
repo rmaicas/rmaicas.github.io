@@ -616,6 +616,7 @@ arrUsaStocks=[
 {id:"NYSE:SO",		refDataTV:"NYSE:SO",		desc:"Southern Company (The)"},
 {id:"NYSE:SWN",		refDataTV:"NYSE:SWN",		desc:"Southwestern Energy Company"},
 {id:"NYSE:T",		refDataTV:"NYSE:T",		desc:"AT&T Inc."},
+{id:"NASDAQ:TLRY",	refDataTV:"NASDAQ:TLRY",	desc:"Tilray Brands, Inc."},
 {id:"NASDAQ:TMUS",	refDataTV:"NASDAQ:TMUS",	desc:"T-Mobile US, Inc."},
 {id:"NYSE:TRU",		refDataTV:"NYSE:TRU",		desc:"TransUnion) [Servicio de consulta de estados financiera. Se lo considera como un lead indicator de la economia]"},
 {id:"NASDAQ:TSLA",	refDataTV:"NASDAQ:TSLA",	desc:"Tesla, Inc."},
@@ -919,7 +920,7 @@ function onLoad() {
 
 function setTabContentListTV(tabId, listTV, arrListTV){
 	var listTV = document.getElementById(listTV);
-	listTV.innerHTML += `<tr style="font-size: small;"><th>Name</th><th>Change</th><th>Ch.M</th><th>Ch.Y</th><th>Description</th></tr>`
+	listTV.innerHTML += `<tr style="font-size: small;"><th>Name</th><th>Change</th><th>Ch.M</th><th>Ch.Y</th><th>Sector - Industry</th><th>Description</th></tr>`
 	for (item of arrListTV) {
 		listTV.innerHTML += `<tr><td style="width: 180px;"><button type="button" class="flag" onclick="setFlag('` +item.id+ `', '`+item.refDataTV+`');">&#11036;</button>`
 			+`&nbsp;<img src="" logoid="${item.refDataTV}" class="firstImage"/><img src="" class="secondImage"/>`
@@ -927,6 +928,7 @@ function setTabContentListTV(tabId, listTV, arrListTV){
 			+`<td style="width: 220px; text-align: right;"> <span style="font-size: xx-small;">${(item.id!=item.refDataTV?item.refDataTV:'')}</span>&nbsp;<span class="${tabId}" refDataTV="${item.refDataTV}" style="font-size: small;"></span></td>`
 			+`<td style="font-size: x-small; text-align: right;" refMonthlyDataTV="${item.refDataTV}"></td>`
 			+`<td style="font-size: x-small; text-align: right;" refYearlyDataTV="${item.refDataTV}"></td>`
+			+`<td style="font-size: smaller; text-align: left;" refSectorIndustryDataTV="${item.refDataTV}"></td>`
 			+`<td style="font-size: small;">${item.desc}</td> </tr>`;
 	}
 }
@@ -1096,7 +1098,7 @@ function restoreLocalStorageFromClipboard() {
 
 const callApiTV = async (symbol) => {
 	if ((symbol!= null) && (symbol!=="")){
-		const response = await fetch('https://scanner.tradingview.com/symbol?symbol='+symbol+'&fields=close,change,logoid,price_52_week_high,price_52_week_low,sector,country,market,Low.1M,High.1M,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y,Perf.YTD,Recommend.All,average_volume_10d_calc,average_volume_30d_calc,nav_discount_premium,open_interest&no_404=true');
+		const response = await fetch('https://scanner.tradingview.com/symbol?symbol='+symbol+'&fields=close,change,logoid,price_52_week_high,price_52_week_low,sector,industry,country,market,Low.1M,High.1M,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y,Perf.YTD,Recommend.All,average_volume_10d_calc,average_volume_30d_calc,nav_discount_premium,open_interest&no_404=true');
 		const jsonResponse = await response.json(); //extract JSON from the http response
 		if (jsonResponse!=null){
 			// do something with jsonResponse
@@ -1150,6 +1152,14 @@ const callApiTV = async (symbol) => {
 					secondFlag= tickerName.substring(3,5).toUpperCase();
 					item.src = `https://s3-symbol-logo.tradingview.com/country/${firstFlag}.svg`;
 					item.nextElementSibling.src = `https://s3-symbol-logo.tradingview.com/country/${secondFlag}.svg`;
+				}
+			}
+
+			
+			arrChangeSectorIndustry = document.querySelectorAll('[refSectorIndustryDataTV="'+symbol+'"]');
+			for (item of arrChangeSectorIndustry) {
+				if ((jsonResponse["sector"]!=null) || (jsonResponse["industry"]!=null)){
+					item.innerHTML = `${(jsonResponse['sector'])}`+ ((jsonResponse["industry"]==null)?'': `- ${(jsonResponse['industry'])}`);
 				}
 			}
 			
