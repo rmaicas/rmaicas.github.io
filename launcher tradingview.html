@@ -193,31 +193,29 @@ select option {
 			<button id="set" style="background-color: red;color: white;border-color: red;" onclick="saveNote()">SAVE</button>
 		</div>
 		<div style="width: 100%;">
-			<div style="width:45%;padding-top:10px;display: flex;float: left;">
+			<div style="width:40%;padding-top:10px;display: flex;float: left;">
 				<textarea style="max-width: 98%;background-color: lightgray;" name="note" cols="122" id="note" rows="40" onblur="saveNote()"></textarea>
 			</div>
-			<div style="width:55%;padding-top:10px;display: flex;float: left;">
-				
+			
+			<div style="width:60%;padding-top:10px;display: flex;float: left;">
 				<div class="flagList">
 					<label for="purpleList">&#129002; Purple List:</label>
 					<table class="list-group" name="purpleList" id="purpleList" style="font-size: small;"></table>
 				</div>
 			</div>	
-			<div style="width:55%;padding-top:10px;display: flex;float: left;">	
+			<div style="width:60%;padding-top:10px;display: flex;float: left;">	
 				<div class="flagList"">
 					<label for="blueList">&#128998; Blue List:</label>
 					<table class="list-group" name="blueList" id="blueList" style="font-size: small;"></table>
 				</div>
-				
 			</div>
-			
-			<div style="width:55%;padding-top:10px;display: flex;float: left;">		
+			<div style="width:60%;padding-top:10px;display: flex;float: left;">		
 				<div class="flagList">
 					<label for="greenList">&#129001; Green List:</label>
 					<table class="list-group" name="greenList" id="greenList" style="font-size: small;"></table>
 				</div>
 			</div>
-			<div style="width:55%;padding-top:10px;display: flex;float: right;">
+			<div style="width:60%;padding-top:10px;display: flex;float: right;">
 				<div class="flagList">
 					<label for="redList">&#128997; Red List:</label>
 					<table class="list-group" name="redList" id="redList" style="font-size: small;"></table>
@@ -975,9 +973,11 @@ function saveNote() {
 }
 
 // Manage Flags
-function setItemInArray(array, ticket, refDataTV, description) {
+function setItemInArray(array, ticket, refDataTV, description, comment) {
     var index = array.findIndex(i => i.id === ticket);
-    if (index === -1) array.push({"id":ticket, "refDataTV":refDataTV, "desc":description});
+    if (index === -1) array.push({"id":ticket, "refDataTV":refDataTV, "desc":description, "comment":comment})
+	else array[index]={"id":ticket, "refDataTV":refDataTV, "desc":description, "comment":comment};
+	
     return array;
 }
 
@@ -1004,32 +1004,32 @@ function getFlags() {
 }
 
 function setAllFlagsOnPage() {
-	setFlagsOnPage("redList", arrayRed, CHAR_RED);
-	setFlagsOnPage("greenList", arrayGreen, CHAR_GREEN);
-	setFlagsOnPage("blueList", arrayBlue, CHAR_BLUE);
-	setFlagsOnPage("purpleList", arrayPurple, CHAR_PURPLE);
+	setFlagTableContent("redList", arrayRed, CHAR_RED);
+	setFlagTableContent("greenList", arrayGreen, CHAR_GREEN);
+	setFlagTableContent("blueList", arrayBlue, CHAR_BLUE);
+	setFlagTableContent("purpleList", arrayPurple, CHAR_PURPLE);
 }
 
-function changeFlag(ticket, refDataTV, description, charFlagOrig, charFlagTarget){
+function changeFlag(ticket, refDataTV, description, comment, charFlagOrig, charFlagTarget){
 	arrayOrig = charFlagOrig===CHAR_RED? arrayRed : charFlagOrig===CHAR_GREEN? arrayGreen : charFlagOrig===CHAR_BLUE? arrayBlue : arrayPurple;
 	arrayDest = charFlagTarget===CHAR_RED? arrayRed : charFlagTarget===CHAR_GREEN? arrayGreen : charFlagTarget===CHAR_BLUE? arrayBlue : arrayPurple;
-	deleteItemInArray(arrayOrig,ticket);
+	if (charFlagOrig !== charFlagTarget) deleteItemInArray(arrayOrig,ticket);
 	document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = charFlagTarget;
-	setItemInArray(arrayDest, ticket, refDataTV, description);
+	setItemInArray(arrayDest, ticket, refDataTV, description, comment.replaceAll(String.fromCharCode(10), '<br>'));
 	saveFlags();
 	setAllFlagsOnPage();
 	callsTVForTab(currentTab)
 }
 
-function setFlagsOnPage(listId, array, charFlag) {
+function setFlagTableContent(listId, array, charFlag) {
 	var colorList = document.getElementById(listId);
 	if (array.length>0){
 		for (ticket of array) {
 			document.getElementById(ticket.id).previousElementSibling.previousElementSibling.previousElementSibling.innerText = charFlag;
 		}
-		colorList.innerHTML = `<tr style="font-size: small;"><th style="width: 20%;" class="header-table">Name</th><th style="width: 15%;" class="header-table">Change</th>
-		<th style="width: 5%;" class="header-table">Ch.M</th><th style="width: 5%;" class="header-table">Ch.Y</th>
-		<th style="width: 45%;" class="header-table">Description</th><th style="width: 5%;" class="header-table"></th><th style="width: 5%;" class="header-table"></th></tr>`
+		colorList.innerHTML = `<tr style="font-size: small;"><th style="width: 15%;" class="header-table">Name</th><th style="width: 15%;" class="header-table">Change</th>
+		<th style="width: 3%;" class="header-table">Ch.M</th><th style="width: 3%;" class="header-table">Ch.Y</th>
+		<th style="width: 35%;" class="header-table">Description</th><th style="width: 24%;" class="header-table">Comment</th><th style="width: 3%;" class="header-table"></th><th style="width: 2%;" class="header-table"></th></tr>`
 		for(var i = 0; i < array.length; i++) {
 			var item = array[i];
 			colorList.innerHTML += `<tr><td style="width: 160px;">&nbsp;<img src="" logoid="${item.refDataTV}" class="firstImage"/><img src="" class="secondImage"/>`
@@ -1038,8 +1038,9 @@ function setFlagsOnPage(listId, array, charFlag) {
 				+`<td style="font-size: x-small; text-align: right;" refMonthlyDataTV="`+item.refDataTV+`"></td>`
 				+`<td style="font-size: x-small; text-align: right;" refYearlyDataTV="`+item.refDataTV+`"></td>`
 				+`<td style="font-size: x-small;">${item.desc}</td>`
+				+`<td><div style="background-color: midnightblue;" contenteditable onblur="changeFlag( '${item.id}', '${item.refDataTV}', '${item.desc}', innerText, '${charFlag}', '${charFlag}')">${item.comment}</div></td>`
 				+`<td style="font-size: x-small; text-align: right;" >
-					<select id="${'select_'+item.id}" onChange="changeFlag( '${item.id}', '${item.refDataTV}', '${item.desc}', '${charFlag}', document.getElementById('${'select_'+item.id}').value)" style="border: 0;background-color: transparent;color: lightgray;">
+					<select id="${'select_'+item.id}" onChange="changeFlag( '${item.id}', '${item.refDataTV}', '${item.desc}', '${item.comment}', '${charFlag}', document.getElementById('${'select_'+item.id}').value)" style="border: 0;background-color: transparent;color: lightgray;">
 						<option value="${CHAR_RED}"    ${charFlag == CHAR_RED? "selected":""}>${CHAR_RED}</option>
 						<option value="${CHAR_GREEN}"  ${charFlag == CHAR_GREEN? "selected":""}>${CHAR_GREEN}</option>
 						<option value="${CHAR_BLUE}"   ${charFlag == CHAR_BLUE? "selected":""}>${CHAR_BLUE}</option>
@@ -1069,18 +1070,18 @@ function removeFlag(ticket){
 function setFlag(ticket, refDataTV, description){
 	if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == CHAR_WHITE) {  // WHITE pasa a RED
 		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = CHAR_RED;
-		setItemInArray(arrayRed, ticket, refDataTV, description);
+		setItemInArray(arrayRed, ticket, refDataTV, description, '');
 	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == CHAR_RED) { // RED pasa a GREEN
 		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = CHAR_GREEN;
-		setItemInArray(arrayGreen, ticket, refDataTV, description);
+		setItemInArray(arrayGreen, ticket, refDataTV, description, '');
 		deleteItemInArray(arrayRed,ticket);
 	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == CHAR_GREEN) { // GREEN pasa a BLUE
 		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = CHAR_BLUE;
-		setItemInArray(arrayBlue, ticket, refDataTV, description);
+		setItemInArray(arrayBlue, ticket, refDataTV, description, '');
 		deleteItemInArray(arrayGreen,ticket);
 	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == CHAR_BLUE) { // BLUE pasa a PURPLE
 		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = CHAR_PURPLE;
-		setItemInArray(arrayPurple, ticket, refDataTV, description);
+		setItemInArray(arrayPurple, ticket, refDataTV, description, '');
 		deleteItemInArray(arrayBlue,ticket);
 	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == CHAR_PURPLE) { // PURPLE pasa a WHITE
 		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = CHAR_WHITE;
