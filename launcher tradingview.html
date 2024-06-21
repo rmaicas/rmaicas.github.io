@@ -1033,7 +1033,7 @@ function setFlagTableContent(listId, array, charFlag) {
 		}
 		colorList.innerHTML = `<tr style="font-size: small;"><th style="width: 15%;" class="header-table">Name</th><th style="width: 15%;" class="header-table">Change</th>
 		<th style="width: 3%;" class="header-table">Ch.M</th><th style="width: 3%;" class="header-table">Ch.Y</th>
-		<th style="width: 35%;" class="header-table">Description</th><th style="width: 24%;" class="header-table">Comment</th><th style="width: 3%;" class="header-table"></th><th style="width: 2%;" class="header-table"></th></tr>`
+		<th style="width: 35%;" class="header-table">Description</th><th style="width: 24%;" class="header-table">Comment</th><th style="width: 2%;" class="header-table"></th><th style="width: 1%;" class="header-table"><th style="width: 1%;" class="header-table"><th style="width: 1%;" class="header-table"></th></tr>`
 		for(var i = 0; i < array.length; i++) {
 			var item = array[i];
 			colorList.innerHTML += `<tr><td style="width: 160px;">&nbsp;<img src="" logoid="${item.refDataTV}" class="firstImage"/><img src="" class="secondImage"/>`
@@ -1051,7 +1051,9 @@ function setFlagTableContent(listId, array, charFlag) {
 						<option value="${CHAR_PURPLE}" ${charFlag == CHAR_PURPLE? "selected":""}>${CHAR_PURPLE}</option>
     					</select>
 				</td>`
-				+`<td><button type="button" class="flag" onclick="removeFlag('`+item.id+`')">&#10006;</button></td></tr>`;
+				+`<td><button type="button" class="flag" ${(i==0)? 'disabled' : ''} onclick="moveItem('${charFlag}', ${i}, ${i-1})" style="font-size: smaller;">&#9650;</button></td>`
+				+`<td><button type="button" class="flag" ${(i==array.length-1)? 'disabled' : ''} onclick="moveItem('${charFlag}', ${i}, ${i+1})" style="font-size: smaller;">&#9660;</button></td>`
+				+`<td><button type="button" class="flag" onclick="removeFlag('`+item.id+`')" style="font-size: smaller;">&#10006;</button></td></tr>`;
 		}
 	} else {
 		colorList.innerHTML = ``;
@@ -1059,6 +1061,18 @@ function setFlagTableContent(listId, array, charFlag) {
 }
 
 
+function moveItemInArray(arr, fromIndex, toIndex){
+  let itemRemoved = arr.splice(fromIndex, 1) // assign the removed item as an array
+  arr.splice(toIndex, 0, itemRemoved[0]) // insert itemRemoved into the target index
+}
+
+function moveItem(charFlag, idxSource, idxTarget){
+	array = charFlag===CHAR_RED? arrayRed : charFlag===CHAR_GREEN? arrayGreen : charFlag===CHAR_BLUE? arrayBlue : arrayPurple;
+	moveItemInArray(array, idxSource, idxTarget);
+	saveFlags();
+	setAllFlagsOnPage();
+	callsTVForTab(currentTab)
+}
 
 function removeFlag(ticket){
 	document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = CHAR_WHITE;
