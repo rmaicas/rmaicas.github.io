@@ -152,6 +152,499 @@ select option {
 </style>
 </head>
 <body>
+<script>
+<!---- Indices   OK---->
+arrIndices=[
+{id:"OANDA:SPX500USD"	,desc:"" ,refDataTV:"CME_MINI:ES1!"},
+{id:"AMEX:SPY"			,desc:"SPY ETF (EU: MIL:SPY5)"},
+{id:"NASDAQ:QQQ"		,desc:"ETF Nasdaq"}, 		
+{id:"CME_MINI:NQ1!"		,desc:"Futuros Nasdaq", refDataTV:"CME_MINI:NQ1!"},
+{id:"DJ:DJI"			,desc:"Dow Jones"},
+{id:"CBOT_MINI:YM1!"	,desc:"Mini Dow Jones (para ver el volumen real)"},
+{id:"AMEX:IWM"			,desc:"IShares Russell 2000 ETF // XETR:XRS2 - XTRACKERS RUSSELL 2000 UCITS ETF (isin: IE00BJZ2DD79)"},
+{id:"TVC:NYA"			,desc:"NYSE Composite Index"},
+{id:"AMEX:RSP"			,desc:"Invesco S&P 500 Equal Weight ETF"},
+{id:"NASDAQ:ACWI"		,desc:"iShares MSCI ACWI ETF (offers a broad portfolio of global large- and mid-cap stocks that matches the market well)"},
+{id:"XETR:DAX"			,desc:"DAX"},
+{id:"TVC:SX5E"			,desc:"Euro Stoxx 50 Index"},
+{id:"EURONEXT:PX1"		,desc:"CAC 40 Index"},
+{id:"TVC:UKX"			,desc:"UK 100 Index"},
+{id:"TVC:IBEX35"		,desc:"IBEX35"},
+{id:"EURONEXT:MIB"		,desc:"AMUNDI FTSE MIB UCITS ETF DIST (Indice Bolsa de Milan, Italia)"},
+{id:"TVC:AEX"			,desc:"AEX (Indice Paises Bajos)"},
+{id:"OSE:NK2251!"		,desc:"NIKKEI 225 FUTURES (ETF c/cobertura divisa:WisdomTree Japan Equity UCITS ETF EUR Hedged Acc [IE00BYQCZJ13-WTIF])"},
+{id:"SSE:000016"		,desc:"SSE 50 INDEX (Top 50 companies of Shanghai Stock Exchange)" ,refDataTV:"AMEX:AFTY"},
+{id:"HKEX:HSI1!"		,desc:"HANG SENG INDEX FUTURE"},
+{id:"FTSE:XIN9"			,desc:"FTSE China A50 Index (chosen from Shanghai Stock Exchange and Shenzhen Stock Exchange)"},
+{id:"AMEX:FXI"			,desc:"iShares China Large-Cap ETF"},
+{id:"AMEX:ARGT"			,desc:""},
+{id:"BCBA:IMV/(BCBA:GGAL/NASDAQ:GGAL*10)",desc:"Simil Merval en dolares" ,refDataTV:""},
+{id:"AMEX:EWZ"			,desc:"IShares Inc iShares MSCI Brazil ETF"},
+{id:"OMXSTO:OMXS30"		,desc:"OMX Stockholm 30 Index (Europa: parecido, esta capado a un max. 5% por stock. LSE:OMXS - iShares OMX Stockholm Capped UCITS ETF (isin: IE00BD3RYZ16)"},
+{id:"NSE:NIFTY"			,desc:"Nifty 50 Index"},
+];
+
+<!---- Market Timming   OK---->
+arrMarketTimmingStocks=[
+	
+{id:"FRED:BAMLH0A0HYM2"		,desc:"ICE BofA US High Yield Index Option-Adjusted Spread. Diferencia de rendimiento entre bonos no gubernamentales y los bonos gubernamentales. Medida del riesgo de la economia. (Si baja, es probable que la bolsa suba y viceversa)"},
+{id:"CBOE:VIX"				,desc:""},
+{id:"CBOE:VVIX"				,desc:""},
+{id:"TVC:VIX - NASDAQ:VOLI"	,desc:">2 Riesgo, <2 No Riesgo"},
+{id:"CBOE:VX2!-CBOE:VX1!"	,desc:"(Si hay contango (>0, , VX2>VX1) -> OK, normal. Si hay backwardation (<0, VX2<VX1)-> Mal, nervios)"}, 		
+{id:"CBOE:VIX/CBOE:VIX3M"	,desc:"Volatilidad 1 mes / Volatilidad 3 meses (Por encima de 1 => DANGER!!!)"},
+{id:"CBOE:VIX3M/CBOE:VIX"	,desc:"VRatio: is the ratio of VIX3M and VIX. (Arriba 1.1 -> Bear market, luego decrece y llega a estar debajo de 1)"},
+{id:"AMEX:SPY/TVC:DXY"		,desc:"SP500 / Dollar (Cortos cuando el ratio perfora la media ponderada de 30 semanas y largos cuando el ratio supera la media)"},
+{id:"USI:PCCE"				,desc:"Put / Call Ratio Equities"},
+{id:"INDEX:HIGN-INDEX:LOWN"	,desc:"New Highs - New Lows (NYSE market) ( >0 = bullish / <0 = bearish)"},
+{id:"NASDAQ:SDEX"			,desc:"NATIONS SKEWDEX (Option skew is not a measure of fear or implied volatility. It’s a measure of how much risk market participants are willing to bear, that is how far investors are willing to let markets fall before hedges offer protection.)"},
+{id:"INDEX:S5FI"			,desc:"S&P 500 Stocks Above 50-Day Average"},
+{id:"INDEX:S5TH"			,desc:"S&P 500 Stocks Above 200-Day Average"},
+{id:"AMEX:SPY/AMEX:SPLV"	,desc:"SP500/SP500 Low Volatility. (Anticipa/confirma posibles movimientos hacia arriba/abajo del SP500)"},
+{id:"AMEX:MTUM/AMEX:SPLV"	,desc:"Momentum/Low Volatility Ratio.\nBull market clue: If Momentum/Low Vol. Ratio>rising 50-week MA + PPO > 0\nBear market clue: If Momentum/Low Vol. Ratio<falling 50-week MA + PPO < 0"},
+{id:"AMEX:RSP/AMEX:SPY"		,desc:"SP500 equal weight / SP500"},
+{id:"NASDAQ:QQEW/NASDAQ:QQQ",desc:"QQQ equal weight / QQQ"},
+{id:"AMEX:SPHB"				,desc:"Invesco S&P 500 High Beta ETF"},
+{id:"AMEX:SPHB/AMEX:SPLV"	,desc:"ETF High Beta / Low Volatility"},
+{id:"AMEX:VUG/AMEX:VTV"		,desc:"ETF Vanguard Growth / Value"},
+{id:"NASDAQ:QQEW"			,desc:"First Trust NASDAQ-100 Equal Weighted Index Fund"},
+{id:"NASDAQ:SQQQ"			,desc:"ProShares UltraPro Short QQQ"},
+{id:"AMEX:ARKK/AMEX:XLK"	,desc:"Tecnologia con perdida / Sector Tecnologico"},
+{id:"NASDAQ:MAGS"			,desc:"Roundhill Magnificent Seven ETF"},
+];
+
+arrMarketTimmingBonds=[
+{id:"TVC:US02Y"					,desc:"US Government Bonds 2 YR Yield<"},
+{id:"TVC:US10Y"					,desc:"US Government Bonds 10 YR Yield"},
+{id:"TVC:US30Y"					,desc:"US Government Bonds 30 YR Yield"},
+{id:"TVC:US10Y-TVC:US03MY"		,desc:"US10Y-US03MY (Si cae debajo de cero --> RECESIÓN !!!) (Dicen que ahora se usa mas este que el 10Y-2Y)"},
+{id:"TVC:US10Y-TVC:US02Y"		,desc:"US10Y-US02Y (Si cae debajo de cero --> RECESIÓN !!!)"},
+{id:"FRED:BAMLH0A0HYM2"			,desc:"ICE BofA US High Yield Index Option-Adjusted Spread (Si el Spread baja (los diferenciales de credito se estrechan)-> El apetito por el riesgo es mayor, OK. Si el Spread sube (diferenciales de credito se expanden)-> Apetito x riego se reduce, mal)"},
+{id:"NASDAQ:SHY"				,desc:"IShares 1-3 Year Treasury Bond ETF"},
+{id:"NASDAQ:IEF"				,desc:"IShares Trust Barclays 7-10 year treasury Bond ETF"},
+{id:"AMEX:TLH"					,desc:"IShares 10-20 Year Treasury Bond ETF"},
+{id:"NASDAQ:TLT"				,desc:"Ishares 20+ Year Treasury Bond ETF"},
+{id:"TVC:MOVE"					,desc:""},
+{id:"AMEX:TIP"					,desc:"iShares TIPS Bond ETF (10 YR Tips Yield = 10 YR yield - 10 YR Breakeven inflation rate (inflacion esperada a 10 años). (Sube -> inclinarse por valores de riesgo, Baja -> inclinarse por valores defensivos) (EUR: LSE:IDTP - ISHARES II PLC ISHARES USD TIPS UCITS ETF USD (ACC), ISIN: IE00B1FZSC47)"},
+{id:"AMEX:AGG/NASDAQ:IEF"		,desc:"(simula el comportamiento de los bonos de gobierno USA 7/10YRS(IEF) en el conjunto del universo de bonos (AGG))"},
+{id:"AMEX:LQD"					,desc:"iShares iBoxx $ Investment Grade Corporate Bond ETF"},
+{id:"AMEX:HYG"					,desc:'iShares iBoxx $ High Yield Corporate Bond ETF ("bonos basura")'},
+];
+
+arrMarketTimmingEconomy=[
+{id:"FRED:ANFCI"				,desc:"Chicago Fed Adjusted National Financial Conditions Inde"},
+{id:"COMEX:HG1!/COMEX:GC1!"		,desc:"Cobre/Oro (Si sube, la economia va bien. Si baja, la economia va mal)"},
+{id:"AMEX:DBB/AMEX:DBP"			,desc:"Metales Bases / Metales Preciosos.(Si baja es porque la economia esta debil. Si sube, la economia esta fuerte.)"}, 		
+{id:"OANDA:SPX500USD/TVC:DXY"	,desc:"(Simula el movimiento real del SP500 sin considerar la cotización del dolar)"},
+{id:"FRED:BAMLH0A0HYM2"			,desc:"(Indice de probabilidad de no pago de deuda)"},
+{id:"CBOE:SKEW"					,desc:"CBOE SKEW INDEX"},
+{id:"AMEX:BKLN"					,desc:"Invesco Senior Loan ETF (Prestamos apalancados)"},
+{id:"FRED:T5YIE"				,desc:"5-Year Breakeven Inflation Rate ((Expectativas de inflación futura))"},
+{id:"AMEX:JNK/AMEX:QLTA"		,desc:"Bonos basura / Bonos calidad"},
+{id:"AMEX:RSP/NASDAQ:TLT"		,desc:"Invesco S&P 500 Equal Weight ETF / IShares 20+ Year Treasury Bond ETF (Bolsa vs. Bonos)"},
+{id:"AMEX:RSPD/AMEX:RSPS"		,desc:"ETF Discretionary / Staples (Igual ponderacion)"},
+{id:"NASDAQ:PEZ/NASDAQ:PSL"		,desc:"Consumer Ciclicas/ Defensivas = PMI"},
+{id:"AMEX:IWM/AMEX:SPY"			,desc:"Small Caps / Big Caps (Si las small caps caen, eso significa que hay mayor preocupación por la economia. Los inversores solo invierten en grandes empresas.)"},
+{id:"FRED:WALCL+FRED:ECBASSETSW*1.07+ECONOMICS:GBCBBS*OANDA:GBPUSD+FRED:JPNASSETS/OANDA:USDJPY+ECONOMICS:CNCBBS*FX_IDC:CNYUSD-(FRED:WTREGEN+FRED:RRPONTSYD)",desc:"Liquidez Global ( USA + EURO + GB + JP + CH)",refDataTV:""},
+{id:"FRED:WRESBAL"				,desc:"(Liabilities and Capital: Other Factors Draining Reserve Balances: Reserve Balances with Federal Reserve Banks: Week Average)"},
+
+];
+
+<!---- Forex   OK---->
+arrForex=[
+{id:"CBOE:EVZ", 			desc:"CBOE EURO CURRENCY VOLATILITY INDEX (Nivel de riesgo: <7 Alto / >7 Bajo.  Evitar USD)"},
+{id:"TVC:DXY", 				desc:""},
+{id:"AMEX:UUP", 			desc:"para ver el volumen del DXY"}, 		
+{id:"INDEX:BTCUSD", 		desc:""},
+{id:"AMEX:BITI", 			desc:"ETF para apostar al Bitcoin en corto. Sirve para ver el volumen y ver el interes por la baja. (US74347G2912: ProShares Trust ProShares Short Bitcoin Strategy ETF)"},
+{id:"BINANCE:ETHUSD", 		desc:""},
+{id:"OANDA:AUDCAD", 		refDataTV:"FX_IDC:AUDCAD",		desc:""},
+{id:"OANDA:AUDCHF", 		refDataTV:"FX_IDC:AUDCHF",		desc:""},
+{id:"OANDA:AUDJPY", 		refDataTV:"FX_IDC:AUDJPY",		desc:""},
+{id:"OANDA:AUDUSD", 		refDataTV:"FX_IDC:AUDUSD",		desc:"Suele anticipar/seguir movimientos SP500"},
+{id:"OANDA:AUDNZD", 		refDataTV:"FX_IDC:AUDNZD",		desc:"dicen que es bastante fiel al AT"},
+{id:"OANDA:CADCHF", 		refDataTV:"FX_IDC:CADCHF",		desc:""},
+{id:"OANDA:CADJPY", 		refDataTV:"FX_IDC:CADJPY",		desc:""},
+{id:"PEPPERSTONE:CHFPLN", 	refDataTV:"FX_IDC:CHFPLN",		desc:""},
+{id:"OANDA:EURCAD", 		refDataTV:"FX_IDC:EURCAD",		desc:""},
+{id:"OANDA:EURCHF", 		refDataTV:"FX_IDC:EURCHF",		desc:""},
+{id:"OANDA:EURGBP", 		refDataTV:"FX_IDC:EURGBP",		desc:""},
+{id:"OANDA:EURJPY", 		refDataTV:"FX_IDC:EURJPY",		desc:""},
+{id:"CAPITALCOM:EURMXN",	refDataTV:"FX_IDC:EURMXN",		desc:""},
+{id:"OANDA:EURNOK", 		refDataTV:"FX_IDC:EURNOK",		desc:""},
+{id:"OANDA:EURNZD", 		refDataTV:"FX_IDC:EURNZD",		desc:""},
+{id:"OANDA:EURPLN", 		refDataTV:"FX_IDC:EURPLN",		desc:""},
+{id:"OANDA:EURSEK", 		refDataTV:"FX_IDC:EURSEK",		desc:""},
+{id:"OANDA:EURSGD", 		refDataTV:"FX_IDC:EURSGD",		desc:""},
+{id:"OANDA:EURUSD", 		refDataTV:"FX_IDC:EURUSD",		desc:""},
+{id:"OANDA:EURZAR", 		refDataTV:"FX_IDC:EURZAR",		desc:""},
+{id:"OANDA:GBPAUD", 		refDataTV:"FX_IDC:GBPAUD",		desc:""},
+{id:"OANDA:GBPCAD", 		refDataTV:"FX_IDC:GBPCAD",		desc:""},
+{id:"OANDA:GBPCHF", 		refDataTV:"FX_IDC:GBPCHF",		desc:""},
+{id:"OANDA:GBPNZD", 		refDataTV:"FX_IDC:GBPNZD",		desc:""},
+{id:"OANDA:GBPPLN", 		refDataTV:"FX_IDC:GBPPLN",		desc:""},
+{id:"OANDA:GBPUSD", 		refDataTV:"FX_IDC:GBPUSD",		desc:""},
+{id:"OANDA:NZDCAD", 		refDataTV:"FX_IDC:NZDCAD",		desc:""},
+{id:"OANDA:NZDCHF", 		refDataTV:"FX_IDC:NZDCHF",		desc:""},
+{id:"OANDA:NZDJPY", 		refDataTV:"FX_IDC:NZDJPY",		desc:""},
+{id:"OANDA:NZDUSD", 		refDataTV:"FX_IDC:NZDUSD",		desc:""},
+{id:"ACTIVTRADES:USDBRL", 	refDataTV:"FX_IDC:USDBRL",		desc:""},
+{id:"OANDA:USDCAD", 		refDataTV:"FX_IDC:USDCAD",		desc:""},
+{id:"OANDA:USDCHF", 		refDataTV:"FX_IDC:USDCHF",		desc:""},
+{id:"OANDA:USDCNH", 		refDataTV:"FX_IDC:USDCNH",		desc:""},
+{id:"OANDA:USDJPY", 		refDataTV:"FX_IDC:USDJPY",		desc:""},
+{id:"OANDA:USDMXN", 		refDataTV:"FX_IDC:USDMXN",		desc:""},
+{id:"OANDA:USDNOK", 		refDataTV:"FX_IDC:USDNOK",		desc:""},
+{id:"OANDA:USDPLN", 		refDataTV:"FX_IDC:USDPLN",		desc:""},
+{id:"OANDA:USDSEK", 		refDataTV:"FX_IDC:USDSEK",		desc:""},
+{id:"OANDA:USDZAR", 		refDataTV:"FX_IDC:USDZAR",		desc:""},
+];
+arrYields=[
+{id:"TVC:EU10Y", 		desc:"Euro 10 Year Government Bonds Yield"},
+{id:"TVC:GB10Y", 		desc:"United Kingdom 10 Year Government Bonds Yield"},
+{id:"TVC:JP10Y", 		desc:"Japan 10 Year Government Bonds Yield"},
+{id:"TVC:AU10Y", 		desc:"Australia 10 Year Government Bonds Yield"},
+{id:"TVC:CA10Y", 		desc:"Canada 10 Year Government Bonds Yield"},
+{id:"TVC:CN10Y", 		desc:"China 10 Year Government Bonds Yield"},
+{id:"TVC:DE10Y", 		desc:"Germany 10 Year Government Bonds Yield"},
+{id:"TVC:PL10Y", 		desc:"Poland 10 Year Government Bonds Yield"},
+{id:"TVC:FR10Y", 		desc:"France 10 Year Government Bonds Yield"},
+{id:"TVC:IT10Y", 		desc:"Italy 10 Year Government Bonds Yield"},
+{id:"TVC:ES10Y", 		desc:"Spain 10 Year Government Bonds Yield"},
+{id:"TVC:IN10Y", 		desc:"India 10 Year Government Bonds Yield"},
+{id:"TVC:BR10Y", 		desc:"Brazil 10 Year Government Bonds Yield"},
+];
+
+<!---- Basic Materials   OK---->
+arrBasicMaterialsIndices=[
+{id:"AMEX:DBC"		,desc:"Invesco DB Commodity Index Tracking Fund (Europa: LSE:ICOM - ISHARES VI PLC DIVERSIFIED COMMODITY SWAP UCIT USD(GBP) (isin: IE00BDFL4P12))"},
+{id:"AMEX:DBB"		,desc:"Metales Bases"},
+{id:"AMEX:DBP"		,desc:"Metales Preciosos"}, 		
+{id:"DJ:DJCIGR" 	,desc:"Dow Jones Commodity Index Grains"},
+];
+
+arrBasicMaterialsTimming=[
+{id:"COMEX:SI1!/COMEX:GC1!"	,refDataTV:""	,desc:"Ratio Silver/Gold (Si el ratio sube -> Mercado alcista para los metales preciosos (No es verdad del todo). Quizas un arranque alcista de la plata ayude a anticipar futuros arranques alcistas del oro...)"},
+{id:"COMEX:GC1!/COMEX:SI1!"	,refDataTV:""	,desc:"Ratio Gold/Silver (La relación oro/plata ha fluctuado entre aproximadamente 40 y 120. Cuando este ratio se acerca a uno de estos extremos, los inversores y traders suelen participar en estrategias de trading de spread diseñadas para beneficiarse de su reversión a la media histórica, que suele ser de alrededor de 60)"},
+{id:"AMEX:GDX/COMEX:GC1!"  	,refDataTV:""  	,desc:"VanEck Gold Miners ETF/Gold (Referencia guia para el oro. En teoria deberia estar correlacionado, en caso contrario, priorizar lo que indica esta relación.)"},
+{id:"AMEX:SIL/COMEX:SI1!"  	,refDataTV:""  	,desc:"Global X Silver Miners ETF/Silver (Referencia guia para la plata. En teoria deberia estar correlacionado, en caso contrario, priorizar lo que indica esta relación.)"}, 		
+{id:"CBOT:ZM1!/CBOT:ZL1!"   ,refDataTV:""  	,desc:"CBOT:ZM1!(Meal)/CBOT:ZL1!(Oil)(Cuando baja desde sus maximos hasta 6.0-5.9 la soja (ZS) experimenta una subida importante)"},
+{id:"CBOT:ZS1!/CBOT:ZC1!"   ,refDataTV:""  	,desc:"Ratio Soybean/Corn (Históricamente, la proporción de soja/maíz ha oscilado típicamente entre aproximadamente 2 y 3. Cuando este ratio se acerca a uno de estos extremos, los inversores y traders suelen participar en estrategias de trading de spread diseñadas para beneficiarse de su reversión a la media histórica, que suele ser de alrededor de 2,51)"},
+];
+
+arrBasicMaterialsFutures=[
+{id:"COMEX:GC1!"		,desc:"Gold Futures (- Cierta relacion inversa con los rendimientos del bono a 10 años. En los pico altos de los bonos se producen picos bajos del oro.<br> - Correlacion inversa bastante alta con los rendimientos de los TIPS a 10 años. Esto hace que el oro sea proteccion contra inflación futura, no la inflacion actual.)"},
+{id:"COMEX:SI1!"		,desc:"Silver Futures"},
+{id:"MCX:ALUMINIUM1!"	,desc:"Aluminium Futures (India)"}, 		
+{id:"COMEX:HG1!"		,desc:"Copper Futures"},
+{id:"ICEUS:CC1!"		,desc:"Cocoa Futures"},
+{id:"NYMEX:CL1!"		,desc:"Light Crude Oil Futures"},
+{id:"ICEUS:CT1!"		,desc:"Cotton No.2 Futures"},
+{id:"ICEUS:KC1!"		,desc:"Coffee C Futures"},
+{id:"CME:LBR1!" 	    ,desc:"Lumber Futures"},
+{id:"CME:LE1!"			,desc:"Live Cattle Futures (Tiene un delay aproximadamente de 8 meses respecto al Wheat)"},
+{id:"NYMEX:NG1!"		,desc:"Natural Gas Futures"},
+{id:"MCX:NICKEL1!"		,desc:"Nickel Futures (India)"},
+{id:"ICEUS:OJ1!"		,desc:"FCOJ-A, Orange Juice Futures"},
+{id:"NYMEX:PL1!"		,desc:"Platinum Future"},
+{id:"NYMEX:RB1!"		,desc:"RBOB Gasoline Futures"},
+{id:"ICEUS:SB1!"		,desc:"Sugar No.11 Futures"},
+{id:"NYMEX:TTF1!"		,desc:"DUTCH TTF Futures (Gas Europeo (No ingles))"},
+{id:"COMEX:UX1!"		,desc:"UXC Uranium U3O8 Futures"},
+{id:"CBOT:ZC1!"			,desc:"Corn Futures"},
+{id:"MCX:ZINC1!"		,desc:"ZINC Futures"},
+{id:"CBOT:ZS1!"			,desc:"Soybean Futures"},
+{id:"CBOT:ZW1!"			,desc:"Wheat Futures (Se adelanta aproximadamente 8 meses al movimiento futuro del Live Cattle)"},
+{id:"SGX:FEF1!"			,desc:"SGX TSI IRON ORE CFR CHINA (62% FE FINES) INDEX Futures (Singapore)"},
+];
+
+arrBasicMaterialsSpot=[
+{id:"OANDA:XAUUSD"		,desc:"Gold Spot"},
+{id:"OANDA:XAGUSD"		,desc:"Silver Spot"},
+{id:"OANDA:WTICOUSD"	,desc:"West Texas Oil"}, 		
+{id:"OANDA:BCOUSD"		,desc:"Brent Crude Oil"},
+{id:"OANDA:XPTUSD"	 	,desc:"Platinum"},
+];
+
+arrBasicMaterialsEtf=[
+{id:"LSE:ICOM"		,desc:"ISHARES VI PLC DIVERSIFIED COMMODITY SWAP UCIT USD(GBP), London"},
+{id:"MIL:TINM"		,desc:"WISDOMTREE TIN, ETF Estaño, Milano"},
+{id:"XETR:XGDU"		,desc:"XTRACK. ETC GOLD 80, Xetra"},
+{id:"MIL:SGLD"		,desc:"INVESCO PHYSICAL GOLD ETC (isin:IE00B579F325) (TER:0.12%), Milano"},
+{id:"MIL:PHAG"		,desc:"WISDOMTREE PHYSICAL SILVER, Milano"},
+{id:"MIL:GBSE"		,desc:"WISDOMTREE PHYSICAL GOLD EUR DAILY HEDGE, Milano"},
+{id:"XETR:8PSG"		,desc:"Invesco Physical Gold A, Xetra"},
+{id:"MIL:NICK"		,desc:"WISDOMTREE NICKEL, Milano"},
+{id:"LSE:NICK"		,desc:"WISDOMTREE COMMODITY SECURITIES LTD NICKEL, London"},
+{id:"MIL:CORN"		,desc:"WISDOMTREE CORN (ISIN: JE00BN7KB441), Milano"},
+];
+
+<!---- Sectors   OK---->
+arrSectors=[
+{id:"AMEX:XLY/AMEX:XLP"	,desc:"Consumer Discretionary/Consumer Staples"},
+{id:"AMEX:XLB"			,desc:"Materials"},
+{id:"AMEX:XLC"			,desc:"Communication Services"}, 		
+{id:"AMEX:XLE"			,desc:"Energy"},
+{id:"AMEX:XLF"			,desc:"Financial"},
+{id:"AMEX:XLI"			,desc:"Industrial"},
+{id:"AMEX:XLK"			,desc:"Technology"},
+{id:"AMEX:XLP"			,desc:"Consumer Staples"},
+{id:"AMEX:XLU"			,desc:"Utilities"},
+{id:"AMEX:XLV"			,desc:"Health Care"},
+{id:"AMEX:XLY"			,desc:"Consumer Discretionary"},
+{id:"AMEX:GDX"			,desc:"VanEck Gold Miners ETF"},
+{id:"AMEX:XTN"			,desc:"SPDR S&P Transportation ET"},
+];
+
+<!---- USA Stocks   OK---->
+arrUsaStocks=[
+{id:"NASDAQ:AAL",	desc:"American Airlines Group, Inc."},
+{id:"NYSE:ABBV",	desc:"AbbVie Inc."},
+{id:"NASDAQ:AAPL",	desc:"Apple Inc"}, 		
+{id:"NYSE:ABT",		desc:"Abbott Laboratories"},
+{id:"NYSE:ACN",		desc:"Accenture plc"},
+{id:"NASDAQ:ADBE",	desc:"Adobe Inc."},
+{id:"NASDAQ:AMD",	desc:"Advanced Micro Devices Inc"},
+{id:"NASDAQ:AMZN",	desc:"Amazon.com, Inc."},
+{id:"NASDAQ:ATVI",	desc:"Activision Blizzard, Inc"},
+{id:"NASDAQ:AZN",	desc:"AstraZeneca PLC"},
+{id:"NYSE:BA",		desc:"Boeing Company (The)"},
+{id:"NASDAQ:BKNG",	desc:"Booking Holdings Inc. Common Stock"},
+{id:"NYSE:BRK.B",	desc:"Berkshire Hathaway Inc. New"},
+{id:"NYSE:CAT",		desc:"Caterpillar, Inc."},
+{id:"NYSE:CCL",		desc:"Carnival Corporation"},
+{id:"NYSE:CL",		desc:"Colgate-Palmolive Company"},
+{id:"NASDAQ:COIN",	desc:"Coinbase Global, Inc."},
+{id:"NASDAQ:COST",	desc:"Costco Wholesale Corporation"},
+{id:"NYSE:CRM",		desc:"Salesforce, Inc."},
+{id:"NASDAQ:CSCO",	desc:"Cisco Systems, Inc."},
+{id:"NYSE:CVX",		desc:"Chevron Corporation"},
+{id:"NYSE:DG",		desc:"Dollar General Corporation"},
+{id:"NYSE:DHR",		desc:"Danaher Corporation"},
+{id:"NYSE:DIS",		desc:"Walt Disney Company (The)"},
+{id:"NYSE:DPZ",		desc:"Domino's Pizza Inc"},
+{id:"NASDAQ:DXCM",	desc:"DexCom, Inc."},
+{id:"NASDAQ:EBAY",	desc:"eBay Inc."},
+{id:"NYSE:EFX",		desc:"Equifax [Servicio de consulta de situacion financiera. Se lo considera como un lead indicator de la economia]"},
+{id:"NYSE:F",		desc:"Ford Mtr Co Del"},
+{id:"NASDAQ:FCEL",	desc:"FuelCell Energy, Inc."},
+{id:"NYSE:FDX",		desc:"FedEx Corporation"},
+{id:"NYSE:GE",		desc:"General Electric Company"},
+{id:"NASDAQ:GILD",	desc:"Gilead Sciences, Inc."},
+{id:"NYSE:GIS",		desc:"General Mills, Inc."},
+{id:"NYSE:GM",		desc:"General Motors Co."},
+{id:"NASDAQ:GOOGL",	desc:"Alphabet Inc (Google) Class A"},
+{id:"NYSE:HD",	 	desc:"Home Depot, Inc. (The)"},
+{id:"NYSE:HOG",		desc:"Harley-Davidson, Inc."},
+{id:"NYSE:IBM",		desc:"International Business Machines Corporation"},
+{id:"NASDAQ:INTC",	desc:"Intel Corporation"},
+{id:"NYSE:JNJ",		desc:"Johnson & Johnson"},
+{id:"NYSE:JPM",		desc:"JP Morgan Chase & Co."},
+{id:"NYSE:KO",		desc:"Coca-Cola Company (The)"},
+{id:"NYSE:LLY",		desc:"Eli Lilly and Company"},
+{id:"NYSE:LMT",		desc:"Lockheed Martin Corporation"},
+{id:"NYSE:LUMN",	desc:"Lumen Technologies, Inc."},
+{id:"NYSE:M",		desc:"Macy's Inc"},
+{id:"NYSE:MA",		desc:"Mastercard Incorporated"},
+{id:"NASDAQ:MAR",	desc:"Marriott International"},
+{id:"NYSE:MCD",		desc:"McDonald's Corporation"},
+{id:"NASDAQ:MELI",	desc:"MercadoLibre, Inc."},
+{id:"NASDAQ:META",	desc:"Meta Platforms, Inc."},
+{id:"NYSE:MO",		desc:"Altria Group, Inc. (Las empresas de Tabaco dan altos dividendos, pero suelen tener mucha deuda. Tienen menos potencial porque solo vende en USA. PM vende en todo el mundo excepto USA)"},
+{id:"NYSE:MRK",		desc:"Merck & Company, Inc."},
+{id:"NASDAQ:MSFT",	desc:"Microsoft Corp."},
+{id:"NASDAQ:MU",	desc:"Micron Technology, Inc."},
+{id:"NYSE:NEE",		desc:"NextEra Energy, Inc. [Sector: Utilities]"},
+{id:"NYSE:NEM",		desc:"Newmont Corporation (La compañía minera estadounidense, no solo fue la mayor productora mundial de oro en 2020, sino que ocupó el cuarto puesto en cuanto a producción de plata."},
+{id:"NASDAQ:NFLX",	desc:"Netflix, Inc."},
+{id:"NYSE:NIO",		desc:"NIO Inc."},
+{id:"NYSE:NKE",		desc:"Nike, Inc."},
+{id:"NASDAQ:NVDA",	desc:"NVIDIA Corporation"},
+{id:"NYSE:NVO",		desc:"Novo Nordisk A/S"},
+{id:"NYSE:O",		desc:"Realty Income Corporation (Real Estate Comercial)"},
+{id:"NYSE:ORCL",	desc:"Oracle Corporation"},
+{id:"NYSE:PCG",		desc:"Pacific Gas & Electric Co."},
+{id:"NASDAQ:PEP",	desc:"PepsiCo, Inc."},
+{id:"NYSE:PFE",		desc:"Pfizer, Inc."},
+{id:"NYSE:PG",		desc:"Procter & Gamble Company (The)"},
+{id:"NYSE:PM",		desc:"Philip Morris International Inc (Las empresas de Tabaco dan altos dividendos, pero suelen tener mucha deuda. Vende en todo el mundo excepto USA)"},
+{id:"NYSE:PSA",		desc:"Public Storage (Trasteros y almacenaje. 03/24:Tiene menos deuda)"},
+{id:"NYSE:PLTR",	desc:"Palantir Technologies Inc."},
+{id:"NASDAQ:PYPL",	desc:"PayPal Holdings, Inc."},
+{id:"NASDAQ:PZZA",	desc:"Papa John's International, Inc."},
+{id:"NASDAQ:QCOM",	desc:"Qualcomm Incorporated"},
+{id:"NASDAQ:ROKU",	desc:"Roku, Inc."},
+{id:"NYSE:RS",		desc:"Reliance Steel & Aluminum Co."},
+{id:"NASDAQ:SBUX",	desc:"Starbucks Corporation"},
+{id:"NYSE:SO",		desc:"Southern Company (The)"},
+{id:"NYSE:SWN",		desc:"Southwestern Energy Company"},
+{id:"NYSE:T",		desc:"AT&T Inc."},
+{id:"NASDAQ:TLRY",	desc:"Tilray Brands, Inc."},
+{id:"NASDAQ:TMUS",	desc:"T-Mobile US, Inc."},
+{id:"NYSE:TRU",		desc:"TransUnion) [Servicio de consulta de estados financiera. Se lo considera como un lead indicator de la economia]"},
+{id:"NASDAQ:TSLA",	desc:"Tesla, Inc."},
+{id:"NYSE:TSM",		desc:"Taiwan Semiconductor Manufacturing Company Ltd."},
+{id:"NASDAQ:TXN",	desc:"Texas Instruments Incorporated"},
+{id:"NASDAQ:UAL",	desc:"United Airlines Holdings, Inc."},
+{id:"NYSE:UBER",	desc:"Uber Technologies, Inc."},
+{id:"NYSE:UNH",		desc:"UnitedHealth Group Incorporated"},
+{id:"NYSE:UNP",		desc:"Union Pacific Corporation"},
+{id:"NYSE:V",		desc:"Visa Inc."},
+{id:"NYSE:VICI",	desc:"VICI Properties Inc. (Real Estate de Casinos)"},
+{id:"NYSE:VZ",		desc:"Verizon Communications Inc."},
+{id:"NYSE:WMT",		desc:"Walmart Inc."},
+{id:"NYSE:XOM",		desc:"Exxon Mobil Corporation"},
+];
+
+<!---- World Stocks  OK ---->
+arrChinaStocks=[
+{id:"HKEX:9988"		,desc:"ALIBABA GROUP HOLDING LTD"},
+{id:"NYSE:BABA"		,desc:"Alibaba Group Holdings Ltd."},
+{id:"NASDAQ:BIDU"	,desc:"Baidu, Inc."}, 		
+{id:"NASDAQ:JD"		,desc:"JD.com, Inc."},
+{id:"OTC:TCEHY"		,desc:"Tencent Holding Ltd."},
+];
+
+arrEuropeStocks=[
+{id:"EURONEXT:AIR"	,desc:"AIRBUS SE, Paris"},
+{id:"XETR:ADS"		,desc:"Adidas AG NA O.N., Xetra"},
+{id:"XETR:ALV"		,desc:"Allianz SE NA O.N., Xetra"}, 		
+{id:"BME:AMS"		,desc:"AMADEUS IT GROUP, S.A., Madrid"},
+{id:"EURONEXT:ASML"	,desc:"ASML HOLDING, Amsterdam"},
+{id:"LSE:AZN"		,desc:"ASTRAZENECA ORD USD0.25, London"},
+{id:"XETR:BAS"		,desc:"BASF SE NA O.N., Xetra"},
+{id:"LSE:BATS"		,desc:"BRITISH AMERICAN TOBACCO ORD GBP0.25 (Las empresas de Tabaco dan altos dividendos, pero suelen tener mucha deuda), London"},
+{id:"XETR:BMW"		,desc:"BMW Bay. Motoren Werke AG ST, Xetra"},
+{id:"XETR:BAYN"		,desc:"Bayer AG NA O.N., Xetra"},
+{id:"XETR:DTE"		,desc:"DT.TELEKOM AG NA, Xetra"},
+{id:"MIL:ENI"		,desc:"ENI, Milan"},
+{id:"XETR:EOAN"		,desc:"E.ON SE NA O.N., Xetra"},
+{id:"LSE:GLEN"		,desc:"GLENCORE PLC ORD USD0.01, London (La primera empresa privada del mundo dedicada a la compraventa y producción de materias primas y alimentos.)"},
+{id:"LSE:GSK"		,desc:"GSK PLC ORD GBP0.3125, London"},
+{id:"LSE:FRES"		,desc:"FRESNILLO PLC ORD USD0.50, London (Minera de Plata. Es la mayor de México y del mundo en cuanto a volumen de producción.)"},
+{id:"XETR:FTK"		,desc:"FLATEXDEGIRO AG NA O N, Xetra"},
+{id:"LSE:GSK"		,desc:"GSK PLC, London"},
+{id:"EURONEXT:HEIA"	,desc:"HEINEKEN, Amsterdam"},
+{id:"BME:IBE"		,desc:"ACCIONES IBERDROLA, Madrid"},
+{id:"BME:ITX"		,desc:"INDUSTRIA DE DISENO TEXTIL S.A. INDITEX, Madrid"},
+{id:"XETR:LHA"		,desc:"LUFTHANSA AG VNA O.N., Xetra"},
+{id:"EURONEXT:MC"	,desc:"LVMH (Louis Vuitton), Paris"},
+{id:"MIL:MONC"		,desc:"MONCLER, Milan"},
+{id:"XETR:MRK"		,desc:"MERCK KGAA O.N., Xetra"},
+{id:"XETR:MUV2"		,desc:"MUENCH.RUECKVERS.VNA O.N. (Munich Re - Health Insurance), Xetra"},
+{id:"SIX:NESN"		,desc:"NESTLE N, Swiss"},
+{id:"OMXHEX:NOKIA"	,desc:"NOKIA CORPORATION, Helsinki"},
+{id:"SIX:NOVN"		,desc:"NOVARTIS N, Swiss"},
+{id:"OMXCOP:NOVO_B"	,desc:"NOVO NORDISK B A/S, Copenhagen"},
+{id:"EURONEXT:OR"	,desc:"L'OREAL, Paris"},
+{id:"EURONEXT:PHIA"	,desc:"KON.PHILIPS N.V., Amsterdam"},
+{id:"MIL:RACE"		,desc:"FERRARI, Milan"},
+{id:"SIX:RO"		,desc:"ROCHE I, Swiss"},
+{id:"EURONEXT:SAN"	,desc:"SANOFI, Paris"},
+{id:"BME:SAN"		,desc:"BANCO SANTANDER S.A., Madrid"},
+{id:"XETR:SAP"		,desc:"SAP SE O.N., Xetra"},
+{id:"LSE:SHEL"		,desc:"SHELL PLC ORD EUR0.07, London"},
+{id:"XETR:SIE"		,desc:"Siemens AG NA O.N., Xetra"},
+{id:"MIL:STLAM"		,desc:"STELLANTIS (Altos dividendos), Milan"},	
+{id:"EURONEXT:TTE"	,desc:"TOTALENERGIES, Paris"},
+{id:"XETR:VOW3"		,desc:"Volkswagen AG VZO O.N., Xetra"},
+{id:"XETR:ZAL"		,desc:"Zalando SE, Xetra"},
+];
+
+arrCanadaStocks=[
+{id:"TSX:ARG"		,desc:"AMERIGO RESOURCES LTD (Producción y venta de cobre y molybdenum)"},
+{id:"TSXV:AFM"		,desc:"ALPHAMIN RES CORP (Minera de estaño (Tin))"},
+	
+];
+
+<!---- ETFs   ---->
+arrEtfIndices=[
+{id:"XETR:DAX"		,desc:"DAX"},
+{id:"OANDA:EU50EUR"	,desc:"Euro Stoxx 50"},
+{id:"TVC:NI225"		,desc:"Nikkei 225"}, 		
+{id:"TVC:UKX"		,desc:"UKX (Mineras)"},
+{id:"TVC:IBEX35"	,desc:"IBEX35"},
+{id:"AMEX:EWZ"		,desc:"Brazil"},
+{id:"XETR:ICGA"		,desc:"ISHARES MSCI CHINA UCITS ETF (isin: IE00BJ5JPG56)"},
+	
+];
+
+arrEtfFixedIncome=[
+{id:"EURONEXT:CSH2"	,desc:"LYXOR UCITS ETF SMART CASH C-EUR, Paris (Money Market Euro)"},
+{id:"LSE:SMTC"		,desc:"LYXOR INDEX FUND LYXOR SMART CASH UCITS ETF C-USD, London (Money Market USD) (isin: LU1248511575)"},
+{id:"XETR:SYBR"		,desc:"SPDR B.1-10Y.USCB.DLUD, Xetra (USD)"},
+{id:"NASDAQ:TLT"	,desc:"20+ year treasury Bond ETF // LSE:DTLA - ISHARES IV PLC ISH $ T BND 20+YR ETF USD ACC (isin: IE00BFM6TC58)"},
+{id:"NASDAQ:IEF"	,desc:"7-10 year treasury Bond ETF // IShares Trust Barclays 7-10 year treasury Bond ETF"},
+{id:"LSE:IDTP"		,desc:"ISHARES II PLC ISHARES USD TIPS UCITS ETF USD (ACC) (isin: IE00B1FZSC47)  (Simil TIPS), London"},
+{id:"SIX:IUCB.USD"	,desc:"SPDR 1-10 US CORPORATE (isin: IE00BYV12Y75), Swiss"},
+{id:"MIL:XDGU"		,desc:"XTRACKERS USD CORPORATE BOND UCITS ETF, Milan (Euros)"},
+{id:"LSE:LQDA"		,desc:"iShares USD Corporate Bond UCITS ETF (Acc) (isin: IE00BYXYYJ35), London"},
+{id:"XETR:VGEA"		,desc:"VANGUARD EUR EUROZONE GOVERNMENT BOND UCITS ETF (isin: IE00BH04GL39), Xetra"},
+{id:"XETR:VECA"		,desc:"VANGUARD EUR CORPORATE BOND UCITS ETF (isin: IE00BGYWT403), Xetra"},
+{id:"XETR:D5BG"		,desc:"XTR.II EUR CORP.BD 1C, Xetra"},
+{id:"EURONEXT:EHYA"	,desc:"ISHARES EUR HIGH YIELD CORP BOND ESG UCITS ETF EUR (ACC), Amsterdam"},
+{id:"NASDAQ:BND"	,desc:"Vanguard Total Bond Market ETF (broad US investment-grade fixed-income coverage), Nasdaq  //(EUR: EUNE - iShares US Aggregate Bond UCITS ETF EUR Hedged (Acc). POCA LIQUIDEZ!!!)"},
+{id:"XETR:EUNA"		,desc:"ISHARES CORE GLOBAL AGGREGATE BOND UCITS ETF (isin: IE00BDBRDM35) (Bonos globales, sigue el Bloomberg Barclays Global Aggregate Bond Index. Investment Grade), Xetra"},
+{id:"XETR:EUN5"		,desc:"iShares Core Euro Corporate Bond UCITS ETF (Dist), Xetra"},
+];
+
+arrEtfVariableIncome=[
+{id:"MIL:VUAA"		,desc:"VANGUARD S&P 500 UCITS ETF ACC, Milano"},
+{id:"XETR:EUNL"		,desc:"iShares Core MSCI World UCITS ETF USD (Acc), Xetra"},
+{id:"XETR:IS3N"		,desc:"iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc), Xetra"},
+{id:"EURONEXT:EMIM"	,desc:"ISHARES CORE MSCI EMERGING MARKETS IMI UCITS ETF, Amsterdam (Interactive Brokers)"},
+{id:"LSE:IUSZ"		,desc:"iShares Core FTSE 100 UCITS ETF (Dist), London"},
+{id:"XETR:SXRV"		,desc:"iShares Nasdaq 100 UCITS ETF (Acc), Xetra"},
+{id:"AMEX:IGV"		,desc:"iShares Expanded Tech-Software Sector ETF (Software USA), USA"},
+{id:"NASDAQ:IBB"	,desc:"IShares Biotechnology ETF, USA. (EUR: XETR:2B70 - IShares NASDAQ US Biotechnology UCITS ETF (isin: IE00BYXG2H39)"},
+{id:"XETR:2B70"		,desc:"IShares NASDAQ US Biotechnology UCITS ETF (isin: IE00BYXG2H39)"},
+{id:"XETR:EXI5"		,desc:"ISHARES STOXX EUROPE 600 REAL ESTATE UCITS ETF (DE), Xetra"},
+{id:"XETR:EXV6"		,desc:"ISHARES STOXX EUROPE 600 BASIC RESOURCES UCITS ETF (DE), Xetra"},
+{id:"XETR:EXV5"		,desc:"ISHARES STOXX EUROPE 600 AUTOMOBILES & PARTS UCITS ETF (DE), Xetra"},
+{id:"XETR:EXV1"		,desc:"ISHARES STOXX EUROPE 600 BANKS UCITS ETF (DE), Xetra"},
+{id:"XETR:EXH9"		,desc:"ISHARES STOXX EUROPE 600 UTILITIES UCITS ETF (DE), Xetra"},
+{id:"XETR:EXH1"		,desc:"ISHARES STOXX EUROPE 600 OIL & GAS UCITS ETF (DE), Xetra"},
+{id:"XETR:EXH5"		,desc:"ISHARES STOXX EUROPE 600 INSURANCE UCITS ETF (DE), Xetra"},
+{id:"XETR:EXH2"		,desc:"ISHARES STOXX EUROPE 600 FINANCIAL SERVICES UCITS ETF (DE), Xetra"},
+{id:"XETR:EXH3"		,desc:"ISHARES STOXX EUROPE 600 FOOD & BEVERAGE UCITS ETF (DE), Xetra"},
+{id:"XETR:EXV4"		,desc:"ISHARES STOXX EUROPE 600 HEALTH CARE UCITS ETF (DE), Xetra"},
+{id:"XETR:EXH4"		,desc:"ISHARES STOXX EUROPE 600 INDUSTRIAL GOODS & SERVICES UCITS DE, Xetra"},
+{id:"XETR:EXH6"		,desc:"ISHARES STOXX EUROPE 600 MEDIA UCITS ETF (DE), Xetra"},
+{id:"XETR:EXV2"		,desc:"ISHARES STOXX EUROPE 600 TELECOMMUNICATIONS UCITS ETF (DE), Xetra"},
+{id:"XETR:LYX4"		,desc:"LYXOR STOXX EUROPE 600 CHEMICALS UCITS ETF, Xetra"},
+{id:"XETR:EXV3"		,desc:"ISHARES STOXX EUROPE 600 TECHNOLOGY UCITS ETF (DE), Xetra"},
+{id:"XETR:EXV9"		,desc:"ISHARES STOXX EUROPE 600 TRAVEL & LEISURE UCITS ETF (DE), Xetra"},
+{id:"XETR:EXH8"		,desc:"ISHARES STOXX EUROPE 600 RETAIL UCITS ETF (DE), Xetra"},
+{id:"XETR:IQQH"		,desc:"ISHARES GLOBAL CLEAN ENERGY UCITS ETF, Xetra"},
+{id:"XETR:IQQQ"		,desc:"ISHARES GLOBAL WATER UCITS ETF, Xetra"},
+{id:"XETR:LYPG"		,desc:"LYXOR MSCI WORLD INFORMATION TECHNOLOGY TR UCITS ETF, Xetra"},
+{id:"XETR:XDW0"		,desc:"XTRACKERS MSCI WORLD ENERGY UCITS ETF, Xetra"},
+{id:"LSE:HEAL"		,desc:"ISHARES IV PLC HEALTHCARE INNOVATION UCITS ETF ACC, London"},
+{id:"NASDAQ:SOXX"	,desc:"IShares Semiconductor ETF, USA"},
+{id:"AMEX:REET"		,desc:"IShares Trust iShares Global REIT ETF, USA"},
+{id:"AMEX:JETS"		,desc:"U.S. Global Jets ETF, USA"},
+{id:"AMEX:REM"		,desc:"Mortgage Real Estate, USA"},
+{id:"XETR:ZPRX"		,desc:"SPDR MSCI Europe Small Cap Value Weighted UCITS ETF (isin: IE00BSPLC298), Xetra"},
+];
+
+arrEtfVariableIncomeDividend=[
+{id:"XETR:ISPA"		,desc:"ISHARES STOXX GLOBAL SELECT DIVIDEND 100 UCITS ETF (DE) (Dividendos en todo el mundo (mas invierte: EEUU HK)), Xetra"},
+{id:"XETR:SPYD"		,desc:"SPDR S&P US DIVIDEND ARISTOCRATS UCITS ETF (Aristocratas de Dividendos en el SP500), Xetra"},
+{id:"EURONEXT:VEUR"	,desc:"VANGUARD FTSE DEVELOPED EUROPE UCITS ETF (Dividendos en Europa), Amsterdam"},
+{id:"XETR:EHDL"		,desc:"INVESCO FTSE EMERGING MARKETS HIGH DIVIDEND LOW VOL UCITS ETF (Dividendos en paises emergentes), Xetra"},
+{id:"MIL:SDIV"		,desc:"GLOBAL X SUPERDIVIDEND UCITS ETF (Tracks the Solactive Global SuperDividend index tracks stocks with high dividend yields from around the world) (Ter: 0.45%), Milan"},
+{id:"MIL:HDLV"		,desc:"INVESCO S&P500 HIGH DIV L VOL UCITS ETF (Tracks the 50 least-volatile high dividend-yielding stocks in the S&P 500) (Ter: 0.30%), Milan"},
+	
+];
+
+<!---- Researches   OK---->
+arrResearches=[
+{id:"ECONOMICS:USIJC", desc:"United States Initial Jobless Claims"},
+{id:"ECONOMICS:USCJC", desc:"United States Continuing Jobless Claims"},
+];
+
+
+</script>
 
 <!---- Cabecera ---->
 <div style="width:100%;position: sticky;top: 0;background-color: black;z-index: 99;">
@@ -226,37 +719,7 @@ select option {
 </div>
 
 <!---- Indices   OK---->
-<script>
-arrIndices=[
-{id:"OANDA:SPX500USD"		,refDataTV:"CME_MINI:ES1!"		,desc:""},
-{id:"AMEX:SPY"			,refDataTV:"AMEX:SPY"			,desc:"(EU: MIL:SPY5)"},
-{id:"NASDAQ:QQQ"		,refDataTV:"NASDAQ:QQQ"			,desc:"ETF Nasdaq"}, 		
-{id:"CME_MINI:NQ1!"		,refDataTV:"CME_MINI:NQ1!"		,desc:"Futuros Nasdaq"},
-{id:"DJ:DJI"			,refDataTV:"DJ:DJI"			,desc:""},
-{id:"CBOT_MINI:YM1!"		,refDataTV:"CBOT_MINI:YM1!"		,desc:"Mini Dow Jones (para ver el volumen real)"},
-{id:"AMEX:IWM"			,refDataTV:"AMEX:IWM"			,desc:"IShares Russell 2000 ETF // XETR:XRS2 - XTRACKERS RUSSELL 2000 UCITS ETF (isin: IE00BJZ2DD79)"},
-{id:"TVC:NYA"			,refDataTV:"TVC:NYA"			,desc:"NYSE Composite Index"},
-{id:"AMEX:RSP"			,refDataTV:"AMEX:RSP"			,desc:"Invesco S&P 500 Equal Weight ETF"},
-{id:"NASDAQ:ACWI"		,refDataTV:"NASDAQ:ACWI"		,desc:"iShares MSCI ACWI ETF (offers a broad portfolio of global large- and mid-cap stocks that matches the market well)"},
-{id:"XETR:DAX"			,refDataTV:"XETR:DAX"			,desc:"DAX"},
-{id:"TVC:SX5E"			,refDataTV:"TVC:SX5E"			,desc:"Euro Stoxx 50 Index"},
-{id:"EURONEXT:PX1"		,refDataTV:"EURONEXT:PX1"		,desc:"CAC 40 Index"},
-{id:"TVC:UKX"			,refDataTV:"TVC:UKX"			,desc:"UK 100 Index"},
-{id:"TVC:IBEX35"		,refDataTV:"TVC:IBEX35"			,desc:"IBEX35"},
-{id:"EURONEXT:MIB"		,refDataTV:"EURONEXT:MIB"		,desc:"AMUNDI FTSE MIB UCITS ETF DIST (Indice Bolsa de Milan, Italia)"},
-{id:"TVC:AEX"			,refDataTV:"TVC:AEX"			,desc:"AEX (Indice Paises Bajos)"},
-{id:"OSE:NK2251!"		,refDataTV:"OSE:NK2251!"		,desc:"NIKKEI 225 FUTURES (ETF c/cobertura divisa:WisdomTree Japan Equity UCITS ETF EUR Hedged Acc [IE00BYQCZJ13-WTIF])"},
-{id:"SSE:000016"		,refDataTV:"AMEX:AFTY"			,desc:"SSE 50 INDEX (Top 50 companies of Shanghai Stock Exchange)"},
-{id:"HKEX:HSI1!"		,refDataTV:"HKEX:HSI1!"			,desc:"HANG SENG INDEX FUTURE"},
-{id:"FTSE:XIN9"			,refDataTV:"FTSE:XIN9"			,desc:"FTSE China A50 Index (chosen from Shanghai Stock Exchange and Shenzhen Stock Exchange)"},
-{id:"AMEX:FXI"			,refDataTV:"AMEX:FXI"			,desc:"iShares China Large-Cap ETF"},
-{id:"AMEX:ARGT"			,refDataTV:"AMEX:ARGT"			,desc:""},
-{id:"BCBA:IMV/(BCBA:GGAL/NASDAQ:GGAL*10)",	refDataTV:""		,desc:"Simil Merval en dolares"},
-{id:"AMEX:EWZ"			,refDataTV:"AMEX:EWZ"			,desc:"IShares Inc iShares MSCI Brazil ETF"},
-{id:"OMXSTO:OMXS30"		,refDataTV:"OMXSTO:OMXS30"		,desc:"OMX Stockholm 30 Index (Europa: parecido, esta capado a un max. 5% por stock. LSE:OMXS - iShares OMX Stockholm Capped UCITS ETF (isin: IE00BD3RYZ16)"},
-{id:"NSE:NIFTY"			,refDataTV:"NSE:NIFTY"			,desc:"Nifty 50 Index"},
-];
-</script>
+
 <div id="tabIndices" class="tabcontent">
 	<div class="divBtn">
 		<a class="btn" style="background-color: purple;" target="tv" href="https://www.tradingview.com/markets/indices/quotes-us/">US Indices</a>
@@ -267,73 +730,6 @@ arrIndices=[
 </div>
 
 <!---- Market Timming   OK---->
-<script>
-arrMarketTimmingStocks=[
-	
-{id:"FRED:BAMLH0A0HYM2"			,refDataTV:"FRED:BAMLH0A0HYM2"		,desc:"ICE BofA US High Yield Index Option-Adjusted Spread. Diferencia de rendimiento entre bonos no gubernamentales y los bonos gubernamentales. Medida del riesgo de la economia. (Si baja, es probable que la bolsa suba y viceversa)"},
-{id:"CBOE:VIX"				,refDataTV:"CBOE:VIX"			,desc:""},
-{id:"CBOE:VVIX"				,refDataTV:"CBOE:VVIX"			,desc:""},
-{id:"TVC:VIX - NASDAQ:VOLI"		,refDataTV:"TVC:VIX - NASDAQ:VOLI"	,desc:">2 Riesgo, <2 No Riesgo"},
-{id:"CBOE:VX2!-CBOE:VX1!"		,refDataTV:"CBOE:VX2!-CBOE:VX1!"	,desc:"(Si hay contango (>0, , VX2>VX1) -> OK, normal. Si hay backwardation (<0, VX2<VX1)-> Mal, nervios)"}, 		
-{id:"CBOE:VIX/CBOE:VIX3M"		,refDataTV:"CBOE:VIX/CBOE:VIX3M"	,desc:"Volatilidad 1 mes / Volatilidad 3 meses (Por encima de 1 => DANGER!!!)"},
-{id:"CBOE:VIX3M/CBOE:VIX"		,refDataTV:"CBOE:VIX3M/CBOE:VIX"	,desc:"VRatio: is the ratio of VIX3M and VIX. (Arriba 1.1 -> Bear market, luego decrece y llega a estar debajo de 1)"},
-{id:"AMEX:SPY/TVC:DXY"			,refDataTV:"AMEX:SPY/TVC:DXY"		,desc:"SP500 / Dollar (Cortos cuando el ratio perfora la media ponderada de 30 semanas y largos cuando el ratio supera la media)"},
-{id:"USI:PCCE"				,refDataTV:"USI:PCCE"			,desc:"Put / Call Ratio Equities"},
-{id:"INDEX:HIGN-INDEX:LOWN"		,refDataTV:"INDEX:HIGN-INDEX:LOWN"	,desc:"New Highs - New Lows (NYSE market) ( >0 = bullish / <0 = bearish)"},
-{id:"NASDAQ:SDEX"			,refDataTV:"NASDAQ:SDEX"		,desc:"NATIONS SKEWDEX (Option skew is not a measure of fear or implied volatility. It’s a measure of how much risk market participants are willing to bear, that is how far investors are willing to let markets fall before hedges offer protection.)"},
-{id:"INDEX:S5FI"			,refDataTV:"INDEX:S5FI"			,desc:"S&P 500 Stocks Above 50-Day Average"},
-{id:"INDEX:S5TH"			,refDataTV:"INDEX:S5TH"			,desc:"S&P 500 Stocks Above 200-Day Average"},
-{id:"AMEX:SPY/AMEX:SPLV"		,refDataTV:"AMEX:SPY/AMEX:SPLV"		,desc:"SP500/SP500 Low Volatility. (Anticipa/confirma posibles movimientos hacia arriba/abajo del SP500)"},
-{id:"AMEX:MTUM/AMEX:SPLV"		,refDataTV:"AMEX:MTUM/AMEX:SPLV"	,desc:"Momentum/Low Volatility Ratio.\nBull market clue: If Momentum/Low Vol. Ratio>rising 50-week MA + PPO > 0\nBear market clue: If Momentum/Low Vol. Ratio<falling 50-week MA + PPO < 0"},
-{id:"AMEX:RSP/AMEX:SPY"			,refDataTV:"AMEX:RSP/AMEX:SPY"		,desc:"SP500 equal weight / SP500"},
-{id:"NASDAQ:QQEW/NASDAQ:QQQ"		,refDataTV:"NASDAQ:QQEW/NASDAQ:QQQ"	,desc:"QQQ equal weight / QQQ"},
-{id:"AMEX:SPHB"				,refDataTV:"AMEX:SPHB"			,desc:"Invesco S&P 500 High Beta ETF"},
-{id:"AMEX:SPHB/AMEX:SPLV"		,refDataTV:"AMEX:SPHB/AMEX:SPLV"	,desc:"ETF High Beta / Low Volatility"},
-{id:"AMEX:VUG/AMEX:VTV"			,refDataTV:"AMEX:VUG/AMEX:VTV"		,desc:"ETF Vanguard Growth / Value"},
-{id:"NASDAQ:QQEW"			,refDataTV:"NASDAQ:QQEW"		,desc:"First Trust NASDAQ-100 Equal Weighted Index Fund"},
-{id:"NASDAQ:SQQQ"			,refDataTV:"NASDAQ:SQQQ"		,desc:"ProShares UltraPro Short QQQ"},
-{id:"AMEX:ARKK/AMEX:XLK"		,refDataTV:"AMEX:ARKK/AMEX:XLK"		,desc:"Tecnologia con perdida / Sector Tecnologico"},
-{id:"NASDAQ:MAGS"			,refDataTV:"NASDAQ:MAGS"		,desc:"Roundhill Magnificent Seven ETF"},
-];
-
-arrMarketTimmingBonds=[
-{id:"TVC:US02Y"					,refDataTV:"TVC:US02Y"				,desc:"US Government Bonds 2 YR Yield<"},
-{id:"TVC:US10Y"					,refDataTV:"TVC:US10Y"				,desc:"US Government Bonds 10 YR Yield"},
-{id:"TVC:US30Y"					,refDataTV:"TVC:US30Y"				,desc:"US Government Bonds 30 YR Yield"},
-{id:"TVC:US10Y-TVC:US03MY"		,refDataTV:"TVC:US10Y-TVC:US03MY"	,desc:"US10Y-US03MY (Si cae debajo de cero --> RECESIÓN !!!) (Dicen que ahora se usa mas este que el 10Y-2Y)"},
-{id:"TVC:US10Y-TVC:US02Y"		,refDataTV:"TVC:US10Y-TVC:US02Y"	,desc:"US10Y-US02Y (Si cae debajo de cero --> RECESIÓN !!!)"},
-{id:"FRED:BAMLH0A0HYM2"			,refDataTV:"FRED:BAMLH0A0HYM2"		,desc:"ICE BofA US High Yield Index Option-Adjusted Spread (Si el Spread baja (los diferenciales de credito se estrechan)-> El apetito por el riesgo es mayor, OK. Si el Spread sube (diferenciales de credito se expanden)-> Apetito x riego se reduce, mal)"},
-{id:"NASDAQ:SHY"				,refDataTV:"NASDAQ:SHY"				,desc:"IShares 1-3 Year Treasury Bond ETF"},
-{id:"NASDAQ:IEF"				,refDataTV:"NASDAQ:IEF"				,desc:"IShares Trust Barclays 7-10 year treasury Bond ETF"},
-{id:"AMEX:TLH"					,refDataTV:"AMEX:TLH"				,desc:"IShares 10-20 Year Treasury Bond ETF"},
-{id:"NASDAQ:TLT"				,refDataTV:"NASDAQ:TLT"				,desc:"Ishares 20+ Year Treasury Bond ETF"},
-{id:"TVC:MOVE"					,refDataTV:"TVC:MOVE"				,desc:""},
-{id:"AMEX:TIP"					,refDataTV:"AMEX:TIP"				,desc:"iShares TIPS Bond ETF (10 YR Tips Yield = 10 YR yield - 10 YR Breakeven inflation rate (inflacion esperada a 10 años). (Sube -> inclinarse por valores de riesgo, Baja -> inclinarse por valores defensivos) (EUR: LSE:IDTP - ISHARES II PLC ISHARES USD TIPS UCITS ETF USD (ACC), ISIN: IE00B1FZSC47)"},
-{id:"AMEX:AGG/NASDAQ:IEF"		,refDataTV:"AMEX:AGG/NASDAQ:IEF"	,desc:"(simula el comportamiento de los bonos de gobierno USA 7/10YRS(IEF) en el conjunto del universo de bonos (AGG))"},
-{id:"AMEX:LQD"					,refDataTV:"AMEX:LQD"				,desc:"iShares iBoxx $ Investment Grade Corporate Bond ETF"},
-{id:"AMEX:HYG"					,refDataTV:"AMEX:HYG"				,desc:'iShares iBoxx $ High Yield Corporate Bond ETF ("bonos basura")'},
-];
-
-arrMarketTimmingEconomy=[
-{id:"FRED:ANFCI"				,refDataTV:"FRED:ANFCI"				,desc:"Chicago Fed Adjusted National Financial Conditions Inde"},
-{id:"COMEX:HG1!/COMEX:GC1!"		,refDataTV:"COMEX:HG1!/COMEX:GC1!"	,desc:"Cobre/Oro (Si sube, la economia va bien. Si baja, la economia va mal)"},
-{id:"AMEX:DBB/AMEX:DBP"			,refDataTV:"AMEX:DBB/AMEX:DBP"		,desc:"Metales Bases / Metales Preciosos.(Si baja es porque la economia esta debil. Si sube, la economia esta fuerte.)"}, 		
-{id:"OANDA:SPX500USD/TVC:DXY"	,refDataTV:"OANDA:SPX500USD/TVC:DXY",desc:"(Simula el movimiento real del SP500 sin considerar la cotización del dolar)"},
-{id:"FRED:BAMLH0A0HYM2"			,refDataTV:"FRED:BAMLH0A0HYM2"		,desc:"(Indice de probabilidad de no pago de deuda)"},
-{id:"CBOE:SKEW"					,refDataTV:"CBOE:SKEW"				,desc:"CBOE SKEW INDEX"},
-{id:"AMEX:BKLN"					,refDataTV:"AMEX:BKLN"				,desc:"Invesco Senior Loan ETF (Prestamos apalancados)"},
-{id:"FRED:T5YIE"				,refDataTV:"FRED:T5YIE"				,desc:"5-Year Breakeven Inflation Rate ((Expectativas de inflación futura))"},
-{id:"AMEX:JNK/AMEX:QLTA"		,refDataTV:"AMEX:JNK/AMEX:QLTA"		,desc:"Bonos basura / Bonos calidad"},
-{id:"AMEX:RSP/NASDAQ:TLT"		,refDataTV:"AMEX:RSP/NASDAQ:TLT"	,desc:"Invesco S&P 500 Equal Weight ETF / IShares 20+ Year Treasury Bond ETF (Bolsa vs. Bonos)"},
-{id:"AMEX:RSPD/AMEX:RSPS"		,refDataTV:"AMEX:RSPD/AMEX:RSPS"	,desc:"ETF Discretionary / Staples (Igual ponderacion)"},
-{id:"NASDAQ:PEZ/NASDAQ:PSL"		,refDataTV:"NASDAQ:PEZ/NASDAQ:PSL"	,desc:"Consumer Ciclicas/ Defensivas = PMI"},
-{id:"AMEX:IWM/AMEX:SPY"			,refDataTV:"AMEX:IWM/AMEX:SPY"		,desc:"Small Caps / Big Caps (Si las small caps caen, eso significa que hay mayor preocupación por la economia. Los inversores solo invierten en grandes empresas.)"},
-{id:"FRED:WALCL+FRED:ECBASSETSW*1.07+ECONOMICS:GBCBBS*OANDA:GBPUSD+FRED:JPNASSETS/OANDA:USDJPY+ECONOMICS:CNCBBS*FX_IDC:CNYUSD-(FRED:WTREGEN+FRED:RRPONTSYD)",refDataTV:"",desc:"Liquidez Global ( USA + EURO + GB + JP + CH)"},
-{id:"FRED:WRESBAL"				,refDataTV:"FRED:WRESBAL"			,desc:"(Liabilities and Capital: Other Factors Draining Reserve Balances: Reserve Balances with Federal Reserve Banks: Week Average)"},
-
-];
-
-</script>
 
 <div id="tabMarketTimming" class="tabcontent">
 	
@@ -349,71 +745,7 @@ arrMarketTimmingEconomy=[
 </div>
 
 <!---- Forex   OK---->
-<script>
-arrForex=[
-{id:"CBOE:EVZ", 		refDataTV:"CBOE:EVZ",			desc:"CBOE EURO CURRENCY VOLATILITY INDEX (Nivel de riesgo: <7 Alto / >7 Bajo.  Evitar USD)"},
-{id:"TVC:DXY", 			refDataTV:"TVC:DXY",			desc:""},
-{id:"AMEX:UUP", 		refDataTV:"AMEX:UUP",			desc:"para ver el volumen del DXY"}, 		
-{id:"INDEX:BTCUSD", 		refDataTV:"BINANCE:BTCUSD",		desc:""},
-{id:"AMEX:BITI", 		refDataTV:"AMEX:BITI",			desc:"ETF para apostar al Bitcoin en corto. Sirve para ver el volumen y ver el interes por la baja. (US74347G2912: ProShares Trust ProShares Short Bitcoin Strategy ETF)"},
-{id:"BINANCE:ETHUSD", 		refDataTV:"BINANCE:ETHUSD",		desc:""},
-{id:"OANDA:AUDCAD", 		refDataTV:"FX_IDC:AUDCAD",		desc:""},
-{id:"OANDA:AUDCHF", 		refDataTV:"FX_IDC:AUDCHF",		desc:""},
-{id:"OANDA:AUDJPY", 		refDataTV:"FX_IDC:AUDJPY",		desc:""},
-{id:"OANDA:AUDUSD", 		refDataTV:"FX_IDC:AUDUSD",		desc:"Suele anticipar/seguir movimientos SP500"},
-{id:"OANDA:AUDNZD", 		refDataTV:"FX_IDC:AUDNZD",		desc:"dicen que es bastante fiel al AT"},
-{id:"OANDA:CADCHF", 		refDataTV:"FX_IDC:CADCHF",		desc:""},
-{id:"OANDA:CADJPY", 		refDataTV:"FX_IDC:CADJPY",		desc:""},
-{id:"PEPPERSTONE:CHFPLN", 	refDataTV:"FX_IDC:CHFPLN",		desc:""},
-{id:"OANDA:EURCAD", 		refDataTV:"FX_IDC:EURCAD",		desc:""},
-{id:"OANDA:EURCHF", 		refDataTV:"FX_IDC:EURCHF",		desc:""},
-{id:"OANDA:EURGBP", 		refDataTV:"FX_IDC:EURGBP",		desc:""},
-{id:"OANDA:EURJPY", 		refDataTV:"FX_IDC:EURJPY",		desc:""},
-{id:"CAPITALCOM:EURMXN",	refDataTV:"FX_IDC:EURMXN",		desc:""},
-{id:"OANDA:EURNOK", 		refDataTV:"FX_IDC:EURNOK",		desc:""},
-{id:"OANDA:EURNZD", 		refDataTV:"FX_IDC:EURNZD",		desc:""},
-{id:"OANDA:EURPLN", 		refDataTV:"FX_IDC:EURPLN",		desc:""},
-{id:"OANDA:EURSEK", 		refDataTV:"FX_IDC:EURSEK",		desc:""},
-{id:"OANDA:EURSGD", 		refDataTV:"FX_IDC:EURSGD",		desc:""},
-{id:"OANDA:EURUSD", 		refDataTV:"FX_IDC:EURUSD",		desc:""},
-{id:"OANDA:EURZAR", 		refDataTV:"FX_IDC:EURZAR",		desc:""},
-{id:"OANDA:GBPAUD", 		refDataTV:"FX_IDC:GBPAUD",		desc:""},
-{id:"OANDA:GBPCAD", 		refDataTV:"FX_IDC:GBPCAD",		desc:""},
-{id:"OANDA:GBPCHF", 		refDataTV:"FX_IDC:GBPCHF",		desc:""},
-{id:"OANDA:GBPNZD", 		refDataTV:"FX_IDC:GBPNZD",		desc:""},
-{id:"OANDA:GBPPLN", 		refDataTV:"FX_IDC:GBPPLN",		desc:""},
-{id:"OANDA:GBPUSD", 		refDataTV:"FX_IDC:GBPUSD",		desc:""},
-{id:"OANDA:NZDCAD", 		refDataTV:"FX_IDC:NZDCAD",		desc:""},
-{id:"OANDA:NZDCHF", 		refDataTV:"FX_IDC:NZDCHF",		desc:""},
-{id:"OANDA:NZDJPY", 		refDataTV:"FX_IDC:NZDJPY",		desc:""},
-{id:"OANDA:NZDUSD", 		refDataTV:"FX_IDC:NZDUSD",		desc:""},
-{id:"ACTIVTRADES:USDBRL", 	refDataTV:"FX_IDC:USDBRL",		desc:""},
-{id:"OANDA:USDCAD", 		refDataTV:"FX_IDC:USDCAD",		desc:""},
-{id:"OANDA:USDCHF", 		refDataTV:"FX_IDC:USDCHF",		desc:""},
-{id:"OANDA:USDCNH", 		refDataTV:"FX_IDC:USDCNH",		desc:""},
-{id:"OANDA:USDJPY", 		refDataTV:"FX_IDC:USDJPY",		desc:""},
-{id:"OANDA:USDMXN", 		refDataTV:"FX_IDC:USDMXN",		desc:""},
-{id:"OANDA:USDNOK", 		refDataTV:"FX_IDC:USDNOK",		desc:""},
-{id:"OANDA:USDPLN", 		refDataTV:"FX_IDC:USDPLN",		desc:""},
-{id:"OANDA:USDSEK", 		refDataTV:"FX_IDC:USDSEK",		desc:""},
-{id:"OANDA:USDZAR", 		refDataTV:"FX_IDC:USDZAR",		desc:""},
-];
-arrYields=[
-{id:"TVC:EU10Y", 		refDataTV:"TVC:EU10Y",			desc:"Euro 10 Year Government Bonds Yield"},
-{id:"TVC:GB10Y", 		refDataTV:"TVC:GB10Y",			desc:"United Kingdom 10 Year Government Bonds Yield"},
-{id:"TVC:JP10Y", 		refDataTV:"TVC:JP10Y",			desc:"Japan 10 Year Government Bonds Yield"},
-{id:"TVC:AU10Y", 		refDataTV:"TVC:AU10Y",			desc:"Australia 10 Year Government Bonds Yield"},
-{id:"TVC:CA10Y", 		refDataTV:"TVC:CA10Y",			desc:"Canada 10 Year Government Bonds Yield"},
-{id:"TVC:CN10Y", 		refDataTV:"TVC:CN10Y",			desc:"China 10 Year Government Bonds Yield"},
-{id:"TVC:DE10Y", 		refDataTV:"TVC:DE10Y",			desc:"Germany 10 Year Government Bonds Yield"},
-{id:"TVC:PL10Y", 		refDataTV:"TVC:PL10Y",			desc:"Poland 10 Year Government Bonds Yield"},
-{id:"TVC:FR10Y", 		refDataTV:"TVC:FR10Y",			desc:"France 10 Year Government Bonds Yield"},
-{id:"TVC:IT10Y", 		refDataTV:"TVC:IT10Y",			desc:"Italy 10 Year Government Bonds Yield"},
-{id:"TVC:ES10Y", 		refDataTV:"TVC:ES10Y",			desc:"Spain 10 Year Government Bonds Yield"},
-{id:"TVC:IN10Y", 		refDataTV:"TVC:IN10Y",			desc:"India 10 Year Government Bonds Yield"},
-{id:"TVC:BR10Y", 		refDataTV:"TVC:BR10Y",			desc:"Brazil 10 Year Government Bonds Yield"},
-];
-</script>
+
 <div id="tabForex" class="tabcontent">
 	<div class="divBtn">
 		<a class="btn" target="tv" href="https://www.tradingview.com/markets/indices/quotes-currency/">Currency Indices</a>
@@ -426,70 +758,6 @@ arrYields=[
 
 
 <!---- Basic Materials   OK---->
-<script>
-arrBasicMaterialsIndices=[
-{id:"AMEX:DBC"		,refDataTV:"AMEX:DBC"	,desc:"Invesco DB Commodity Index Tracking Fund (Europa: LSE:ICOM - ISHARES VI PLC DIVERSIFIED COMMODITY SWAP UCIT USD(GBP) (isin: IE00BDFL4P12))"},
-{id:"AMEX:DBB"		,refDataTV:"AMEX:DBB"	,desc:"Metales Bases"},
-{id:"AMEX:DBP"		,refDataTV:"AMEX:DBP"	,desc:"Metales Preciosos"}, 		
-{id:"DJ:DJCIGR" 	,refDataTV:"DJ:DJCIGR" 	,desc:"Dow Jones Commodity Index Grains"},
-];
-
-arrBasicMaterialsTimming=[
-{id:"COMEX:SI1!/COMEX:GC1!"	,refDataTV:""	,desc:"Ratio Silver/Gold (Si el ratio sube -> Mercado alcista para los metales preciosos (No es verdad del todo). Quizas un arranque alcista de la plata ayude a anticipar futuros arranques alcistas del oro...)"},
-{id:"COMEX:GC1!/COMEX:SI1!"	,refDataTV:""	,desc:"Ratio Gold/Silver (La relación oro/plata ha fluctuado entre aproximadamente 40 y 120. Cuando este ratio se acerca a uno de estos extremos, los inversores y traders suelen participar en estrategias de trading de spread diseñadas para beneficiarse de su reversión a la media histórica, que suele ser de alrededor de 60)"},
-{id:"AMEX:GDX/COMEX:GC1!"  	,refDataTV:""  	,desc:"VanEck Gold Miners ETF/Gold (Referencia guia para el oro. En teoria deberia estar correlacionado, en caso contrario, priorizar lo que indica esta relación.)"},
-{id:"AMEX:SIL/COMEX:SI1!"  	,refDataTV:""  	,desc:"Global X Silver Miners ETF/Silver (Referencia guia para la plata. En teoria deberia estar correlacionado, en caso contrario, priorizar lo que indica esta relación.)"}, 		
-{id:"CBOT:ZM1!/CBOT:ZL1!"   	,refDataTV:""  	,desc:"CBOT:ZM1!(Meal)/CBOT:ZL1!(Oil)(Cuando baja desde sus maximos hasta 6.0-5.9 la soja (ZS) experimenta una subida importante)"},
-{id:"CBOT:ZS1!/CBOT:ZC1!"   	,refDataTV:""  	,desc:"Ratio Soybean/Corn (Históricamente, la proporción de soja/maíz ha oscilado típicamente entre aproximadamente 2 y 3. Cuando este ratio se acerca a uno de estos extremos, los inversores y traders suelen participar en estrategias de trading de spread diseñadas para beneficiarse de su reversión a la media histórica, que suele ser de alrededor de 2,51)"},
-];
-
-arrBasicMaterialsFutures=[
-{id:"COMEX:GC1!"		,refDataTV:"COMEX:GC1!"			,desc:"Gold Futures (- Cierta relacion inversa con los rendimientos del bono a 10 años. En los pico altos de los bonos se producen picos bajos del oro.<br> - Correlacion inversa bastante alta con los rendimientos de los TIPS a 10 años. Esto hace que el oro sea proteccion contra inflación futura, no la inflacion actual.)"},
-{id:"COMEX:SI1!"		,refDataTV:"COMEX:SI1!"			,desc:"Silver Futures"},
-{id:"MCX:ALUMINIUM1!"		,refDataTV:"MCX:ALUMINIUM1!"		,desc:"Aluminium Futures (India)"}, 		
-{id:"COMEX:HG1!"		,refDataTV:"COMEX:HG1!"			,desc:"Copper Futures"},
-{id:"ICEUS:CC1!"		,refDataTV:"ICEUS:CC1!"			,desc:"Cocoa Futures"},
-{id:"NYMEX:CL1!"		,refDataTV:"NYMEX:CL1!"			,desc:"Light Crude Oil Futures"},
-{id:"ICEUS:CT1!"		,refDataTV:"ICEUS:CT1!"			,desc:"Cotton No.2 Futures"},
-{id:"ICEUS:KC1!"		,refDataTV:"ICEUS:KC1!"			,desc:"Coffee C Futures"},
-{id:"CME:LBR1!" 	    	,refDataTV:"CME:LBR1!" 	    		,desc:"Lumber Futures"},
-{id:"CME:LE1!"			,refDataTV:"CME:LE1!"			,desc:"Live Cattle Futures (Tiene un delay aproximadamente de 8 meses respecto al Wheat)"},
-{id:"NYMEX:NG1!"		,refDataTV:"NYMEX:NG1!"			,desc:"Natural Gas Futures"},
-{id:"MCX:NICKEL1!"		,refDataTV:"MCX:NICKEL1!"		,desc:"Nickel Futures (India)"},
-{id:"ICEUS:OJ1!"		,refDataTV:"ICEUS:OJ1!"			,desc:"FCOJ-A, Orange Juice Futures"},
-{id:"NYMEX:PL1!"		,refDataTV:"NYMEX:PL1!"			,desc:"Platinum Future"},
-{id:"NYMEX:RB1!"		,refDataTV:"NYMEX:RB1!"			,desc:"RBOB Gasoline Futures"},
-{id:"ICEUS:SB1!"		,refDataTV:"ICEUS:SB1!"			,desc:"Sugar No.11 Futures"},
-{id:"NYMEX:TTF1!"		,refDataTV:"NYMEX:TTF1!"		,desc:"DUTCH TTF Futures (Gas Europeo (No ingles))"},
-{id:"COMEX:UX1!"		,refDataTV:"COMEX:UX1!"			,desc:"UXC Uranium U3O8 Futures"},
-{id:"CBOT:ZC1!"			,refDataTV:"CBOT:ZC1!"			,desc:"Corn Futures"},
-{id:"MCX:ZINC1!"		,refDataTV:"MCX:ZINC1!"			,desc:"ZINC Futures"},
-{id:"CBOT:ZS1!"			,refDataTV:"CBOT:ZS1!"			,desc:"Soybean Futures"},
-{id:"CBOT:ZW1!"			,refDataTV:"CBOT:ZW1!"			,desc:"Wheat Futures (Se adelanta aproximadamente 8 meses al movimiento futuro del Live Cattle)"},
-{id:"SGX:FEF1!"			,refDataTV:"SGX:FEF1!"			,desc:"SGX TSI IRON ORE CFR CHINA (62% FE FINES) INDEX Futures (Singapore)"},
-];
-
-arrBasicMaterialsSpot=[
-{id:"OANDA:XAUUSD"		,refDataTV:"OANDA:XAUUSD"		,desc:"Gold Spot"},
-{id:"OANDA:XAGUSD"		,refDataTV:"OANDA:XAGUSD"	  	,desc:"Silver Spot"},
-{id:"OANDA:WTICOUSD"		,refDataTV:"OANDA:WTICOUSD"  		,desc:"West Texas Oil"}, 		
-{id:"OANDA:BCOUSD"		,refDataTV:"OANDA:BCOUSD"	  	,desc:"Brent Crude Oil"},
-{id:"OANDA:XPTUSD"	 	,refDataTV:"OANDA:XPTUSD"	  	,desc:"Platinum"},
-];
-
-arrBasicMaterialsEtf=[
-{id:"LSE:ICOM"		,refDataTV:"LSE:ICOM"		,desc:"ISHARES VI PLC DIVERSIFIED COMMODITY SWAP UCIT USD(GBP), London"},
-{id:"MIL:TINM"		,refDataTV:"MIL:TINM"		,desc:"WISDOMTREE TIN, ETF Estaño, Milano"},
-{id:"XETR:XGDU"		,refDataTV:"XETR:XGDU" 		,desc:"XTRACK. ETC GOLD 80, Xetra"},
-{id:"MIL:SGLD"		,refDataTV:"MIL:SGLD"  		,desc:"INVESCO PHYSICAL GOLD ETC (isin:IE00B579F325) (TER:0.12%), Milano"},
-{id:"MIL:PHAG"		,refDataTV:"MIL:PHAG"  		,desc:"WISDOMTREE PHYSICAL SILVER, Milano"},
-{id:"MIL:GBSE"		,refDataTV:"MIL:GBSE"		,desc:"WISDOMTREE PHYSICAL GOLD EUR DAILY HEDGE, Milano"},
-{id:"XETR:8PSG"		,refDataTV:"XETR:8PSG"		,desc:"Invesco Physical Gold A, Xetra"},
-{id:"MIL:NICK"		,refDataTV:"MIL:NICK"		,desc:"WISDOMTREE NICKEL, Milano"},
-{id:"LSE:NICK"		,refDataTV:"LSE:NICK"		,desc:"WISDOMTREE COMMODITY SECURITIES LTD NICKEL, London"},
-{id:"MIL:CORN"		,refDataTV:"MIL:CORN"		,desc:"WISDOMTREE CORN (ISIN: JE00BN7KB441), Milano"},
-];
-</script>
 
 <div id="tabBasicMaterials" class="tabcontent">
 	
@@ -518,23 +786,7 @@ arrBasicMaterialsEtf=[
 </div>
 
 <!---- Sectors   OK---->
-<script>
-arrSectors=[
-{id:"AMEX:XLY/AMEX:XLP"		,refDataTV:"AMEX:XLY/AMEX:XLP"		,desc:"Consumer Discretionary/Consumer Staples"},
-{id:"AMEX:XLB"			,refDataTV:"AMEX:XLB"			,desc:"Materials"},
-{id:"AMEX:XLC"			,refDataTV:"AMEX:XLC"			,desc:"Communication Services"}, 		
-{id:"AMEX:XLE"			,refDataTV:"AMEX:XLE"			,desc:"Energy"},
-{id:"AMEX:XLF"			,refDataTV:"AMEX:XLF"			,desc:"Financial"},
-{id:"AMEX:XLI"			,refDataTV:"AMEX:XLI"			,desc:"Industrial"},
-{id:"AMEX:XLK"			,refDataTV:"AMEX:XLK"			,desc:"Technology"},
-{id:"AMEX:XLP"			,refDataTV:"AMEX:XLP"			,desc:"Consumer Staples"},
-{id:"AMEX:XLU"			,refDataTV:"AMEX:XLU"			,desc:"Utilities"},
-{id:"AMEX:XLV"			,refDataTV:"AMEX:XLV"			,desc:"Health Care"},
-{id:"AMEX:XLY"			,refDataTV:"AMEX:XLY"			,desc:"Consumer Discretionary"},
-{id:"AMEX:GDX"			,refDataTV:"AMEX:GDX"			,desc:"VanEck Gold Miners ETF"},
-{id:"AMEX:XTN"			,refDataTV:"AMEX:XTN"			,desc:"SPDR S&P Transportation ET"},
-];
-</script>
+
 <div id="tabSectors" class="tabcontent">
 	<div class="divBtn">
 		<a class="btn" style="background-color: blue;" target="tv" href="https://www.tradingview.com/markets/indices/quotes-snp/">S&P Sectors</a>
@@ -544,106 +796,7 @@ arrSectors=[
 
 
 <!---- USA Stocks   OK---->
-<script>
-arrUsaStocks=[
-{id:"NASDAQ:AAL",	refDataTV:"NASDAQ:AAL",		desc:"American Airlines Group, Inc."},
-{id:"NYSE:ABBV",	refDataTV:"NYSE:ABBV",		desc:"AbbVie Inc."},
-{id:"NASDAQ:AAPL",	refDataTV:"NASDAQ:AAPL",	desc:"Apple Inc"}, 		
-{id:"NYSE:ABT",		refDataTV:"NYSE:ABT",		desc:"Abbott Laboratories"},
-{id:"NYSE:ACN",		refDataTV:"NYSE:ACN",		desc:"Accenture plc"},
-{id:"NASDAQ:ADBE",	refDataTV:"NASDAQ:ADBE",	desc:"Adobe Inc."},
-{id:"NASDAQ:AMD",	refDataTV:"NASDAQ:AMD",		desc:"Advanced Micro Devices Inc"},
-{id:"NASDAQ:AMZN",	refDataTV:"NASDAQ:AMZN",	desc:"Amazon.com, Inc."},
-{id:"NASDAQ:ATVI",	refDataTV:"NASDAQ:ATVI",	desc:"Activision Blizzard, Inc"},
-{id:"NASDAQ:AZN",	refDataTV:"NASDAQ:AZN",		desc:"AstraZeneca PLC"},
-{id:"NYSE:BA",		refDataTV:"NYSE:BA",		desc:"Boeing Company (The)"},
-{id:"NASDAQ:BKNG",	refDataTV:"NASDAQ:BKNG",	desc:"Booking Holdings Inc. Common Stock"},
-{id:"NYSE:BRK.B",	refDataTV:"NYSE:BRK.B",		desc:"Berkshire Hathaway Inc. New"},
-{id:"NYSE:CAT",		refDataTV:"NYSE:CAT",		desc:"Caterpillar, Inc."},
-{id:"NYSE:CCL",		refDataTV:"NYSE:CCL",		desc:"Carnival Corporation"},
-{id:"NYSE:CL",		refDataTV:"NYSE:CL",		desc:"Colgate-Palmolive Company"},
-{id:"NASDAQ:COIN",	refDataTV:"NASDAQ:COIN",	desc:"Coinbase Global, Inc."},
-{id:"NASDAQ:COST",	refDataTV:"NASDAQ:COST",	desc:"Costco Wholesale Corporation"},
-{id:"NYSE:CRM",		refDataTV:"NYSE:CRM",		desc:"Salesforce, Inc."},
-{id:"NASDAQ:CSCO",	refDataTV:"NASDAQ:CSCO",	desc:"Cisco Systems, Inc."},
-{id:"NYSE:CVX",		refDataTV:"NYSE:CVX",		desc:"Chevron Corporation"},
-{id:"NYSE:DG",		refDataTV:"NYSE:DG",		desc:"Dollar General Corporation"},
-{id:"NYSE:DHR",		refDataTV:"NYSE:DHR",		desc:"Danaher Corporation"},
-{id:"NYSE:DIS",		refDataTV:"NYSE:DIS",		desc:"Walt Disney Company (The)"},
-{id:"NYSE:DPZ",		refDataTV:"NYSE:DPZ",		desc:"Domino's Pizza Inc"},
-{id:"NASDAQ:DXCM",	refDataTV:"NASDAQ:DXCM",	desc:"DexCom, Inc."},
-{id:"NASDAQ:EBAY",	refDataTV:"NASDAQ:EBAY",	desc:"eBay Inc."},
-{id:"NYSE:EFX",		refDataTV:"NYSE:EFX",		desc:"Equifax [Servicio de consulta de situacion financiera. Se lo considera como un lead indicator de la economia]"},
-{id:"NYSE:F",		refDataTV:"NYSE:F",		desc:"Ford Mtr Co Del"},
-{id:"NASDAQ:FCEL",	refDataTV:"NASDAQ:FCEL",	desc:"FuelCell Energy, Inc."},
-{id:"NYSE:FDX",		refDataTV:"NYSE:FDX",		desc:"FedEx Corporation"},
-{id:"NYSE:GE",		refDataTV:"NYSE:GE",		desc:"General Electric Company"},
-{id:"NASDAQ:GILD",	refDataTV:"NASDAQ:GILD",	desc:"Gilead Sciences, Inc."},
-{id:"NYSE:GIS",		refDataTV:"NYSE:GIS",		desc:"General Mills, Inc."},
-{id:"NYSE:GM",		refDataTV:"NYSE:GM",		desc:"General Motors Co."},
-{id:"NASDAQ:GOOGL",	refDataTV:"NASDAQ:GOOGL",	desc:"Alphabet Inc (Google) Class A"},
-{id:"NYSE:HD",	 	refDataTV:"NYSE:HD",	 	desc:"Home Depot, Inc. (The)"},
-{id:"NYSE:HOG",		refDataTV:"NYSE:HOG",		desc:"Harley-Davidson, Inc."},
-{id:"NYSE:IBM",		refDataTV:"NYSE:IBM",		desc:"International Business Machines Corporation"},
-{id:"NASDAQ:INTC",	refDataTV:"NASDAQ:INTC",	desc:"Intel Corporation"},
-{id:"NYSE:JNJ",		refDataTV:"NYSE:JNJ",		desc:"Johnson & Johnson"},
-{id:"NYSE:JPM",		refDataTV:"NYSE:JPM",		desc:"JP Morgan Chase & Co."},
-{id:"NYSE:KO",		refDataTV:"NYSE:KO",		desc:"Coca-Cola Company (The)"},
-{id:"NYSE:LLY",		refDataTV:"NYSE:LLY",		desc:"Eli Lilly and Company"},
-{id:"NYSE:LMT",		refDataTV:"NYSE:LMT",		desc:"Lockheed Martin Corporation"},
-{id:"NYSE:LUMN",	refDataTV:"NYSE:LUMN",		desc:"Lumen Technologies, Inc."},
-{id:"NYSE:M",		refDataTV:"NYSE:M",		desc:"Macy's Inc"},
-{id:"NYSE:MA",		refDataTV:"NYSE:MA",		desc:"Mastercard Incorporated"},
-{id:"NASDAQ:MAR",	refDataTV:"NASDAQ:MAR",		desc:"Marriott International"},
-{id:"NYSE:MCD",		refDataTV:"NYSE:MCD",		desc:"McDonald's Corporation"},
-{id:"NASDAQ:MELI",	refDataTV:"NASDAQ:MELI",	desc:"MercadoLibre, Inc."},
-{id:"NASDAQ:META",	refDataTV:"NASDAQ:META",	desc:"Meta Platforms, Inc."},
-{id:"NYSE:MO",		refDataTV:"NYSE:MO",		desc:"Altria Group, Inc. (Las empresas de Tabaco dan altos dividendos, pero suelen tener mucha deuda. Tienen menos potencial porque solo vende en USA. PM vende en todo el mundo excepto USA)"},
-{id:"NYSE:MRK",		refDataTV:"NYSE:MRK",		desc:"Merck & Company, Inc."},
-{id:"NASDAQ:MSFT",	refDataTV:"NASDAQ:MSFT",	desc:"Microsoft Corp."},
-{id:"NASDAQ:MU",	refDataTV:"NASDAQ:MU",	    	desc:"Micron Technology, Inc."},
-{id:"NYSE:NEE",		refDataTV:"NYSE:NEE",		desc:"NextEra Energy, Inc. [Sector: Utilities]"},
-{id:"NYSE:NEM",		refDataTV:"NYSE:NEM",		desc:"Newmont Corporation (La compañía minera estadounidense, no solo fue la mayor productora mundial de oro en 2020, sino que ocupó el cuarto puesto en cuanto a producción de plata."},
-{id:"NASDAQ:NFLX",	refDataTV:"NASDAQ:NFLX",	desc:"Netflix, Inc."},
-{id:"NYSE:NIO",		refDataTV:"NYSE:NIO",		desc:"NIO Inc."},
-{id:"NYSE:NKE",		refDataTV:"NYSE:NKE",		desc:"Nike, Inc."},
-{id:"NASDAQ:NVDA",	refDataTV:"NASDAQ:NVDA",	desc:"NVIDIA Corporation"},
-{id:"NYSE:NVO",		refDataTV:"NYSE:NVO",		desc:"Novo Nordisk A/S"},
-{id:"NYSE:O",		refDataTV:"NYSE:O",		desc:"Realty Income Corporation (Real Estate Comercial)"},
-{id:"NYSE:ORCL",	refDataTV:"NYSE:ORCL",	    	desc:"Oracle Corporation"},
-{id:"NYSE:PCG",		refDataTV:"NYSE:PCG",		desc:"Pacific Gas & Electric Co."},
-{id:"NASDAQ:PEP",	refDataTV:"NASDAQ:PEP",	    	desc:"PepsiCo, Inc."},
-{id:"NYSE:PFE",		refDataTV:"NYSE:PFE",		desc:"Pfizer, Inc."},
-{id:"NYSE:PG",		refDataTV:"NYSE:PG",		desc:"Procter & Gamble Company (The)"},
-{id:"NYSE:PM",		refDataTV:"NYSE:PM",		desc:"Philip Morris International Inc (Las empresas de Tabaco dan altos dividendos, pero suelen tener mucha deuda. Vende en todo el mundo excepto USA)"},
-{id:"NYSE:PSA",		refDataTV:"NYSE:PSA",		desc:"Public Storage (Trasteros y almacenaje. 03/24:Tiene menos deuda)"},
-{id:"NYSE:PLTR",	refDataTV:"NYSE:PLTR",	  	desc:"Palantir Technologies Inc."},
-{id:"NASDAQ:PYPL",	refDataTV:"NASDAQ:PYPL",	desc:"PayPal Holdings, Inc."},
-{id:"NASDAQ:PZZA",	refDataTV:"NASDAQ:PZZA",	desc:"Papa John's International, Inc."},
-{id:"NASDAQ:QCOM",	refDataTV:"NASDAQ:QCOM",	desc:"Qualcomm Incorporated"},
-{id:"NASDAQ:ROKU",	refDataTV:"NASDAQ:ROKU",	desc:"Roku, Inc."},
-{id:"NYSE:RS",		refDataTV:"NYSE:RS",		desc:"Reliance Steel & Aluminum Co."},
-{id:"NASDAQ:SBUX",	refDataTV:"NASDAQ:SBUX",	desc:"Starbucks Corporation"},
-{id:"NYSE:SO",		refDataTV:"NYSE:SO",		desc:"Southern Company (The)"},
-{id:"NYSE:SWN",		refDataTV:"NYSE:SWN",		desc:"Southwestern Energy Company"},
-{id:"NYSE:T",		refDataTV:"NYSE:T",		desc:"AT&T Inc."},
-{id:"NASDAQ:TLRY",	refDataTV:"NASDAQ:TLRY",	desc:"Tilray Brands, Inc."},
-{id:"NASDAQ:TMUS",	refDataTV:"NASDAQ:TMUS",	desc:"T-Mobile US, Inc."},
-{id:"NYSE:TRU",		refDataTV:"NYSE:TRU",		desc:"TransUnion) [Servicio de consulta de estados financiera. Se lo considera como un lead indicator de la economia]"},
-{id:"NASDAQ:TSLA",	refDataTV:"NASDAQ:TSLA",	desc:"Tesla, Inc."},
-{id:"NYSE:TSM",		refDataTV:"NYSE:TSM",		desc:"Taiwan Semiconductor Manufacturing Company Ltd."},
-{id:"NASDAQ:TXN",	refDataTV:"NASDAQ:TXN",	    	desc:"Texas Instruments Incorporated"},
-{id:"NASDAQ:UAL",	refDataTV:"NASDAQ:UAL",	    	desc:"United Airlines Holdings, Inc."},
-{id:"NYSE:UBER",	refDataTV:"NYSE:UBER",	    	desc:"Uber Technologies, Inc."},
-{id:"NYSE:UNH",		refDataTV:"NYSE:UNH",		desc:"UnitedHealth Group Incorporated"},
-{id:"NYSE:UNP",		refDataTV:"NYSE:UNP",		desc:"Union Pacific Corporation"},
-{id:"NYSE:V",		refDataTV:"NYSE:V",		desc:"Visa Inc."},
-{id:"NYSE:VICI",	refDataTV:"NYSE:VICI",		desc:"VICI Properties Inc. (Real Estate de Casinos)"},
-{id:"NYSE:VZ",		refDataTV:"NYSE:VZ",		desc:"Verizon Communications Inc."},
-{id:"NYSE:WMT",		refDataTV:"NYSE:WMT",		desc:"Walmart Inc."},
-{id:"NYSE:XOM",		refDataTV:"NYSE:XOM",		desc:"Exxon Mobil Corporation"},
-];
-</script>
+
 <div id="tabUsaStocks" class="tabcontent">
 	<ul class="list-group">
 		<div class="divBtn">
@@ -663,67 +816,6 @@ arrUsaStocks=[
 
 
 <!---- World Stocks  OK ---->
-<script>
-arrChinaStocks=[
-{id:"HKEX:9988"		,refDataTV:"HKEX:9988"		,desc:"ALIBABA GROUP HOLDING LTD"},
-{id:"NYSE:BABA"		,refDataTV:"NYSE:BABA"		,desc:"Alibaba Group Holdings Ltd."},
-{id:"NASDAQ:BIDU"	,refDataTV:"NASDAQ:BIDU"	,desc:"Baidu, Inc."}, 		
-{id:"NASDAQ:JD"		,refDataTV:"NASDAQ:JD"		,desc:"JD.com, Inc."},
-{id:"OTC:TCEHY"		,refDataTV:"OTC:TCEHY"		,desc:"Tencent Holding Ltd."},
-];
-
-arrEuropeStocks=[
-{id:"EURONEXT:AIR"	,refDataTV:"EURONEXT:AIR"	,desc:"AIRBUS SE, Paris"},
-{id:"XETR:ADS"		,refDataTV:"XETR:ADS"		,desc:"Adidas AG NA O.N., Xetra"},
-{id:"XETR:ALV"		,refDataTV:"XETR:ALV"		,desc:"Allianz SE NA O.N., Xetra"}, 		
-{id:"BME:AMS"		,refDataTV:"BME:AMS"		,desc:"AMADEUS IT GROUP, S.A., Madrid"},
-{id:"EURONEXT:ASML"	,refDataTV:"EURONEXT:ASML"	,desc:"ASML HOLDING, Amsterdam"},
-{id:"LSE:AZN"		,refDataTV:"LSE:AZN"		,desc:"ASTRAZENECA ORD USD0.25, London"},
-{id:"XETR:BAS"		,refDataTV:"XETR:BAS"		,desc:"BASF SE NA O.N., Xetra"},
-{id:"LSE:BATS"		,refDataTV:"LSE:BATS"		,desc:"BRITISH AMERICAN TOBACCO ORD GBP0.25 (Las empresas de Tabaco dan altos dividendos, pero suelen tener mucha deuda), London"},
-{id:"XETR:BMW"		,refDataTV:"XETR:BMW"		,desc:"BMW Bay. Motoren Werke AG ST, Xetra"},
-{id:"XETR:BAYN"		,refDataTV:"XETR:BAYN"		,desc:"Bayer AG NA O.N., Xetra"},
-{id:"XETR:DTE"		,refDataTV:"XETR:DTE"		,desc:"DT.TELEKOM AG NA, Xetra"},
-{id:"MIL:ENI"		,refDataTV:"MIL:ENI"		,desc:"ENI, Milan"},
-{id:"XETR:EOAN"		,refDataTV:"XETR:EOAN"		,desc:"E.ON SE NA O.N., Xetra"},
-{id:"LSE:GLEN"		,refDataTV:"LSE:GLEN"		,desc:"GLENCORE PLC ORD USD0.01, London (La primera empresa privada del mundo dedicada a la compraventa y producción de materias primas y alimentos.)"},
-{id:"LSE:GSK"		,refDataTV:"LSE:GSK"		,desc:"GSK PLC ORD GBP0.3125, London"},
-{id:"LSE:FRES"		,refDataTV:"LSE:FRES"		,desc:"FRESNILLO PLC ORD USD0.50, London (Minera de Plata. Es la mayor de México y del mundo en cuanto a volumen de producción.)"},
-{id:"XETR:FTK"		,refDataTV:"XETR:FTK"		,desc:"FLATEXDEGIRO AG NA O N, Xetra"},
-{id:"LSE:GSK"		,refDataTV:"LSE:GSK"		,desc:"GSK PLC, London"},
-{id:"EURONEXT:HEIA"	,refDataTV:"EURONEXT:HEIA"	,desc:"HEINEKEN, Amsterdam"},
-{id:"BME:IBE"		,refDataTV:"BME:IBE"		,desc:"ACCIONES IBERDROLA, Madrid"},
-{id:"BME:ITX"		,refDataTV:"BME:ITX"		,desc:"INDUSTRIA DE DISENO TEXTIL S.A. INDITEX, Madrid"},
-{id:"XETR:LHA"		,refDataTV:"XETR:LHA"		,desc:"LUFTHANSA AG VNA O.N., Xetra"},
-{id:"EURONEXT:MC"	,refDataTV:"EURONEXT:MC"	,desc:"LVMH (Louis Vuitton), Paris"},
-{id:"MIL:MONC"		,refDataTV:"MIL:MONC"		,desc:"MONCLER, Milan"},
-{id:"XETR:MRK"		,refDataTV:"XETR:MRK"		,desc:"MERCK KGAA O.N., Xetra"},
-{id:"XETR:MUV2"		,refDataTV:"XETR:MUV2"		,desc:"MUENCH.RUECKVERS.VNA O.N. (Munich Re - Health Insurance), Xetra"},
-{id:"SIX:NESN"		,refDataTV:"SIX:NESN"		,desc:"NESTLE N, Swiss"},
-{id:"OMXHEX:NOKIA"	,refDataTV:"OMXHEX:NOKIA"	,desc:"NOKIA CORPORATION, Helsinki"},
-{id:"SIX:NOVN"		,refDataTV:"SIX:NOVN"		,desc:"NOVARTIS N, Swiss"},
-{id:"OMXCOP:NOVO_B"	,refDataTV:"OMXCOP:NOVO_B"	,desc:"NOVO NORDISK B A/S, Copenhagen"},
-{id:"EURONEXT:OR"	,refDataTV:"EURONEXT:OR"	,desc:"L'OREAL, Paris"},
-{id:"EURONEXT:PHIA"	,refDataTV:"EURONEXT:PHIA"	,desc:"KON.PHILIPS N.V., Amsterdam"},
-{id:"MIL:RACE"		,refDataTV:"MIL:RACE"		,desc:"FERRARI, Milan"},
-{id:"SIX:RO"		,refDataTV:"SIX:RO"		,desc:"ROCHE I, Swiss"},
-{id:"EURONEXT:SAN"	,refDataTV:"EURONEXT:SAN"	,desc:"SANOFI, Paris"},
-{id:"BME:SAN"		,refDataTV:"BME:SAN"		,desc:"BANCO SANTANDER S.A., Madrid"},
-{id:"XETR:SAP"		,refDataTV:"XETR:SAP"		,desc:"SAP SE O.N., Xetra"},
-{id:"LSE:SHEL"		,refDataTV:"LSE:SHEL"		,desc:"SHELL PLC ORD EUR0.07, London"},
-{id:"XETR:SIE"		,refDataTV:"XETR:SIE"		,desc:"Siemens AG NA O.N., Xetra"},
-{id:"MIL:STLAM"		,refDataTV:"MIL:STLAM"		,desc:"STELLANTIS (Altos dividendos), Milan"},	
-{id:"EURONEXT:TTE"	,refDataTV:"EURONEXT:TTE"	,desc:"TOTALENERGIES, Paris"},
-{id:"XETR:VOW3"		,refDataTV:"XETR:VOW3"		,desc:"Volkswagen AG VZO O.N., Xetra"},
-{id:"XETR:ZAL"		,refDataTV:"XETR:ZAL"		,desc:"Zalando SE, Xetra"},
-];
-
-arrCanadaStocks=[
-{id:"TSX:ARG"		,refDataTV:"TSX:ARG"		,desc:"AMERIGO RESOURCES LTD (Producción y venta de cobre y molybdenum)"},
-{id:"TSXV:AFM"		,refDataTV:"TSXV:AFM"		,desc:"ALPHAMIN RES CORP (Minera de estaño (Tin))"},
-	
-];
-</script>
 
 <div id="tabWorldStocks" class="tabcontent">
 	<ul class="list-group">
@@ -747,86 +839,7 @@ arrCanadaStocks=[
 </div>
 
 <!---- ETFs   ---->
-<script>
-arrEtfIndices=[
-{id:"XETR:DAX"		,refDataTV:"XETR:DAX"		,desc:"DAX"},
-{id:"OANDA:EU50EUR"	,refDataTV:"OANDA:EU50EUR"	,desc:"Euro Stoxx 50"},
-{id:"TVC:NI225"		,refDataTV:"TVC:NI225"		,desc:"Nikkei 225"}, 		
-{id:"TVC:UKX"		,refDataTV:"TVC:UKX"		,desc:"UKX (Mineras)"},
-{id:"TVC:IBEX35"	,refDataTV:"TVC:IBEX35"		,desc:"IBEX35"},
-{id:"AMEX:EWZ"		,refDataTV:"AMEX:EWZ"		,desc:"Brazil"},
-{id:"XETR:ICGA"		,refDataTV:"XETR:ICGA"		,desc:"ISHARES MSCI CHINA UCITS ETF (isin: IE00BJ5JPG56)"},
-	
-];
 
-arrEtfFixedIncome=[
-{id:"EURONEXT:CSH2"	,refDataTV:"EURONEXT:CSH2"	,desc:"LYXOR UCITS ETF SMART CASH C-EUR, Paris (Money Market Euro)"},
-{id:"LSE:SMTC"		,refDataTV:"LSE:SMTC"		,desc:"LYXOR INDEX FUND LYXOR SMART CASH UCITS ETF C-USD, London (Money Market USD) (isin: LU1248511575)"},
-{id:"XETR:SYBR"		,refDataTV:"XETR:SYBR"		,desc:"SPDR B.1-10Y.USCB.DLUD, Xetra (USD)"},
-{id:"NASDAQ:TLT"	,refDataTV:"NASDAQ:TLT"		,desc:"20+ year treasury Bond ETF // LSE:DTLA - ISHARES IV PLC ISH $ T BND 20+YR ETF USD ACC (isin: IE00BFM6TC58)"},
-{id:"NASDAQ:IEF"	,refDataTV:"NASDAQ:IEF"		,desc:"7-10 year treasury Bond ETF // IShares Trust Barclays 7-10 year treasury Bond ETF"},
-{id:"LSE:IDTP"		,refDataTV:"LSE:IDTP"		,desc:"ISHARES II PLC ISHARES USD TIPS UCITS ETF USD (ACC) (isin: IE00B1FZSC47)  (Simil TIPS), London"},
-{id:"SIX:IUCB.USD"	,refDataTV:"SIX:IUCB.USD"	,desc:"SPDR 1-10 US CORPORATE (isin: IE00BYV12Y75), Swiss"},
-{id:"MIL:XDGU"		,refDataTV:"MIL:XDGU"		,desc:"XTRACKERS USD CORPORATE BOND UCITS ETF, Milan (Euros)"},
-{id:"LSE:LQDA"		,refDataTV:"LSE:LQDA"		,desc:"iShares USD Corporate Bond UCITS ETF (Acc) (isin: IE00BYXYYJ35), London"},
-{id:"XETR:VGEA"		,refDataTV:"XETR:VGEA"		,desc:"VANGUARD EUR EUROZONE GOVERNMENT BOND UCITS ETF (isin: IE00BH04GL39), Xetra"},
-{id:"XETR:VECA"		,refDataTV:"XETR:VECA"		,desc:"VANGUARD EUR CORPORATE BOND UCITS ETF (isin: IE00BGYWT403), Xetra"},
-{id:"XETR:D5BG"		,refDataTV:"XETR:D5BG"		,desc:"XTR.II EUR CORP.BD 1C, Xetra"},
-{id:"EURONEXT:EHYA"	,refDataTV:"EURONEXT:EHYA"	,desc:"ISHARES EUR HIGH YIELD CORP BOND ESG UCITS ETF EUR (ACC), Amsterdam"},
-{id:"NASDAQ:BND"	,refDataTV:"NASDAQ:BND"		,desc:"Vanguard Total Bond Market ETF (broad US investment-grade fixed-income coverage), Nasdaq  //(EUR: EUNE - iShares US Aggregate Bond UCITS ETF EUR Hedged (Acc). POCA LIQUIDEZ!!!)"},
-{id:"XETR:EUNA"		,refDataTV:"XETR:EUNA"		,desc:"ISHARES CORE GLOBAL AGGREGATE BOND UCITS ETF (isin: IE00BDBRDM35) (Bonos globales, sigue el Bloomberg Barclays Global Aggregate Bond Index. Investment Grade), Xetra"},
-{id:"XETR:EUN5"		,refDataTV:"XETR:EUN5"		,desc:"iShares Core Euro Corporate Bond UCITS ETF (Dist), Xetra"},
-];
-
-arrEtfVariableIncome=[
-{id:"MIL:VUAA"		,refDataTV:"MIL:VUAA"		,desc:"VANGUARD S&P 500 UCITS ETF ACC, Milano"},
-{id:"XETR:EUNL"		,refDataTV:"XETR:EUNL"		,desc:"iShares Core MSCI World UCITS ETF USD (Acc), Xetra"},
-{id:"XETR:IS3N"		,refDataTV:"XETR:IS3N"		,desc:"iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc), Xetra"},
-{id:"EURONEXT:EMIM"	,refDataTV:"EURONEXT:EMIM"	,desc:"ISHARES CORE MSCI EMERGING MARKETS IMI UCITS ETF, Amsterdam (Interactive Brokers)"},
-{id:"LSE:IUSZ"		,refDataTV:"LSE:IUSZ"		,desc:"iShares Core FTSE 100 UCITS ETF (Dist), London"},
-{id:"XETR:SXRV"		,refDataTV:"XETR:SXRV"		,desc:"iShares Nasdaq 100 UCITS ETF (Acc), Xetra"},
-{id:"AMEX:IGV"		,refDataTV:"AMEX:IGV"		,desc:"iShares Expanded Tech-Software Sector ETF (Software USA), USA"},
-{id:"NASDAQ:IBB"	,refDataTV:"NASDAQ:IBB"		,desc:"IShares Biotechnology ETF, USA. (EUR: XETR:2B70 - IShares NASDAQ US Biotechnology UCITS ETF (isin: IE00BYXG2H39)"},
-{id:"XETR:2B70"		,refDataTV:"XETR:2B70"		,desc:"IShares NASDAQ US Biotechnology UCITS ETF (isin: IE00BYXG2H39)"},
-{id:"XETR:EXI5"		,refDataTV:"XETR:EXI5"		,desc:"ISHARES STOXX EUROPE 600 REAL ESTATE UCITS ETF (DE), Xetra"},
-{id:"XETR:EXV6"		,refDataTV:"XETR:EXV6"		,desc:"ISHARES STOXX EUROPE 600 BASIC RESOURCES UCITS ETF (DE), Xetra"},
-{id:"XETR:EXV5"		,refDataTV:"XETR:EXV5"		,desc:"ISHARES STOXX EUROPE 600 AUTOMOBILES & PARTS UCITS ETF (DE), Xetra"},
-{id:"XETR:EXV1"		,refDataTV:"XETR:EXV1"		,desc:"ISHARES STOXX EUROPE 600 BANKS UCITS ETF (DE), Xetra"},
-{id:"XETR:EXH9"		,refDataTV:"XETR:EXH9"		,desc:"ISHARES STOXX EUROPE 600 UTILITIES UCITS ETF (DE), Xetra"},
-{id:"XETR:EXH1"		,refDataTV:"XETR:EXH1"		,desc:"ISHARES STOXX EUROPE 600 OIL & GAS UCITS ETF (DE), Xetra"},
-{id:"XETR:EXH5"		,refDataTV:"XETR:EXH5"		,desc:"ISHARES STOXX EUROPE 600 INSURANCE UCITS ETF (DE), Xetra"},
-{id:"XETR:EXH2"		,refDataTV:"XETR:EXH2"		,desc:"ISHARES STOXX EUROPE 600 FINANCIAL SERVICES UCITS ETF (DE), Xetra"},
-{id:"XETR:EXH3"		,refDataTV:"XETR:EXH3"		,desc:"ISHARES STOXX EUROPE 600 FOOD & BEVERAGE UCITS ETF (DE), Xetra"},
-{id:"XETR:EXV4"		,refDataTV:"XETR:EXV4"		,desc:"ISHARES STOXX EUROPE 600 HEALTH CARE UCITS ETF (DE), Xetra"},
-{id:"XETR:EXH4"		,refDataTV:"XETR:EXH4"		,desc:"ISHARES STOXX EUROPE 600 INDUSTRIAL GOODS & SERVICES UCITS DE, Xetra"},
-{id:"XETR:EXH6"		,refDataTV:"XETR:EXH6"		,desc:"ISHARES STOXX EUROPE 600 MEDIA UCITS ETF (DE), Xetra"},
-{id:"XETR:EXV2"		,refDataTV:"XETR:EXV2"		,desc:"ISHARES STOXX EUROPE 600 TELECOMMUNICATIONS UCITS ETF (DE), Xetra"},
-{id:"XETR:LYX4"		,refDataTV:"XETR:LYX4"		,desc:"LYXOR STOXX EUROPE 600 CHEMICALS UCITS ETF, Xetra"},
-{id:"XETR:EXV3"		,refDataTV:"XETR:EXV3"		,desc:"ISHARES STOXX EUROPE 600 TECHNOLOGY UCITS ETF (DE), Xetra"},
-{id:"XETR:EXV9"		,refDataTV:"XETR:EXV9"		,desc:"ISHARES STOXX EUROPE 600 TRAVEL & LEISURE UCITS ETF (DE), Xetra"},
-{id:"XETR:EXH8"		,refDataTV:"XETR:EXH8"		,desc:"ISHARES STOXX EUROPE 600 RETAIL UCITS ETF (DE), Xetra"},
-{id:"XETR:IQQH"		,refDataTV:"XETR:IQQH"		,desc:"ISHARES GLOBAL CLEAN ENERGY UCITS ETF, Xetra"},
-{id:"XETR:IQQQ"		,refDataTV:"XETR:IQQQ"		,desc:"ISHARES GLOBAL WATER UCITS ETF, Xetra"},
-{id:"XETR:LYPG"		,refDataTV:"XETR:LYPG"		,desc:"LYXOR MSCI WORLD INFORMATION TECHNOLOGY TR UCITS ETF, Xetra"},
-{id:"XETR:XDW0"		,refDataTV:"XETR:XDW0"		,desc:"XTRACKERS MSCI WORLD ENERGY UCITS ETF, Xetra"},
-{id:"LSE:HEAL"		,refDataTV:"LSE:HEAL"		,desc:"ISHARES IV PLC HEALTHCARE INNOVATION UCITS ETF ACC, London"},
-{id:"NASDAQ:SOXX"	,refDataTV:"NASDAQ:SOXX"	,desc:"IShares Semiconductor ETF, USA"},
-{id:"AMEX:REET"		,refDataTV:"AMEX:REET"		,desc:"IShares Trust iShares Global REIT ETF, USA"},
-{id:"AMEX:JETS"		,refDataTV:"AMEX:JETS"		,desc:"U.S. Global Jets ETF, USA"},
-{id:"AMEX:REM"		,refDataTV:"AMEX:REM"		,desc:"Mortgage Real Estate, USA"},
-{id:"XETR:ZPRX"		,refDataTV:"XETR:ZPRX"		,desc:"SPDR MSCI Europe Small Cap Value Weighted UCITS ETF (isin: IE00BSPLC298), Xetra"},
-];
-
-arrEtfVariableIncomeDividend=[
-{id:"XETR:ISPA"		,refDataTV:"XETR:ISPA"		,desc:"ISHARES STOXX GLOBAL SELECT DIVIDEND 100 UCITS ETF (DE) (Dividendos en todo el mundo (mas invierte: EEUU HK)), Xetra"},
-{id:"XETR:SPYD"		,refDataTV:"XETR:SPYD"		,desc:"SPDR S&P US DIVIDEND ARISTOCRATS UCITS ETF (Aristocratas de Dividendos en el SP500), Xetra"},
-{id:"EURONEXT:VEUR"	,refDataTV:"EURONEXT:VEUR"	,desc:"VANGUARD FTSE DEVELOPED EUROPE UCITS ETF (Dividendos en Europa), Amsterdam"},
-{id:"XETR:EHDL"		,refDataTV:"XETR:EHDL"		,desc:"INVESCO FTSE EMERGING MARKETS HIGH DIVIDEND LOW VOL UCITS ETF (Dividendos en paises emergentes), Xetra"},
-{id:"MIL:SDIV"		,refDataTV:"MIL:SDIV"		,desc:"GLOBAL X SUPERDIVIDEND UCITS ETF (Tracks the Solactive Global SuperDividend index tracks stocks with high dividend yields from around the world) (Ter: 0.45%), Milan"},
-{id:"MIL:HDLV"		,refDataTV:"MIL:HDLV"		,desc:"INVESCO S&P500 HIGH DIV L VOL UCITS ETF (Tracks the 50 least-volatile high dividend-yielding stocks in the S&P 500) (Ter: 0.30%), Milan"},
-	
-];
-</script>
 <div id="tabETFs" class="tabcontent">
 	<ul class="list-group">
 		<h3>Información General</h3>
@@ -853,12 +866,7 @@ arrEtfVariableIncomeDividend=[
 </div>
 
 <!---- Researches   OK---->
-<script>
-arrResearches=[
-{id:"ECONOMICS:USIJC"	,refDataTV:"ECONOMICS:USIJC"	,desc:"United States Initial Jobless Claims"},
-{id:"ECONOMICS:USCJC"	,refDataTV:"ECONOMICS:USCJC"	,desc:"United States Continuing Jobless Claims"},
-];
-</script>
+
 <div id="tabResearches" class="tabcontent">
 	<ul class="list-group">
 		<h3>Inflation</h3>
@@ -940,6 +948,10 @@ function setTabContentListTV(tabId, listTV, arrListTV){
  			    <th class="header-table" style="width: 15%;">Sector - Industry</th><th class="header-table" style="width: 50%;">Description</th></tr>`
 	
 	for (item of arrListTV) {
+		if (typeof item.refDataTV == 'undefined') {
+			item.refDataTV = item.id
+		}
+		
 		listTV.innerHTML += `<tr><td style="width: 180px;"><button type="button" class="flag" onclick="setFlag('${item.id}', '${item.refDataTV}', '${item.desc}');">&#11036;</button>`
 			+`&nbsp;<img src="" logoid="${item.refDataTV}" class="firstImage"/><img src="" class="secondImage"/>`
 			+`<span class="pointAndCall" onclick="liClick('${item.id}')" id="${item.id}" style="font-size: small;">${item.id}</span></td>`
