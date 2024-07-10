@@ -570,6 +570,7 @@ arrEtfIndices=[
 ];
 
 arrEtfFixedIncome=[
+{id:"NASDAQ:TLT"	,desc:"Ishares 20+ Year Treasury Bond ETF"},
 {id:"EURONEXT:CSH2"	,desc:"LYXOR UCITS ETF SMART CASH C-EUR, Paris (Money Market Euro)"},
 {id:"LSE:SMTC"		,desc:"LYXOR INDEX FUND LYXOR SMART CASH UCITS ETF C-USD, London (Money Market USD) (isin: LU1248511575)"},
 {id:"XETR:SYBR"		,desc:"SPDR B.1-10Y.USCB.DLUD, Xetra (USD)"},
@@ -1034,18 +1035,30 @@ function changeFlag(ticket, refDataTV, description, comment, charFlagOrig, charF
 	arrayOrig = charFlagOrig===CHAR_RED? arrayRed : charFlagOrig===CHAR_GREEN? arrayGreen : charFlagOrig===CHAR_BLUE? arrayBlue : arrayPurple;
 	arrayDest = charFlagTarget===CHAR_RED? arrayRed : charFlagTarget===CHAR_GREEN? arrayGreen : charFlagTarget===CHAR_BLUE? arrayBlue : arrayPurple;
 	if (charFlagOrig !== charFlagTarget) deleteItemInArray(arrayOrig,ticket);
-	document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = charFlagTarget;
+	setFlagToTicket(ticket, charFlagTarget)
 	setItemInArray(arrayDest, ticket, refDataTV, description, comment.replaceAll(String.fromCharCode(10), '<br>'));
 	saveFlags();
 	setAllFlagsOnPage();
 	callsTVForTab(currentTab)
 }
 
+function setFlagToTicket(ticket, charFlag) {
+	
+	let nodeList = document.querySelectorAll("#"+ticket.replaceAll(":", "\\:").replaceAll("!", "\\!"));
+	for (let i = 0; i < nodeList.length; i++) {
+	  nodeList[i].previousElementSibling.previousElementSibling.previousElementSibling.innerText = charFlag;
+	}
+}
+
+function getFlagOfTicket(ticket) {
+	return document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText
+}
+
 function setFlagTableContent(listId, array, charFlag) {
 	var colorList = document.getElementById(listId);
 	if (array.length>0){
 		for (ticket of array) {
-			document.getElementById(ticket.id).previousElementSibling.previousElementSibling.previousElementSibling.innerText = charFlag;
+			setFlagToTicket(ticket.id, charFlag)
 		}
 		colorList.innerHTML = `<tr style="font-size: small;"><th style="width: 15%;" class="header-table">Name</th><th style="width: 15%;" class="header-table">Change</th>
 		<th style="width: 3%;" class="header-table">Ch.M</th><th style="width: 3%;" class="header-table">Ch.Y</th>
@@ -1091,7 +1104,7 @@ function moveItem(charFlag, idxSource, idxTarget){
 }
 
 function removeFlag(ticket){
-	document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = CHAR_WHITE;
+	setFlagToTicket(ticket, CHAR_WHITE)
 	deleteItemInArray(arrayRed,ticket);
 	deleteItemInArray(arrayGreen,ticket);
 	deleteItemInArray(arrayBlue,ticket);
@@ -1102,23 +1115,23 @@ function removeFlag(ticket){
 }
 
 function setFlag(ticket, refDataTV, description){
-	if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == CHAR_WHITE) {  // WHITE pasa a RED
-		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = CHAR_RED;
+	if (getFlagOfTicket(ticket) == CHAR_WHITE) {  // WHITE pasa a RED
+		setFlagToTicket(ticket, CHAR_RED)
 		setItemInArray(arrayRed, ticket, refDataTV, description, '');
-	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == CHAR_RED) { // RED pasa a GREEN
-		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = CHAR_GREEN;
+	} else if (getFlagOfTicket(ticket) == CHAR_RED) { // RED pasa a GREEN
+		setFlagToTicket(ticket, CHAR_GREEN)
 		setItemInArray(arrayGreen, ticket, refDataTV, description, '');
 		deleteItemInArray(arrayRed,ticket);
-	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == CHAR_GREEN) { // GREEN pasa a BLUE
-		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = CHAR_BLUE;
+	} else if (getFlagOfTicket(ticket) == CHAR_GREEN) { // GREEN pasa a BLUE
+		setFlagToTicket(ticket, CHAR_BLUE)
 		setItemInArray(arrayBlue, ticket, refDataTV, description, '');
 		deleteItemInArray(arrayGreen,ticket);
-	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == CHAR_BLUE) { // BLUE pasa a PURPLE
-		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = CHAR_PURPLE;
+	} else if (getFlagOfTicket(ticket) == CHAR_BLUE) { // BLUE pasa a PURPLE
+		setFlagToTicket(ticket, CHAR_PURPLE)
 		setItemInArray(arrayPurple, ticket, refDataTV, description, '');
 		deleteItemInArray(arrayBlue,ticket);
-	} else if (document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText == CHAR_PURPLE) { // PURPLE pasa a WHITE
-		document.getElementById(ticket).previousElementSibling.previousElementSibling.previousElementSibling.innerText = CHAR_WHITE;
+	} else if (getFlagOfTicket(ticket) == CHAR_PURPLE) { // PURPLE pasa a WHITE
+		setFlagToTicket(ticket, CHAR_WHITE)
 		deleteItemInArray(arrayPurple,ticket);
 	}	
 	saveFlags();
