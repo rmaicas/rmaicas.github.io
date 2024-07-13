@@ -1044,7 +1044,7 @@ function changeFlag(ticket, refDataTV, description, comment, charFlagOrig, charF
 
 function setFlagToTicket(ticket, charFlag) {
 	
-	let nodeList = document.querySelectorAll("#"+ticket.replaceAll(":", "\\:").replaceAll("!", "\\!"));
+	let nodeList = document.querySelectorAll("#"+ticket.replaceAll(":", "\\:").replaceAll("!", "\\!").replaceAll("/", "\\/"));
 	for (let i = 0; i < nodeList.length; i++) {
 	  nodeList[i].previousElementSibling.previousElementSibling.previousElementSibling.innerText = charFlag;
 	}
