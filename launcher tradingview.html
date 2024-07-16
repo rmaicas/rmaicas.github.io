@@ -317,10 +317,11 @@ arrYields=[
 
 <!---- Basic Materials   OK---->
 arrBasicMaterialsIndices=[
-{id:"AMEX:DBC"		,desc:"Invesco DB Commodity Index Tracking Fund (Europa: LSE:ICOM - ISHARES VI PLC DIVERSIFIED COMMODITY SWAP UCIT USD(GBP) (isin: IE00BDFL4P12))"},
+{id:"AMEX:DBC"		,desc:"Invesco DB Commodity Index Tracking Fund (Europa: LSE:ICOM)"},
 {id:"AMEX:DBB"		,desc:"Metales Bases"},
 {id:"AMEX:DBP"		,desc:"Metales Preciosos"}, 		
 {id:"DJ:DJCIGR" 	,desc:"Dow Jones Commodity Index Grains"},
+{id:"LSE:ICOM" 		,desc:"ISHARES VI PLC DIVERSIFIED COMMODITY SWAP UCIT USD(GBP) (isin: IE00BDFL4P12)"},
 ];
 
 arrBasicMaterialsTimming=[
@@ -390,7 +391,7 @@ arrSectors=[
 {id:"AMEX:XLK"			,desc:"Technology"},
 {id:"AMEX:XLP"			,desc:"Consumer Staples"},
 {id:"AMEX:XLU"			,desc:"Utilities"},
-{id:"AMEX:XLV"			,desc:"Health Care"},
+{id:"AMEX:XLV"			,desc:"Health Care (SPDR S&P US Health Care Select Sector UCITS ETF)"},
 {id:"AMEX:XLY"			,desc:"Consumer Discretionary"},
 {id:"AMEX:GDX"			,desc:"VanEck Gold Miners ETF"},
 {id:"AMEX:XTN"			,desc:"SPDR S&P Transportation ET"},
@@ -429,6 +430,7 @@ arrUsaStocks=[
 {id:"NYSE:F",		desc:"Ford Mtr Co Del"},
 {id:"NASDAQ:FCEL",	desc:"FuelCell Energy, Inc."},
 {id:"NYSE:FDX",		desc:"FedEx Corporation"},
+{id:"NASDAQ:FTNT",	desc:"Empresa de Ciberseguridad"},
 {id:"NYSE:GE",		desc:"General Electric Company"},
 {id:"NASDAQ:GILD",	desc:"Gilead Sciences, Inc."},
 {id:"NYSE:GIS",		desc:"General Mills, Inc."},
@@ -455,7 +457,7 @@ arrUsaStocks=[
 {id:"NASDAQ:MSFT",	desc:"Microsoft Corp."},
 {id:"NASDAQ:MU",	desc:"Micron Technology, Inc."},
 {id:"NYSE:NEE",		desc:"NextEra Energy, Inc. [Sector: Utilities]"},
-{id:"NYSE:NEM",		desc:"Newmont Corporation (La compañía minera estadounidense, no solo fue la mayor productora mundial de oro en 2020, sino que ocupó el cuarto puesto en cuanto a producción de plata."},
+{id:"NYSE:NEM",		desc:"Newmont Corporation (Minera de oro y plata, no solo fue la mayor productora mundial de oro en 2020, sino que ocupó el cuarto puesto en cuanto a producción de plata."},
 {id:"NASDAQ:NFLX",	desc:"Netflix, Inc."},
 {id:"NYSE:NIO",		desc:"NIO Inc."},
 {id:"NYSE:NKE",		desc:"Nike, Inc."},
@@ -481,7 +483,7 @@ arrUsaStocks=[
 {id:"NYSE:T",		desc:"AT&T Inc."},
 {id:"NASDAQ:TLRY",	desc:"Tilray Brands, Inc."},
 {id:"NASDAQ:TMUS",	desc:"T-Mobile US, Inc."},
-{id:"NYSE:TRU",		desc:"TransUnion) [Servicio de consulta de estados financiera. Se lo considera como un lead indicator de la economia]"},
+{id:"NYSE:TRU",		desc:"TransUnion [Servicio de consulta de estados financiera. Se lo considera como un lead indicator de la economia]"},
 {id:"NASDAQ:TSLA",	desc:"Tesla, Inc."},
 {id:"NYSE:TSM",		desc:"Taiwan Semiconductor Manufacturing Company Ltd."},
 {id:"NASDAQ:TXN",	desc:"Texas Instruments Incorporated"},
@@ -590,15 +592,9 @@ arrEtfFixedIncome=[
 ];
 
 arrEtfVariableIncome=[
-{id:"MIL:VUAA"		,desc:"VANGUARD S&P 500 UCITS ETF ACC, Milano"},
-{id:"XETR:EUNL"		,desc:"iShares Core MSCI World UCITS ETF USD (Acc), Xetra"},
-{id:"XETR:IS3N"		,desc:"iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc), Xetra"},
-{id:"EURONEXT:EMIM"	,desc:"ISHARES CORE MSCI EMERGING MARKETS IMI UCITS ETF, Amsterdam (Interactive Brokers)"},
-{id:"LSE:IUSZ"		,desc:"iShares Core FTSE 100 UCITS ETF (Dist), London"},
-{id:"XETR:SXRV"		,desc:"iShares Nasdaq 100 UCITS ETF (Acc), Xetra"},
-{id:"AMEX:IGV"		,desc:"iShares Expanded Tech-Software Sector ETF (Software USA), USA"},
-{id:"NASDAQ:IBB"	,desc:"IShares Biotechnology ETF, USA. (EUR: XETR:2B70 - IShares NASDAQ US Biotechnology UCITS ETF (isin: IE00BYXG2H39)"},
 {id:"XETR:2B70"		,desc:"IShares NASDAQ US Biotechnology UCITS ETF (isin: IE00BYXG2H39)"},
+{id:"EURONEXT:EMIM"	,desc:"ISHARES CORE MSCI EMERGING MARKETS IMI UCITS ETF, Amsterdam (Interactive Brokers)"},
+{id:"XETR:EUNL"		,desc:"iShares Core MSCI World UCITS ETF USD (Acc), Xetra"},
 {id:"XETR:EXI5"		,desc:"ISHARES STOXX EUROPE 600 REAL ESTATE UCITS ETF (DE), Xetra"},
 {id:"XETR:EXV6"		,desc:"ISHARES STOXX EUROPE 600 BASIC RESOURCES UCITS ETF (DE), Xetra"},
 {id:"XETR:EXV5"		,desc:"ISHARES STOXX EUROPE 600 AUTOMOBILES & PARTS UCITS ETF (DE), Xetra"},
@@ -616,15 +612,22 @@ arrEtfVariableIncome=[
 {id:"XETR:EXV3"		,desc:"ISHARES STOXX EUROPE 600 TECHNOLOGY UCITS ETF (DE), Xetra"},
 {id:"XETR:EXV9"		,desc:"ISHARES STOXX EUROPE 600 TRAVEL & LEISURE UCITS ETF (DE), Xetra"},
 {id:"XETR:EXH8"		,desc:"ISHARES STOXX EUROPE 600 RETAIL UCITS ETF (DE), Xetra"},
+{id:"LSE:HEAL"		,desc:"ISHARES IV PLC HEALTHCARE INNOVATION UCITS ETF ACC, London"},
+{id:"NASDAQ:IBB"	,desc:"IShares Biotechnology ETF, USA. (EUR: XETR:2B70 - IShares NASDAQ US Biotechnology UCITS ETF (isin: IE00BYXG2H39)"},
+{id:"AMEX:IGV"		,desc:"iShares Expanded Tech-Software Sector ETF (Software USA), USA"},
 {id:"XETR:IQQH"		,desc:"ISHARES GLOBAL CLEAN ENERGY UCITS ETF, Xetra"},
 {id:"XETR:IQQQ"		,desc:"ISHARES GLOBAL WATER UCITS ETF, Xetra"},
-{id:"XETR:LYPG"		,desc:"LYXOR MSCI WORLD INFORMATION TECHNOLOGY TR UCITS ETF, Xetra"},
-{id:"XETR:XDW0"		,desc:"XTRACKERS MSCI WORLD ENERGY UCITS ETF, Xetra"},
-{id:"LSE:HEAL"		,desc:"ISHARES IV PLC HEALTHCARE INNOVATION UCITS ETF ACC, London"},
-{id:"NASDAQ:SOXX"	,desc:"IShares Semiconductor ETF, USA"},
-{id:"AMEX:REET"		,desc:"IShares Trust iShares Global REIT ETF, USA"},
+{id:"XETR:IS3N"		,desc:"iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc), Xetra"},
+{id:"LSE:IUSZ"		,desc:"iShares Core FTSE 100 UCITS ETF (Dist), London"},
 {id:"AMEX:JETS"		,desc:"U.S. Global Jets ETF, USA"},
+{id:"XETR:LYPG"		,desc:"LYXOR MSCI WORLD INFORMATION TECHNOLOGY TR UCITS ETF, Xetra"},
+{id:"AMEX:REET"		,desc:"IShares Trust iShares Global REIT ETF, USA"},
 {id:"AMEX:REM"		,desc:"Mortgage Real Estate, USA"},
+{id:"XETR:SXRV"		,desc:"iShares Nasdaq 100 UCITS ETF (Acc), Xetra"},
+{id:"MIL:VUAA"		,desc:"VANGUARD S&P 500 UCITS ETF ACC, Milano"},
+{id:"XETR:XDW0"		,desc:"XTRACKERS MSCI WORLD ENERGY UCITS ETF, Xetra"},
+{id:"NASDAQ:SOXX"	,desc:"IShares Semiconductor ETF, USA"},
+{id:"AMEX:XLRE"		,desc:"Real Estate, USA (VNQ (Vanguard Real Estate Index Fund ETF Shares))"},
 {id:"XETR:ZPRX"		,desc:"SPDR MSCI Europe Small Cap Value Weighted UCITS ETF (isin: IE00BSPLC298), Xetra"},
 ];
 
