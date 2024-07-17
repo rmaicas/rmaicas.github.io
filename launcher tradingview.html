@@ -966,7 +966,7 @@ function onLoad() {
 
 function setTabContentListTV(tabId, listTV, arrListTV){
 	var listTV = document.getElementById(listTV);
-	listTV.innerHTML += `<tr style="font-size: small;"><th class="header-table" style="width: 10%;">Name</th><th class="header-table" style="width: 14%;">Change</th><th class="header-table" style="width: 4%;">Ch.M</th><th class="header-table" style="width: 4%;">Ch.Y</th><th class="header-table" style="width: 3%;">DPS(FY)</th>
+	listTV.innerHTML += `<tr style="font-size: small;"><th class="header-table" style="width: 10%;">Name</th><th class="header-table" style="width: 14%;">Change</th><th class="header-table" style="width: 4%;">Ch.M</th><th class="header-table" style="width: 4%;">Ch.Y</th><th class="header-table" style="width: 3%;">DPS(fy)</th>
  			    <th class="header-table" style="width: 15%;">Sector - Industry</th><th class="header-table" style="width: 50%;">Description</th></tr>`
 	
 	for (item of arrListTV) {
@@ -1083,17 +1083,23 @@ function setFlagTableContent(listId, array, charFlag) {
 			setFlagToTicket(ticket.id, charFlag)
 		}
 		colorList.innerHTML = `<tr style="font-size: small;"><th style="width: 15%;" class="header-table">Name</th><th style="width: 14%;" class="header-table">Change</th>
-		<th style="width: 2%;" class="header-table">Ch.M</th><th style="width: 2%;" class="header-table">Ch.Y</th><th style="width: 2%;" class="header-table">DPS(FY)</th>
+		<th style="width: 2%;" class="header-table">Ch.M</th><th style="width: 2%;" class="header-table">Ch.Y</th><th style="width: 2%;" class="header-table">DPS(fy)</th>
 		<th style="width: 35%;" class="header-table">Description</th><th style="width: 24%;" class="header-table">Comment</th><th style="width: 2%;" class="header-table"></th><th style="width: 1%;" class="header-table"><th style="width: 1%;" class="header-table"><th style="width: 1%;" class="header-table"></th></tr>`
 		for(var i = 0; i < array.length; i++) {
 			var item = array[i];
+			if ((typeof item.refDataTV == 'undefined') || (item.refDataTV == 'undefined') || (item.refDataTV == '')) {
+				item.refDataTV = item.id
+			}
+			if ((typeof item.desc == 'undefined') || (item.desc == 'undefined')){
+				item.desc = ""
+			}
 			colorList.innerHTML += `<tr><td style="width: 160px;">&nbsp;<img src="" logoid="${item.refDataTV}" class="firstImage"/><img src="" class="secondImage"/>`
 				+`<span class="pointAndCall" onclick="liClick('`+item.id+`')" style="font-size: small;">`+item.id+`</span></td>`
 				+`<td style="width: 220px; text-align: right;"> <span style="font-size: xx-small;">`+ (item.id!=item.refDataTV?item.refDataTV:``)+`</span>&nbsp;<span class="tabNotes" refDataTV="`+item.refDataTV+`" style="font-size: small;"></span></td>`
 				+`<td style="font-size: x-small; text-align: right;" refMonthlyDataTV="`+item.refDataTV+`"></td>`
 				+`<td style="font-size: x-small; text-align: right;" refYearlyDataTV="`+item.refDataTV+`"></td>`
 				+`<td style="font-size: x-small; text-align: right;" refDPS="`+item.refDataTV+`"></td>`
-				+`<td style="font-size: x-small;">${item.desc}</td>`
+				+`<td style="font-size: x-small;" refDescription="${item.refDataTV}" additionalDescription="${item.desc}"></td>`
 				+`<td><div style="background-color: midnightblue;" contenteditable onblur="changeFlag( '${item.id}', '${item.refDataTV}', '${item.desc}', innerText, '${charFlag}', '${charFlag}')">${item.comment}</div></td>`
 				+`<td style="font-size: x-small; text-align: right;" >
 					<select id="${'select_'+item.id}" onChange="changeFlag( '${item.id}', '${item.refDataTV}', '${item.desc}', '${item.comment}', '${charFlag}', document.getElementById('${'select_'+item.id}').value)" style="border: 0;background-color: transparent;color: lightgray;">
@@ -1258,7 +1264,7 @@ const callApiTV = async (symbol) => {
 					if ((additionalDescription===undefined) || (additionalDescription==="")){
 						item.innerHTML = `${description}`;
 					} else {
-						item.innerHTML = `${description} (${item.getAttribute("additionalDescription")})`;
+						item.innerHTML = `${description} (${additionalDescription})`;
 					}
 				}
 			}
@@ -1275,8 +1281,9 @@ const callApiTV = async (symbol) => {
 		} else {
 			arrDescription = document.querySelectorAll('[refDescription="'+symbol+'"]');
 			for (item of arrDescription) {
-				if ((item.getAttribute("additionalDescription")!=undefined) && (item.getAttribute("additionalDescription")!=="")){
-					item.innerHTML = `(${item.getAttribute("additionalDescription")})`;
+				additionalDescription = item.getAttribute("additionalDescription")
+				if ((additionalDescription!=undefined) && (additionalDescription!=="")){
+					item.innerHTML = `(${additionalDescription})`;
 				}
 			}
 		}
