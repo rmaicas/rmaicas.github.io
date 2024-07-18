@@ -169,11 +169,13 @@ arrIndices=[
 {id:"TVC:SX5E"			,desc:""},
 {id:"EURONEXT:PX1"		,desc:"(no volume)"},
 {id:"TVC:UKX"			,desc:"(Fuertemente asociado con mineras)"},
+{id:"OANDA:EU50EUR"		,desc:""},
 {id:"XETR:VGWL"			,desc:"(IE00B3RBWM25: VANGUARD FTSE ALL-WORLD UCITS ETF)"},
 {id:"TVC:IBEX35"		,desc:""},
 {id:"EURONEXT:MIB"		,desc:"Indice Bolsa de Milan, Italia"},
 {id:"TVC:AEX"			,desc:"Indice Paises Bajos"},
-{id:"OSE:NK2251!"		,desc:"ETF c/cobertura divisa:WisdomTree Japan Equity UCITS ETF EUR Hedged Acc [IE00BYQCZJ13-WTIF]"},
+{id:"TVC:NI225"			,desc:""}, 	
+{id:"OSE:NK2251!"		,desc:"EUR: ETF c/cobertura divisa:WisdomTree Japan Equity UCITS ETF EUR Hedged Acc [IE00BYQCZJ13-WTIF]"},
 {id:"SSE:000016"		,desc:"(Top 50 companies of Shanghai Stock Exchange)" ,refDataTV:"AMEX:AFTY"},
 {id:"HKEX:HSI1!"		,desc:"(Hong Kong Stock Exchange)"},
 {id:"XETR:ICGA"			,desc:"(isin: IE00BJ5JPG56)"},
@@ -197,6 +199,7 @@ arrIndices=[
 {id:"NSE:NIFTY"			,desc:""},
 {id:"MIL:XNIF"			,desc:"India"},
 ];
+
 
 <!---- Market Timming   OK---->
 arrMarketTimmingStocks=[
@@ -576,16 +579,6 @@ arrCanadaStocks=[
 ];
 
 <!---- ETFs   ---->
-arrEtfIndices=[
-{id:"XETR:DAX"		,desc:""},
-{id:"OANDA:EU50EUR"	,desc:""},
-{id:"TVC:NI225"		,desc:""}, 		
-{id:"TVC:UKX"		,desc:"(Mineras)"},
-{id:"TVC:IBEX35"	,desc:""},
-{id:"AMEX:EWZ"		,desc:"Brazil"},
-
-	
-];
 
 arrEtfFixedIncome=[
 {id:"NASDAQ:TLT"	,desc:"LSE:DTLA   ISHARES IV PLC ISH $ T BND 20+YR ETF USD ACC (isin: IE00BFM6TC58)"},
@@ -872,9 +865,6 @@ arrResearches=[
 		<h4>Caracteristicas Sectores</h4>
 		<li>REIT: Se manejan con mucha deuda, por lo tanto, si suben los intereses esto les afecta mas.</li>
 	</ul>
-	
-	<h3>Indices</h3>
-	<table class="list-group" id="etfIndicesListTV"></table>
 
 	<h3>Fixed Income</h3>
 	<table class="list-group" id="etfFixedIncomeListTV"></table>
@@ -952,7 +942,6 @@ function onLoad() {
 	setTabContentListTV("tabWorldStocks", "chinaStocksListTV", arrChinaStocks);
 	setTabContentListTV("tabWorldStocks", "europeStocksListTV", arrEuropeStocks);
 	setTabContentListTV("tabWorldStocks", "canadaStocksListTV", arrCanadaStocks);
-	setTabContentListTV("tabETFs", "etfIndicesListTV", arrEtfIndices);
 	setTabContentListTV("tabETFs", "etfFixedIncomeListTV", arrEtfFixedIncome);
 	setTabContentListTV("tabETFs", "etfVariableIncomeListTV", arrEtfVariableIncome);
 	setTabContentListTV("tabETFs", "etfVariableIncomeDividendListTV", arrEtfVariableIncomeDividend);
