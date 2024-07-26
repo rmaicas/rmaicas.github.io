@@ -1182,7 +1182,7 @@ function restoreLocalStorageFromClipboard() {
 
 const callApiTV = async (symbol) => {
 	if ((symbol!= null) && (symbol!=="")){
-		const response = await fetch('https://scanner.tradingview.com/symbol?symbol='+symbol+'&fields=close,change,logoid,description,price_52_week_high,price_52_week_low,sector,industry,country,market,Low.1M,High.1M,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y,Perf.YTD,dps_common_stock_prim_issue_fy,Recommend.All,average_volume_10d_calc,average_volume_30d_calc,nav_discount_premium,open_interest&no_404=true');
+		const response = await fetch('https://scanner.tradingview.com/symbol?symbol='+symbol+'&fields=close,change,logoid,description,price_52_week_high,price_52_week_low,sector,industry,country,market,Low.1M,High.1M,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y,Perf.YTD,dps_common_stock_prim_issue_fy,dividend_yield_recent,Recommend.All,average_volume_10d_calc,average_volume_30d_calc,nav_discount_premium,open_interest&no_404=true');
 		const jsonResponse = await response.json(); //extract JSON from the http response
 		if (jsonResponse!=null){
 			// do something with jsonResponse
@@ -1232,8 +1232,13 @@ const callApiTV = async (symbol) => {
 					dps = +(jsonResponse["dps_common_stock_prim_issue_fy"]) / +(jsonResponse["close"]) *100
 					item.innerHTML = `${dps.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}%`;
 					item.style.color="yellow";
+				} else if (jsonResponse["dividend_yield_recent"]!=null){
+					dps = +(jsonResponse["dividend_yield_recent"])
+					item.innerHTML = `<i style="color: lightgray;">fw:</i> ${dps.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}%`;
+					item.style.color="yellow";
 				}
 			}
+			
 			
 			arrLogo = document.querySelectorAll('[logoid="'+symbol+'"]');
 			for (item of arrLogo) {
