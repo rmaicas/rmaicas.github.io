@@ -958,7 +958,7 @@ function onLoad() {
 
 function setTabContentListTV(tabId, listTV, arrListTV){
 	var listTV = document.getElementById(listTV);
-	listTV.innerHTML += `<tr style="font-size: small;"><th class="header-table" style="width: 10%;">Name</th><th class="header-table" style="width: 14%;">Change</th><th class="header-table" style="width: 4%;">Ch.M</th><th class="header-table" style="width: 4%;">Ch.Y</th><th class="header-table" style="width: 3%;">DPS(fy)</th>
+	listTV.innerHTML += `<tr style="font-size: small;"><th class="header-table" style="width: 10%;">Name</th><th class="header-table" style="width: 14%;">Change</th><th class="header-table" style="width: 4%;">Ch.M</th><th class="header-table" style="width: 4%;">Ch.Y</th><th class="header-table" style="width: 3%;">DPS(fw)</th>
  			    <th class="header-table" style="width: 15%;">Sector - Industry</th><th class="header-table" style="width: 50%;">Description</th></tr>`
 	
 	for (item of arrListTV) {
@@ -1075,7 +1075,7 @@ function setFlagTableContent(listId, array, charFlag) {
 			setFlagToTicket(ticket.id, charFlag)
 		}
 		colorList.innerHTML = `<tr style="font-size: small;"><th style="width: 15%;" class="header-table">Name</th><th style="width: 14%;" class="header-table">Change</th>
-		<th style="width: 2%;" class="header-table">Ch.M</th><th style="width: 2%;" class="header-table">Ch.Y</th><th style="width: 2%;" class="header-table">DPS(fy)</th>
+		<th style="width: 2%;" class="header-table">Ch.M</th><th style="width: 2%;" class="header-table">Ch.Y</th><th style="width: 2%;" class="header-table">DPS(fw)</th>
 		<th style="width: 35%;" class="header-table">Description</th><th style="width: 24%;" class="header-table">Comment</th><th style="width: 2%;" class="header-table"></th><th style="width: 1%;" class="header-table"><th style="width: 1%;" class="header-table"><th style="width: 1%;" class="header-table"></th></tr>`
 		for(var i = 0; i < array.length; i++) {
 			var item = array[i];
@@ -1228,13 +1228,9 @@ const callApiTV = async (symbol) => {
 			
 			arrDPS = document.querySelectorAll('[refDPS="'+symbol+'"]');
 			for (item of arrDPS) {
-				if (jsonResponse["dps_common_stock_prim_issue_fy"]!=null){
-					dps = +(jsonResponse["dps_common_stock_prim_issue_fy"]) / +(jsonResponse["close"]) *100
-					item.innerHTML = `${dps.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}%`;
-					item.style.color="yellow";
-				} else if (jsonResponse["dividend_yield_recent"]!=null){
+				if (jsonResponse["dividend_yield_recent"]!=null){
 					dps = +(jsonResponse["dividend_yield_recent"])
-					item.innerHTML = `<i style="color: lightgray;">fw:</i> ${dps.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}%`;
+					item.innerHTML = `${dps.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}%`;
 					item.style.color="yellow";
 				}
 			}
