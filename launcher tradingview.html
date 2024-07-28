@@ -211,7 +211,7 @@ arrMarketTimmingStocks=[
 {id:"CBOE:VX2!-CBOE:VX1!"	,desc:"(Si hay contango (>0, , VX2>VX1) -> OK, normal. Si hay backwardation (<0, VX2<VX1)-> Mal, nervios)"}, 		
 {id:"CBOE:VIX/CBOE:VIX3M"	,desc:"Volatilidad 1 mes / Volatilidad 3 meses (Por encima de 1 => DANGER!!!)"},
 {id:"CBOE:VIX3M/CBOE:VIX"	,desc:"VRatio: is the ratio of VIX3M and VIX. (Arriba 1.1 -> Bear market, luego decrece y llega a estar debajo de 1)"},
-{id:"AMEX:SPY/TVC:DXY"		,desc:"SP500 / Dollar (Cortos cuando el ratio perfora la media ponderada de 30 semanas y largos cuando el ratio supera la media)"},
+{id:"AMEX:SPY/TVC:DXY"		,desc:"SP500 / Dollar (Cortos cuando el ratio perfora la media ponderada de 30 semanas y tenga pendiente negativa. Largos cuando el ratio supera la media y tiene tendencia positiva. Si distancia entre el ratio y la media ponderada de 30W >12%, cerrar cobertura bajista.)"},
 {id:"USI:PCCE"				,desc:"Put / Call Ratio Equities"},
 {id:"INDEX:HIGN-INDEX:LOWN"	,desc:"New Highs - New Lows (NYSE market) ( >0 = bullish / <0 = bearish)"},
 {id:"NASDAQ:SDEX"			,desc:"NATIONS SKEWDEX (Option skew is not a measure of fear or implied volatility. It’s a measure of how much risk market participants are willing to bear, that is how far investors are willing to let markets fall before hedges offer protection.)"},
