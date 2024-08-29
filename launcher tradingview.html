@@ -557,6 +557,15 @@ arrEtfVariableIncomeDividend=[
 {id:"LSE:IEDL"		,desc:"Dividendos aceptables (4.5% aprox) con un crecimiento sostenido (Ter: 0.25%), London"},
 ];
 
+arrEtfRealEstate=[
+{id:"LSE:XRES"		,desc:"(isin: IE00BYM8JD58), London"},
+{id:"LSE:IUKP"		,desc:"(isin: IE00B1TXLS18), London"},
+{id:"XETR:D5BK"		,desc:"(isin: LU0489337690), Xetra"},
+{id:"LSE:IASP"		,desc:"(isin: IE00B1FZS244), London"},
+{id:"EURONEXT:EPRA"	,desc:"(isin: LU1437018838), Paris"},
+{id:"LSE:HPRO"		,desc:"(isin: IE00B5L01S80), London.  Atención en Xetra tambien hay con buen volumen, habria que ver los precios entre ambos"},
+];
+
 <!---- Researches   OK---->
 arrResearches=[
 {id:"ECONOMICS:USIJC", desc:""},
@@ -928,6 +937,9 @@ select option {
 
 	<h3>High Dividends</h3>
 	<table class="list-group" id="etfVariableIncomeDividendListTV"></table>
+	
+	<h3>Real Estate</h3>
+	<table class="list-group" id="etfRealEstateListTV"></table>
 
 </div>
 
@@ -1006,6 +1018,7 @@ function onLoad() {
 	setTabContentListTV("tabETFs", "etfFixedIncomeListTV", arrEtfFixedIncome);
 	setTabContentListTV("tabETFs", "etfVariableIncomeListTV", arrEtfVariableIncome);
 	setTabContentListTV("tabETFs", "etfVariableIncomeDividendListTV", arrEtfVariableIncomeDividend);
+	setTabContentListTV("tabETFs", "etfRealEstateListTV", arrEtfRealEstate);
 	setTabContentListTV("tabResearches", "researchesListTV", arrResearches);
 	getFlags();
 	setAllFlagsOnPage();
