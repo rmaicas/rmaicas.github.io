@@ -54,6 +54,11 @@ arrIndices = [
 {id:"MIL:XNIF"			,desc:"India"},
 ];
 
+arrEtfIndices = [
+{id:"XETR:XDN0", desc:"", refDataTV:""},
+];
+	
+
 
 <!---- Market Timming   OK---->
 arrMarketTimmingStocks=[
@@ -804,6 +809,10 @@ select option {
 	</div>
 	<h4>Indices</h4>
 	<table class="list-group" id="indicesListTV"></table>
+
+	<h4>ETFs Indices</h4>
+	<table class="list-group" id="etfIndicesListTV"></table>
+	
 	
 </div>
 
@@ -1000,6 +1009,7 @@ var currentTab='';
 function onLoad() {
 	getNote();
 	setTabContentListTV("tabIndices", "indicesListTV", arrIndices);
+	setTabContentListTV("tabIndices", "etfIndicesListTV", arrEtfIndices);
 	setTabContentListTV("tabMarketTimming", "marketTimmingStocksListTV", arrMarketTimmingStocks);
 	setTabContentListTV("tabMarketTimming", "marketTimmingBondsListTV", arrMarketTimmingBonds);
 	setTabContentListTV("tabMarketTimming", "marketTimmingEconomyListTV", arrMarketTimmingEconomy);
