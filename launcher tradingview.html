@@ -638,6 +638,10 @@ table, th, td {
   color: whitesmoke;
 }
 
+.prTableRow:hover {
+  background-color: navy;
+}
+
 body {
 	font-family: Arial;
 	background-color: #161212;
@@ -1054,7 +1058,7 @@ function setTabContentListTV(tabId, listTV, arrListTV){
 			item.refDataTV = item.id
 		}
 		
-		listTV.innerHTML += `<tr><td style="width: 180px;"><button type="button" class="flag" onclick="setFlag('${item.id}', '${item.refDataTV}', '${item.desc}');">&#11036;</button>`
+		listTV.innerHTML += `<tr class="prTableRow"><td style="width: 180px;"><button type="button" class="flag" onclick="setFlag('${item.id}', '${item.refDataTV}', '${item.desc}');">&#11036;</button>`
 			+`&nbsp;<img src="" logoid="${item.refDataTV}" class="firstImage"/><img src="" class="secondImage"/>`
 			+`<span class="pointAndCall" onclick="liClick('${item.id}')" id="${item.id}" style="font-size: small;">${item.id}</span></td>`
 			+`<td style="width: 220px; text-align: right;"> <span style="font-size: xx-small;">${(item.id!=item.refDataTV?item.refDataTV:'')}</span>&nbsp;<span class="${tabId}" refDataTV="${item.refDataTV}" style="font-size: small;"></span></td>`
@@ -1173,14 +1177,14 @@ function setFlagTableContent(listId, array, charFlag) {
 			if ((typeof item.desc == 'undefined') || (item.desc == 'undefined')){
 				item.desc = ""
 			}
-			colorList.innerHTML += `<tr><td style="width: 160px;">&nbsp;<img src="" logoid="${item.refDataTV}" class="firstImage"/><img src="" class="secondImage"/>`
+			colorList.innerHTML += `<tr class="prTableRow"><td style="width: 160px;">&nbsp;<img src="" logoid="${item.refDataTV}" class="firstImage"/><img src="" class="secondImage"/>`
 				+`<span class="pointAndCall" onclick="liClick('`+item.id+`')" style="font-size: small;">`+item.id+`</span></td>`
 				+`<td style="width: 220px; text-align: right;"> <span style="font-size: xx-small;">`+ (item.id!=item.refDataTV?item.refDataTV:``)+`</span>&nbsp;<span class="tabNotes" refDataTV="`+item.refDataTV+`" style="font-size: small;"></span></td>`
 				+`<td style="font-size: x-small; text-align: right;" refMonthlyDataTV="`+item.refDataTV+`"></td>`
 				+`<td style="font-size: x-small; text-align: right;" refYearlyDataTV="`+item.refDataTV+`"></td>`
 				+`<td style="font-size: x-small; text-align: right;" refDPS="`+item.refDataTV+`"></td>`
 				+`<td style="font-size: x-small;" refDescription="${item.refDataTV}" additionalDescription="${item.desc}"></td>`
-				+`<td><div style="background-color: midnightblue;" contenteditable onblur="changeFlag( '${item.id}', '${item.refDataTV}', '${item.desc}', innerText, '${charFlag}', '${charFlag}')">${item.comment}</div></td>`
+				+`<td><div style="background-color: #363535;color: gainsboro;" contenteditable onblur="changeFlag( '${item.id}', '${item.refDataTV}', '${item.desc}', innerText, '${charFlag}', '${charFlag}')">${item.comment}</div></td>`
 				+`<td style="font-size: x-small; text-align: right;" >
 					<select id="${'select_'+item.id}" onChange="changeFlag( '${item.id}', '${item.refDataTV}', '${item.desc}', '${item.comment}', '${charFlag}', document.getElementById('${'select_'+item.id}').value)" style="border: 0;background-color: transparent;color: lightgray;">
 						<option value="${CHAR_RED}"    ${charFlag == CHAR_RED? "selected":""}>${CHAR_RED}</option>
