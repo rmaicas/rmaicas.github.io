@@ -890,9 +890,11 @@ select option {
 			<button id="set" style="background-color: red;color: white;border-color: red;" onclick="saveNote()">SAVE</button>
 		</div>
 		<div style="width: 100%;">
-			<div style="width:40%;padding-top:10px;display: flex;float: left;">
+			<div style="width:40%;padding-top:10px;display: flex;float: left; flex-direction: column; place-content: center;">
 				<textarea style="max-width: 98%;background-color: lightgray;" name="note" cols="122" id="note" rows="40" onblur="saveNote()"></textarea>
+				<img src="Investing-Cycles-vs-Market-Cycle.jpg" alt="Investing-Cycles-vs-Market-Cycle.jpg" width="99%" >
 			</div>
+			
 			
 			<div style="width:60%;padding-top:10px;display: flex;float: left;">
 				<div class="flagList">
@@ -917,7 +919,8 @@ select option {
 					<label for="redList">&#128997; Red List:</label>
 					<table class="list-group" name="redList" id="redList" style="font-size: small;"></table>
 				</div>
-			</div>	
+			</div>
+						
 		</div>
 	</div>
 </div>
