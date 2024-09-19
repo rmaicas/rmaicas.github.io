@@ -107,7 +107,7 @@ arrMarketTimmingBonds=[
 {id:"TVC:MOVE"					,desc:""},
 {id:"AMEX:TIP"					,desc:"(10 YR Tips Yield = 10 YR yield - 10 YR Breakeven inflation rate (inflacion esperada a 10 años). (Sube -> inclinarse por valores de riesgo, Baja -> inclinarse por valores defensivos) (EUR: LSE:IDTP - ISHARES II PLC ISHARES USD TIPS UCITS ETF USD (ACC), ISIN: IE00B1FZSC47)"},
 {id:"AMEX:AGG/NASDAQ:IEF"		,desc:"(simula el comportamiento de los bonos de gobierno USA 7/10YRS(IEF) en el conjunto del universo de bonos (AGG))"},
-{id:"AMEX:LQD"					,desc:""},
+{id:"AMEX:LQD"					,desc:"Bonos Corporativos USA Investment Grade. EUR: LSE:VDPA"},
 {id:"AMEX:HYG"					,desc:'"bonos basura"'},
 ];
 
@@ -259,10 +259,13 @@ arrBasicMaterialsEtf=[
 	{id:"LSE:ICOM",		desc:"(GBP), London"},
 	{id:"MIL:NICK",		desc:"(isin: GB00B15KY211), Milano"},
 	{id:"XETR:NUKL",	desc:"(isin: IE000M7V94E1)"},
-	{id:"MIL:PHAG",		desc:"Milano"},
-	{id:"LSE:SGLD",		desc:"(isin:IE00B579F325) (TER:0.12%), London"},
+	{id:"MIL:PHAG",		desc:"Milano (isin: JE00B1VS3333. TER: 0.49%)"},
+	{id:"LSE:SSLN",		desc:"London (isin: IE00B4NCWG09. TER: 0.20%)"},
+	{id:"LSE:SGLD",		desc:"London (isin:IE00B579F325. TER:0.12%)"},
 	{id:"LSE:TINM",		desc:"ETF Estaño, London"},
 	{id:"XETR:XGDU",	desc:"Xetra"},
+	{id:"LSE:COPA", 	desc:"London (isin: GB00B15KXQ89. TER: 0.49%)"},
+	{id:"LSE:CRUD",		desc:"WTI OIL Futures, London (isin: GB00B15KXV33. TER: 0.49%)"},
 ];
 
 <!---- Sectors   OK---->
@@ -607,11 +610,12 @@ arrEtfFixedIncome=[
 	{id:"XETR:SXRM"		,desc:"Replicate the performance of the Benchmark Index (being the ICE U.S. Treasury 7-10 Year Bond Index), less the fees and expenses of the Fund. (Tar:0.07%, isin: IE00B3VWN518)"},
 	{id:"XETR:SYBR"		,desc:"Xetra (USD)"},
 	{id:"NASDAQ:TLT"	,desc:"LSE:DTLA   ISHARES IV PLC ISH $ T BND 20+YR ETF USD ACC (isin: IE00BFM6TC58)"},
-	{id:"XETR:VECA"		,desc:"isin: IE00BGYWT403, Xetra"},
+	{id:"XETR:VECA"		,desc:"Bonos Corporativos Europa, Xetra (isin: IE00BGYWT403. TER:0.09%)"},
 	{id:"XETR:VGEA"		,desc:"isin: IE00BH04GL39, Xetra"},
 	{id:"LSE:XDGU"		,desc:"(USD)"},
-	{id:"LSE:VDPA", 	desc:"(isin:IE00BGYWFK87)(USD)"},
-	{id:"LSE:XUHY", 	desc:"Bonos Corporativos de alto rendimiento (TER: 0.20%, isin: IE00BDR5HM97), London"},
+	{id:"LSE:VDPA", 	desc:"Bonos Corporativos USD en mercados emergentes y desarrollados con grado Investment Grade, London (isin:IE00BGYWFK87. TER:0.09%) (USD)"},
+	{id:"LSE:XUHY", 	desc:"Bonos Corporativos de alto rendimiento USD, London (isin: IE00BDR5HM97. TER: 0.20%)"},
+	{id:"XETR:XHYA",	desc:"Bonos Corporativos de alto Rendimiento EUR, Xetra (isin: LU1109943388. TER:0.20%)"},
 ];
 
 arrEtfVariableIncome=[
@@ -626,7 +630,7 @@ arrEtfVariableIncome=[
 {id:"XETR:EXV5"		,desc:"Xetra"},
 {id:"XETR:EXV1"		,desc:"Xetra"},
 {id:"XETR:EXH9"		,desc:"Xetra"},
-{id:"XETR:EXH1"		,desc:"Xetra"},
+{id:"XETR:EXH1"		,desc:"Xetra (isin: DE000A0H08M3. TER: 0.46%)"},
 {id:"XETR:EXH5"		,desc:"Xetra"},
 {id:"XETR:EXH2"		,desc:"Xetra"},
 {id:"XETR:EXH3"		,desc:"Xetra"},
@@ -645,7 +649,7 @@ arrEtfVariableIncome=[
 {id:"LSE:IEVL"		,desc:"Factor Value: Se enfoca en acciones europeas que están infravaloradas según métricas como el precio sobre el valor en libros (PBV) o el precio sobre ganancias (PER)"},
 {id:"AMEX:IGV"		,desc:"(Software USA), USA"},
 {id:"XETR:IQQH"		,desc:"Xetra"},
-{id:"XETR:IQQQ"		,desc:"Xetra"},
+{id:"XETR:IQQQ"		,desc:"Xetra (isin:IE00B1TXK627. TER:0.65%)"},
 {id:"XETR:IS3N"		,desc:"(Acc), Xetra (IE00BKM4GZ66)"},
 {id:"LSE:IUES"		,desc:"(Acc), London (isin: IE00B42NKQ00)"},
 {id:"LSE:IUSZ"		,desc:"(Dist), London"},
