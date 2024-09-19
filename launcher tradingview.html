@@ -66,7 +66,7 @@ arrEtfIndices = [
 <!---- Market Timming   OK---->
 arrMarketTimmingStocks=[
 	
-{id:"FRED:BAMLH0A0HYM2"		,desc:"Diferencia de rendimiento entre bonos no gubernamentales y los bonos gubernamentales. Medida del riesgo o stress de la economia. (Si baja, es probable que la bolsa suba y viceversa). Funciona como un indice de probabilidad de no pago de deuda"},
+{id:"FRED:BAMLH0A0HYM2"		,desc:"Diferencia de rendimiento entre bonos no gubernamentales y los bonos gubernamentales. Medida del riesgo o stress de la economia. (Si baja, es probable que la bolsa suba y viceversa)\nSi el Spread baja (los diferenciales de credito se estrechan)-> El apetito por el riesgo es mayor, OK. Si el Spread sube (diferenciales de credito se expanden)-> Apetito x riego se reduce, mal\nFunciona como un indice de probabilidad de no pago de deuda. El 7 puede funcionar como umbral de riesgo."},
 {id:"CBOE:VIX"				,desc:""},
 {id:"CBOE:VVIX"				,desc:""},
 {id:"TVC:VIX - NASDAQ:VOLI"	,desc:">2 Riesgo, <2 No Riesgo"},
@@ -99,7 +99,6 @@ arrMarketTimmingBonds=[
 {id:"TVC:US30Y"					,desc:""},
 {id:"TVC:US10Y-TVC:US03MY"		,desc:"US10Y-US03MY (Si cae debajo de cero --> RECESIÓN !!!) (Dicen que ahora se usa mas este que el 10Y-2Y)"},
 {id:"TVC:US10Y-TVC:US02Y"		,desc:"US10Y-US02Y (Si cae debajo de cero --> RECESIÓN !!!)"},
-{id:"FRED:BAMLH0A0HYM2"			,desc:"Si el Spread baja (los diferenciales de credito se estrechan)-> El apetito por el riesgo es mayor, OK. Si el Spread sube (diferenciales de credito se expanden)-> Apetito x riego se reduce, mal"},
 {id:"NASDAQ:SHY"				,desc:""},
 {id:"NASDAQ:IEF"				,desc:""},
 {id:"AMEX:TLH"					,desc:""},
