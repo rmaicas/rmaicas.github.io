@@ -66,7 +66,7 @@ arrEtfIndices = [
 <!---- Market Timming   OK---->
 arrMarketTimmingStocks=[
 	
-{id:"FRED:BAMLH0A0HYM2"		,desc:"ICE BofA US High Yield Index Option-Adjusted Spread. Diferencia de rendimiento entre bonos no gubernamentales y los bonos gubernamentales. Medida del riesgo de la economia. (Si baja, es probable que la bolsa suba y viceversa)"},
+{id:"FRED:BAMLH0A0HYM2"		,desc:"Diferencia de rendimiento entre bonos no gubernamentales y los bonos gubernamentales. Medida del riesgo o stress de la economia. (Si baja, es probable que la bolsa suba y viceversa). Funciona como un indice de probabilidad de no pago de deuda"},
 {id:"CBOE:VIX"				,desc:""},
 {id:"CBOE:VVIX"				,desc:""},
 {id:"TVC:VIX - NASDAQ:VOLI"	,desc:">2 Riesgo, <2 No Riesgo"},
@@ -99,7 +99,7 @@ arrMarketTimmingBonds=[
 {id:"TVC:US30Y"					,desc:""},
 {id:"TVC:US10Y-TVC:US03MY"		,desc:"US10Y-US03MY (Si cae debajo de cero --> RECESIÓN !!!) (Dicen que ahora se usa mas este que el 10Y-2Y)"},
 {id:"TVC:US10Y-TVC:US02Y"		,desc:"US10Y-US02Y (Si cae debajo de cero --> RECESIÓN !!!)"},
-{id:"FRED:BAMLH0A0HYM2"			,desc:"ICE BofA US High Yield Index Option-Adjusted Spread (Si el Spread baja (los diferenciales de credito se estrechan)-> El apetito por el riesgo es mayor, OK. Si el Spread sube (diferenciales de credito se expanden)-> Apetito x riego se reduce, mal)"},
+{id:"FRED:BAMLH0A0HYM2"			,desc:"Si el Spread baja (los diferenciales de credito se estrechan)-> El apetito por el riesgo es mayor, OK. Si el Spread sube (diferenciales de credito se expanden)-> Apetito x riego se reduce, mal"},
 {id:"NASDAQ:SHY"				,desc:""},
 {id:"NASDAQ:IEF"				,desc:""},
 {id:"AMEX:TLH"					,desc:""},
@@ -116,7 +116,6 @@ arrMarketTimmingEconomy=[
 {id:"COMEX:HG1!/COMEX:GC1!"		,desc:"Cobre/Oro (Si sube, la economia va bien. Si baja, la economia va mal)"},
 {id:"AMEX:DBB/AMEX:DBP"			,desc:"Metales Bases / Metales Preciosos.(Si baja es porque la economia esta debil. Si sube, la economia esta fuerte.)"}, 		
 {id:"OANDA:SPX500USD/TVC:DXY"		,desc:"(Simula el movimiento real del SP500 sin considerar la cotización del dolar)"},
-{id:"FRED:BAMLH0A0HYM2"			,desc:"(Indice de probabilidad de no pago de deuda)"},
 {id:"CBOE:SKEW"				,desc:"CBOE SKEW INDEX"},
 {id:"NASDAQ:TDEX"			,desc:"Coberturas de riesgo de cola > 3 desviaciones estandards respecto al nivel actual"},
 {id:"AMEX:BKLN"				,desc:"Prestamos apalancados"},
