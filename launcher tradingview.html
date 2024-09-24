@@ -57,6 +57,7 @@ arrIndices = [
 ];
 
 arrEtfIndices = [
+	{id:"LSE:VUAA",		desc:"SP500, acum. London (isin: IE00BFMXXD54. TER: 0.07%)"},
 	{id:"XETR:XDN0", 	desc:"Track the MSCI Nordic Countries index. The MSCI Nordic Countries index tracks leading stocks on the Nordic market, including Denmark, Norway, Finland and Sweden"},
 	{id:"XETR:XRS2", 	desc:"(isin: IE00BJZ2DD79)"},
 ];
@@ -667,19 +668,20 @@ arrEtfVariableIncome=[
 {id:"XETR:IQQH"		,desc:"Xetra"},
 {id:"XETR:IQQQ"		,desc:"Xetra (isin:IE00B1TXK627. TER:0.65%)"},
 {id:"XETR:IS3N"		,desc:"(Acc), Xetra (IE00BKM4GZ66)"},
-{id:"LSE:IUCM",		desc:"Communication Sector SP500. London (isin: IE00BDDRF478. TER:0.15%)"},
-{id:"LSE:IUCD",		desc:"Consumer Discretionary Sector SP500. London (isin: IE00B4MCHD36. TER:0.15%)"},
-{id:"LSE:IUCS",		desc:"Consumer Staples Sector SP500. London (isin: IE00B40B8R38. TER:0.15%)"},
-{id:"LSE:IUES"		,desc:"(Acc), London (isin: IE00B42NKQ00)"},
-{id:"LSE:IUFS",		desc:"Financial Sector SP500. London (isin: IE00B4JNQZ49. TER:0.15%)"},
-{id:"LSE:IUHC",		desc:"Health Care Sector SP500. London (isin: IE00B43HR379. TER:0.15%)"},
-{id:"LSE:IUIS",		desc:"Industrial Sector SP500. London (isin: IE00B4LN9N13. TER:0.15%)"},
-{id:"LSE:IUIT",		desc:"Technology Sector SP500. London (isin: IE00B3WJKG14. TER:0.15%)"},
-{id:"LSE:IUMS",		desc:"Materials Sector SP500. London (isin: IE00B4MKCJ84. TER:0.15%)"},
-{id:"LSE:IUSZ"		,desc:"return of the MSCI USA Mid-Cap Equal Weighted Index. London (Dist) (isin: IE00BD1F4K20. TER: 0.21%)"},
-{id:"LSE:IUUS"		,desc:"Utilities Sector SP500. London (isin: IE00B4KBBD01. TER: 0.15%)"},
-{id:"LSE:IUVL",		desc:"London (isin: IE00BD1F4M44. TER:0.20%)"},
-{id:"AMEX:IYR"		,desc:"Real Estate, USA (VNQ (Vanguard Real Estate Index Fund ETF Shares))"},
+	{id:"LSE:IUCM",		desc:"Communication Sector SP500. London (isin: IE00BDDRF478. TER:0.15%)"},
+	{id:"LSE:IUCD",		desc:"Consumer Discretionary Sector SP500. London (isin: IE00B4MCHD36. TER:0.15%)"},
+	{id:"LSE:IUCS",		desc:"Consumer Staples Sector SP500. London (isin: IE00B40B8R38. TER:0.15%)"},
+	{id:"LSE:IUES",		desc:"Energy Sector SP500 (Acc), London (isin: IE00B42NKQ00. TER:0.15%)"},
+	{id:"LSE:IUFS",		desc:"Financial Sector SP500. London (isin: IE00B4JNQZ49. TER:0.15%)"},
+	{id:"LSE:IUHC",		desc:"Health Care Sector SP500. London (isin: IE00B43HR379. TER:0.15%)"},
+	{id:"LSE:IUIS",		desc:"Industrial Sector SP500. London (isin: IE00B4LN9N13. TER:0.15%)"},
+	{id:"LSE:IUIT",		desc:"Technology Sector SP500. London (isin: IE00B3WJKG14. TER:0.15%)"},
+	{id:"LSE:IUMS",		desc:"Materials Sector SP500. London (isin: IE00B4MKCJ84. TER:0.15%)"},
+	{id:"LSE:IUUS",		desc:"Utilities Sector SP500. London (isin: IE00B4KBBD01. TER: 0.15%)"},
+	
+	{id:"LSE:IUSZ"		,desc:"MSCI USA Mid-Cap Equal Weighted Index. London (Dist) (isin: IE00BD1F4K20. TER: 0.21%)"},
+	{id:"LSE:IUVL",		desc:"MSCI USA Enhanced Value Index (Grandes y medianas empresas con caracteristicas de alto Valor en USA), London (isin: IE00BD1F4M44. TER:0.20%)"},
+
 {id:"AMEX:JETS"		,desc:"USA"},
 {id:"AMEX:KRE"		,desc:"(SPDR S&P Regional Banking ETF)"},
 {id:"LSE:LCJD"		,desc:"Tracks leading Japanese stocks. London (isin: LU1781541252. TER:0.12%)"},
@@ -692,12 +694,9 @@ arrEtfVariableIncome=[
 {id:"NASDAQ:SOXX"	,desc:"USA"},
 {id:"LSE:SWRD",		desc:"Track the MSCI World index. The MSCI World index tracks stocks from 23 developed countries worldwide. London (isin: IE00BFY0GT14. TER:0.12%)"},
 {id:"XETR:SXRV"		,desc:"(Acc), Xetra"},
-{id:"AMEX:VNQ",		desc:"Real Estate USA"},
-{id:"MIL:VUAA"		,desc:"Milano"},
 {id:"XETR:XDEV"		,desc:"The Fund is passively managed. The fund aims to reflect the performance, before fees and expenses, of the MSCI World Value (USD) Index. (isin: IE00BL25JM42. TER: 0.25%)"},
 {id:"XETR:XDW0"		,desc:"Xetra"},
 {id:"AMEX:XHB"		,desc:""},
-{id:"AMEX:XLRE"		,desc:"Real Estate, USA (VNQ (Vanguard Real Estate Index Fund ETF Shares))"},
 {id:"XETR:ZPRX"		,desc:"isin: IE00BSPLC298, Xetra"},
 ];
 
@@ -714,7 +713,10 @@ arrEtfVariableIncomeDividend=[
 ];
 
 arrEtfRealEstate=[
-	{id:"LSE:XRES"		,desc:"(isin: IE00BYM8JD58), London"},
+	{id:"AMEX:IYR",		desc:"Real Estate, USA"},
+	{id:"AMEX:VNQ",		desc:"Real Estate USA"},
+	{id:"AMEX:XLRE",	desc:"Real Estate, USA"},
+	{id:"LSE:XRES"		,desc:"Real Estate USA, London (isin: IE00BYM8JD58. TER: 0.10%)"},
 	{id:"LSE:IUKP"		,desc:"(isin: IE00B1TXLS18), London"},
 	{id:"XETR:D5BK"		,desc:"(isin: LU0489337690), Xetra"},
 	{id:"LSE:IASP"		,desc:"(isin: IE00B1FZS244), London"},
