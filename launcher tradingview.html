@@ -38,7 +38,6 @@ arrIndices = [
 	{id:"OSE:NK2251!",	desc:"EUR: ETF c/cobertura divisa:WisdomTree Japan Equity UCITS ETF EUR Hedged Acc [IE00BYQCZJ13-WTIF]"},
 	{id:"SSE:000016",	desc:"(Top 50 companies of Shanghai Stock Exchange)" ,refDataTV:"AMEX:AFTY"},
 	{id:"HKEX:HSI1!",	desc:"(Hong Kong Stock Exchange)"},
-	{id:"XETR:ICGA",	desc:"Tracks the largest and most liquid Chinese stocks (A shares, H shares, B shares, Red chips, P chips). Xetra (isin: IE00BJ5JPG56. TER: 0.40%)"},
 	{id:"FTSE:XIN9",	desc:"(chosen from Shanghai Stock Exchange and Shenzhen Stock Exchange)"},
 	{id:"AMEX:FXI",		desc:""},
 	{id:"AMEX:EWY",		desc:""},
@@ -58,6 +57,8 @@ arrIndices = [
 
 arrEtfIndices = [
 	{id:"LSE:VUAA",		desc:"SP500, acum. London (isin: IE00BFMXXD54. TER: 0.07%)"},
+	{id:"LSE:SWRD",		desc:"Track the MSCI World index. The MSCI World index tracks stocks from 23 developed countries worldwide. London (isin: IE00BFY0GT14. TER:0.12%)"},
+	{id:"XETR:ICGA",	desc:"Tracks the largest and most liquid Chinese stocks (A shares, H shares, B shares, Red chips, P chips). Xetra (isin: IE00BJ5JPG56. TER: 0.40%)"},
 	{id:"XETR:XDN0", 	desc:"Track the MSCI Nordic Countries index. The MSCI Nordic Countries index tracks leading stocks on the Nordic market, including Denmark, Norway, Finland and Sweden"},
 	{id:"XETR:XRS2", 	desc:"(isin: IE00BJZ2DD79)"},
 ];
@@ -245,32 +246,31 @@ arrBasicMaterialsFutures=[
 ];
 
 arrBasicMaterialsSpot=[
-{id:"OANDA:XAUUSD",	desc:""},
-{id:"OANDA:XAGUSD",	desc:""},
-{id:"OANDA:WTICOUSD",	desc:""},
-{id:"OANDA:BCOUSD",	desc:""},
-{id:"OANDA:XPTUSD",	desc:""},
+	{id:"OANDA:XAUUSD",	desc:""},
+	{id:"OANDA:XAGUSD",	desc:""},
+	{id:"OANDA:WTICOUSD",	desc:""},
+	{id:"OANDA:BCOUSD",	desc:""},
+	{id:"OANDA:XPTUSD",	desc:""},
 ];
 
 arrBasicMaterialsEtf=[
-	{id:"XETR:8PSG",	desc:"Xetra"},
-	{id:"LSE:AIGG",		desc:"London USD (isin: GB00B15KYL00. TER: 0.49%)"},
-	{id:"LSE:ALUM",		desc:"(isin: GB00B15KXN58), London"},
-	{id:"MIL:CORN",		desc:"(ISIN: JE00BN7KB441), Milano"},
-	{id:"MIL:GBSE",		desc:"Milano"},
 	{id:"LSE:ICOM",		desc:"(GBP), London"},
-	{id:"MIL:NICK",		desc:"(isin: GB00B15KY211), Milano"},
-	{id:"XETR:NUKL",	desc:"(isin: IE000M7V94E1)"},
-	{id:"MIL:PHAG",		desc:"Milano (isin: JE00B1VS3333. TER: 0.49%)"},
+	{id:"LSE:CRUD",		desc:"WTI OIL Futures, London (isin: GB00B15KXV33. TER: 0.49%)"},
 	{id:"LSE:ISLN",		desc:"London (isin: IE00B4NCWG09. TER: 0.20%)"},
 	{id:"LSE:SGLD",		desc:"London (isin:IE00B579F325. TER:0.12%)"},
+	{id:"XETR:XGDU",	desc:"Oro Fisico EUR. Xetra (isin: DE000A2T0VU5. TER: 0.11%)"},
+	{id:"MIL:GBSE",		desc:"Milano"},
 	{id:"LSE:GDX",		desc:"London (isin:IE00BQQP9F84. TER:0.53%)"},
 	{id:"LSE:GDXJ",		desc:"Más volátil que el GDX, extrema el sentimiento del mercado de Oro. London (isin:IE00BQQP9G91. TER:0.55%)"},
+	{id:"MIL:PHAG",		desc:"Milano (isin: JE00B1VS3333. TER: 0.49%)"},
 	{id:"LSE:TINM",		desc:"ETF Estaño, London"},
-	{id:"XETR:XGDU",	desc:"Xetra"},
 	{id:"LSE:COPA", 	desc:"London (isin: GB00B15KXQ89. TER: 0.49%)"},
-	{id:"LSE:CRUD",		desc:"WTI OIL Futures, London (isin: GB00B15KXV33. TER: 0.49%)"},
+	{id:"LSE:ALUM",		desc:"(isin: GB00B15KXN58), London"},
+	{id:"MIL:NICK",		desc:"(isin: GB00B15KY211), Milano"},
+	{id:"LSE:AIGG",		desc:"London USD (isin: GB00B15KYL00. TER: 0.49%)"},
+	{id:"MIL:CORN",		desc:"(ISIN: JE00BN7KB441), Milano"},
 	{id:"LSE:WOOD",		desc:"Industria de la madera Global. Track the S&P Global Timber&Forestry index (25 largest and most liquid companies). London (isin:IE00B27YCF74. TER:0.65%)"},
+	{id:"XETR:NUKL",	desc:"(isin: IE000M7V94E1)"},
 ];
 
 <!---- Sectors   OK---->
@@ -629,7 +629,7 @@ arrEtfVariableIncome=[
 {id:"XETR:2B76"		,desc:"(isin: IE00BYZK4552), Xetra"},
 {id:"MIL:ANAU",		desc:"Milano (isin: IE000QDFFK00. TER: 0.16%)"},
 {id:"XETR:CEMS",	desc:"Europe Value. Xetra (isin: IE00BQN1K901. TER: 0.25%)"},
-{id:"HAM:GANN"		,desc:"Es un FONDO. Investigar cual se puede comprar en IB. isin: LU0272941971 (Amundi Funds - Volatility World A EUR LU0557872479, no existe en TView)"},
+{id:"HAM:GANN"		,desc:"Es un FONDO de volatilidad (simula un Vix pero mucho mas estable y lento). Investigar cual se puede comprar en IB. isin: LU0272941971 (Amundi Funds - Volatility World A EUR LU0557872479, no existe en TView)"},
 {id:"GETTEX:GAN3"	,desc:"INVESTIGAR... isin: LU0319687124"},
 {id:"XETR:2B70"		,desc:"isin: IE00BYXG2H39"},
 {id:"EURONEXT:EMIM"	,desc:"Amsterdam (Interactive Brokers)"},
@@ -692,7 +692,6 @@ arrEtfVariableIncome=[
 {id:"LSE:R2US"		,desc:"London (isin: IE00BJ38QD84. TER:0.30%)"},
 {id:"AMEX:REET"		,desc:"USA (EUR: iShares US Property Yield UCITS (IUSP) - Londres - en dólares - IE00B1FZSF77, CONFIRMAR.!!!!)"},
 {id:"NASDAQ:SOXX"	,desc:"USA"},
-{id:"LSE:SWRD",		desc:"Track the MSCI World index. The MSCI World index tracks stocks from 23 developed countries worldwide. London (isin: IE00BFY0GT14. TER:0.12%)"},
 {id:"XETR:SXRV"		,desc:"(Acc), Xetra"},
 {id:"XETR:XDEV"		,desc:"The Fund is passively managed. The fund aims to reflect the performance, before fees and expenses, of the MSCI World Value (USD) Index. (isin: IE00BL25JM42. TER: 0.25%)"},
 {id:"XETR:XDW0"		,desc:"Xetra"},
