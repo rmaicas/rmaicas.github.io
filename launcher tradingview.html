@@ -1288,11 +1288,11 @@ var fundamentalsTooltip='PER / ROIC/ ROE / Operating Margin (ttm)'
 						+'  • > 25% tabacaleras/asset managers/restaurantes/biotechs';
 						
 var technicalsTooltip='Moving Average Rating / Oscillator Rating / Technical Rating / MACD (normalize by ATR) [+/- 1.5 son ya puntos extremos]'
-					+'<br><br>Moving Average Rating: Aparentemente establece un rating segun la combinacion de multiples moving average. Parece ser mas lento que el Oscillator Rating. '
-					+'<br>Moving Average Rating: Aparentemente establece un rating segun la combinacion de multiples osciladores técnicos.'
-					+'<br>Technical Rating: Combina los valores de multiples indicadores técnicos.'
-					+'<br>&nbsp;&nbsp;&nbsp;&#129001;: Strong Buy&nbsp;&nbsp;&nbsp;&#128994;: Buy&nbsp;&nbsp;&nbsp;&#129003;: Neutral&nbsp;&nbsp;&nbsp;&#128308;: Sell&nbsp;&nbsp;&nbsp;&#128997;: Strong Sell'
-					+'<br><br>MACD normalizado por ATR (MACD/ATR): Se observa que los valores  +/- 1.5 son puntos extremos.'
+					+'<ul><li>Moving Average Rating: Aparentemente establece un rating segun la combinacion de multiples moving average. Parece ser mas lento que el Oscillator Rating.</li>'
+					+'<li>Oscillator Average Rating: Aparentemente establece un rating segun la combinacion de multiples osciladores técnicos.</li>'
+					+'<li>Technical Rating: Combina los valores de multiples indicadores técnicos.</li>'
+					+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#129001;: Strong Buy&nbsp;&nbsp;&nbsp;&#128994;: Buy&nbsp;&nbsp;&nbsp;&#129003;: Neutral&nbsp;&nbsp;&nbsp;&#128308;: Sell&nbsp;&nbsp;&nbsp;&#128997;: Strong Sell</ul>'
+					+'<ul><li>MACD normalizado por ATR (MACD/ATR): Se observa que los valores  +/- 1.5 son puntos extremos.</li></ul>'
 
 function onLoad() {
 	getNote();
@@ -1624,22 +1624,22 @@ const callApiTV = async (symbol) => {
 			arrFundamental = document.querySelectorAll('[refFundamental="'+symbol+'"]');
 			for (item of arrFundamental) {
 				if (jsonResponse["price_earnings_ttm"]!=null){
-					perRoicRoe = `${(+jsonResponse["price_earnings_ttm"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })} / `;
+					perRoicRoe = `per:${(+jsonResponse["price_earnings_ttm"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })} / `;
 				} else {
 					perRoicRoe = '- /';
 				}
 				if (jsonResponse["return_on_invested_capital"]!=null){
-					perRoicRoe += `${(+jsonResponse["return_on_invested_capital"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })} / `;
+					perRoicRoe += `roic:${(+jsonResponse["return_on_invested_capital"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })} / `;
 				} else {
 					perRoicRoe += '- /';
 				}
 				if (jsonResponse["return_on_equity"]!=null){
-					perRoicRoe += `${(+jsonResponse["return_on_equity"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })} / `;
+					perRoicRoe += `roe:${(+jsonResponse["return_on_equity"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })} / `;
 				} else {
 					perRoicRoe += '- / ';
 				}
 				if (jsonResponse["operating_margin"]!=null){
-					perRoicRoe += `${(+jsonResponse["operating_margin"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}`;
+					perRoicRoe += `om:${(+jsonResponse["operating_margin"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}`;
 				} else {
 					perRoicRoe += '-';
 				}
@@ -1652,21 +1652,21 @@ const callApiTV = async (symbol) => {
 			for (item of arrRecommendsW) {
 				if (jsonResponse["Recommend.MA|1W"]!=null){
 					recMA = jsonResponse["Recommend.MA|1W"];
-					recommendsW = (recMA>0.50? '&#129001;' : recMA>0.10? '&#128994;' : recMA>=-0.10? '&#129003;' : recMA>=-0.50? '&#128308;' : '&#128997;') + ' / ';
+					recommendsW = 'm:'+(recMA>0.50? '&#129001;' : recMA>0.10? '&#128994;' : recMA>=-0.10? '&#129003;' : recMA>=-0.50? '&#128308;' : '&#128997;') + ' / ';
 				} else {
-					recommendsW = '- /';
+					recommendsW = 'm: - /';
 				}
 				if (jsonResponse["Recommend.Other|1W"]!=null){
 					recOt = jsonResponse["Recommend.Other|1W"];
-					recommendsW += (recOt>0.50? '&#129001;' : recOt>0.10? '&#128994;' : recOt>=-0.10? '&#129003;' : recOt>=-0.50? '&#128308;' : '&#128997;') + ' / ';
+					recommendsW += 'o:'+(recOt>0.50? '&#129001;' : recOt>0.10? '&#128994;' : recOt>=-0.10? '&#129003;' : recOt>=-0.50? '&#128308;' : '&#128997;') + ' / ';
 				} else {
-					recommendsW = '- /';
+					recommendsW = 'o: - /';
 				}
 				if (jsonResponse["Recommend.All|1W"]!=null){
 					recAll = jsonResponse["Recommend.All|1W"];
-					recommendsW += (recAll>0.50? '&#129001;' : recAll>0.10? '&#128994;' : recAll>=-0.10? '&#129003;' : recAll>=-0.50? '&#128308;' : '&#128997;') + ' / ';
+					recommendsW += 't:'+(recAll>0.50? '&#129001;' : recAll>0.10? '&#128994;' : recAll>=-0.10? '&#129003;' : recAll>=-0.50? '&#128308;' : '&#128997;') + ' / ';
 				} else {
-					recommendsW = '- /';
+					recommendsW = 't: - /';
 				}
 								
 				macdW=null;
@@ -1676,9 +1676,9 @@ const callApiTV = async (symbol) => {
 					signalW = jsonResponse["MACD.signal|1W"];
 					atrW = jsonResponse["ATR|1W"];
 					macdNormalW = macdW/atrW;
-					recommendsW += `${macdNormalW.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}`;
+					recommendsW += `M: ${macdNormalW.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}`;
 				} else {
-					recommendsW = '-';
+					recommendsW = 'M: -';
 				}
 				item.innerHTML = `${recommendsW}`;
 				item.style.color= (macdW>0 && macdW>signalW ? "lightgreen" : macdW>0 && macdW<signalW ? "orange" : macdW<0 && macdW<signalW ? "orangered" : "dodgerblue");
@@ -1690,21 +1690,21 @@ const callApiTV = async (symbol) => {
 			for (item of arrRecommendsD) {
 				if (jsonResponse["Recommend.MA"]!=null){
 					recMAD = jsonResponse["Recommend.MA"];
-					recommendsD = (recMAD>0.50? '&#129001;' : recMAD>0.10? '&#128994;' : recMAD>=-0.10? '&#129003;' : recMAD>=-0.50? '&#128308;' : '&#128997;') + ' / ';
+					recommendsD = 'm:'+(recMAD>0.50? '&#129001;' : recMAD>0.10? '&#128994;' : recMAD>=-0.10? '&#129003;' : recMAD>=-0.50? '&#128308;' : '&#128997;') + ' / ';
 				} else {
-					recommendsD = '- /';
+					recommendsD = 'm: - /';
 				}
 				if (jsonResponse["Recommend.Other"]!=null){
 					recOtD = jsonResponse["Recommend.Other"];
-					recommendsD += (recOtD>0.50? '&#129001;' : recOtD>0.10? '&#128994;' : recOtD>=-0.10? '&#129003;' : recOtD>=-0.50? '&#128308;' : '&#128997;') + ' / ';
+					recommendsD += 'o:'+(recOtD>0.50? '&#129001;' : recOtD>0.10? '&#128994;' : recOtD>=-0.10? '&#129003;' : recOtD>=-0.50? '&#128308;' : '&#128997;') + ' / ';
 				} else {
-					recommendsD = '- /';
+					recommendsD = 'o: - /';
 				}
 				if (jsonResponse["Recommend.All"]!=null){
 					recAllD = jsonResponse["Recommend.All"];
-					recommendsD += (recAllD>0.50? '&#129001;' : recAllD>0.10? '&#128994;' : recAllD>=-0.10? '&#129003;' : recAllD>=-0.50? '&#128308;' : '&#128997;') + ' / ';
+					recommendsD += 't:'+(recAllD>0.50? '&#129001;' : recAllD>0.10? '&#128994;' : recAllD>=-0.10? '&#129003;' : recAllD>=-0.50? '&#128308;' : '&#128997;') + ' / ';
 				} else {
-					recommendsD = '- /';
+					recommendsD = 't: - /';
 				}
 				
 				macdD=null;
@@ -1714,9 +1714,9 @@ const callApiTV = async (symbol) => {
 					signalD = jsonResponse["MACD.signal"];
 					atrD = jsonResponse["ATR"];
 					macdNormalD = macdD/atrD;
-					recommendsD += `${macdNormalD.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}`;
+					recommendsD += `M: ${macdNormalD.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}`;
 				} else {
-					recommendsD = '-';
+					recommendsD = 'M: -';
 				}
 				item.innerHTML = `${recommendsD}`;
 				item.style.color= (macdD>0 && macdD>signalD ? "lightgreen" : macdD>0 && macdD<signalD ? "orange" : macdD<0 && macdD<signalD ? "orangered" : "dodgerblue");
