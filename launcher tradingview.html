@@ -13,7 +13,6 @@ arrIndices = [
 	{id:"OANDA:SPX500USD"	, desc:"", refDataTV:"CME_MINI:ES1!"},
 	{id:"AMEX:SPY",		desc:"(EU: MIL:SPY5)"},
 	{id:"AMEX:RSP",		desc:"(EUR: Xtrackers S&P 500 Equal Weight UCITS (XDEW) - XETRA - en euros - IE00BLNMYC90)"},
-	{id:"EURONEXT:EWSP",	desc:"ETF EUR: SP500 Equal Weight (isin: IE000MLMNYS0)"},
 	{id:"NASDAQ:QQQ",	desc:"EUR: MIL:ANAU"}, 		
 	{id:"CME_MINI:NQ1!",	desc:"Futuros Nasdaq", refDataTV:"CME_MINI:NQ1!"},
 	{id:"NASDAQ:NDXE", 	desc:""},
@@ -57,12 +56,16 @@ arrIndices = [
 
 arrEtfIndices = [
 	{id:"LSE:VUAA",		desc:"SP500, acum. London (isin: IE00BFMXXD54. TER: 0.07%)"},
+	{id:"MIL:ANAU",		desc:"ETF del Nasdaq 100 mas barato (2024). Milano (isin: IE000QDFFK00. TER: 0.16%)"},
+	{id:"EURONEXT:EWSP",	desc:"ETF EUR: SP500 Equal Weight (isin: IE000MLMNYS0)"},
 	{id:"LSE:SWRD",		desc:"Indice MSCI World. The MSCI World index tracks stocks from 23 developed countries worldwide. London (isin: IE00BFY0GT14. TER:0.12%)"},
 	{id:"XETR:EUNL"		,desc:"Indice MSCI World (incluye acciones de grandes y medianas empresas de países desarrollados), acum. Xetra. (isin: IE00B4L5Y983. TER: 0.20%)"},
 	{id:"XETR:VGWL",	desc:"Indice FTSE All-World (incluye acciones de grandes y medianas empresas de países desarrollados y emergentes). Xetra (isin: IE00B3RBWM25. TER: 0.22%)"},
+	{id:"XETR:EUNK",	desc:"Top stocks from 15 industrial countries. Xetra (isin: IE00B4K48X80. TER: 0.12%)"},
 	{id:"XETR:ICGA",	desc:"Tracks the largest and most liquid Chinese stocks (A shares, H shares, B shares, Red chips, P chips). Xetra (isin: IE00BJ5JPG56. TER: 0.40%)"},
 	{id:"EURONEXT:EMIM"	,desc:"Emerging Markets. Amsterdam (Interactive Brokers) (isin: IE00BKM4GZ66. TER: 0.18%)"},
 	{id:"XETR:EMXC", 	desc:"Emerging Markets (ex China). Xetra (isin: LU2009202107. TER: 0.15%)"},
+	{id:"XETR:ETLK",	desc:"Track the Solactive Core Developed Markets Pacific (ex Japan) Large & Mid Cap index. Xetra (isin: IE00BFXR5W90. TER: 0.10%)"},
 	{id:"XETR:XDN0", 	desc:"Track the MSCI Nordic Countries index. The MSCI Nordic Countries index tracks leading stocks on the Nordic market, including Denmark, Norway, Finland and Sweden"},
 	{id:"XETR:XRS2", 	desc:"(isin: IE00BJZ2DD79)"},
 	
@@ -649,16 +652,13 @@ arrEtfFixedIncome=[
 ];
 
 arrEtfVariableIncome=[
-{id:"XETR:2B76"		,desc:"(isin: IE00BYZK4552), Xetra"},
-{id:"MIL:ANAU",		desc:"ETF del Nasdaq 100 mas barato (2024). Milano (isin: IE000QDFFK00. TER: 0.16%)"},
+{id:"XETR:2B76"		,desc:"(isin: IE00BYZK4552. TER: 0.40%), Xetra"},
 {id:"XETR:CEMS",	desc:"Europe Value. Xetra (isin: IE00BQN1K901. TER: 0.25%)"},
 {id:"HAM:GANN"		,desc:"Es un FONDO de volatilidad (simula un Vix pero mucho mas estable y lento). Investigar cual se puede comprar en IB. isin: LU0272941971 (Amundi Funds - Volatility World A EUR LU0557872479, no existe en TView)"},
 {id:"GETTEX:GAN3"	,desc:"INVESTIGAR... isin: LU0319687124"},
-{id:"XETR:2B70"		,desc:"isin: IE00BYXG2H39"},
+	
 	{id:"XETR:DFEN", 	desc:"Defensa Global. Xetra (isin: IE000YYE6WK5. TER: 0.55%)"},
-{id:"XETR:ETLK",	desc:"Track the Solactive Core Developed Markets Pacific (ex Japan) Large & Mid Cap index. Xetra (isin: IE00BFXR5W90. TER: 0.10%)"},
-{id:"XETR:EUNK",	desc:"Top stocks from 15 industrial countries. Xetra (isin: IE00B4K48X80. TER: 0.12%)"},
-
+	
 	{id:"XETR:EXI5",	desc:"Real Estate EUR, Xetra"},
 	{id:"XETR:EXH1",	desc:"Xetra (isin: DE000A0H08M3. TER: 0.46%)"},
 	{id:"XETR:EXH2",	desc:"Xetra"},
@@ -701,6 +701,7 @@ arrEtfVariableIncome=[
 	{id:"LSE:IUIT",		desc:"Technology Sector SP500. London (isin: IE00B3WJKG14. TER:0.15%)"},
 	{id:"LSE:IUMS",		desc:"Materials Sector SP500. London (isin: IE00B4MKCJ84. TER:0.15%)"},
 	{id:"LSE:IUUS",		desc:"Utilities Sector SP500. London (isin: IE00B4KBBD01. TER: 0.15%)"},
+	{id:"LSE:BTEC"		,desc:"NASDAQ Biotechnology Index. USD. London (isin: IE00BYXG2H39. TER: 0.35%)"},
 	
 	{id:"LSE:IUSZ"		,desc:"MSCI USA Mid-Cap Equal Weighted Index. London (Dist) (isin: IE00BD1F4K20. TER: 0.21%)"},
 	{id:"LSE:IUVL",		desc:"MSCI USA Enhanced Value Index (Grandes y medianas empresas con caracteristicas de alto Valor en USA), London (isin: IE00BD1F4M44. TER:0.20%)"},
