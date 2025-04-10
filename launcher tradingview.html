@@ -677,6 +677,10 @@ arrJapanStocks=[
 	{id:"TSE:8002", desc:"Conglomerado Japones: Real Estate, Gestion de activos, Agricultura, Quimica, Metales Energia, Transporte, etc. Fundada en 1858."},
 ];
 
+arrOthersStocks=[
+	{id:"NYSE:PBR", desc:""},
+];
+
 <!---- ETFs   ---->
 
 arrEtfFixedIncome=[
@@ -1262,6 +1266,10 @@ select option {
 
 	<h3>Japan</h3>
 	<table class="list-group" id="japanStocksListTV"></table>
+
+	<h3>Others</h3>
+	<table class="list-group" id="othersStocksListTV"></table>
+
 	
 </div>
 
@@ -1430,6 +1438,7 @@ function onLoad() {
 	setTabContentListTV("tabWorldStocks", "europeStocksListTV", arrEuropeStocks);
 	setTabContentListTV("tabWorldStocks", "canadaStocksListTV", arrCanadaStocks);
 	setTabContentListTV("tabWorldStocks", "japanStocksListTV", arrJapanStocks);
+	setTabContentListTV("tabWorldStocks", "othersStocksListTV", arrOthersStocks);
 	setTabContentListTV("tabETFs", "etfFixedIncomeListTV", arrEtfFixedIncome);
 	setTabContentListTV("tabETFs", "etfVariableIncomeListTV", arrEtfVariableIncome);
 	setTabContentListTV("tabETFs", "etfVariableIncomeDividendListTV", arrEtfVariableIncomeDividend);
