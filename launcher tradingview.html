@@ -1374,7 +1374,10 @@ select option {
 
 <script>
 const body = document.querySelector('body');
-body.onload = onLoad;
+body.onload = function() {
+  onLoad(); // Your existing onLoad function
+  attachRowClickHandlers(); // Add row click handlers
+};
 
 const CHAR_RED   = String.fromCodePoint( 128997 )
 const CHAR_GREEN = String.fromCodePoint( 129001 )
@@ -2035,6 +2038,43 @@ function extractPxValue(str) {
   return 0;
 }
 <!-- //////////////////////////   END SPLITTER   /////////////////////////////////// -->
+
+<!-- //////////////////////////   HIGHLIGHTING ROW   /////////////////////////////////// -->
+// Track the currently highlighted row
+var currentlyHighlightedRow = null;
+
+// Function to handle row clicks
+function handleRowClick(event) {
+  // If the click is on a button or select element, don't change highlighting
+  if (event.target.tagName === 'BUTTON' || event.target.tagName === 'SELECT') {
+    return;
+  }
+
+  const clickedRow = event.currentTarget;
+  
+  // If there's a previously highlighted row, restore its original color
+  if (currentlyHighlightedRow) {
+    currentlyHighlightedRow.style.backgroundColor = ''; // Reset to default
+  }
+  
+  // Highlight the clicked row in darkslategrey
+  clickedRow.style.backgroundColor = 'darkslategrey';
+  
+  // Update the currently highlighted row
+  currentlyHighlightedRow = clickedRow;
+}
+
+// Function to attach click handlers to all table rows
+function attachRowClickHandlers() {
+  // Get all table rows in the document
+  const allRows = document.querySelectorAll('table tr');
+  
+  // Add click handler to each row
+  allRows.forEach(row => {
+    row.addEventListener('click', handleRowClick);
+  });
+}
+<!-- //////////////////////////   END HIGHLIGHTING ROW   /////////////////////////////////// -->
 
 </script>
    
