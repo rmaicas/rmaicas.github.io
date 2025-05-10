@@ -1598,10 +1598,10 @@ function setFlagTableContent(listId, array, charFlag) {
 			colorList.innerHTML += `<tr class="prTableRow"><td style="width: 160px;">&nbsp;<img src="" logoid="${item.refDataTV}" class="firstImage"/><img src="" class="secondImage"/>`
 				+`<span class="pointAndCall" onclick="liClick('`+item.id+`')" style="font-size: small;">`+item.id+`</span></td>`
 				+`<td style="width: 220px; text-align: right;"> <span style="font-size: xx-small;">`+ (item.id!=item.refDataTV?item.refDataTV:``)+`</span>&nbsp;<span class="tabNotes" refDataTV="`+item.refDataTV+`" style="font-size: small;"></span></td>`
-				+`<td style="font-size: x-small; text-align: right;" refMonthlyDataTV="`+item.refDataTV+`"></td>`
-				+`<td style="font-size: x-small; text-align: right;" refYearlyDataTV="`+item.refDataTV+`"></td>`
-				+`<td style="font-size: x-small; text-align: right;" refDPS="`+item.refDataTV+`"></td>`
-				+`<td style="font-size: x-small; text-align: right;" refDrawdown="${item.refDataTV}"></td>`
+				+`<td style="font-size: small; text-align: right;" refMonthlyDataTV="`+item.refDataTV+`"></td>`
+				+`<td style="font-size: small; text-align: right;" refYearlyDataTV="`+item.refDataTV+`"></td>`
+				+`<td style="font-size: small; text-align: right;" refDPS="`+item.refDataTV+`"></td>`
+				+`<td style="font-size: small; text-align: right;" refDrawdown="${item.refDataTV}"></td>`
 				+`<td style="font-size: small; text-align: center;" refFundamental="${item.refDataTV}"></td>`
 				+`<td style="font-size: smaller; text-align: center;" refRecommendsW="${item.refDataTV}"></td>`
 				+`<td style="font-size: smaller; text-align: center;" refRecommendsD="${item.refDataTV}"></td>`
@@ -1643,10 +1643,10 @@ function setTabContentListTV(tabId, listTV, arrListTV){
 			+`&nbsp;<img src="" logoid="${item.refDataTV}" class="firstImage"/><img src="" class="secondImage"/>`
 			+`<span class="pointAndCall" onclick="liClick('${item.id}')" id="${item.id}" style="font-size: small;">${item.id}</span></td>`
 			+`<td style="width: 220px; text-align: right;"> <span style="font-size: xx-small;">${(item.id!=item.refDataTV?item.refDataTV:'')}</span>&nbsp;<span class="${tabId}" refDataTV="${item.refDataTV}" style="font-size: small;"></span></td>`
-			+`<td style="font-size: x-small; text-align: right;" refMonthlyDataTV="${item.refDataTV}"></td>`
-			+`<td style="font-size: x-small; text-align: right;" refYearlyDataTV="${item.refDataTV}"></td>`
-			+`<td style="font-size: x-small; text-align: right;" refDPS="${item.refDataTV}"></td>`
-			+`<td style="font-size: x-small; text-align: right;" refDrawdown="${item.refDataTV}"></td>`
+			+`<td style="font-size: small; text-align: right;" refMonthlyDataTV="${item.refDataTV}"></td>`
+			+`<td style="font-size: small; text-align: right;" refYearlyDataTV="${item.refDataTV}"></td>`
+			+`<td style="font-size: small; text-align: right;" refDPS="${item.refDataTV}"></td>`
+			+`<td style="font-size: small; text-align: right;" refDrawdown="${item.refDataTV}"></td>`
 			+`<td style="font-size: small; text-align: center;" refFundamental="${item.refDataTV}"></td>`
 			+`<td style="font-size: smaller; text-align: center;" refRecommendsW="${item.refDataTV}"></td>`
 			+`<td style="font-size: smaller; text-align: center;" refRecommendsD="${item.refDataTV}"></td>`
