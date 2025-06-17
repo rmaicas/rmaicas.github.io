@@ -1144,7 +1144,7 @@ select option {
   z-index: 99999999 !important;
   /*bottom: 125%;  Position the tooltip above the text */
   left: 50%;
-  margin-left: -600px; /* Center the tooltip */
+  margin-left: -500px; /* Center the tooltip */
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -1532,6 +1532,7 @@ var arrayPurple = [];
 
 var currentTab='';
 
+var dividendsTooltip='DPS TTM / DPS indicated (no incluyen dividendos especiales)<br>Year Growth(continue years growth)<br>Payout(continue payout growth) (basado en beneficio neto)';
 var fundamentalsTooltip='PER / ROIC / ROE / Operating Margin (ttm) / Net Debt To Ebitda'
 					+'<br><br>PER: Price Earnings Ratio. PER= Precio Acción / EPS(anual). PER=20, significa que la acción cotiza a 20 veces beneficios anuales.\nAlto Crecimiento: [20-30]\nCrecimiento Medio: [16-20]\nCrecimiento Bajo: [10-15]'
 					+'<br><br>ROIC:Return on Invested Capital (Muy Importante): Relación(%) = Beneficios / dinero que tanto los accionistas como los tenedores de deuda han dado a la empresa para medir la habilidad de la administración en la asignación de capital.\nUn ROIC alto y estable durante años es una buena forma de saber que una compañía tiene fuertes ventajas competitivas. También permite ver que la directiva está haciendo una buena gestión del capital.<br>'
@@ -1723,8 +1724,9 @@ function setFlagTableContent(listId, array, charFlag) {
 		for (ticket of array) {
 			setFlagToTicket(ticket.id, charFlag)
 		}
-		colorList.innerHTML = `<tr style="font-size: small;"><th style="width: 12%;" class="header-table">Name</th><th style="width: 10%;" class="header-table">Change</th>
-		<th style="width: 2%;" class="header-table">Ch.M</th><th style="width: 2%;" class="header-table">Ch.Y</th><th style="width: 1%;" class="header-table">DPS(fw)</th>
+		colorList.innerHTML = `<tr style="font-size: small;"><th style="width: 12%;" class="header-table">Name</th><th style="width: 4%;" class="header-table">Change</th>
+		<th style="width: 2%;" class="header-table">Ch.M</th><th style="width: 2%;" class="header-table">Ch.Y</th>
+		<th class="header-table tooltip" style="width: 7%;">Div.<span class="tooltiplittletext">${dividendsTooltip}</span></th>
 		<th class="header-table tooltip" style="width: 1%;">DD<span class="tooltiplittletext">% Drawdown desde maximos de todos los tiempos (ATH)</span></th>
 		<th class="header-table tooltip" style="font-size: small; width: 6%;" title="PER / ROIC/ ROE / Operating Margin (ttm)">Fundamentals(ttm)<span class="tooltiptext">${fundamentalsTooltip}</span></th>
 		<th class="header-table tooltip" style="font-size: small; width: 5%;" title="MA Rating / Osc. Rat./ Technical Rat. / MACD (normalize by ATR) [+/- 1.5 son ya puntos extremos]">Technicals Weekly<span class="tooltiptext">${technicalsTooltip}</span></th>
@@ -1770,7 +1772,8 @@ function setFlagTableContent(listId, array, charFlag) {
 
 function setTabContentListTV(tabId, listTV, arrListTV){
 	var listTV = document.getElementById(listTV);
-	listTV.innerHTML += `<tr style="font-size: small;"><th class="header-table" style="width: 10%;">Name</th><th class="header-table" style="width: 10%;">Change</th><th class="header-table" style="width: 3%;">Ch.M</th><th class="header-table" style="width: 3%;">Ch.Y</th><th class="header-table" style="width: 1.5%;">DPS(fw)</th>
+	listTV.innerHTML += `<tr style="font-size: small;"><th class="header-table" style="width: 10%;">Name</th><th class="header-table" style="width: 4.5%;">Change</th><th class="header-table" style="width: 3%;">Ch.M</th><th class="header-table" style="width: 3%;">Ch.Y</th>
+				<th class="header-table tooltip" style="width: 7%;">Div.<span class="tooltiplittletext">${dividendsTooltip}</span></th>
 				<th class="header-table tooltip" style="width: 1.5%;">DD<span class="tooltiplittletext">% Drawdown desde maximos de todos los tiempos (ATH)</span></th>
 				<th class="header-table tooltip" style="font-size: small; width: 8%;" title="PER / ROIC/ ROE / Operating Margin (ttm)">Fundamentals(ttm)<span class="tooltiptext">${fundamentalsTooltip}</span></th>
 				<th class="header-table tooltip" style="font-size: small; width: 6%;" title="MA Rating / Osc. Rat./ Technical Rat. / MACD (normalize by ATR) [+/- 1.5 son ya puntos extremos]">Technicals Weekly<span class="tooltiptext">${technicalsTooltip}</span></th>
@@ -1870,7 +1873,7 @@ function restoreLocalStorageFromClipboard() {
 
 const callApiTV = async (symbol) => {
 	if ((symbol!= null) && (symbol!=="")){
-		const response = await fetch('https://scanner.tradingview.com/symbol?symbol='+symbol+'&fields=close,change,logoid,description,price_52_week_high,price_52_week_low,sector,industry,country,market,Low.1M,High.1M,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y,Perf.YTD,High.All,dps_common_stock_prim_issue_fy,dividend_yield_recent,MACD.macd,MACD.signal,ATR,Recommend.MA,Recommend.Other,Recommend.All,average_volume_10d_calc,MACD.macd|1W,MACD.signal|1W,ATR|1W,price_earnings_ttm,return_on_invested_capital,return_on_equity,operating_margin,net_debt_to_ebitda_fq,Recommend.MA|1W,Recommend.Other|1W,Recommend.All|1W,average_volume_30d_calc,nav_discount_premium,open_interest&no_404=true');
+		const response = await fetch('https://scanner.tradingview.com/symbol?symbol='+symbol+'&fields=close,change,logoid,description,price_52_week_high,price_52_week_low,sector,industry,country,market,Low.1M,High.1M,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y,Perf.YTD,High.All,dps_common_stock_prim_issue_fy,dividend_yield_recent,dividends_yield,dividends_yield_current,dps_common_stock_prim_issue_yoy_growth_fy,continuous_dividend_growth,dividend_payout_ratio_ttm,continuous_dividend_payout,MACD.macd,MACD.signal,ATR,Recommend.MA,Recommend.Other,Recommend.All,average_volume_10d_calc,MACD.macd|1W,MACD.signal|1W,ATR|1W,price_earnings_ttm,return_on_invested_capital,return_on_equity,operating_margin,net_debt_to_ebitda_fq,Recommend.MA|1W,Recommend.Other|1W,Recommend.All|1W,average_volume_30d_calc,nav_discount_premium,open_interest&no_404=true');
 		const jsonResponse = await response.json(); //extract JSON from the http response
 		if (jsonResponse!=null){
 			// do something with jsonResponse
@@ -1916,9 +1919,20 @@ const callApiTV = async (symbol) => {
 			
 			arrDPS = document.querySelectorAll('[refDPS="'+symbol+'"]');
 			for (item of arrDPS) {
-				if (jsonResponse["dividend_yield_recent"]!=null){
-					dps = +(jsonResponse["dividend_yield_recent"])
-					item.innerHTML = `${dps.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}%`;
+				if ((jsonResponse["dividends_yield_current"]!=null && jsonResponse["dividends_yield_current"]!=0) || jsonResponse["dividends_yield"]!=null && jsonResponse["dividends_yield"]!=0){
+					dpsttm = ((jsonResponse["dividends_yield_current"])?? "").toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+					dpsttm += dpsttm!=""?'%':'';
+					//dpsfwd = (jsonResponse["dividend_yield_recent"]);
+					dpsind = ((jsonResponse["dividends_yield"])?? "").toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+					dpsind += dpsind!=""?'%':'';
+					dpsYoYGrowth = ((jsonResponse["dps_common_stock_prim_issue_yoy_growth_fy"])?? "").toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+					dpsYoYGrowth+= dpsYoYGrowth!=""?'%':'';
+					dpsContYGrowth = ((jsonResponse["continuous_dividend_growth"])?? "").toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 0 });
+					dpsPayoutRatio = ((jsonResponse["dividend_payout_ratio_ttm"])?? "").toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+					dpsPayoutRatio+= dpsPayoutRatio!=""?'%':'';
+					dpsContPayoutRatioGrowth = ((jsonResponse["continuous_dividend_payout"])?? "").toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 0 });
+					item.innerHTML = `ttm: ${dpsttm} / ind: ${dpsind}<br>Y growth: ${dpsYoYGrowth}(${dpsContYGrowth})
+					<br>Payout: ${dpsPayoutRatio}(${dpsContPayoutRatioGrowth})`;
 					item.style.color="yellow";
 				}
 			}
