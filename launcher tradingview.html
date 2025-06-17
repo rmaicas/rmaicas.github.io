@@ -1219,43 +1219,45 @@ select option {
 			<button id="set" style="background-color: red;color: white;border-color: red;" onclick="saveNote()">SAVE</button>
 		</div>
 		
-		<div class="splitter" style="width: 100%;">
+		
 
-			<div class="splitter__pane" style="width:35%;min-width: 10%;padding-top:10px;">
-				<textarea style="max-width: 98%;background-color: lightgray;" name="note" cols="122" id="note" rows="40" onblur="saveNote()"></textarea>
-				<img src="Investing-Cycles-vs-Market-Cycle.jpg" alt="Investing-Cycles-vs-Market-Cycle.jpg" width="99%" style="padding-top: 10px;">
-				<img src="CiclicasVsDefensivas.png" alt="CiclicasVsDefensivas.jpg" width="99%" style="padding-top: 10px;">
-				<img src="Retorno Nivel Vix.png" alt="Retorno Nivel Vix.jpg" width="99%" style="padding-top: 10px;">
-			</div>
+			<div style="width:100%;min-width: 10%;padding-top:10px;">
+				<textarea style="max-width: 98%;background-color: lightgray;" name="note" cols="300" id="note" rows="10" onblur="saveNote()"></textarea>
+				<div>
+					<img src="Investing-Cycles-vs-Market-Cycle.jpg" alt="Investing-Cycles-vs-Market-Cycle.jpg" width="33%" style="padding-top: 10px;vertical-align: top;">
+					<img src="CiclicasVsDefensivas.png" alt="CiclicasVsDefensivas.jpg" width="33%" style="padding-top: 10px;vertical-align: top;">
+					<img src="Retorno Nivel Vix.png" alt="Retorno Nivel Vix.jpg" width="33%" style="padding-top: 10px;vertical-align: top;">
+				</div>
 			
 			
-			<div class="splitter__pane" >
-				<div style="width:100%;padding-top:0px;">
-					<div class="flagList">
-						<label for="purpleList">&#129002; Purple List:</label>
-						<table class="list-group" name="purpleList" id="purpleList" style="font-size: small;"></table>
+				<div>
+					<div style="width:100%;padding-top:0px;">
+						<div class="flagList">
+							<label for="purpleList">&#129002; Purple List:</label>
+							<table class="list-group" name="purpleList" id="purpleList" style="font-size: small;"></table>
+						</div>
+					</div>	
+					<div style="width:100%;padding-top:10px;">	
+						<div class="flagList"">
+							<label for="blueList">&#128998; Blue List:</label>
+							<table class="list-group" name="blueList" id="blueList" style="font-size: small;"></table>
+						</div>
 					</div>
-				</div>	
-				<div style="width:100%;padding-top:10px;">	
-					<div class="flagList"">
-						<label for="blueList">&#128998; Blue List:</label>
-						<table class="list-group" name="blueList" id="blueList" style="font-size: small;"></table>
+					<div style="width:100%;padding-top:10px;">		
+						<div class="flagList">
+							<label for="greenList">&#129001; Green List:</label>
+							<table class="list-group" name="greenList" id="greenList" style="font-size: small;"></table>
+						</div>
 					</div>
-				</div>
-				<div style="width:100%;padding-top:10px;">		
-					<div class="flagList">
-						<label for="greenList">&#129001; Green List:</label>
-						<table class="list-group" name="greenList" id="greenList" style="font-size: small;"></table>
-					</div>
-				</div>
-				<div style="width:100%;padding-top:10px;">
-					<div class="flagList">
-						<label for="redList">&#128997; Red List:</label>
-						<table class="list-group" name="redList" id="redList" style="font-size: small;"></table>
+					<div style="width:100%;padding-top:10px;">
+						<div class="flagList">
+							<label for="redList">&#128997; Red List:</label>
+							<table class="list-group" name="redList" id="redList" style="font-size: small;"></table>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		
 	</div>
 </div>
 
@@ -1529,10 +1531,11 @@ var arrayRed = [];
 var arrayGreen = [];
 var arrayBlue = [];
 var arrayPurple = [];
+var arrayComments=[];
 
 var currentTab='';
 
-var dividendsTooltip='DPS TTM / DPS indicated (no incluyen dividendos especiales)<br>Year Growth(continue years growth)<br>Payout(continue payout growth) (basado en beneficio neto)';
+var dividendsTooltip='DPS TTM / DPS indicated (no incluyen dividendos especiales)<br>Growth Year(continue years growth)<br>Payout(continue payout growth) (basado en beneficio neto)';
 var fundamentalsTooltip='PER / ROIC / ROE / Operating Margin (ttm) / Net Debt To Ebitda'
 					+'<br><br>PER: Price Earnings Ratio. PER= Precio Acción / EPS(anual). PER=20, significa que la acción cotiza a 20 veces beneficios anuales.\nAlto Crecimiento: [20-30]\nCrecimiento Medio: [16-20]\nCrecimiento Bajo: [10-15]'
 					+'<br><br>ROIC:Return on Invested Capital (Muy Importante): Relación(%) = Beneficios / dinero que tanto los accionistas como los tenedores de deuda han dado a la empresa para medir la habilidad de la administración en la asignación de capital.\nUn ROIC alto y estable durante años es una buena forma de saber que una compañía tiene fuertes ventajas competitivas. También permite ver que la directiva está haciendo una buena gestión del capital.<br>'
@@ -1583,42 +1586,18 @@ var fundamentalsTooltip='PER / ROIC / ROE / Operating Margin (ttm) / Net Debt To
 					    +'  • < 5 Industrial REITs<br>'
 					    +'  • < 5.5 Resto de REITs';
 						
-var technicalsTooltip='Oscillator Rating / Moving Average Rating / Technical Rating / MACD (normalize by ATR) [+/- 1.5 son ya puntos extremos]'
-					+'<ul><li>Oscillator Average Rating: Aparentemente establece un rating segun la combinacion de multiples osciladores técnicos.</li>'
-					+'<li>Moving Average Rating: Aparentemente establece un rating segun la combinacion de multiples moving average. Parece ser mas lento que el Oscillator Rating.</li>'
-					+'<li>Technical Rating: Combina los valores de multiples indicadores técnicos.</li>'
+var technicalsTooltip='Technical Rating / MACD (normalize by ATR) [+/- 1.5 son ya puntos extremos]'
+					//+'<ul><li>Oscillator Average Rating: Aparentemente establece un rating segun la combinacion de multiples osciladores técnicos.</li>'
+					//+'<li>Moving Average Rating: Aparentemente establece un rating segun la combinacion de multiples moving average. Parece ser mas lento que el Oscillator Rating.</li>'
+					+'<ul><li>Technical Rating: Combina los valores de multiples indicadores técnicos.</li>'
 					+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#129001;: Strong Buy&nbsp;&nbsp;&nbsp;&#128994;: Buy&nbsp;&nbsp;&nbsp;&#129003;: Neutral&nbsp;&nbsp;&nbsp;&#128308;: Sell&nbsp;&nbsp;&nbsp;&#128997;: Strong Sell</ul>'
 					+'<ul><li>MACD normalizado por ATR (MACD/ATR): Se observa que los valores  +/- 1.5 son puntos extremos.</li></ul>'
 
 function onLoad() {
-	getNote();
-	activeSplitters();
-	setTabContentListTV("tabIndices", "indicesListTV", arrIndices);
-	setTabContentListTV("tabIndices", "etfIndicesListTV", arrEtfIndices);
-	setTabContentListTV("tabMarketTimming", "marketTimmingStocksListTV", arrMarketTimmingStocks);
-	setTabContentListTV("tabMarketTimming", "marketTimmingBondsListTV", arrMarketTimmingBonds);
-	setTabContentListTV("tabMarketTimming", "marketTimmingEconomyListTV", arrMarketTimmingEconomy);
-	setTabContentListTV("tabForex", "forexListTV", arrForex);
-	setTabContentListTV("tabForex", "yieldListTV", arrYields);
-	setTabContentListTV("tabBasicMaterials", "basicMaterialsIndicesListTV", arrBasicMaterialsIndices);
-	setTabContentListTV("tabBasicMaterials", "basicMaterialsTimmingListTV", arrBasicMaterialsTimming);
-	setTabContentListTV("tabBasicMaterials", "basicMaterialsFuturesListTV", arrBasicMaterialsFutures);
-	setTabContentListTV("tabBasicMaterials", "basicMaterialsSpotListTV", arrBasicMaterialsSpot);
-	setTabContentListTV("tabBasicMaterials", "basicMaterialsEtfListTV", arrBasicMaterialsEtf);
-	setTabContentListTV("tabSectors", "sectorsListTV", arrSectors);
-	setTabContentListTV("tabUsaStocks", "usaStocksListTV", arrUsaStocks);
-	setTabContentListTV("tabUsaStocks", "usaREITsListTV", arrUsaREITs);
-	setTabContentListTV("tabWorldStocks", "chinaStocksListTV", arrChinaStocks);
-	setTabContentListTV("tabWorldStocks", "europeStocksListTV", arrEuropeStocks);
-	setTabContentListTV("tabWorldStocks", "canadaStocksListTV", arrCanadaStocks);
-	setTabContentListTV("tabWorldStocks", "japanStocksListTV", arrJapanStocks);
-	setTabContentListTV("tabWorldStocks", "othersStocksListTV", arrOthersStocks);
-	setTabContentListTV("tabETFs", "etfFixedIncomeListTV", arrEtfFixedIncome);
-	setTabContentListTV("tabETFs", "etfVariableIncomeListTV", arrEtfVariableIncome);
-	setTabContentListTV("tabETFs", "etfVariableIncomeDividendListTV", arrEtfVariableIncomeDividend);
-	setTabContentListTV("tabETFs", "etfRealEstateListTV", arrEtfRealEstate);
-	setTabContentListTV("tabResearches", "researchesListTV", arrResearches);
+	//getNote();
 	getFlags();
+	activeSplitters();
+	setAllTabContentListTV();
 	setAllFlagsOnPage();
 	const el = document.querySelector('#mainTab');
 	currentTab='tabNotes';
@@ -1658,10 +1637,17 @@ function saveNote() {
 }
 
 // Manage Flags
-function setItemInArray(array, ticket, refDataTV, description, comment) {
+function setCommentInArray(ticket, comment) {
+    var index = arrayComments.findIndex(i => i.id === ticket);
+    if (index === -1) arrayComments.push({"id":ticket, "comment":comment})
+	else arrayComments[index]={"id":ticket, "comment":comment};
+    return arrayComments;
+}
+
+function setItemInArray(array, ticket, refDataTV, description) {
     var index = array.findIndex(i => i.id === ticket);
-    if (index === -1) array.push({"id":ticket, "refDataTV":refDataTV, "desc":description, "comment":comment})
-	else array[index]={"id":ticket, "refDataTV":refDataTV, "desc":description, "comment":comment};
+    if (index === -1) array.push({"id":ticket, "refDataTV":refDataTV, "desc":description})
+	else array[index]={"id":ticket, "refDataTV":refDataTV, "desc":description};
 	
     return array;
 }
@@ -1678,6 +1664,7 @@ function saveFlags() {
 	localStorage.greenFlags = JSON.stringify(arrayGreen);
 	localStorage.blueFlags = JSON.stringify(arrayBlue);
 	localStorage.purpleFlags = JSON.stringify(arrayPurple);
+	localStorage.comments = JSON.stringify(arrayComments);
 }
 
 function getFlags() {
@@ -1686,6 +1673,35 @@ function getFlags() {
 	arrayGreen = JSON.parse(localStorage.greenFlags);
 	arrayBlue = JSON.parse(localStorage.blueFlags);
 	arrayPurple = JSON.parse(localStorage.purpleFlags);
+	arrayComments = JSON.parse(localStorage.comments);
+}
+
+function setAllTabContentListTV() {
+	setTabContentListTV("tabIndices", "indicesListTV", arrIndices);
+	setTabContentListTV("tabIndices", "etfIndicesListTV", arrEtfIndices);
+	setTabContentListTV("tabMarketTimming", "marketTimmingStocksListTV", arrMarketTimmingStocks);
+	setTabContentListTV("tabMarketTimming", "marketTimmingBondsListTV", arrMarketTimmingBonds);
+	setTabContentListTV("tabMarketTimming", "marketTimmingEconomyListTV", arrMarketTimmingEconomy);
+	setTabContentListTV("tabForex", "forexListTV", arrForex);
+	setTabContentListTV("tabForex", "yieldListTV", arrYields);
+	setTabContentListTV("tabBasicMaterials", "basicMaterialsIndicesListTV", arrBasicMaterialsIndices);
+	setTabContentListTV("tabBasicMaterials", "basicMaterialsTimmingListTV", arrBasicMaterialsTimming);
+	setTabContentListTV("tabBasicMaterials", "basicMaterialsFuturesListTV", arrBasicMaterialsFutures);
+	setTabContentListTV("tabBasicMaterials", "basicMaterialsSpotListTV", arrBasicMaterialsSpot);
+	setTabContentListTV("tabBasicMaterials", "basicMaterialsEtfListTV", arrBasicMaterialsEtf);
+	setTabContentListTV("tabSectors", "sectorsListTV", arrSectors);
+	setTabContentListTV("tabUsaStocks", "usaStocksListTV", arrUsaStocks);
+	setTabContentListTV("tabUsaStocks", "usaREITsListTV", arrUsaREITs);
+	setTabContentListTV("tabWorldStocks", "chinaStocksListTV", arrChinaStocks);
+	setTabContentListTV("tabWorldStocks", "europeStocksListTV", arrEuropeStocks);
+	setTabContentListTV("tabWorldStocks", "canadaStocksListTV", arrCanadaStocks);
+	setTabContentListTV("tabWorldStocks", "japanStocksListTV", arrJapanStocks);
+	setTabContentListTV("tabWorldStocks", "othersStocksListTV", arrOthersStocks);
+	setTabContentListTV("tabETFs", "etfFixedIncomeListTV", arrEtfFixedIncome);
+	setTabContentListTV("tabETFs", "etfVariableIncomeListTV", arrEtfVariableIncome);
+	setTabContentListTV("tabETFs", "etfVariableIncomeDividendListTV", arrEtfVariableIncomeDividend);
+	setTabContentListTV("tabETFs", "etfRealEstateListTV", arrEtfRealEstate);
+	setTabContentListTV("tabResearches", "researchesListTV", arrResearches);
 }
 
 function setAllFlagsOnPage() {
@@ -1695,22 +1711,37 @@ function setAllFlagsOnPage() {
 	setFlagTableContent("purpleList", arrayPurple, CHAR_PURPLE);
 }
 
-function changeFlag(ticket, refDataTV, description, comment, charFlagOrig, charFlagTarget){
+function changeComment(ticket, comment){
+	auxComment = comment.replaceAll(String.fromCharCode(10), '<br>');
+	setCommentInArray(ticket, auxComment);
+	saveFlags();
+	setAllFlagsOnPage();
+	setCommentToTicket(ticket, auxComment);
+	callsTVForTab(currentTab)
+}
+
+function changeFlag(ticket, refDataTV, description, charFlagOrig, charFlagTarget){
 	arrayOrig = charFlagOrig===CHAR_RED? arrayRed : charFlagOrig===CHAR_GREEN? arrayGreen : charFlagOrig===CHAR_BLUE? arrayBlue : arrayPurple;
 	arrayDest = charFlagTarget===CHAR_RED? arrayRed : charFlagTarget===CHAR_GREEN? arrayGreen : charFlagTarget===CHAR_BLUE? arrayBlue : arrayPurple;
 	if (charFlagOrig !== charFlagTarget) deleteItemInArray(arrayOrig,ticket);
 	setFlagToTicket(ticket, charFlagTarget)
-	setItemInArray(arrayDest, ticket, refDataTV, description, comment.replaceAll(String.fromCharCode(10), '<br>'));
+	setItemInArray(arrayDest, ticket, refDataTV, description);
 	saveFlags();
 	setAllFlagsOnPage();
 	callsTVForTab(currentTab)
 }
 
 function setFlagToTicket(ticket, charFlag) {
-	
 	let nodeList = document.querySelectorAll("#"+ticket.replaceAll(":", "\\:").replaceAll("!", "\\!").replaceAll("/", "\\/"));
 	for (let i = 0; i < nodeList.length; i++) {
 	  nodeList[i].previousElementSibling.previousElementSibling.previousElementSibling.innerText = charFlag;
+	}
+}
+
+function setCommentToTicket(ticket, comment) {
+	let nodeList = document.querySelectorAll("#"+ticket.replaceAll(":", "\\:").replaceAll("!", "\\!").replaceAll("/", "\\/"));
+	for (let i = 0; i < nodeList.length; i++) {
+		nodeList[i].parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.childNodes[0].innerText = comment;
 	}
 }
 
@@ -1731,7 +1762,10 @@ function setFlagTableContent(listId, array, charFlag) {
 		<th class="header-table tooltip" style="font-size: small; width: 6%;" title="PER / ROIC/ ROE / Operating Margin (ttm)">Fundamentals(ttm)<span class="tooltiptext">${fundamentalsTooltip}</span></th>
 		<th class="header-table tooltip" style="font-size: small; width: 5%;" title="MA Rating / Osc. Rat./ Technical Rat. / MACD (normalize by ATR) [+/- 1.5 son ya puntos extremos]">Technicals Weekly<span class="tooltiptext">${technicalsTooltip}</span></th>
 		<th class="header-table tooltip" style="font-size: small; width: 5%;" title="MA Rating / Osc. Rat./ Technical Rat. / MACD (normalize by ATR) [+/- 1.5 son ya puntos extremos]">Technicals Daily<span class="tooltiptext">${technicalsTooltip}</span></th>
-		<th style="width: 28%;" class="header-table">Description</th><th style="width: 22%;" class="header-table">Comment</th><th style="width: 2%;" class="header-table"></th><th style="width: 1%;" class="header-table"><th style="width: 1%;" class="header-table"><th style="width: 1%;" class="header-table"></th></tr>`
+		<th class="header-table" style="width: 10%;">Sector - Industry</th>
+		<th style="width: 28%;" class="header-table">Description</th>
+		<th style="width: 22%;" class="header-table">Comment</th>
+		<th style="width: 2%;" class="header-table"></th><th style="width: 1%;" class="header-table"><th style="width: 1%;" class="header-table"><th style="width: 1%;" class="header-table"></th></tr>`
 		for(var i = 0; i < array.length; i++) {
 			var item = array[i];
 			if ((typeof item.refDataTV == 'undefined') || (item.refDataTV == 'undefined') || (item.refDataTV == '')) {
@@ -1740,6 +1774,7 @@ function setFlagTableContent(listId, array, charFlag) {
 			if ((typeof item.desc == 'undefined') || (item.desc == 'undefined')){
 				item.desc = ""
 			}
+			commentFound = arrayComments.find(itemComment => itemComment.id === item.id);
 			colorList.innerHTML += `<tr class="prTableRow"><td style="width: 160px;">&nbsp;<img src="" logoid="${item.refDataTV}" class="firstImage"/><img src="" class="secondImage"/>`
 				+`<span class="pointAndCall" onclick="liClick('`+item.id+`')" style="font-size: small;">`+item.id+`</span></td>`
 				+`<td style="width: 220px; text-align: right;"> <span style="font-size: xx-small;">`+ (item.id!=item.refDataTV?item.refDataTV:``)+`</span>&nbsp;<span class="tabNotes" refDataTV="`+item.refDataTV+`" style="font-size: small;"></span></td>`
@@ -1750,11 +1785,11 @@ function setFlagTableContent(listId, array, charFlag) {
 				+`<td style="font-size: small; text-align: center;" refFundamental="${item.refDataTV}"></td>`
 				+`<td style="font-size: smaller; text-align: center;" refRecommendsW="${item.refDataTV}"></td>`
 				+`<td style="font-size: smaller; text-align: center;" refRecommendsD="${item.refDataTV}"></td>`
-			
+				+`<td style="font-size: smaller; text-align: left;" refSectorIndustryDataTV="${item.refDataTV}"></td>`
 				+`<td style="font-size: x-small;" refDescription="${item.refDataTV}" additionalDescription="${item.desc}"></td>`
-				+`<td><div style="background-color: #363535;color: gainsboro;" contenteditable onblur="changeFlag( '${item.id}', '${item.refDataTV}', '${item.desc}', innerText, '${charFlag}', '${charFlag}')">${item.comment}</div></td>`
+				+`<td><div style="background-color: #363535;color: gainsboro;" contenteditable onblur="changeComment( '${item.id}', innerText)">${commentFound?.comment || ""}</div></td>`
 				+`<td style="font-size: x-small; text-align: right;" >
-					<select id="${'select_'+item.id}" onChange="changeFlag( '${item.id}', '${item.refDataTV}', '${item.desc}', '${item.comment}', '${charFlag}', document.getElementById('${'select_'+item.id}').value)" style="border: 0;background-color: transparent;color: lightgray;">
+					<select id="${'select_'+item.id}" onChange="changeFlag( '${item.id}', '${item.refDataTV}', '${item.desc}', '${charFlag}', document.getElementById('${'select_'+item.id}').value)" style="border: 0;background-color: transparent;color: lightgray;">
 						<option value="${CHAR_RED}"    ${charFlag == CHAR_RED? "selected":""}>${CHAR_RED}</option>
 						<option value="${CHAR_GREEN}"  ${charFlag == CHAR_GREEN? "selected":""}>${CHAR_GREEN}</option>
 						<option value="${CHAR_BLUE}"   ${charFlag == CHAR_BLUE? "selected":""}>${CHAR_BLUE}</option>
@@ -1776,15 +1811,18 @@ function setTabContentListTV(tabId, listTV, arrListTV){
 				<th class="header-table tooltip" style="width: 7%;">Div.<span class="tooltiplittletext">${dividendsTooltip}</span></th>
 				<th class="header-table tooltip" style="width: 1.5%;">DD<span class="tooltiplittletext">% Drawdown desde maximos de todos los tiempos (ATH)</span></th>
 				<th class="header-table tooltip" style="font-size: small; width: 8%;" title="PER / ROIC/ ROE / Operating Margin (ttm)">Fundamentals(ttm)<span class="tooltiptext">${fundamentalsTooltip}</span></th>
-				<th class="header-table tooltip" style="font-size: small; width: 6%;" title="MA Rating / Osc. Rat./ Technical Rat. / MACD (normalize by ATR) [+/- 1.5 son ya puntos extremos]">Technicals Weekly<span class="tooltiptext">${technicalsTooltip}</span></th>
-				<th class="header-table tooltip" style="font-size: small; width: 6%;" title="MA Rating / Osc. Rat./ Technical Rat. / MACD (normalize by ATR) [+/- 1.5 son ya puntos extremos]">Technicals Daily<span class="tooltiptext">${technicalsTooltip}</span></th>				
- 			    <th class="header-table" style="width: 15%;">Sector - Industry</th><th class="header-table" style="width: 36%;">Description</th></tr>`
+				<th class="header-table tooltip" style="font-size: small; width: 3%;" title="MA Rating / Osc. Rat./ Technical Rat. / MACD (normalize by ATR) [+/- 1.5 son ya puntos extremos]">Technicals Weekly<span class="tooltiptext">${technicalsTooltip}</span></th>
+				<th class="header-table tooltip" style="font-size: small; width: 3%;" title="MA Rating / Osc. Rat./ Technical Rat. / MACD (normalize by ATR) [+/- 1.5 son ya puntos extremos]">Technicals Daily<span class="tooltiptext">${technicalsTooltip}</span></th>				
+ 			    <th class="header-table" style="width: 14%;">Sector - Industry</th>
+				<th class="header-table" style="width: 25%;">Description</th>
+				<th style="width: 20%;" class="header-table">Comment</th></tr>`
 	
 	for (item of arrListTV) {
 		if (typeof item.refDataTV == 'undefined') {
 			item.refDataTV = item.id
 		}
 		
+		commentFound = arrayComments.find(itemComment => itemComment.id === item.id);
 		listTV.innerHTML += `<tr class="prTableRow"><td style="width: 180px;"><button type="button" class="flag" onclick="setFlag('${item.id}', '${item.refDataTV}', '${item.desc}');">&#11036;</button>`
 			+`&nbsp;<img src="" logoid="${item.refDataTV}" class="firstImage"/><img src="" class="secondImage"/>`
 			+`<span class="pointAndCall" onclick="liClick('${item.id}')" id="${item.id}" style="font-size: small;">${item.id}</span></td>`
@@ -1798,7 +1836,8 @@ function setTabContentListTV(tabId, listTV, arrListTV){
 			+`<td style="font-size: smaller; text-align: center;" refRecommendsD="${item.refDataTV}"></td>`
 			
 			+`<td style="font-size: smaller; text-align: left;" refSectorIndustryDataTV="${item.refDataTV}"></td>`
-			+`<td style="font-size: small;" refDescription="${item.refDataTV}" additionalDescription="${item.desc}"></td> </tr>`;
+			+`<td style="font-size: small;" refDescription="${item.refDataTV}" additionalDescription="${item.desc}"></td>`
+			+`<td><div style="background-color: #363535;color: gainsboro;" contenteditable onblur="changeComment( '${item.id}', innerText)">${commentFound?.comment || ""}</div></td></tr>`;
 	}
 }
 
@@ -1829,18 +1868,18 @@ function removeFlag(ticket){
 function setFlag(ticket, refDataTV, description){
 	if (getFlagOfTicket(ticket) == CHAR_WHITE) {  // WHITE pasa a RED
 		setFlagToTicket(ticket, CHAR_RED)
-		setItemInArray(arrayRed, ticket, refDataTV, description, '');
+		setItemInArray(arrayRed, ticket, refDataTV, description);
 	} else if (getFlagOfTicket(ticket) == CHAR_RED) { // RED pasa a GREEN
 		setFlagToTicket(ticket, CHAR_GREEN)
-		setItemInArray(arrayGreen, ticket, refDataTV, description, '');
+		setItemInArray(arrayGreen, ticket, refDataTV, description);
 		deleteItemInArray(arrayRed,ticket);
 	} else if (getFlagOfTicket(ticket) == CHAR_GREEN) { // GREEN pasa a BLUE
 		setFlagToTicket(ticket, CHAR_BLUE)
-		setItemInArray(arrayBlue, ticket, refDataTV, description, '');
+		setItemInArray(arrayBlue, ticket, refDataTV, description);
 		deleteItemInArray(arrayGreen,ticket);
 	} else if (getFlagOfTicket(ticket) == CHAR_BLUE) { // BLUE pasa a PURPLE
 		setFlagToTicket(ticket, CHAR_PURPLE)
-		setItemInArray(arrayPurple, ticket, refDataTV, description, '');
+		setItemInArray(arrayPurple, ticket, refDataTV, description);
 		deleteItemInArray(arrayBlue,ticket);
 	} else if (getFlagOfTicket(ticket) == CHAR_PURPLE) { // PURPLE pasa a WHITE
 		setFlagToTicket(ticket, CHAR_WHITE)
@@ -1931,7 +1970,7 @@ const callApiTV = async (symbol) => {
 					dpsPayoutRatio = ((jsonResponse["dividend_payout_ratio_ttm"])?? "").toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 });
 					dpsPayoutRatio+= dpsPayoutRatio!=""?'%':'';
 					dpsContPayoutRatioGrowth = ((jsonResponse["continuous_dividend_payout"])?? "").toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 0 });
-					item.innerHTML = `ttm: ${dpsttm} / ind: ${dpsind}<br>Y growth: ${dpsYoYGrowth}(${dpsContYGrowth})
+					item.innerHTML = `ttm: ${dpsttm} / ind: ${dpsind}<br>growthY: ${dpsYoYGrowth}(${dpsContYGrowth})
 					<br>Payout: ${dpsPayoutRatio}(${dpsContPayoutRatioGrowth})`;
 					item.style.color="yellow";
 				}
@@ -1981,25 +2020,25 @@ const callApiTV = async (symbol) => {
 			
 			arrRecommendsW = document.querySelectorAll('[refRecommendsW="'+symbol+'"]');
 			for (item of arrRecommendsW) {
-				if (jsonResponse["Recommend.Other|1W"]!=null){
-					recOt = jsonResponse["Recommend.Other|1W"];
-					recommendsW = 'o:'+(recOt>0.50? '&#129001;' : recOt>0.10? '&#128994;' : recOt>=-0.10? '&#129003;' : recOt>=-0.50? '&#128308;' : '&#128997;') + ' / ';
-				} else {
-					recommendsW = 'o: - /';
-				}
-				
-				if (jsonResponse["Recommend.MA|1W"]!=null){
-					recMA = jsonResponse["Recommend.MA|1W"];
-					recommendsW += 'm:'+(recMA>0.50? '&#129001;' : recMA>0.10? '&#128994;' : recMA>=-0.10? '&#129003;' : recMA>=-0.50? '&#128308;' : '&#128997;') + ' / ';
-				} else {
-					recommendsW += 'm: - /';
-				}
+				//if (jsonResponse["Recommend.Other|1W"]!=null){
+				//	recOt = jsonResponse["Recommend.Other|1W"];
+				//	recommendsW = 'o:'+(recOt>0.50? '&#129001;' : recOt>0.10? '&#128994;' : recOt>=-0.10? '&#129003;' : recOt>=-0.50? '&#128308;' : '&#128997;') + ' / ';
+				//} else {
+				//	recommendsW = 'o: - /';
+				//}
+				//
+				//if (jsonResponse["Recommend.MA|1W"]!=null){
+				//	recMA = jsonResponse["Recommend.MA|1W"];
+				//	recommendsW += 'm:'+(recMA>0.50? '&#129001;' : recMA>0.10? '&#128994;' : recMA>=-0.10? '&#129003;' : recMA>=-0.50? '&#128308;' : '&#128997;') + ' / ';
+				//} else {
+				//	recommendsW += 'm: - /';
+				//}
 				
 				if (jsonResponse["Recommend.All|1W"]!=null){
 					recAll = jsonResponse["Recommend.All|1W"];
-					recommendsW += 't:'+(recAll>0.50? '&#129001;' : recAll>0.10? '&#128994;' : recAll>=-0.10? '&#129003;' : recAll>=-0.50? '&#128308;' : '&#128997;') + ' / ';
+					recommendsW = 't:'+(recAll>0.50? '&#129001;' : recAll>0.10? '&#128994;' : recAll>=-0.10? '&#129003;' : recAll>=-0.50? '&#128308;' : '&#128997;') + ' / ';
 				} else {
-					recommendsW += 't: - /';
+					recommendsW = 't: - /';
 				}
 								
 				macdW=null;
@@ -2021,25 +2060,25 @@ const callApiTV = async (symbol) => {
 			
 			arrRecommendsD = document.querySelectorAll('[refRecommendsD="'+symbol+'"]');
 			for (item of arrRecommendsD) {
-				if (jsonResponse["Recommend.Other"]!=null){
-					recOtD = jsonResponse["Recommend.Other"];
-					recommendsD = 'o:'+(recOtD>0.50? '&#129001;' : recOtD>0.10? '&#128994;' : recOtD>=-0.10? '&#129003;' : recOtD>=-0.50? '&#128308;' : '&#128997;') + ' / ';
-				} else {
-					recommendsD = 'o: - /';
-				}
-				
-				if (jsonResponse["Recommend.MA"]!=null){
-					recMAD = jsonResponse["Recommend.MA"];
-					recommendsD += 'm:'+(recMAD>0.50? '&#129001;' : recMAD>0.10? '&#128994;' : recMAD>=-0.10? '&#129003;' : recMAD>=-0.50? '&#128308;' : '&#128997;') + ' / ';
-				} else {
-					recommendsD += 'm: - /';
-				}
+				//if (jsonResponse["Recommend.Other"]!=null){
+				//	recOtD = jsonResponse["Recommend.Other"];
+				//	recommendsD = 'o:'+(recOtD>0.50? '&#129001;' : recOtD>0.10? '&#128994;' : recOtD>=-0.10? '&#129003;' : recOtD>=-0.50? '&#128308;' : '&#128997;') + ' / ';
+				//} else {
+				//	recommendsD = 'o: - /';
+				//}
+				//
+				//if (jsonResponse["Recommend.MA"]!=null){
+				//	recMAD = jsonResponse["Recommend.MA"];
+				//	recommendsD += 'm:'+(recMAD>0.50? '&#129001;' : recMAD>0.10? '&#128994;' : recMAD>=-0.10? '&#129003;' : recMAD>=-0.50? '&#128308;' : '&#128997;') + ' / ';
+				//} else {
+				//	recommendsD += 'm: - /';
+				//}
 				
 				if (jsonResponse["Recommend.All"]!=null){
 					recAllD = jsonResponse["Recommend.All"];
-					recommendsD += 't:'+(recAllD>0.50? '&#129001;' : recAllD>0.10? '&#128994;' : recAllD>=-0.10? '&#129003;' : recAllD>=-0.50? '&#128308;' : '&#128997;') + ' / ';
+					recommendsD = 't:'+(recAllD>0.50? '&#129001;' : recAllD>0.10? '&#128994;' : recAllD>=-0.10? '&#129003;' : recAllD>=-0.50? '&#128308;' : '&#128997;') + ' / ';
 				} else {
-					recommendsD += 't: - /';
+					recommendsD = 't: - /';
 				}
 				
 				macdD=null;
