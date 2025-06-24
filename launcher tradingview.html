@@ -1191,6 +1191,15 @@ select option {
   opacity: 1;
 }
 
+.colorData {
+  color: yellow;
+}
+.colorData.orange{
+  color: orange;
+}
+.colorData.green{
+  color: lightgreen;
+}
 </style>
 
 <!---- Cabecera ---->
@@ -1984,9 +1993,10 @@ const callApiTV = async (symbol) => {
 					dpsPayoutRatio = ((jsonResponse["dividend_payout_ratio_ttm"])?? "").toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 });
 					dpsPayoutRatio+= dpsPayoutRatio!=""?'%':'';
 					dpsContPayoutRatioGrowth = ((jsonResponse["continuous_dividend_payout"])?? "").toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 0 });
-					item.innerHTML = `ttm: ${dpsttm} / ind: ${dpsind}<br>growthY: ${dpsYoYGrowth}(${dpsContYGrowth})
-					<br>Payout: ${dpsPayoutRatio}(${dpsContPayoutRatioGrowth})`;
-					item.style.color="yellow";
+					item.innerHTML = `ttm: <span class="colorData ${jsonResponse["dividends_yield_current"] > 5? 'green' :  (jsonResponse["dividends_yield_current"] > 3 ? 'orange' :'')}">${dpsttm}</span> / ind: <span class="colorData ${jsonResponse["dividends_yield_current"] > 5? 'green' : (jsonResponse["dividends_yield_current"] > 3 ? 'orange' : '')}">${dpsind}</span>
+					<br>growthY: <span class="colorData">${dpsYoYGrowth}(${dpsContYGrowth})</span>
+					<br>Payout: <span class="colorData">${dpsPayoutRatio}(${dpsContPayoutRatioGrowth})</span>`;
+					item.style.color="silver";
 				}
 			}
 			
@@ -2003,32 +2013,32 @@ const callApiTV = async (symbol) => {
 			arrFundamental = document.querySelectorAll('[refFundamental="'+symbol+'"]');
 			for (item of arrFundamental) {
 				if (jsonResponse["price_earnings_ttm"]!=null){
-					perRoicRoe = `per:${(+jsonResponse["price_earnings_ttm"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })} / `;
+					perRoicRoe = `per:<span class="colorData">${(+jsonResponse["price_earnings_ttm"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}</span> / `;
 				} else {
 					perRoicRoe = '- /';
 				}
 				if (jsonResponse["return_on_invested_capital"]!=null){
-					perRoicRoe += `roic:${(+jsonResponse["return_on_invested_capital"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })} / `;
+					perRoicRoe += `roic:<span class="colorData">${(+jsonResponse["return_on_invested_capital"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}</span> / `;
 				} else {
 					perRoicRoe += '- /';
 				}
 				if (jsonResponse["return_on_equity"]!=null){
-					perRoicRoe += `roe:${(+jsonResponse["return_on_equity"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })} / `;
+					perRoicRoe += `roe:<span class="colorData">${(+jsonResponse["return_on_equity"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}</span> / `;
 				} else {
 					perRoicRoe += '- / ';
 				}
 				if (jsonResponse["operating_margin"]!=null){
-					perRoicRoe += `om:${(+jsonResponse["operating_margin"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })} / `;
+					perRoicRoe += `om:<span class="colorData">${(+jsonResponse["operating_margin"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}</span> / `;
 				} else {
 					perRoicRoe += '- / ';
 				}
 				if (jsonResponse["net_debt_to_ebitda_fq"]!=null){
-					perRoicRoe += `nd2e:${(+jsonResponse["net_debt_to_ebitda_fq"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}`;
+					perRoicRoe += `nd2e:<span class="colorData">${(+jsonResponse["net_debt_to_ebitda_fq"]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}</span>`;
 				} else {
 					perRoicRoe += '-';
 				}
 				item.innerHTML = `${perRoicRoe}`;
-				item.style.color="orange";
+				item.style.color="silver";
 			}
 			
 			
