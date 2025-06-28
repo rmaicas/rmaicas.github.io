@@ -603,7 +603,8 @@ const reitsObj = {
   "NYSE:WPC": "REIT: Industrial (aunque esta diversificado). Su cartera incluye propiedades industriales, de almacén y minoristas, todas bajo contratos de arrendamiento a largo plazo con aumentos de renta incorporados. Norte America y Europa"
 };
 // Convertir a array de objetos:
-const arrUsaREITs = Object.entries(reitsObj).map(([id, desc]) => ({ id, desc }));
+//const arrUsaREITs = Object.entries(reitsObj).map(([id, desc]) => ({ id, desc }));
+const arrUsaREITs = convertToArrIndices(reitsObj)
 
 	
 <!---- World Stocks  OK ---->
