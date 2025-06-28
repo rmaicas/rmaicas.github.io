@@ -8,52 +8,77 @@
 <body>
 
 <script>
+
+function convertToArrayObjects(obj) {
+  return Object.keys(obj).map(id => {
+    const value = obj[id];
+    
+    // Caso 1: Es un array [desc, refDataTV]
+    if (Array.isArray(value)) {
+      return {
+        id,
+        desc: value[0],
+        refDataTV: value[1]
+      };
+    } 
+    // Caso 2: Es solo un string (descripción)
+    else {
+      return {
+        id,
+        desc: value
+      };
+    }
+  });
+}
+	
 <!---- Indices   OK---->
-arrIndices = [
-	{id:"OANDA:SPX500USD"	, desc:"", refDataTV:"CME_MINI:ES1!"},
-	{id:"AMEX:SPY",		desc:"(EU: MIL:SPY5)"},
-	{id:"AMEX:RSP",		desc:"(EUR: Xtrackers S&P 500 Equal Weight UCITS (XDEW) - XETRA - en euros - IE00BLNMYC90)"},
-	{id:"NYSE:VALUG",	desc:"1700 acciones USA de diferentes industrias y tamaños. Utiliza media geometrica."},
-	{id:"NASDAQ:QQQ",	desc:"EUR: MIL:ANAU"}, 		
-	{id:"CME_MINI:NQ1!",	desc:"Futuros Nasdaq", refDataTV:"CME_MINI:NQ1!"},
-	{id:"NASDAQ:NDXE", 	desc:""},
-	{id:"DJ:DJI",		desc:""},
-	{id:"CBOT_MINI:YM1!", 	desc:"Mini Dow Jones (para ver el volumen real)"},
-	{id:"AMEX:MDY",		desc:""},
-	{id:"AMEX:IWM",		desc:"XETR:XRS2 - XTRACKERS RUSSELL 2000 UCITS ETF (isin: IE00BJZ2DD79)"},
-	{id:"TVC:NYA",		desc:""},
-	{id:"NASDAQ:ACWI",	desc:"El MSCI ACWI (All Country World Index) es un índice que representa la evolución del mercado mundial, incluyendo casi 3.000 compañías de mediana y gran capitalización de 23 países desarrollados y 27 emergentes. Este índice es una mezcla entre el MSCI World y el MSCI Mercados Emergentes.\nEl ACWI está ponderado por capitalización bursátil y ajustado por el free float de las compañías, lo que significa que los movimientos en el precio de las compañías grandes tienen un mayor impacto en la cotización del índice1.\nEs una herramienta útil para proporcionar información sobre la economía y los mercados financieros a nivel global."},
-	{id:"AMEX:EFA",		desc:"Acciones Ex. USA ETF. Sigue un indice de renta variable internacional muy conocido: MSCI`s EAFE"},
-	{id:"OANDA:EU50EUR",	desc:""},
-	{id:"XETR:DAX",		desc:""},
-	{id:"TVC:SX5E",		desc:""},
-	{id:"EURONEXT:PX1",	desc:"(no volume)"},
-	{id:"TVC:UKX",		desc:"(Fuertemente asociado con mineras)"},
-	{id:"TVC:IBEX35",	desc:""},
-	{id:"EURONEXT:MIB",	desc:"Indice Bolsa de Milan, Italia"},
-	{id:"TVC:AEX",		desc:"Indice Paises Bajos"},
-	{id:"OMXSTO:OMXS30",	desc:"Suecia, no real volume) (Europa: parecido, esta capado a un max. 5% por stock. LSE:OMXS - iShares OMX Stockholm Capped UCITS ETF (isin: IE00BD3RYZ16)"},
-	{id:"SIX:SMI",		desc:"No real volume"},
-	{id:"TVC:NI225",	desc:""}, 	
-	{id:"OSE:NK2251!",	desc:"EUR: ETF c/cobertura divisa:WisdomTree Japan Equity UCITS ETF EUR Hedged Acc [IE00BYQCZJ13-WTIF]"},
-	{id:"SSE:000016",	desc:"(Top 50 companies of Shanghai Stock Exchange)" ,refDataTV:"AMEX:AFTY"},
-	{id:"HKEX:HSI1!",	desc:"(Hong Kong Stock Exchange)"},
-	{id:"FTSE:XIN9",	desc:"(chosen from Shanghai Stock Exchange and Shenzhen Stock Exchange)"},
-	{id:"AMEX:FXI",		desc:""},
-	{id:"AMEX:EWY",		desc:""},
-	{id:"AMEX:EWT",		desc:""},
-	{id:"AMEX:ARGT",	desc:"Argentina"},
-	{id:"BCBA:IMV/(BCBA:GGAL/NASDAQ:GGAL*10)",desc:"Simula un Merval en dolares"},
-	{id:"AMEX:EWZ",		desc:"Brazil"},
-	{id:"AMEX:EWW",		desc:"iShares MSCI Mexico ETF (En Europa, usar MIL:XMEX)"},
-	{id:"AMEX:EPP",		desc:"En Europa, usar XETR:ETLK"},
-	{id:"AMEX:EZA",		desc:"South Africa iShares MSCI South Africa Index Fund"},
-	{id:"XETR:IUSW",	desc:"Saudi Arabia (iShares MSCI Saudi Arabia Capped)"},
-	{id:"TADAWUL:MT30USD",	desc:"Indice Arabia Saudita en usd - No real volume"},
-	{id:"ASX:XJO",		desc:"Indice Australia - No real volume"},
-	{id:"NSE:NIFTY",	desc:""},
-	{id:"MIL:XNIF",		desc:"India"},
-];
+const indicesObj = {
+  "OANDA:SPX500USD": ["", "CME_MINI:ES1!"],
+  "AMEX:SPY": "(EU: MIL:SPY5)",
+  "AMEX:RSP": "(EUR: Xtrackers S&P 500 Equal Weight UCITS (XDEW) - XETRA - en euros - IE00BLNMYC90)",
+  "NYSE:VALUG": "1700 acciones USA de diferentes industrias y tamaños. Utiliza media geometrica.",
+  "NASDAQ:QQQ": "EUR: MIL:ANAU",
+  "CME_MINI:NQ1!": ["Futuros Nasdaq", "CME_MINI:NQ1!"],
+  "NASDAQ:NDXE": "",
+  "DJ:DJI": "",
+  "CBOT_MINI:YM1!": "Mini Dow Jones (para ver el volumen real)",
+  "AMEX:MDY": "",
+  "AMEX:IWM": "XETR:XRS2 - XTRACKERS RUSSELL 2000 UCITS ETF (isin: IE00BJZ2DD79)",
+  "TVC:NYA": "",
+  "NASDAQ:ACWI": "El MSCI ACWI (All Country World Index) es un índice que representa la evolución del mercado mundial, incluyendo casi 3.000 compañías de mediana y gran capitalización de 23 países desarrollados y 27 emergentes. Este índice es una mezcla entre el MSCI World y el MSCI Mercados Emergentes.\nEl ACWI está ponderado por capitalización bursátil y ajustado por el free float de las compañías, lo que significa que los movimientos en el precio de las compañías grandes tienen un mayor impacto en la cotización del índice1.\nEs una herramienta útil para proporcionar información sobre la economía y los mercados financieros a nivel global.",
+  "AMEX:EFA": "Acciones Ex. USA ETF. Sigue un indice de renta variable internacional muy conocido: MSCI`s EAFE",
+  "OANDA:EU50EUR": "",
+  "XETR:DAX": "",
+  "TVC:SX5E": "",
+  "EURONEXT:PX1": "(no volume)",
+  "TVC:UKX": "(Fuertemente asociado con mineras)",
+  "TVC:IBEX35": "",
+  "EURONEXT:MIB": "Indice Bolsa de Milan, Italia",
+  "TVC:AEX": "Indice Paises Bajos",
+  "OMXSTO:OMXS30": "Suecia, no real volume) (Europa: parecido, esta capado a un max. 5% por stock. LSE:OMXS - iShares OMX Stockholm Capped UCITS ETF (isin: IE00BD3RYZ16)",
+  "SIX:SMI": "No real volume",
+  "TVC:NI225": "",
+  "OSE:NK2251!": "EUR: ETF c/cobertura divisa:WisdomTree Japan Equity UCITS ETF EUR Hedged Acc [IE00BYQCZJ13-WTIF]",
+  "SSE:000016": ["(Top 50 companies of Shanghai Stock Exchange)", "AMEX:AFTY"],
+  "HKEX:HSI1!": "(Hong Kong Stock Exchange)",
+  "FTSE:XIN9": "(chosen from Shanghai Stock Exchange and Shenzhen Stock Exchange)",
+  "AMEX:FXI": "",
+  "AMEX:EWY": "",
+  "AMEX:EWT": "",
+  "AMEX:ARGT": "Argentina",
+  "BCBA:IMV/(BCBA:GGAL/NASDAQ:GGAL*10)": "Simula un Merval en dolares",
+  "AMEX:EWZ": "Brazil",
+  "AMEX:EWW": "iShares MSCI Mexico ETF (En Europa, usar MIL:XMEX)",
+  "AMEX:EPP": "En Europa, usar XETR:ETLK",
+  "AMEX:EZA": "South Africa iShares MSCI South Africa Index Fund",
+  "XETR:IUSW": "Saudi Arabia (iShares MSCI Saudi Arabia Capped)",
+  "TADAWUL:MT30USD": "Indice Arabia Saudita en usd - No real volume",
+  "ASX:XJO": "Indice Australia - No real volume",
+  "NSE:NIFTY": "",
+  "MIL:XNIF": "India"
+};
+// Generar el array original
+const arrIndices = convertToArrIndices(indicesObj);
 
 arrEtfIndices = [
 	{id:"LSE:VUAA",		desc:"SP500, acum. London (isin: IE00BFMXXD54. TER: 0.07%)"},
