@@ -104,33 +104,33 @@ const arrEtfIndices = convertToArrayObjects(etfIndicesObj);
 
 <!---- Market Timming   OK---->
 const marketTimmingStocksObj = {
-  "FRED:NFCI": "Indice de condiciones financieras. Cuando sube, hay mas restricciones economicas y por lo tanto bajadas en bolsa",
-  "MULTPL:SHILLER_PE_RATIO_MONTH": "The Shiller P/E Ratio helps investors understand whether the stock market as a whole is overvalued or undervalued...",
-  "FRED:BAMLH0A0HYM2": "Diferencia de rendimiento entre bonos no gubernamentales y los bonos gubernamentales...",
-  "CBOE:VIX": "$VIX = volatilidad implícita de 30 días para $SPX. Truco: dividir $VIX por 16...",
-  "CBOE:VVIX": "A partir de 100-110 el mercado empieza a estar inestable.",
-  "TVC:VIX - NASDAQ:VOLI": ">2 Riesgo, <2 No Riesgo",
-  "CBOE:VX2!-CBOE:VX1!": "(Si hay contango (>0, , VX2>VX1) -> OK, normal. Si hay backwardation (<0, VX2<VX1)-> Mal, nervios)",
-  "CBOE:VIX3M/CBOE:VIX": "VRatio: Volatilidad 3 meses / Volatilidad 1 mes...",
-	"CBOE:COR1M": " Refleja la expectativa del mercado de qué tan sincronizados (correlacionados) estarán los retornos de las acciones del S&P 500 en el corto plazo (1 mes).\nSuele oscilar entre 0 (no correlación) y 100 (correlación perfecta).\n - Valores altos (>70) sugieren que los inversores esperan que las acciones se muevan en conjunto (útil en crisis o alta volatilidad). Suelen coincidir con mercados bajistas\n - Valores bajos (<30): Mercado espera divergencia entre sectores/acciones (entornos de crecimiento estable). Oportunidades para stock-picking."
-  "AMEX:SPY/TVC:DXY": "SP500 / Dollar...",
-  "USI:PCCE": "Put / Call Ratio Equities",
-  "INDEX:HIGN-INDEX:LOWN": "New Highs - New Lows (NYSE market) ( >0 = bullish / <0 = bearish)",
-  "AMEX:HYG/AMEX:LQD": "Bonos High Yield / Bonos 'seguros'. Representa un poco el estado de la economía.",
-  "NASDAQ:SDEX": "NATIONS SKEWDEX...",
-  "INDEX:S5FI": "S&P 500 Stocks Above 50-Day Average",
-  "INDEX:S5TH": "S&P 500 Stocks Above 200-Day Average",
-  "AMEX:SPY/AMEX:SPLV": "SP500/SP500 Low Volatility...",
-  "AMEX:MTUM/AMEX:SPLV": "Momentum/Low Volatility Ratio...",
-  "AMEX:RSP/AMEX:SPY": "SP500 equal weight / SP500",
-  "NASDAQ:QQEW/NASDAQ:QQQ": "QQQ equal weight / QQQ",
-  "AMEX:SPHB": "",
-  "AMEX:SPHB/AMEX:SPLV": "ETF High Beta / Low Volatility",
-  "AMEX:VUG/AMEX:VTV": "ETF Vanguard Growth / Value",
-  "NASDAQ:QQEW": "",
-  "NASDAQ:SQQQ": "",
-  "AMEX:ARKK/AMEX:XLK": "Tecnologia con perdida / Sector Tecnologico",
-  "NASDAQ:MAGS": ""
+  	"FRED:NFCI": "Indice de condiciones financieras. Cuando sube, hay mas restricciones economicas y por lo tanto bajadas en bolsa",
+  	"MULTPL:SHILLER_PE_RATIO_MONTH": "The Shiller P/E Ratio helps investors understand whether the stock market as a whole is overvalued or undervalued...",
+  	"FRED:BAMLH0A0HYM2": "Diferencia de rendimiento entre bonos no gubernamentales y los bonos gubernamentales...",
+  	"CBOE:VIX": "$VIX = volatilidad implícita de 30 días para $SPX. Truco: dividir $VIX por 16...",
+  	"CBOE:VVIX": "A partir de 100-110 el mercado empieza a estar inestable.",
+  	"TVC:VIX - NASDAQ:VOLI": ">2 Riesgo, <2 No Riesgo",
+  	"CBOE:VX2!-CBOE:VX1!": "(Si hay contango (>0, , VX2>VX1) -> OK, normal. Si hay backwardation (<0, VX2<VX1)-> Mal, nervios)",
+  	"CBOE:VIX3M/CBOE:VIX": "VRatio: Volatilidad 3 meses / Volatilidad 1 mes...",
+	"CBOE:COR1M": " Refleja la expectativa del mercado de qué tan sincronizados (correlacionados) estarán los retornos de las acciones del S&P 500 en el corto plazo (1 mes).\nSuele oscilar entre 0 (no correlación) y 100 (correlación perfecta).\n - Valores altos (>70) sugieren que los inversores esperan que las acciones se muevan en conjunto (útil en crisis o alta volatilidad). Suelen coincidir con mercados bajistas\n - Valores bajos (<30): Mercado espera divergencia entre sectores/acciones (entornos de crecimiento estable). Oportunidades para stock-picking.",
+  	"AMEX:SPY/TVC:DXY": "SP500 / Dollar...",
+  	"USI:PCCE": "Put / Call Ratio Equities",
+  	"INDEX:HIGN-INDEX:LOWN": "New Highs - New Lows (NYSE market) ( >0 = bullish / <0 = bearish)",
+  	"AMEX:HYG/AMEX:LQD": "Bonos High Yield / Bonos 'seguros'. Representa un poco el estado de la economía.",
+  	"NASDAQ:SDEX": "NATIONS SKEWDEX...",
+  	"INDEX:S5FI": "S&P 500 Stocks Above 50-Day Average",
+  	"INDEX:S5TH": "S&P 500 Stocks Above 200-Day Average",
+  	"AMEX:SPY/AMEX:SPLV": "SP500/SP500 Low Volatility...",
+  	"AMEX:MTUM/AMEX:SPLV": "Momentum/Low Volatility Ratio...",
+  	"AMEX:RSP/AMEX:SPY": "SP500 equal weight / SP500",
+  	"NASDAQ:QQEW/NASDAQ:QQQ": "QQQ equal weight / QQQ",
+  	"AMEX:SPHB": "",
+  	"AMEX:SPHB/AMEX:SPLV": "ETF High Beta / Low Volatility",
+  	"AMEX:VUG/AMEX:VTV": "ETF Vanguard Growth / Value",
+  	"NASDAQ:QQEW": "",
+  	"NASDAQ:SQQQ": "",
+  	"AMEX:ARKK/AMEX:XLK": "Tecnologia con perdida / Sector Tecnologico",
+  	"NASDAQ:MAGS": ""
 };
 const arrMarketTimmingStocks = convertToArrayObjects(marketTimmingStocksObj);
 
@@ -2396,5 +2396,6 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
