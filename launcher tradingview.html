@@ -155,21 +155,22 @@ const arrMarketTimmingBonds = convertToArrayObjects(marketTimmingBondsObj);
 
 
 const marketTimmingEconomyObj = {
-  "FRED:ANFCI": "Chicago Fed Adjusted National Financial Conditions Inde",
-  "COMEX:HG1!/COMEX:GC1!": "Cobre/Oro (Si sube, la economia va bien. Si baja, la economia va mal)",
-  "AMEX:DBB/AMEX:DBP": "Metales Bases / Metales Preciosos...(Si baja es porque la economia esta debil...)",
-  "OANDA:SPX500USD/TVC:DXY": "(Simula el movimiento real del SP500 sin considerar la cotización del dolar)",
-  "CBOE:SKEW": "CBOE SKEW INDEX",
-  "NASDAQ:TDEX": "Coberturas de riesgo de cola > 3 desviaciones estandards respecto al nivel actual",
-  "AMEX:BKLN": "Prestamos apalancados",
-  "FRED:T5YIE": "5-Year Breakeven Inflation Rate ((Expectativas de inflación futura))",
-  "AMEX:JNK/AMEX:QLTA": "Bonos basura / Bonos calidad",
-  "AMEX:RSP/NASDAQ:TLT": "Invesco S&P 500 Equal Weight ETF / IShares 20+ Year Treasury Bond ETF...",
-  "AMEX:RSPD/AMEX:RSPS": "ETF Discretionary / Staples (Igual ponderacion)",
-  "NASDAQ:PEZ/NASDAQ:PSL": "Consumer Ciclicas/ Defensivas = PMI",
-  "AMEX:IWM/AMEX:SPY": "Small Caps / Big Caps...",
-  "FRED:WALCL+FRED:ECBASSETSW*1.07+ECONOMICS:GBCBBS*OANDA:GBPUSD+FRED:JPNASSETS/OANDA:USDJPY+ECONOMICS:CNCBBS*FX_IDC:CNYUSD-(FRED:WTREGEN+FRED:RRPONTSYD)": ["Liquidez Global ( USA + EURO + GB + JP + CH)", ""],
-  "FRED:WRESBAL": "(Liabilities and Capital: Other Factors Draining Reserve Balances: Reserve Balances with Federal Reserve Banks: Week Average)"
+  	"FRED:ANFCI": "Chicago Fed Adjusted National Financial Conditions Inde",
+  	"COMEX:HG1!/COMEX:GC1!": "Cobre/Oro (Si sube, la economia va bien. Si baja, la economia va mal)",
+  	"AMEX:DBB/AMEX:DBP": "Metales Bases / Metales Preciosos...(Si baja es porque la economia esta debil...)",
+  	"OANDA:SPX500USD/TVC:DXY": "(Simula el movimiento real del SP500 sin considerar la cotización del dolar)",
+  	"CBOE:SKEW": "CBOE SKEW INDEX",
+  	"NASDAQ:TDEX": "Coberturas de riesgo de cola > 3 desviaciones estandards respecto al nivel actual",
+  	"AMEX:BKLN": "Prestamos apalancados",
+  	"FRED:T5YIE": "5-Year Breakeven Inflation Rate ((Expectativas de inflación futura))",
+  	"AMEX:JNK/AMEX:QLTA": "Bonos basura / Bonos calidad",
+  	"AMEX:RSP/NASDAQ:TLT": "Invesco S&P 500 Equal Weight ETF / IShares 20+ Year Treasury Bond ETF...",
+  	"AMEX:RSPD/AMEX:RSPS": "ETF Discretionary / Staples (Igual ponderacion)",
+  	"NASDAQ:PEZ/NASDAQ:PSL": "Consumer Ciclicas/ Defensivas = PMI",
+  	"AMEX:IWM/AMEX:SPY": "Small Caps / Big Caps...",
+  	"FRED:WALCL+FRED:ECBASSETSW*1.07+ECONOMICS:GBCBBS*OANDA:GBPUSD+FRED:JPNASSETS/OANDA:USDJPY+ECONOMICS:CNCBBS*FX_IDC:CNYUSD-(FRED:WTREGEN+FRED:RRPONTSYD)": ["Liquidez Global ( USA + EURO + GB + JP + CH)", ""],
+	"ECONOMICS:CNM2*FX_IDC:CNYUSD+ECONOMICS:USM2+ECONOMICS:EUM2*FX_IDC:EURUSD+LSE:JPM2*FX_IDC:JPYUSD+ECONOMICS:GBM2*FX_IDC:GBPUSD": "Liquidez M2 Global (USA+EURO+CHINA+JP+GB)",
+  	"FRED:WRESBAL": "(Liabilities and Capital: Other Factors Draining Reserve Balances: Reserve Balances with Federal Reserve Banks: Week Average)"
 };
 const arrMarketTimmingEconomy = convertToArrayObjects(marketTimmingEconomyObj);
 
@@ -2394,3 +2395,4 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
