@@ -112,6 +112,7 @@ const marketTimmingStocksObj = {
   "TVC:VIX - NASDAQ:VOLI": ">2 Riesgo, <2 No Riesgo",
   "CBOE:VX2!-CBOE:VX1!": "(Si hay contango (>0, , VX2>VX1) -> OK, normal. Si hay backwardation (<0, VX2<VX1)-> Mal, nervios)",
   "CBOE:VIX3M/CBOE:VIX": "VRatio: Volatilidad 3 meses / Volatilidad 1 mes...",
+	"CBOE:COR1M": " Refleja la expectativa del mercado de qué tan sincronizados (correlacionados) estarán los retornos de las acciones del S&P 500 en el corto plazo (1 mes).\nSuele oscilar entre 0 (no correlación) y 100 (correlación perfecta).\n - Valores altos (>70) sugieren que los inversores esperan que las acciones se muevan en conjunto (útil en crisis o alta volatilidad). Suelen coincidir con mercados bajistas\n - Valores bajos (<30): Mercado espera divergencia entre sectores/acciones (entornos de crecimiento estable). Oportunidades para stock-picking."
   "AMEX:SPY/TVC:DXY": "SP500 / Dollar...",
   "USI:PCCE": "Put / Call Ratio Equities",
   "INDEX:HIGN-INDEX:LOWN": "New Highs - New Lows (NYSE market) ( >0 = bullish / <0 = bearish)",
@@ -168,9 +169,9 @@ const marketTimmingEconomyObj = {
   	"AMEX:RSPD/AMEX:RSPS": "ETF Discretionary / Staples (Igual ponderacion)",
   	"NASDAQ:PEZ/NASDAQ:PSL": "Consumer Ciclicas/ Defensivas = PMI",
   	"AMEX:IWM/AMEX:SPY": "Small Caps / Big Caps...",
-  	"FRED:WALCL+FRED:ECBASSETSW*1.07+ECONOMICS:GBCBBS*OANDA:GBPUSD+FRED:JPNASSETS/OANDA:USDJPY+ECONOMICS:CNCBBS*FX_IDC:CNYUSD-(FRED:WTREGEN+FRED:RRPONTSYD)": ["Liquidez Global ( USA + EURO + GB + JP + CH)", ""],
+  	"FRED:WALCL+FRED:ECBASSETSW*1.07+ECONOMICS:GBCBBS*OANDA:GBPUSD+FRED:JPNASSETS/OANDA:USDJPY+ECONOMICS:CNCBBS*FX_IDC:CNYUSD-(FRED:WTREGEN+FRED:RRPONTSYD)": "Liquidez Global ( USA + EURO + GB + JP + CH)",
 	"ECONOMICS:CNM2*FX_IDC:CNYUSD+ECONOMICS:USM2+ECONOMICS:EUM2*FX_IDC:EURUSD+LSE:JPM2*FX_IDC:JPYUSD+ECONOMICS:GBM2*FX_IDC:GBPUSD": "Liquidez M2 Global (USA+EURO+CHINA+JP+GB)",
-  	"FRED:WRESBAL": "(Liabilities and Capital: Other Factors Draining Reserve Balances: Reserve Balances with Federal Reserve Banks: Week Average)"
+  	"FRED:WRESBAL": "Liabilities and Capital: Other Factors Draining Reserve Balances: Reserve Balances with Federal Reserve Banks: Week Average"
 };
 const arrMarketTimmingEconomy = convertToArrayObjects(marketTimmingEconomyObj);
 
@@ -2395,4 +2396,5 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
