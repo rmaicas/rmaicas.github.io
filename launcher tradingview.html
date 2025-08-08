@@ -158,6 +158,7 @@ const arrMarketTimmingBonds = convertToArrayObjects(marketTimmingBondsObj);
 const marketTimmingEconomyObj = {
 	"FRED:BAMLH0A0HYM2EY": "Prima de riesgo de los bonos basura. Otra opcion: AMEX:HYG-TVC:US10Y"
   	"FRED:ANFCI": "Chicago Fed Adjusted National Financial Conditions Inde",
+	"AMEX:SPY/BATS:AGG": "SPY vs Bonos en grado de inversión. Utilizado por Kosar of Asbury Research."
   	"COMEX:HG1!/COMEX:GC1!": "Cobre/Oro (Si sube, la economia va bien. Si baja, la economia va mal)",
   	"AMEX:DBB/AMEX:DBP": "Metales Bases / Metales Preciosos...(Si baja es porque la economia esta debil...)",
   	"OANDA:SPX500USD/TVC:DXY": "(Simula el movimiento real del SP500 sin considerar la cotización del dolar)",
@@ -916,30 +917,31 @@ const arrOthersStocks = convertToArrayObjects(othersStocksObj);
 <!---- ETFs   ---->
 
 const etfFixedIncomeObj = {
-  "NASDAQ:BND": "broad US investment-grade fixed-income coverage, Nasdaq  //(EUR: EUNE - iShares US Aggregate Bond UCITS ETF EUR Hedged (Acc). POCA LIQUIDEZ!!!)",
-  "NASDAQ:IEF": "7-10 year treasury Bond (EU: XETR:SXRM)",
-  "NASDAQ:TLT": "LSE:DTLA   ISHARES IV PLC ISH $ T BND 20+YR ETF USD ACC (isin: IE00BFM6TC58)",
-  "EURONEXT:CSH2": "Paris (Money Market Euro) (isin: LU1190417599. TER: 0.10%)",
-  "LSE:SMTC": "London (Money Market USD) (isin: LU1248511575. TER: 0.10%)",
-  "LSE:CSH2": "London (Money Market GBP) (isin: LU1230136894. TER: 0.10%)",
-  "LSE:FLOT": "London (Bonos Flotantes: canasta de bonos USA Corporativos de 1 a 5 años. Rating: Investment Grade (USD) (isin: IE00BZ048462. TER: 0.10%).\nNota: Creo que pueden ser una opcion interesante si <= 4.90",
-  "XETR:D5BG": "Xetra",
-  "LSE:DTLA": "Bonos USA 20+ años (isin: IE00BFM6TC58)",
-  "LSE:IDTP": "Bonos TIPS Accum. USA, London (isin: IE00B1FZSC47. TER:0.10%)  (Simil TIPS)",
-  "EURONEXT:EHYA": "(ACC), Amsterdam",
-  "XETR:EUNA": "isin: IE00BDBRDM35 (Bonos globales, sigue el Bloomberg Barclays Global Aggregate Bond Index. Investment Grade), Xetra",
-  "XETR:EUN5": "(Dist), Xetra",
-  "LSE:IUCB": "isin: IE00BYV12Y75, London. The objective of the Fund is to track the performance of the intermediate maturity, fixed-rate, investment-grade U.S. Dollar-denominated corporate bond market.",
-  "LSE:LQDA": "(Acc) (isin: IE00BYXYYJ35), London",
-  "XETR:LYS4": "Bonos gubernamentales zona Euro a corto plazo 1-3 años y con altas calificaciones crediticias",
-  "XETR:SXRM": "Replicate the performance of the Benchmark Index (being the ICE U.S. Treasury 7-10 Year Bond Index), less the fees and expenses of the Fund. (Tar:0.07%, isin: IE00B3VWN518)",
-  "XETR:SYBR": "Xetra (USD)",
-  "XETR:VECA": "Bonos Corporativos Europa, Xetra (isin: IE00BGYWT403. TER:0.09%)",
-  "XETR:VGEA": "isin: IE00BH04GL39, Xetra",
-  "LSE:XDGU": "(USD)",
-  "LSE:VDPA": "Bonos Corporativos USD en mercados emergentes y desarrollados con grado Investment Grade, London (isin:IE00BGYWFK87. TER:0.09%) (USD)",
-  "LSE:XUHY": "Bonos Corporativos de alto rendimiento USD, London (isin: IE00BDR5HM97. TER: 0.20%)",
-  "XETR:XHYA": "Bonos Corporativos de alto Rendimiento EUR, Xetra (isin: LU1109943388. TER:0.20%)"
+	"AMEX:AGG": "Es un índice amplio y representativo del mercado de bonos en EE.UU., abarcando bonos del Tesoro, bonos corporativos de grado de inversión, bonos respaldados por hipotecas (MBS), valores respaldados por activos (ABS) y bonos municipales, excluyendo solo high-yield y TIPS"
+  	"NASDAQ:BND": "broad US investment-grade fixed-income coverage, Nasdaq  //(EUR: EUNE - iShares US Aggregate Bond UCITS ETF EUR Hedged (Acc). POCA LIQUIDEZ!!!)",
+  	"NASDAQ:IEF": "7-10 year treasury Bond (EU: XETR:SXRM)",
+  	"NASDAQ:TLT": "LSE:DTLA   ISHARES IV PLC ISH $ T BND 20+YR ETF USD ACC (isin: IE00BFM6TC58)",
+  	"EURONEXT:CSH2": "Paris (Money Market Euro) (isin: LU1190417599. TER: 0.10%)",
+  	"LSE:SMTC": "London (Money Market USD) (isin: LU1248511575. TER: 0.10%)",
+  	"LSE:CSH2": "London (Money Market GBP) (isin: LU1230136894. TER: 0.10%)",
+  	"LSE:FLOT": "London (Bonos Flotantes: canasta de bonos USA Corporativos de 1 a 5 años. Rating: Investment Grade (USD) (isin: IE00BZ048462. TER: 0.10%).\nNota: Creo que pueden ser una opcion interesante si <= 4.90",
+  	"XETR:D5BG": "Xetra",
+  	"LSE:DTLA": "Bonos USA 20+ años (isin: IE00BFM6TC58)",
+  	"LSE:IDTP": "Bonos TIPS Accum. USA, London (isin: IE00B1FZSC47. TER:0.10%)  (Simil TIPS)",
+  	"EURONEXT:EHYA": "(ACC), Amsterdam",
+  	"XETR:EUNA": "isin: IE00BDBRDM35 (Bonos globales, sigue el Bloomberg Barclays Global Aggregate Bond Index. Investment Grade), Xetra",
+  	"XETR:EUN5": "(Dist), Xetra",
+  	"LSE:IUCB": "isin: IE00BYV12Y75, London. The objective of the Fund is to track the performance of the intermediate maturity, fixed-rate, investment-grade U.S. Dollar-denominated corporate bond market.",
+  	"LSE:LQDA": "(Acc) (isin: IE00BYXYYJ35), London",
+  	"XETR:LYS4": "Bonos gubernamentales zona Euro a corto plazo 1-3 años y con altas calificaciones crediticias",
+  	"XETR:SXRM": "Replicate the performance of the Benchmark Index (being the ICE U.S. Treasury 7-10 Year Bond Index), less the fees and expenses of the Fund. (Tar:0.07%, isin: IE00B3VWN518)",
+  	"XETR:SYBR": "Xetra (USD)",
+  	"XETR:VECA": "Bonos Corporativos Europa, Xetra (isin: IE00BGYWT403. TER:0.09%)",
+  	"XETR:VGEA": "isin: IE00BH04GL39, Xetra",
+  	"LSE:XDGU": "(USD)",
+  	"LSE:VDPA": "Bonos Corporativos USD en mercados emergentes y desarrollados con grado Investment Grade, London (isin:IE00BGYWFK87. TER:0.09%) (USD)",
+  	"LSE:XUHY": "Bonos Corporativos de alto rendimiento USD, London (isin: IE00BDR5HM97. TER: 0.20%)",
+  	"XETR:XHYA": "Bonos Corporativos de alto Rendimiento EUR, Xetra (isin: LU1109943388. TER:0.20%)"
 };
 const arrEtfFixedIncome = convertToArrayObjects(etfFixedIncomeObj);
 
@@ -2408,6 +2410,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
