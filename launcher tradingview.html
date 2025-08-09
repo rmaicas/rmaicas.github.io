@@ -356,22 +356,23 @@ const arrBasicMaterialsEtf = convertToArrayObjects(basicMaterialsEtfObj);
 
 <!---- Sectors   OK---->
 const sectorsObj = {
-  "AMEX:XLY/AMEX:XLP": "Consumer Discretionary/Consumer Staples",
-  "AMEX:XLB": "Materials (EUR: LSE:IUMS)",
-  "AMEX:XLC": "Communication Services (EUR: LSE:IUCM)",
-  "AMEX:XLE": "Energy (EUR: LSE:IUES)",
-  "AMEX:XLF": "Financial (EUR: LSE:IUFS)",
-  "AMEX:XLI": "Industrial (EUR: LSE:IUIS)",
-  "AMEX:XLK": "Technology",
-  "AMEX:XLP": "Consumer Staples (EUR: LSE:IUCS)",
-  "AMEX:XLU": "Utilities (EUR: LSE:IUUS)",
-  "AMEX:XLV": "Health Care (EUR: LSE:IUHC)",
-  "AMEX:XLY": "Consumer Discretionary (EUR: LSE:IUCD)",
-  "AMEX:GDX": "VanEck Gold Miners ETF",
-  "AMEX:XTN": "SPDR S&P Transportation ET",
-  "AMEX:XHB": "Sector de constructoras USA. En escenarios bajistas del S&P500 (por ejemplo cuando rompe la media de 200), si el sector de la construccion infrapondera al SP500 (XHB/SPX), la tendencia bajista se confirmo.",
-  "AMEX:XBI": "Biotecnologia",
-  "AMEX:BOAT": "Transporte Maritimo (Cíclico, comprar en ciclo bajo). Réplica el índice Solactive Global Shipping, con exposición pura al transporte marítimo (portacontenedores, buques secos, petroleros, etc.) (A dia 08/06/2025 no se existe nada parecido en Europa"
+	"AMEX:XHB": "Homebuilders",
+  	"AMEX:XLY/AMEX:XLP": "Consumer Discretionary/Consumer Staples",
+  	"AMEX:XLB": "Materials (EUR: LSE:IUMS)",
+  	"AMEX:XLC": "Communication Services (EUR: LSE:IUCM)",
+  	"AMEX:XLE": "Energy (EUR: LSE:IUES)",
+  	"AMEX:XLF": "Financial (EUR: LSE:IUFS)",
+  	"AMEX:XLI": "Industrial (EUR: LSE:IUIS)",
+  	"AMEX:XLK": "Technology",
+  	"AMEX:XLP": "Consumer Staples (EUR: LSE:IUCS)",
+  	"AMEX:XLU": "Utilities (EUR: LSE:IUUS)",
+  	"AMEX:XLV": "Health Care (EUR: LSE:IUHC)",
+  	"AMEX:XLY": "Consumer Discretionary (EUR: LSE:IUCD)",
+  	"AMEX:GDX": "VanEck Gold Miners ETF",
+  	"AMEX:XTN": "SPDR S&P Transportation ET",
+  	"AMEX:XHB": "Sector de constructoras USA. En escenarios bajistas del S&P500 (por ejemplo cuando rompe la media de 200), si el sector de la construccion infrapondera al SP500 (XHB/SPX), la tendencia bajista se confirmo.",
+  	"AMEX:XBI": "Biotecnologia",
+  	"AMEX:BOAT": "Transporte Maritimo (Cíclico, comprar en ciclo bajo). Réplica el índice Solactive Global Shipping, con exposición pura al transporte marítimo (portacontenedores, buques secos, petroleros, etc.) (A dia 08/06/2025 no se existe nada parecido en Europa"
 };
 const arrSectors = convertToArrayObjects(sectorsObj);
 
@@ -463,6 +464,7 @@ const usaStocksObj = {
   	"NASDAQ:FCEL": "",
   	"NYSE:FCX": "Minera de Cobre y otros minerales",
   	"NYSE:FDX": "",
+	"NYSE:FERG": "Suministro de productos de fontanería y calefacción a contratistas profesionales y consumidores",
   	"NYSE:FICO": "Desarrolla y comercializa el FICO Score, la métrica de riesgo crediticio más utilizada en USA",
   	"NYSE:FLO": "div",
   	"NASDAQ:FTNT": "Empresa de ciberseguridad",
@@ -549,7 +551,6 @@ const usaStocksObj = {
   	"NYSE:OWL": "BDC",
   	"NYSE:OXY": "",
   	"NASDAQ:PANW": "",
-  	"NASDAQ:PARA": "",
   	"NYSE:PCG": "",
   	"NASDAQ:PEP": "",
   	"NYSE:PFE": "",
@@ -557,7 +558,9 @@ const usaStocksObj = {
   	"NYSE:PKX": "Minera Hierro, Corea Sur",
   	"NASDAQ:PLTR": "",
   	"NYSE:PM": "Las empresas de Tabaco dan altos dividendos, pero suelen tener mucha deuda...",
+	"NASDAQ:POOL": "",
   	"NASDAQ:PSEC": "BDC",
+	"NASDAQ:PSKY": "",
   	"NYSE:PWR": "",
   	"NASDAQ:PYPL": "",
   	"NASDAQ:PZZA": "",
@@ -671,6 +674,7 @@ const chinaStocksObj = {
   	"HKEX:1810": "",
   	"HKEX:1982": "div, Textil, tejidos de punto y calzado.",
 	"HKEX:2678": "",
+	"HKEX:3998": "Abrigos",
   	"HKEX:6198": "div",
   	"HKEX:9616": "Servicios educativos de nivel superior, universidades IT. Y ademas salud y bienestar: hospitales y residencias mayores.",
   	"HKEX:9919": "Eventos de marketing",
@@ -1017,7 +1021,6 @@ const etfVariableIncomeObj = {
   "XETR:SXRV": "(Acc), Xetra",
   "XETR:XDEV": "The Fund is passively managed. The fund aims to reflect the performance, before fees and expenses, of the MSCI World Value (USD) Index. (isin: IE00BL25JM42. TER: 0.25%)",
   "XETR:XDW0": "Xetra",
-  "AMEX:XHB": "",
   "XETR:ZPRX": "isin: IE00BSPLC298, Xetra"
 };
 const arrEtfVariableIncome = convertToArrayObjects(etfVariableIncomeObj);
@@ -2419,6 +2422,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
