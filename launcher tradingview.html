@@ -156,9 +156,9 @@ const arrMarketTimmingBonds = convertToArrayObjects(marketTimmingBondsObj);
 
 
 const marketTimmingEconomyObj = {
-	"FRED:BAMLH0A0HYM2EY": "Prima de riesgo de los bonos basura. Otra opcion: AMEX:HYG-TVC:US10Y"
+	"FRED:BAMLH0A0HYM2EY": "Prima de riesgo de los bonos basura. Otra opcion: AMEX:HYG-TVC:US10Y",
   	"FRED:ANFCI": "Chicago Fed Adjusted National Financial Conditions Inde",
-	"AMEX:SPY/BATS:AGG": "SPY vs Bonos en grado de inversión. Utilizado por Kosar of Asbury Research."
+	"AMEX:SPY/BATS:AGG": "SPY vs Bonos en grado de inversión. Utilizado por Kosar of Asbury Research.",
   	"COMEX:HG1!/COMEX:GC1!": "Cobre/Oro (Si sube, la economia va bien. Si baja, la economia va mal)",
   	"AMEX:DBB/AMEX:DBP": "Metales Bases / Metales Preciosos...(Si baja es porque la economia esta debil...)",
   	"OANDA:SPX500USD/TVC:DXY": "(Simula el movimiento real del SP500 sin considerar la cotización del dolar)",
@@ -905,7 +905,7 @@ const arrJapanStocks = convertToArrayObjects(japanStocksObj);
 
 
 const othersStocksObj = {
-	"KRX:005930", "Entre las 50 empresas mas capitalizadas del mundo",
+	"KRX:005930": "Entre las 50 empresas mas capitalizadas del mundo",
   	"OTC:BDORY": "",
   	"NYSE:BCH": "Chile",
   	"NYSE:EC": "Petrolera de Colombia (Compro en Latibex? Investigar...)",
@@ -917,7 +917,7 @@ const arrOthersStocks = convertToArrayObjects(othersStocksObj);
 <!---- ETFs   ---->
 
 const etfFixedIncomeObj = {
-	"AMEX:AGG": "Es un índice amplio y representativo del mercado de bonos en EE.UU., abarcando bonos del Tesoro, bonos corporativos de grado de inversión, bonos respaldados por hipotecas (MBS), valores respaldados por activos (ABS) y bonos municipales, excluyendo solo high-yield y TIPS"
+	"AMEX:AGG": "Es un índice amplio y representativo del mercado de bonos en EE.UU., abarcando bonos del Tesoro, bonos corporativos de grado de inversión, bonos respaldados por hipotecas (MBS), valores respaldados por activos (ABS) y bonos municipales, excluyendo solo high-yield y TIPS",
   	"NASDAQ:BND": "broad US investment-grade fixed-income coverage, Nasdaq  //(EUR: EUNE - iShares US Aggregate Bond UCITS ETF EUR Hedged (Acc). POCA LIQUIDEZ!!!)",
   	"NASDAQ:IEF": "7-10 year treasury Bond (EU: XETR:SXRM)",
   	"NASDAQ:TLT": "LSE:DTLA   ISHARES IV PLC ISH $ T BND 20+YR ETF USD ACC (isin: IE00BFM6TC58)",
@@ -1351,10 +1351,17 @@ select option {
 
 			<div style="width:100%;min-width: 10%;padding-top:10px;">
 				<textarea style="max-width: 98%;background-color: lightgray;" name="note" cols="300" id="note" rows="10" onblur="saveNote()"></textarea>
-				<div>
-					<img src="Investing-Cycles-vs-Market-Cycle.jpg" alt="Investing-Cycles-vs-Market-Cycle.jpg" width="33%" style="padding-top: 10px;vertical-align: top;">
-					<img src="CiclicasVsDefensivas.png" alt="CiclicasVsDefensivas.jpg" width="33%" style="padding-top: 10px;vertical-align: top;">
-					<img src="Retorno Nivel Vix.png" alt="Retorno Nivel Vix.jpg" width="33%" style="padding-top: 10px;vertical-align: top;">
+				<div style="display: flex; flex-wrap: wrap;">
+					<div style="width: 33%; padding: 10px 0; box-sizing: border-box;">
+						<img src="Investing-Cycles-vs-Market-Cycle.jpg" alt="Investing Cycles vs Market Cycle" style="width: 100%; vertical-align: top;">
+					</div>
+					<div style="width: 33%; padding: 10px 0; box-sizing: border-box;">
+						<img src="CiclicasVsDefensivas.png" alt="Ciclicas vs Defensivas" style="width: 100%; vertical-align: top;">
+					</div>
+					<div style="width: 33%; padding: 10px 0; box-sizing: border-box;">
+						<img src="Retorno Nivel Vix.png" alt="Retorno Nivel Vix" style="width: 100%; vertical-align: top;">
+						<img src="TheMarketDoesNotCareWhatYouThink.png" alt="The Market Does Not Care What You Think" style="width: 100%; vertical-align: top; padding-top: 10px;">
+					</div>
 				</div>
 			
 			
@@ -2410,7 +2417,6 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
-
 
 
 
