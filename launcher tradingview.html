@@ -174,13 +174,13 @@ const marketTimmingEconomyObj = {
   	"NASDAQ:PEZ/NASDAQ:PSL": "Consumer Ciclicas/ Defensivas = PMI",
   	"AMEX:IWM/AMEX:SPY": "Small Caps / Big Caps...",
   	"FRED:WALCL+FRED:ECBASSETSW*1.07+ECONOMICS:GBCBBS*OANDA:GBPUSD+FRED:JPNASSETS/OANDA:USDJPY+ECONOMICS:CNCBBS*FX_IDC:CNYUSD-(FRED:WTREGEN+FRED:RRPONTSYD)": "Liquidez Global ( USA + EURO + UK + JP + CH)",
-	"ECONOMICS:USM2 + ECONOMICS:CNM2*FX_IDC:CNYUSD + ECONOMICS:EUM2*FX_IDC:EURUSD + LSE:JPM2*FX_IDC:JPYUSD + ECONOMICS:GBM2*FX_IDC:GBPUSD": "Liquidez M2 Global (USA + CHINA + EURO + JAPAN + UK)",
+	"ECONOMICS:USM2 + ECONOMICS:CNM2*FX_IDC:CNYUSD + ECONOMICS:EUM2*FX_IDC:EURUSD + ECONOMICS:JPM2*FX_IDC:JPYUSD + ECONOMICS:GBM2*FX_IDC:GBPUSD": "Liquidez M2 Global (USA + CHINA + EURO + JAPAN + UK)",
 	"AMEX:SPY/ECONOMICS:USM2": "Cotizacion SPY / Liquidez M2  (Cuanto mas arriba -> mas caro, cuanto mas abajo -> mas barato)",
   	"FRED:WRESBAL": "Liabilities and Capital: Other Factors Draining Reserve Balances: Reserve Balances with Federal Reserve Banks: Week Average",
 	"ECONOMICS:USM2": "Liquidez M2 USA",
 	"ECONOMICS:CNM2*FX_IDC:CNYUSD": "Liquidez M2 CHINA (en dolares)",
 	"ECONOMICS:EUM2*FX_IDC:EURUSD": "Liquidez M2 EURO (en dolares)",
-	"LSE:JPM2*FX_IDC:JPYUSD": "Liquidez M2 JAPAN (en dolares)",
+	"ECONOMICS:JPM2*FX_IDC:JPYUSD": "Liquidez M2 JAPAN (en dolares)",
 	"ECONOMICS:GBM2*FX_IDC:GBPUSD": "Liquidez M2 UK (en dolares)",
 };
 const arrMarketTimmingEconomy = convertToArrayObjects(marketTimmingEconomyObj);
@@ -2483,6 +2483,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
