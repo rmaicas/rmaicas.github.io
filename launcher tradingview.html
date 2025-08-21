@@ -426,7 +426,7 @@ const usaStocksObj = {
   	"NYSE:BMY": "div",
   	"NYSE:BRK.B": "",
   	"NYSE:BN": "Management of public and private investment products and services... Bill Ackman lo lleva desde 2024.",
-  	"NYSE:CAG": "",
+  	"NYSE:CAG": "Alimentos, principalmente productos congelados.",
   	"NYSE:CAT": "",
   	"NYSE:CCJ": "Suministro de uranio. Exploración, extracción, molturación, compra y venta de concentrado de uranio...",
   	"NYSE:CCL": "",
@@ -633,6 +633,7 @@ const usaREITsObj = {
 	"NYSE:COLD": "REIT: Temperature-controlled warehouses",
   	"NYSE:CTRE": "REIT: Salud",
   	"NYSE:DLR": "REIT: Data Centers",
+	"NYSE:DOC": "Edificios medicos, centros clinicos, ambulatorios y edificios premium para mayores. Tiene contratos a muy largo plazo.",
   	"NYSE:EARN": "REIT (altos dividendos)(desde hace poco invierten en CLO. Un CLO (Collateralized Loan Obligation) es un tipo de instrumento financiero que agrupa préstamos corporativos y los convierte en valores que pueden ser comprados por inversores1. Estos préstamos suelen ser de empresas con diferentes calificaciones crediticias y se estructuran en tramos con diferentes niveles de riesgo y rendimiento. Los CLOs son similares a las hipotecas subprime que contribuyeron a la crisis financiera de 2008, pero están mejor regulados y supervisados.)",
   	"NYSE:EPR": "REIT: Especializado. Real Estate diversificado que se especializa en propiedades experienciales. Su cartera incluye teatros, centros de entretenimiento familiar, estaciones de esquí y otras atracciones, así como centros de educación temprana y escuelas privadas.",
   	"NASDAQ:EQIX": "REIT: Data Centers",
@@ -1945,7 +1946,7 @@ function setFlagTableContent(listId, array, charFlag) {
 		colorList.innerHTML = `<tr style="font-size: small;"><th style="width: 12%;" class="header-table">Name</th><th style="width: 5%;" class="header-table">Change</th>
 		<th style="width: 2%;" class="header-table">Ch.M</th><th style="width: 2%;" class="header-table">Ch.Y</th>
 		<th class="header-table tooltip" style="width: 7%;">Div.<span class="tooltiplittletext">${dividendsTooltip}</span></th>
-		<th class="header-table tooltip" style="width: 1%;">Gral.Data<span class="tooltiplittletext">DD: Porcentaje Drawdown desde maximos de todos los tiempos (ATH)<br>RS: Relative Strength (aproximado)</span></th>
+		<th class="header-table tooltip" style="width: 1%;">Gral.Data<span class="tooltiplittletext">D: Porcentaje Drawdown desde maximos de todos los tiempos (ATH)<br>RS: Relative Strength (aproximado)</span></th>
 		<th class="header-table tooltip" style="font-size: small; width: 6%;" title="PER / ROIC/ ROE / Operating Margin (ttm)">Fundamentals(ttm)<span class="tooltiptext">${fundamentalsTooltip}</span></th>
 		<th class="header-table tooltip" style="font-size: small; width: 3%;" title="Technical Rat. / MACD (normalize by ATR) [+/- 1.5 son ya puntos extremos]">Tech. Weekly<span class="tooltiptext">${technicalsTooltip}</span></th>
 		<th class="header-table tooltip" style="font-size: small; width: 3%;" title="Technical Rat. / MACD (normalize by ATR) [+/- 1.5 son ya puntos extremos]">Tech. Daily<span class="tooltiptext">${technicalsTooltip}</span></th>
@@ -2168,7 +2169,7 @@ const callApiTV = async (symbol) => {
 			for (item of arrMaxHigh) {
 				if (jsonResponse["High.All"]!=null){
 					drawdown = (+(jsonResponse["close"])*100/+(jsonResponse["High.All"]))-100
-					generalData = `<span style="white-space: nowrap;">DD: <span class="colorData ${(drawdown>-38.2)?'aqua':(drawdown>-50.0)?'yellow':'fuchsia'}">${drawdown.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}%</span></span>`
+					generalData = `<span style="white-space: nowrap;">D: <span class="colorData ${(drawdown>-38.2)?'aqua':(drawdown>-50.0)?'yellow':'fuchsia'}">${drawdown.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}%</span></span>`
 				}
 				if (jsonResponse["Perf.W"]!=null){
 					perfW = (((1+ (jsonResponse["Perf.W"]/100))/(1+ (USAMarket.PerfW/100)))-1)*100
@@ -2483,6 +2484,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
