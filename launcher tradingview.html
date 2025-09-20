@@ -623,7 +623,6 @@ const usaStocksObj = {
   	"NYSE:UNP": "",
   	"NYSE:UPS": "",
   	"NYSE:V": "",
-  	"NYSE:VALE": "Minera Hierro, Brasil",
 	"NYSE:VRT": "Servicio de refrigeracion en Centros de datos",
   	"NYSE:VZ": "",
   	"NASDAQ:WBA": "",
@@ -944,7 +943,8 @@ const othersStocksObj = {
   	"NYSE:BCH": "Chile",
   	"NYSE:EC": "Petrolera de Colombia (Compro en Latibex? Investigar...)",
   	"NASDAQ:KSPI": "Kazajistan",
-  	"NYSE:PBR": ""
+  	"NYSE:PBR": "",
+  	"NYSE:VALE": "Minera Hierro, Brasil",
 };
 const arrOthersStocks = convertToArrayObjects(othersStocksObj);
 
@@ -980,11 +980,11 @@ const etfFixedIncomeObj = {
 const arrEtfFixedIncome = convertToArrayObjects(etfFixedIncomeObj);
 
 const etfVariableIncomeObj = {
-  "XETR:AVWS": "Estrategia Activa en Small Caps de todo el mundo: 70% USA / 30% resto del mundo (isin: IE0003R87OG3. TER: 0.39%) Acumulación",
-  "XETR:BITC": "Bitcoin. Xetra (isin: GB00BLD4ZL17. TER: 0.35%)",
-  "EURONEXT:CETH_XAMS": "Ethereum. Euronext-Amsterdam (isin: GB00BLD4ZM24. TER: 0% (reducido hasta nuevo aviso, se observo comisiones de hasta 1.59%)",
-  "XETR:2B76": "(isin: IE00BYZK4552. TER: 0.40%), Xetra",
-  "XETR:CEMS": "Europe Value. Xetra (isin: IE00BQN1K901. TER: 0.25%)",
+  	"XETR:AVWS": "Estrategia Activa en Small Caps de todo el mundo: 70% USA / 30% resto del mundo (isin: IE0003R87OG3. TER: 0.39%) Acumulación",
+  	"XETR:BITC": "Bitcoin. Xetra (isin: GB00BLD4ZL17. TER: 0.35%)",
+  	"EURONEXT:CETH_XAMS": "Ethereum. Euronext-Amsterdam (isin: GB00BLD4ZM24. TER: 0% (reducido hasta nuevo aviso, se observo comisiones de hasta 1.59%)",
+  	"XETR:2B76": "(isin: IE00BYZK4552. TER: 0.40%), Xetra",
+  	"XETR:CEMS": "Europe Value. Xetra (isin: IE00BQN1K901. TER: 0.25%)",
   "HAM:GANN": "Es un FONDO de volatilidad (simula un Vix pero mucho mas estable y lento). Investigar cual se puede comprar en IB. isin: LU0272941971 (Amundi Funds - Volatility World A EUR LU0557872479, no existe en TView)",
   "GETTEX:GAN3": "INVESTIGAR... isin: LU0319687124",
   "XETR:DFEN": "Defensa Global. Xetra (isin: IE000YYE6WK5. TER: 0.55%)",
@@ -1004,15 +1004,16 @@ const etfVariableIncomeObj = {
   "XETR:EXV4": "Xetra",
   "XETR:EXV5": "Xetra",
   "XETR:EXV6": "Xetra",
-  "XETR:EXV7": "Xetra (isin: DE000A0H08E0. TER: 0.46%)",
-  "XETR:EXV8": "Xetra (isin: DE000A0H08F7. TER: 0.46%)",
-  "XETR:EXV9": "Xetra",
-  "XETR:LYX4": "Xetra",
-  "NASDAQ:FINX": "",
-  "LSE:GDX": "London (isin:IE00BQQP9F84. TER:0.53%)",
-  "LSE:GDXJ": "Más volátil que el GDX, extrema el sentimiento del mercado de Oro. London (isin:IE00BQQP9G91. TER:0.55%)",
-  "AMEX:HACK": "USA. (EUR: A2QGAH - WisdomTree Cybersecurity UCITS ETF USD Acc (isin: IE00BLPK3577))",
-  "LSE:HEAL": "Healthcare Global. London (isin: IE00BYZK4776. TER:0.40%)",
+  	"XETR:EXV7": "Xetra (isin: DE000A0H08E0. TER: 0.46%)",
+  	"XETR:EXV8": "Xetra (isin: DE000A0H08F7. TER: 0.46%)",
+  	"XETR:EXV9": "Xetra",
+  	"XETR:LYX4": "Xetra",
+  	"NASDAQ:FINX": "",
+  	"LSE:GDX": "London (isin:IE00BQQP9F84. TER:0.53%)",
+  	"LSE:GDXJ": "Más volátil que el GDX, extrema el sentimiento del mercado de Oro. London (isin:IE00BQQP9G91. TER:0.55%)",
+  	"AMEX:HACK": "USA. (EUR: A2QGAH - WisdomTree Cybersecurity UCITS ETF USD Acc (isin: IE00BLPK3577))",
+  	"LSE:HEAL": "Healthcare Global. London (isin: IE00BYZK4776. TER:0.40%)",
+	"NYSE:HVAC": "Invests in US-listed equities and ADRs of companies operating in the heating, ventilation, and air conditioning (HVAC) and industrial sectors",
   "LSE:ISAG": "Empresas mundiales del sector agrícola. London (isin: IE00B6R52143. TER:0.55%)",
   "NASDAQ:IBB": "USA. (EUR: XETR:2B70 - IShares NASDAQ US Biotechnology UCITS ETF (isin: IE00BYXG2H39))",
   "LSE:IEVL": "Factor Value: Se enfoca en acciones europeas que están infravaloradas según métricas como el precio sobre el valor en libros (PBV) o el precio sobre ganancias (PER)",
@@ -2502,6 +2503,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
