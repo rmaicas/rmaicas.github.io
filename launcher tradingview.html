@@ -174,10 +174,12 @@ const marketTimmingEconomyObj = {
   	"AMEX:RSPD/AMEX:RSPS": "ETF Discretionary / Staples (Igual ponderacion)",
   	"NASDAQ:PEZ/NASDAQ:PSL": "Consumer Ciclicas/ Defensivas = PMI",
   	"AMEX:IWM/AMEX:SPY": "Small Caps / Big Caps...",
+	
   	"FRED:WALCL+FRED:ECBASSETSW*1.07+ECONOMICS:GBCBBS*OANDA:GBPUSD+FRED:JPNASSETS/OANDA:USDJPY+ECONOMICS:CNCBBS*FX_IDC:CNYUSD-(FRED:WTREGEN+FRED:RRPONTSYD)": "Liquidez Global ( USA + EURO + UK + JP + CH)",
 	"ECONOMICS:USM2 + ECONOMICS:CNM2*FX_IDC:CNYUSD + ECONOMICS:EUM2*FX_IDC:EURUSD + ECONOMICS:JPM2*FX_IDC:JPYUSD + ECONOMICS:GBM2*FX_IDC:GBPUSD": "Liquidez M2 Global (USA + CHINA + EURO + JAPAN + UK)",
 	"AMEX:SPY/ECONOMICS:USM2": "Cotizacion SPY / Liquidez M2  (Cuanto mas arriba -> mas caro, cuanto mas abajo -> mas barato)",
   	"FRED:WRESBAL": "Liabilities and Capital: Other Factors Draining Reserve Balances: Reserve Balances with Federal Reserve Banks: Week Average",
+	"FRED:RRPONTSYD": "REPOs Inversos REPO inverso: Un actor presta dinero tomando como garantía títulos valores. Es una forma de invertir excedentes de liquidez con seguridad. Si baja, no hay liquidez, si sube hay liquidez y sube la bolsa. Cuando sube drena las reservas de la FED, cuando baja devuelve las reservas a la FED.",
 	"ECONOMICS:USM2": "Liquidez M2 USA",
 	"ECONOMICS:CNM2*FX_IDC:CNYUSD": "Liquidez M2 CHINA (en dolares)",
 	"ECONOMICS:EUM2*FX_IDC:EURUSD": "Liquidez M2 EURO (en dolares)",
@@ -1094,12 +1096,13 @@ const arrEtfRealEstate = convertToArrayObjects(etfRealEstateObj);
 
 <!---- Researches   OK---->
 const researchesObj = {
-  "ECONOMICS:USIJC": "",
-  "FRED:IC4WSA": "",
-  "ECONOMICS:USCJC": "",
-  "FRED:CC4WSA": "",
-  "FRED:SAHMCURRENT": "La Regla de Sahm se activa cuando el promedio móvil de tres meses de la tasa de desempleo nacional aumenta en 0.50 puntos porcentuales o más en relación con su nivel más bajo durante los 12 meses anteriores",
-  "FRED:JTSJOL": "Demanda de empleo. Ofertas"
+  	"ECONOMICS:USIJC": "",
+  	"FRED:IC4WSA": "",
+  	"ECONOMICS:USCJC": "",
+  	"FRED:CC4WSA": "",
+  	"FRED:SAHMCURRENT": "La Regla de Sahm se activa cuando el promedio móvil de tres meses de la tasa de desempleo nacional aumenta en 0.50 puntos porcentuales o más en relación con su nivel más bajo durante los 12 meses anteriores",
+  	"FRED:JTSJOL": "Demanda de empleo. Ofertas",
+	"ECONOMICS:USNMPR": "ISM non-manufacturing prices"
 };
 const arrResearches = convertToArrayObjects(researchesObj);
 
@@ -2505,6 +2508,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
