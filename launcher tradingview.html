@@ -341,11 +341,11 @@ const arrBasicMaterialsFutures = convertToArrayObjects(basicMaterialsFuturesObj)
 
 const basicMaterialsSpotObj = {
   	"OANDA:XAUUSD": "Gold",
-  	"OANDA:XAGUSD": ["Silver CFD", "FX_IDC:XAGUSD"],
-  	"OANDA:WTICOUSD": "Oil West Texas",
-  	"OANDA:BCOUSD": "Oil Brent Crude",
-  	"OANDA:XPTUSD": ["Platinum CFD", "FX_IDC:XPTUSD"],
-	"OANDA:XPDUSD": ["Palladium Spot", "FX_IDC:XPDUSD"],
+  	"OANDA:XAGUSD": ["Silver CFD", "TVC:SILVER"],
+  	"OANDA:WTICOUSD": ["Oil West Texas", "FX:USOIL"],
+  	"OANDA:BCOUSD": ["Oil Brent Crude", "FX:UKOIL"],
+  	"OANDA:XPTUSD": ["Platinum CFD", "TVC:PLATINUM"],
+	"OANDA:XPDUSD": ["Palladium Spot", "TVC:PALLADIUM"],
 };
 const arrBasicMaterialsSpot = convertToArrayObjects(basicMaterialsSpotObj);
 
@@ -2531,6 +2531,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
