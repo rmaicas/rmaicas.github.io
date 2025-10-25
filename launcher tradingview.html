@@ -190,16 +190,23 @@ const marketTimmingEconomyObj = {
 const arrMarketTimmingEconomy = convertToArrayObjects(marketTimmingEconomyObj);
 
 <!---- Forex   OK---->
+const cryptoObj = {	
+  	"INDEX:BTCUSD": ["", "CRYPTO:BTCUSD"],
+	"XETR:BITC": "Bitcoin. Xetra (isin: GB00BLD4ZL17. TER: 0.35%)",
+  	"XETR:WBIT": "Xetra (isin: GB00BJYDH287. TER:0.35%)",
+  	"AMEX:BITI": "ETF para apostar al Bitcoin en corto. Sirve para ver el volumen y ver el interes por la baja. (US74347G2912: ProShares Trust ProShares Short Bitcoin Strategy ETF)",
+  	"BINANCE:ETHUSD": "Ethereum [EUR XETR:CETH Ethereum Stacked (isin: GB00BLD4ZM24. TER: 0% (un % del stacking se lo queda la gestora como comisión))]",
+	"XETR:CETH": "Ethereum Stacked (isin: GB00BLD4ZM24. TER: 0% (un % del stacking se lo queda la gestora como comisión))",
+	"CRYPTO:XRPUSD": "XRP [EUR XETR:WXRP]",
+	"XETR:WXRP": "(isin: GB00BRXHQ425. TER: 0.5%)",
+};
+const arrCrypto = convertToArrayObjects(cryptoObj);
+	
 const forexObj = {
   	"CBOE:EVZ": "CBOE EURO CURRENCY VOLATILITY INDEX (Nivel de riesgo: <7 Alto / >7 Bajo.  Evitar USD)",
   	"TVC:DXY": "Dolar frente a una cesta de monedas (principalmente el Euro)",
   	"AMEX:UUP": "para ver el volumen del DXY",
 	"TVC:EXY": "Euro frente a una cesta de monedas",
-  	"INDEX:BTCUSD": ["", "CRYPTO:BTCUSD"],
-  	"XETR:WBIT": "Xetra (isin: GB00BJYDH287. TER:0.35%)",
-  	"AMEX:BITI": "ETF para apostar al Bitcoin en corto. Sirve para ver el volumen y ver el interes por la baja. (US74347G2912: ProShares Trust ProShares Short Bitcoin Strategy ETF)",
-  	"BINANCE:ETHUSD": "",
-	"CRYPTO:XRPUSD": "",
 	"BCBA:GGAL/NASDAQ:GGAL*10": "ARG/USD",
   	"OANDA:AUDCAD": ["", "FX_IDC:AUDCAD"],
   	"OANDA:AUDCHF": ["", "FX_IDC:AUDCHF"],
@@ -998,7 +1005,6 @@ const arrEtfFixedIncome = convertToArrayObjects(etfFixedIncomeObj);
 
 const etfVariableIncomeObj = {
   	"XETR:AVWS": "Estrategia Activa en Small Caps de todo el mundo: 70% USA / 30% resto del mundo (isin: IE0003R87OG3. TER: 0.39%) Acumulación",
-  	"XETR:BITC": "Bitcoin. Xetra (isin: GB00BLD4ZL17. TER: 0.35%)",
   	"EURONEXT:CETH_XAMS": "Ethereum. Euronext-Amsterdam (isin: GB00BLD4ZM24. TER: 0% (reducido hasta nuevo aviso, se observo comisiones de hasta 1.59%)",
   	"XETR:2B76": "(isin: IE00BYZK4552. TER: 0.40%), Xetra",
   	"XETR:CEMS": "Europe Value. Xetra (isin: IE00BQN1K901. TER: 0.25%)",
@@ -1500,6 +1506,9 @@ select option {
 		<a class="btn" target="tv" href="https://www.tradingview.com/markets/indices/quotes-currency/">Currency Indices</a>
 		<a class="btn" target="tv" href="https://www.tradingview.com/forex-screener/">Forex Screener</a>
 	</div>
+	<h4>Crypto</h4>
+	<table class="list-group" id="cryptoListTV"></table>
+	<h4>Forex</h4>
 	<table class="list-group" id="forexListTV"></table>
 	<h4>Yields</h4>
 	<table class="list-group" id="yieldListTV"></table>
@@ -1906,6 +1915,7 @@ function setAllTabContentListTV() {
 	setTabContentListTV("tabMarketTimming", "marketTimmingStocksListTV", arrMarketTimmingStocks);
 	setTabContentListTV("tabMarketTimming", "marketTimmingBondsListTV", arrMarketTimmingBonds);
 	setTabContentListTV("tabMarketTimming", "marketTimmingEconomyListTV", arrMarketTimmingEconomy);
+	setTabContentListTV("tabForex", "cryptoListTV", arrCrypto);
 	setTabContentListTV("tabForex", "forexListTV", arrForex);
 	setTabContentListTV("tabForex", "yieldListTV", arrYields);
 	setTabContentListTV("tabBasicMaterials", "basicMaterialsIndicesListTV", arrBasicMaterialsIndices);
@@ -2521,6 +2531,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
