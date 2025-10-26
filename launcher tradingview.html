@@ -67,7 +67,7 @@ const indicesObj = {
   "AMEX:EWT": "",
   "AMEX:ARGT": "Argentina",
   "BCBA:IMV/(BCBA:GGAL/NASDAQ:GGAL*10)": "Simula un Merval en dolares",
-  "AMEX:EWZ": "Brazil",
+  "AMEX:EWZ": "Brazil [EUR XETR:4BRZ (isin: DE000A0Q4R85. TER: 0.33%)]",
   "AMEX:EWW": "iShares MSCI Mexico ETF (En Europa, usar MIL:XMEX)",
   "AMEX:EPP": "En Europa, usar XETR:ETLK",
   "AMEX:EZA": "South Africa iShares MSCI South Africa Index Fund",
@@ -97,6 +97,7 @@ const etfIndicesObj = {
   "XETR:XDN0": "Track the MSCI Nordic Countries index. The MSCI Nordic Countries index tracks leading stocks on the Nordic market, including Denmark, Norway, Finland and Sweden",
   "XETR:XRS2": "(isin: IE00BJZ2DD79)",
   "MIL:XMEX": "Mexico acum. en euros. Milano (isin: LU0476289466. TER: 0.65%)",
+  "XETR:4BRZ": "Brazil (isin: DE000A0Q4R85. TER: 0.33%)",
   "LSE:IKSA": "Saudi Arabia. London (isin: IE00BYYR0489. TER: 0.60%)"
 };
 const arrEtfIndices = convertToArrayObjects(etfIndicesObj);	
@@ -1059,22 +1060,25 @@ const etfVariableIncomeObj = {
   "XETR:XAIX": "The Nasdaq Global Artificial Intelligence and Big Data index tracks international companies of the sectors artificial intelligence, big data and cyber security. (isin: IE00BGV5VN51. TER: 0.35%)",
   "MIL:WTAI": "Track the Nasdaq CTA Artificial Intelligence index. Accum. (isin: IE00BDVPNG13. TER: 0.40%)",
   "LSE:IUSZ": "MSCI USA Mid-Cap Equal Weighted Index. London (Dist) (isin: IE00BD1F4K20. TER: 0.21%)",
-  "LSE:IUVL": "MSCI USA Enhanced Value Index (Grandes y medianas empresas con caracteristicas de alto Valor en USA), London (isin: IE00BD1F4M44. TER:0.20%)",
-  "EURONEXT:GLUX": "Lujo Global Acc. Euronext Paris (isin: LU1681048630. TER: 0.25%)",
-  "AMEX:JETS": "USA",
-  "AMEX:KRE": "(SPDR S&P Regional Banking ETF)",
-  "LSE:LCJD": "Tracks leading Japanese stocks. London (isin: LU1781541252. TER:0.12%)",
-  "XETR:LYP6": "Tracks the 600 largest European companies. Xetra (isin: LU0908500753. TER:0.07%)",
-  "XETR:LYPG": "Xetra",
-  "XETR:MWOT": "Growth Russell 1000. Xetra (isin: IE0005E8B9S4. TER:0.19%)",
-  "XETR:NUKL": "(isin: IE000M7V94E1)",
-  "LSE:R2US": "London (isin: IE00BJ38QD84. TER:0.30%)",
-  "AMEX:REET": "USA (EUR: iShares US Property Yield UCITS (IUSP) - Londres - en dólares - IE00B1FZSF77, CONFIRMAR.!!!!)",
-  "NASDAQ:SOXX": "USA",
-  "XETR:SXRV": "(Acc), Xetra",
-  "XETR:XDEV": "The Fund is passively managed. The fund aims to reflect the performance, before fees and expenses, of the MSCI World Value (USD) Index. (isin: IE00BL25JM42. TER: 0.25%)",
-  "XETR:XDW0": "Xetra",
-  "XETR:ZPRX": "isin: IE00BSPLC298, Xetra"
+	"AMEX:VTV": "Value USA [EUR LSE:IUVL]",
+  	"LSE:IUVL": "MSCI USA Enhanced Value Index (Grandes y medianas empresas con caracteristicas de alto Valor en USA), London (isin: IE00BD1F4M44. TER:0.20%)",
+  	"EURONEXT:GLUX": "Lujo Global Acc. Euronext Paris (isin: LU1681048630. TER: 0.25%)",
+  	"AMEX:JETS": "USA",
+  	"AMEX:KRE": "(SPDR S&P Regional Banking ETF)",
+  	"LSE:LCJD": "Tracks leading Japanese stocks. London (isin: LU1781541252. TER:0.12%)",
+  	"XETR:LYP6": "Tracks the 600 largest European companies. Xetra (isin: LU0908500753. TER:0.07%)",
+  	"XETR:LYPG": "Xetra",
+	"AMEX:IWF": "Growth Russell 1000 [EUR XETR:MWOT]",
+  	"XETR:MWOT": "Growth Russell 1000. Xetra (isin: IE0005E8B9S4. TER:0.19%)",
+  	"XETR:NUKL": "(isin: IE000M7V94E1)",
+  	"LSE:R2US": "London (isin: IE00BJ38QD84. TER:0.30%)",
+  	"AMEX:REET": "USA (EUR: iShares US Property Yield UCITS (IUSP) - Londres - en dólares - IE00B1FZSF77, CONFIRMAR.!!!!)",
+  	"NASDAQ:SOXX": "USA",
+  	"XETR:SXRV": "(Acc), Xetra",
+	"CBOE:ACWV": "Value World [EUR XETR:XDEV]",
+  	"XETR:XDEV": "The Fund is passively managed. The fund aims to reflect the performance, before fees and expenses, of the MSCI World Value (USD) Index. (isin: IE00BL25JM42. TER: 0.25%)",
+  	"XETR:XDW0": "Xetra",
+  	"XETR:ZPRX": "isin: IE00BSPLC298, Xetra",
 };
 const arrEtfVariableIncome = convertToArrayObjects(etfVariableIncomeObj);
 
@@ -2532,6 +2536,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
