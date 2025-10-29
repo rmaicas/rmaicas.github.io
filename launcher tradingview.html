@@ -1973,7 +1973,7 @@ function changeFlag(ticket, refDataTV, description, charFlagOrig, charFlagTarget
 }
 
 function setFlagToTicket(ticket, charFlag) {
-	let nodeList = document.querySelectorAll("#"+ticket.replaceAll(":", "\\:").replaceAll("!", "\\!").replaceAll("/", "\\/"));
+	let nodeList = document.querySelectorAll("#"+ticket.replaceAll(":", "\\:").replaceAll("!", "\\!").replaceAll("/", "\\/").replaceAll(".", "\\."));
 	for (let i = 0; i < nodeList.length; i++) {
 	  nodeList[i].previousElementSibling.previousElementSibling.previousElementSibling.innerText = charFlag;
 	}
@@ -2537,57 +2537,3 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
