@@ -31,7 +31,7 @@ function convertToArrayObjects(obj) {
   });
 }
 	
-<!---- Indices   OK---->
+<!--------------------------------------------------------------------------------- Indices   OK------------------------------------------------------------------------------------------>
 const indicesObj = {
   "OANDA:SPX500USD": ["", "CME_MINI:ES1!"],
   "AMEX:SPY": "(EU: MIL:SPY5)",
@@ -103,7 +103,7 @@ const etfIndicesObj = {
 const arrEtfIndices = convertToArrayObjects(etfIndicesObj);	
 
 
-<!---- Market Timming   OK---->
+<!--------------------------------------------------------------------------------- Market Timming   OK----------------------------------------------------------------------------------->
 const marketTimmingStocksObj = {
   	"FRED:NFCI": "Indice de condiciones financieras. Cuando sube, hay mas restricciones economicas y por lo tanto bajadas en bolsa",
   	"MULTPL:SHILLER_PE_RATIO_MONTH": "The Shiller P/E Ratio helps investors understand whether the stock market as a whole is overvalued or undervalued...",
@@ -176,7 +176,7 @@ const marketTimmingEconomyObj = {
   	"AMEX:RSPD/AMEX:RSPS": "ETF Discretionary / Staples (Igual ponderacion)",
   	"NASDAQ:PEZ/NASDAQ:PSL": "Consumer Ciclicas/ Defensivas = PMI",
   	"AMEX:IWM/AMEX:SPY": "Small Caps / Big Caps...",
-	
+	"----Liquidez----": "-------------------------- Liquidez ------------------------------",
   	"FRED:WALCL+FRED:ECBASSETSW*1.07+ECONOMICS:GBCBBS*OANDA:GBPUSD+FRED:JPNASSETS/OANDA:USDJPY+ECONOMICS:CNCBBS*FX_IDC:CNYUSD-(FRED:WTREGEN+FRED:RRPONTSYD)": "Liquidez Global ( USA + EURO + UK + JP + CH)",
 	"ECONOMICS:USM2 + ECONOMICS:CNM2*FX_IDC:CNYUSD + ECONOMICS:EUM2*FX_IDC:EURUSD + ECONOMICS:JPM2*FX_IDC:JPYUSD + ECONOMICS:GBM2*FX_IDC:GBPUSD": "Liquidez M2 Global (USA + CHINA + EURO + JAPAN + UK)",
 	"AMEX:SPY/ECONOMICS:USM2": "Cotizacion SPY / Liquidez M2  (Cuanto mas arriba -> mas caro, cuanto mas abajo -> mas barato)",
@@ -187,6 +187,8 @@ const marketTimmingEconomyObj = {
 	"ECONOMICS:EUM2*FX_IDC:EURUSD": "Liquidez M2 EURO (en dolares)",
 	"ECONOMICS:JPM2*FX_IDC:JPYUSD": "Liquidez M2 JAPAN (en dolares)",
 	"ECONOMICS:GBM2*FX_IDC:GBPUSD": "Liquidez M2 UK (en dolares)",
+	"FRED:SOFR-FRED:IORB": "Secured Overnight Financing Rate - Interest Overnight Reserves (si sube, problemas de liquidez en el mercado)",
+	"FRED:TOTRESNS-FRED:RRPONTSYD": "Reserves + Reverse Repo (si baja, problemas de liquidez en el mercado)",
 };
 const arrMarketTimmingEconomy = convertToArrayObjects(marketTimmingEconomyObj);
 
@@ -2539,5 +2541,6 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
