@@ -176,19 +176,23 @@ const marketTimmingEconomyObj = {
   	"AMEX:RSPD/AMEX:RSPS": "ETF Discretionary / Staples (Igual ponderacion)",
   	"NASDAQ:PEZ/NASDAQ:PSL": "Consumer Ciclicas/ Defensivas = PMI",
   	"AMEX:IWM/AMEX:SPY": "Small Caps / Big Caps...",
-	"----Liquidez----": "-------------------------- Liquidez ------------------------------",
+	"-------- LIQUIDEZ --------": "------------------------------------- LIQUIDEZ -----------------------------------------",
   	"FRED:WALCL + FRED:ECBASSETSW*1.07 + ECONOMICS:GBCBBS*OANDA:GBPUSD + FRED:JPNASSETS/OANDA:USDJPY + ECONOMICS:CNCBBS*FX_IDC:CNYUSD - (FRED:WTREGEN+FRED:RRPONTSYD)": "Liquidez Global ( USA + EURO + UK + JP + CH)",
 	"ECONOMICS:USM2 + ECONOMICS:CNM2*FX_IDC:CNYUSD + ECONOMICS:EUM2*FX_IDC:EURUSD + ECONOMICS:JPM2*FX_IDC:JPYUSD + ECONOMICS:GBM2*FX_IDC:GBPUSD": "Liquidez M2 Global (USA + CHINA + EURO + JAPAN + UK)",
 	"AMEX:SPY/ECONOMICS:USM2": "Cotizacion SPY / Liquidez M2  (Cuanto mas arriba -> mas caro, cuanto mas abajo -> mas barato)",
-  	"FRED:WRESBAL": "Liabilities and Capital: Other Factors Draining Reserve Balances: Reserve Balances with Federal Reserve Banks: Week Average",
-	"FRED:RRPONTSYD": "REPOs Inversos REPO inverso: Un actor presta dinero tomando como garantía títulos valores. Es una forma de invertir excedentes de liquidez con seguridad. Si baja, no hay liquidez, si sube hay liquidez y sube la bolsa. Cuando sube drena las reservas de la FED, cuando baja devuelve las reservas a la FED.",
+  	"FRED:WRESBAL": "Liabilities and Capital: Other Factors Draining Reserve Balances: Reserve Balances with Federal Reserve Banks: Week Average. Reservas totales que tienen los bancos comerciales depositadas en la Fed.<br>Aumenta: La Fed está inyectando liquidez (por ejemplo, comprando activos o reduciendo el reverse repo). Los bancos tienen más reservas, mayor liquidez; normalmente apoyo a los mercados de riesgo.<br>Disminuye: La Fed está retirando liquidez (quantitative tightening, TGA sube, RRP absorbe fondos). Menos reservas bancarias, condiciones más ajustadas; suele presionar la liquidez y los activos de riesgo.<br>Si observas:<br>- WRESBAL bajando y RRPONTSYD alto = condición de ajuste de liquidez.<br>- WRESBAL subiendo y RRPONTSYD bajando = condición de expansión de liquidez.",
 	"ECONOMICS:USM2": "Liquidez M2 USA",
 	"ECONOMICS:CNM2*FX_IDC:CNYUSD": "Liquidez M2 CHINA (en dolares)",
 	"ECONOMICS:EUM2*FX_IDC:EURUSD": "Liquidez M2 EURO (en dolares)",
 	"ECONOMICS:JPM2*FX_IDC:JPYUSD": "Liquidez M2 JAPAN (en dolares)",
 	"ECONOMICS:GBM2*FX_IDC:GBPUSD": "Liquidez M2 UK (en dolares)",
+	"TVC:US10Y-FRED:EFFR": "Interes bonos a 10 años - Tasa de la reserva federal (Cuando sube, problemas de liquidez)"
 	"FRED:SOFR-FRED:IORB": "Secured Overnight Financing Rate - Interest Overnight Reserves (si sube, problemas de liquidez en el mercado)",
 	"FRED:TOTRESNS-FRED:RRPONTSYD": "Reserves + Reverse Repo (si baja, problemas de liquidez en el mercado)",
+	"FRED:WALCL": "🔄 WALCL → Total de activos del Balance de la Fed (Total Assets). La Fed tiene un balance grande (o en expansión) → sugiere estímulo o al menos mantenimiento de liquidez alta.",
+	"FRED:RRPONTSYD": "💰 RRPONTSYD (Volumen de acuerdos de recompra inversa (reverse repo) del Fed.) → absorbe liquidez del sistema<br>Un actor presta dinero tomando como garantía títulos valores. Es una forma de invertir excedentes de liquidez con seguridad. Si baja, no hay liquidez, si sube hay liquidez y sube la bolsa. Cuando sube drena las reservas de la FED, cuando baja devuelve las reservas a la FED.<br>RRPONTSYD alto → la Fed está absorbiendo liquidez mediante el mecanismo de reverse repo → liquidez del sistema tiende a estar más contenida.<br>Si observas:<br>- WRESBAL bajando y RRPONTSYD alto = condición de ajuste de liquidez.<br>- WRESBAL subiendo y RRPONTSYD bajando = condición de expansión de liquidez.",
+	"FRED:WTREGEN": "🏦 TGA (Treasury General Account) → cuenta del Tesoro, también quita o añade reservas",
+	"FRED:WALCL-FRED:RRPONTSYD-FRED:WTREGEN": "⚖️ Liquidez neta ≈ WALCL − (RRP + TGA). El WRESBAL tiende a moverse en consonancia con esta métrica.<br>Ajustar los intervalos de tiempo (ej. últimos 2-3 años) para ver bien las tendencias de subida o bajada.",
 };
 const arrMarketTimmingEconomy = convertToArrayObjects(marketTimmingEconomyObj);
 
@@ -2542,6 +2546,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
