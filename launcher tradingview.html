@@ -161,7 +161,7 @@ const arrMarketTimmingBonds = convertToArrayObjects(marketTimmingBondsObj);
 
 
 const marketTimmingEconomyObj = {
-	"FRED:BAMLH0A0HYM2EY": "Prima de riesgo de los bonos basura. Otra opcion: AMEX:HYG-TVC:US10Y",
+	
   	"FRED:ANFCI": "Chicago Fed Adjusted National Financial Conditions Inde",
 	"AMEX:SPY/BATS:AGG": "SPY vs Bonos en grado de inversión. Utilizado por Kosar of Asbury Research.",
   	"COMEX:HG1!/COMEX:GC1!": "Cobre/Oro (Si sube, la economia va bien. Si baja, la economia va mal)",
@@ -176,7 +176,9 @@ const marketTimmingEconomyObj = {
   	"AMEX:RSPD/AMEX:RSPS": "ETF Discretionary / Staples (Igual ponderacion)",
   	"NASDAQ:PEZ/NASDAQ:PSL": "Consumer Ciclicas/ Defensivas = PMI",
   	"AMEX:IWM/AMEX:SPY": "Small Caps / Big Caps...",
-	"-------- LIQUIDEZ --------": "------------------------------------- LIQUIDEZ -----------------------------------------",
+
+	
+	"----------- LIQUIDEZ -----------": "------------------------------------- LIQUIDEZ -----------------------------------------",
   	"FRED:WALCL + FRED:ECBASSETSW*1.07 + ECONOMICS:GBCBBS*OANDA:GBPUSD + FRED:JPNASSETS/OANDA:USDJPY + ECONOMICS:CNCBBS*FX_IDC:CNYUSD - (FRED:WTREGEN+FRED:RRPONTSYD)": "Liquidez Global ( USA + EURO + UK + JP + CH)",
 	"ECONOMICS:USM2 + ECONOMICS:CNM2*FX_IDC:CNYUSD + ECONOMICS:EUM2*FX_IDC:EURUSD + ECONOMICS:JPM2*FX_IDC:JPYUSD + ECONOMICS:GBM2*FX_IDC:GBPUSD": "Liquidez M2 Global (USA + CHINA + EURO + JAPAN + UK)",
 	"AMEX:SPY/ECONOMICS:USM2": "Cotizacion SPY / Liquidez M2  (Cuanto mas arriba -> mas caro, cuanto mas abajo -> mas barato)",
@@ -193,6 +195,18 @@ const marketTimmingEconomyObj = {
 	"FRED:RRPONTSYD": "💰 RRPONTSYD (Volumen de acuerdos de recompra inversa (reverse repo) del Fed.) → absorbe liquidez del sistema<br>Un actor presta dinero tomando como garantía títulos valores. Es una forma de invertir excedentes de liquidez con seguridad. Si baja, no hay liquidez, si sube hay liquidez y sube la bolsa. Cuando sube drena las reservas de la FED, cuando baja devuelve las reservas a la FED.<br>RRPONTSYD alto → la Fed está absorbiendo liquidez mediante el mecanismo de reverse repo → liquidez del sistema tiende a estar más contenida.<br>Si observas:<br>- WRESBAL bajando y RRPONTSYD alto = condición de ajuste de liquidez.<br>- WRESBAL subiendo y RRPONTSYD bajando = condición de expansión de liquidez.",
 	"FRED:WTREGEN": "🏦 TGA (Treasury General Account) → cuenta del Tesoro, también quita o añade reservas",
 	"FRED:WALCL-FRED:RRPONTSYD-FRED:WTREGEN": "⚖️ Liquidez neta ≈ WALCL − (RRP + TGA). El WRESBAL tiende a moverse en consonancia con esta métrica.<br>Ajustar los intervalos de tiempo (ej. últimos 2-3 años) para ver bien las tendencias de subida o bajada.",
+
+	"----------- CREDITO -----------": "------------------------------------- CREDITO -----------------------------------------",
+	"FRED:BAMLH0A0HYM2EY": "Diferencial ajustado de opciones de Alto Rendimiento. Prima de riesgo de los bonos basura. Otra opcion: AMEX:HYG-TVC:US10Y.<br>Representa el spread promedio (prima de riesgo) de los bonos corporativos high yield estadounidenses (bonos basura o de alto rendimiento) frente a los bonos del Tesoro de EE. UU. Se suele mover junto con el VIX. Si sube, malo... Si sube, os inversores piden más prima para mantener deuda high yield. Si baja, Mayor confianza, mejora del apetito por riesgo.",
+	"FRED:BAMLC0A1CAAA": "Diferencial ajustado de opciones de Grado de Inversión",
+	"FRED:BAMLC0A0CM": "Representa el spread (prima) promedio del indice maestro de bonos corporativos de BofA frente a la curva de Treasuries. Se suele mover junto con el VIX. Si sube, los mercados descuentan mayor riesgo de crédito / menor apetito por riesgo (stress crediticio). Suele coincidir con aversión al riesgo, caídas de acciones y flujos a activos seguros.... Si baja, menor percepción de riesgo en el crédito, condiciones más acomodaticias para empresas.",
+	"TVC:MOVE": "Cuando los diferenciales se amplian, la metrica de volatilidad de los bonos se amplia. Tiene cierta relacion con el SP500???",
+	"NASDAQ:SHY/AMEX:HYG": "Otra forma de hacer un seguimiento sobre diferenciales de credito de Alto Rendimiento",
+	"NASDAQ:SHY/AMEX:LQD": "Otra forma menos precisa de hacer un seguimiento sobre diferenciales de credito de Grado de Inversión.",
+	"AMEX:LQD/NASDAQ:SHY": "Bonos corporativos en grado de inversion / Bonos del Tesoro de 1-3 años. Si sube, bueno para la bolsa, si baja es malo.",
+	"CBOE:DSPX": "Indice de dispersion",
+	"CBOE:DSPX - CBOE:COR3M": "Diferencial entre la dispersion y la correlacion a 3 meses, Alta correlacion con el SP500",
+	"CBOE:VIXEQ": "Indice de Volatilidad Constituyente. Permite derivar una medida de la volatilidad esperada del índice utilizando datos que sí están disponibles (las opciones de sus componentes).<br>En algunos mercados o índices más pequeños, el mercado de opciones sobre el índice puede ser poco líquido o incluso no existir. Esto hace imposible calcular un índice de volatilidad como el VIX tradicional.",
 };
 const arrMarketTimmingEconomy = convertToArrayObjects(marketTimmingEconomyObj);
 
@@ -2558,6 +2572,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
