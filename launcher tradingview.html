@@ -108,19 +108,11 @@ const marketTimmingStocksObj = {
   	"FRED:NFCI": "Indice de condiciones financieras. Cuando sube, hay mas restricciones economicas y por lo tanto bajadas en bolsa",
   	"MULTPL:SHILLER_PE_RATIO_MONTH": "The Shiller P/E Ratio helps investors understand whether the stock market as a whole is overvalued or undervalued...",
   	"FRED:BAMLH0A0HYM2": "Diferencia de rendimiento entre bonos no gubernamentales y los bonos gubernamentales...",
-	"GETTEX:GAN3": "Volatilidad Mundial. Tiene poco o nulo volumen, por lo que no seria buena idea invertir alli. Quizas sirva como referente de la situacion de volatilidad general.",
-  	"CBOE:VIX": "$VIX = volatilidad implícita de 30 días para $SPX. Truco: dividir $VIX por 16...",
-  	"CBOE:VVIX": "A partir de 100-110 el mercado empieza a estar inestable.",
-	"CBOE:GAMMA": "Volatilidad realizada. Si baja -> probable que suba la bolsa, si sube -> probable que baje la bolsa",
-  	"TVC:VIX - NASDAQ:VOLI": ">2 Riesgo, <2 No Riesgo",
-  	"CBOE:VX2!-CBOE:VX1!": "(Si hay contango (>0, , VX2>VX1) -> OK, normal. Si hay backwardation (<0, VX2<VX1)-> Mal, nervios)",
-  	"CBOE:VIX3M/CBOE:VIX": "VRatio: Volatilidad 3 meses / Volatilidad 1 mes...",
-	"CBOE:COR1M": " Refleja la expectativa del mercado de qué tan sincronizados (correlacionados) estarán los retornos de las acciones del S&P 500 en el corto plazo (1 mes).<br>Suele oscilar entre 0 (no correlación) y 100 (correlación perfecta).<br> - Valores altos (>70) sugieren que los inversores esperan que las acciones se muevan en conjunto (útil en crisis o alta volatilidad). Suelen coincidir con mercados bajistas<br> - Valores bajos (<30): Mercado espera divergencia entre sectores/acciones (entornos de crecimiento estable). Oportunidades para stock-picking.",
   	"AMEX:SPY/TVC:DXY": "SP500 / Dollar...",
   	"USI:PCCE": "Put / Call Ratio Equities",
   	"INDEX:HIGN-INDEX:LOWN": "New Highs - New Lows (NYSE market) ( >0 = bullish / <0 = bearish)",
   	"AMEX:HYG/AMEX:LQD": "Bonos High Yield / Bonos 'seguros'. Representa un poco el estado de la economía.",
-  	"NASDAQ:SDEX": "NATIONS SKEWDEX...",
+  	"NASDAQ:SDEX": "NATIONS SKEWDEX.<br>El índice está diseñado para capturar alguna medida de “skew”, “sesgo” o “distorsión” del mercado<br>Puede servir como un indicador del apetito por riesgo global o del “miedo / incertidumbre” en los mercados.<br>MIDE EXPECTATIVAS, NO CERTEZAS !!!",
 	"INDEX:S5TW": "S&P 500 Stocks Above 20-Day Average",
   	"INDEX:S5FI": "S&P 500 Stocks Above 50-Day Average",
   	"INDEX:S5TH": "S&P 500 Stocks Above 200-Day Average",
@@ -135,7 +127,21 @@ const marketTimmingStocksObj = {
   	"NASDAQ:SQQQ": "",
   	"AMEX:ARKK/AMEX:XLK": "Tecnologia con perdida / Sector Tecnologico",
   	"CBOE:MAGS": "",
-	"CBOE:SKEW/CBOE:VIX": "Si baja, peligro para la bolsa, sino todo bien"
+	"CBOE:SKEW/CBOE:VIX": "Si baja, peligro para la bolsa, sino todo bien",
+	"----------- VOLATILIDAD -----------": "------------------------------------- VOLATILIDAD -----------------------------------------",
+	"GETTEX:GAN3": "Volatilidad Mundial. Tiene poco o nulo volumen, por lo que no seria buena idea invertir alli. Quizas sirva como referente de la situacion de volatilidad general.",
+  	"CBOE:VIX": "$VIX = volatilidad implícita de 30 días para $SPX. Truco: dividir $VIX por 16...<br>MIDE EXPECTATIVAS, NO CERTEZAS !!!",
+	"CBOE:VIXEQ": "Cboe S&P 500 Constituent Volatility Index.<br>El objetivo del índice es medir la volatilidad implícita esperada a 30 días de las acciones que componen el S&P 500 — es decir, de los valores “constituentes” individuales del índice.<br>Para ello, utiliza opciones sobre acciones individuales (no sobre el índice SPX como el VIX) y aplica una metodología adaptada de la del VIX (una “VIX-like calculation” por acción). Después, esos valores se combinan mediante un ponderado por capitalización bursátil (tal como la composición del índice).<br>Complementa el VIX tradicional. Indica la dispersión esperada de las acciones(valores altos sugieren que el mercado espera movimientos amplios (y posiblemente divergencias fuertes) entre las distintas compañías del S&P 500).",
+	"CBOE:VIXEQ-CBOE:VIX":"Si baja, peligro",
+  	"CBOE:VVIX": "A partir de 100-110 el mercado empieza a estar inestable.",
+	"CBOE:GAMMA": "Volatilidad realizada. Si baja -> probable que suba la bolsa, si sube -> probable que baje la bolsa",
+  	"TVC:VIX - NASDAQ:VOLI": ">2 Riesgo, <2 No Riesgo",
+  	"CBOE:VX2!-CBOE:VX1!": "(Si hay contango (>0, , VX2>VX1) -> OK, normal. Si hay backwardation (<0, VX2<VX1)-> Mal, nervios)",
+  	"CBOE:VIX3M/CBOE:VIX": "VRatio: Volatilidad 3 meses / Volatilidad 1 mes...",
+	"CBOE:COR1M": "Indice de correlación implícita a 1 mes. Refleja la expectativa del mercado de qué tan sincronizados (correlacionados) estarán los retornos de las acciones del S&P 500 en el corto plazo (1 mes)<br>Suele oscilar entre 0 (no correlación) y 100 (correlación perfecta).<br> * Un valor alto (>70) significa que el mercado espera que muchas de las acciones del S&P 500 se muevan en la misma dirección, es decir alta correlación esperada. Esto normalmente ocurre cuando hay nervios en el mercado, riesgo sistémico o aversión al riesgo.<br> * Un valor bajo (<30) sugiere que se espera baja correlación: las acciones se moverán de forma más independiente unas de otras — más dispersión (entornos de crecimiento estable). Oportunidades para stock-picking, ya que aumenta la probabilidad de que algunas suban mucho mientras otras bajan.<br>MIDE EXPECTATIVAS, NO CERTEZAS !!!",
+	"CBOE:COR3M": "Indice de correlación implícita a 3 meses. Ver mas info en CBOE:COR1M",
+	"CBOE:DSPX": "Indice de dispersion. Normalmente cuando las correlaciones implicitas bajan, la dispersion deberia subir.",
+	"CBOE:DSPX-CBOE:COR3M": "Por lo general, el SP500 cotiza/sigue a ese diferencial",
 };
 const arrMarketTimmingStocks = convertToArrayObjects(marketTimmingStocksObj);
 
@@ -167,7 +173,7 @@ const marketTimmingEconomyObj = {
   	"COMEX:HG1!/COMEX:GC1!": "Cobre/Oro (Si sube, la economia va bien. Si baja, la economia va mal)",
   	"AMEX:DBB/AMEX:DBP": "Metales Bases / Metales Preciosos...(Si baja es porque la economia esta debil...)",
   	"OANDA:SPX500USD/TVC:DXY": "(Simula el movimiento real del SP500 sin considerar la cotización del dolar)",
-  	"CBOE:SKEW": "CBOE SKEW INDEX",
+  	"CBOE:SKEW": "CBOE SKEW INDEX: Una medida del riesgo percibido en las colas de la distribución de los rendimientos de inversión del S&P 500 en un horizonte de 30 días.<br>El SKEW es similar al índice VIX, pero en lugar de medir la volatilidad implícita basada en una distribución normal, mide el riesgo implícito de que los rendimientos futuros presenten un comportamiento atípico. El modelo del índice define dicho evento atípico como aquel que se sitúa dos o más desviaciones estándar por debajo de la media, lo que caracterizaría un evento cisne negro o una caída brusca del mercado. El valor del índice refleja típicamente la actividad de negociación de gestores de cartera que cubren el riesgo de cola con opciones, para proteger sus carteras de un descenso grande y repentino en el mercado. Un valor SKEW de 100 indica que el mercado de opciones percibe un bajo riesgo de rendimientos atípicos; valores por encima de 100 reflejan una mayor percepción del riesgo de que se produzca(n) evento(s) atípico(s) en el futuro.",
   	"NASDAQ:TDEX": "Coberturas de riesgo de cola > 3 desviaciones estandards respecto al nivel actual",
   	"AMEX:BKLN": "Prestamos apalancados",
   	"FRED:T5YIE": "5-Year Breakeven Inflation Rate ((Expectativas de inflación futura))",
@@ -2575,6 +2581,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
