@@ -1063,6 +1063,7 @@ const etfVariableIncomeObj = {
   	"XETR:AVWS": "Estrategia Activa en Small Caps de todo el mundo: 70% USA / 30% resto del mundo (isin: IE0003R87OG3. TER: 0.39%) Acumulación",
   	"EURONEXT:CETH_XAMS": "Ethereum. Euronext-Amsterdam (isin: GB00BLD4ZM24. TER: 0% (reducido hasta nuevo aviso, se observo comisiones de hasta 1.59%)",
   	"XETR:2B76": "(isin: IE00BYZK4552. TER: 0.40%), Xetra",
+	"XETR:BBCK": "Sigue el índice Nasdaq Global Buyback Achievers. El índice Nasdaq Global Buyback Achievers sigue a las acciones internacionales que llevan a cabo programas de recompra de acciones por razones financieramente sólidas. (isin: IE00BLSNMW37. TER: 0.39%)",
   	"XETR:CEMS": "Europe Value. Xetra (isin: IE00BQN1K901. TER: 0.25%)",
   "HAM:GANN": "Es un FONDO de volatilidad (simula un Vix pero mucho mas estable y lento). Investigar cual se puede comprar en IB. isin: LU0272941971 (Amundi Funds - Volatility World A EUR LU0557872479, no existe en TView)",
   "GETTEX:GAN3": "INVESTIGAR... isin: LU0319687124",
@@ -1138,23 +1139,25 @@ const etfVariableIncomeObj = {
 const arrEtfVariableIncome = convertToArrayObjects(etfVariableIncomeObj);
 
 const etfVariableIncomeDividendObj = {
-  "XETR:ISPA": "Dividendos en todo el mundo (mas invierte: EEUU y HK), Xetra (isin: DE000A0F5UH1. TER:0.46%)",
-  "LSE:VHYL": "The FTSE All-World High Dividend Yield index tracks high dividend yielding equity globally. (isin: IE00B8GKDB10. TER: 0.29%)",
-  "XETR:SPYD": "Aristocratas de Dividendos en el SP500, Xetra. The S&P High Yield Dividend Aristocrats index tracks the stocks of the S&P Composite 1500 index that have increased dividends every year for at least 20 consecutive years. (isin: IE00B6YX5D40. TER: 0.35%)",
-  "LSE:GLDV": "The S&P Global Dividend Aristocrats index tracks high dividend yielding equities globally. (isin: IE00B9CQXS71. TER: 0.45%)",
-  "XETR:SPYW": "The S&P Euro High Yield Dividend Aristocrats index tracks the EUROZONE companies whose dividends have risen in the last 10 consecutive years. (isin: IE00B5M1WJ87. TER: 0.30%)",
-  "LSE:EDVD": "El índice S&P Emerging Markets High Yield Dividend Aristocrats sigue la rentabilidad de las empresas con alta rentabilidad por dividendo del índice S&P Emerging Plus LargeMidCap que han aumentado o mantenido sus dividendos durante al menos cinco años consecutivos.(isin: IE00B6YX5B26. TER: 0.55%)",
-  "LSE:IUKD": "The FTSE UK Dividend+ index tracks the highest yielding UK stocks. (isin: IE00B0M63060. TER: 0.40%)",
-  "XETR:VDIV": "ETFs de dividendos de todo el mundo (aparentemente peor rendimiento que el ISPA, pero mas barato). The Morningstar Developed Markets Large Cap Dividend Leaders index tracks the performance of companies that display consistency and sustainability in dividend payment patterns and is composed of the top yielding securities which satisfy the screening criteria. Only stocks from developed countries are included in the index.(isin: NL0011683594. TER: 0.38%)",
-  "LSE:JEPG": "Dividendos de todo el mundo (7-8%) con gestión activa (call cubierta). Paga mensualmente. Baja volatilidad: baja y sube menos que el mercado. London USD (isin: IE0003UVYC20. TER:0.35%)",
-  "LSE:JEPI": "Dividendos del USA (7-8%) con gestión activa (call cubierta). Paga mensualmente. Baja volatilidad: baja y sube menos que el mercado. London USD (isin: IE000U5MJOZ6. TER:0.35%)",
-  "XETR:JEQP": "Dividendos del Nasdaq (9-10%) con gestión activa (call cubierta). Paga mensualmente. Baja volatilidad: baja y sube menos que el mercado. Xetra EUR (isin: IE000U9J8HX9. TER:0.35%)",
-  "EURONEXT:VEUR": "Dividendos en Europa, Amsterdam",
-  "XETR:EHDL": "Dividendos en paises emergentes, Xetra",
-  "XETR:UDIV": "Tracks the Solactive Global SuperDividend index tracks stocks with high dividend yields from around the world (Ter: 0.45%), Xetra",
-  "MIL:HDLV": "Tracks the 50 least-volatile high dividend-yielding stocks in the S&P 500 (Ter: 0.30%), Milan",
-  "XETR:XGDD": "Altos dividendos, Xetra",
-  "LSE:IEDL": "Dividendos aceptables (4.5% aprox) con un crecimiento sostenido (Ter: 0.25%), London"
+  
+  	"LSE:EDVD": "El índice S&P Emerging Markets High Yield Dividend Aristocrats sigue la rentabilidad de las empresas con alta rentabilidad por dividendo del índice S&P Emerging Plus LargeMidCap que han aumentado o mantenido sus dividendos durante al menos cinco años consecutivos.(isin: IE00B6YX5B26. TER: 0.55%)",
+	"XETR:EHDL": "Dividendos en paises emergentes, Xetra (isin: IE00BYYXBF44, TER: 0.49%)",
+  	"LSE:GLDV": "The S&P Global Dividend Aristocrats index tracks high dividend yielding equities globally. (isin: IE00B9CQXS71. TER: 0.45%)",
+	"LSE:HDLV": "Tracks the 50 least-volatile high dividend-yielding stocks in the S&P 500. (isin: IE00BWTN6Y99, TER: 0.30%)",
+	"LSE:IEDL": "Dividendos aceptables (4.5% aprox) con un crecimiento sostenido (isin: IE00BG13YH41, TER: 0.25%)"
+	"XETR:ISPA": "Dividendos en todo el mundo (mas invierte: EEUU y HK), Xetra (isin: DE000A0F5UH1. TER:0.46%)",
+	"LSE:IUKD": "The FTSE UK Dividend+ index tracks the highest yielding UK stocks. (isin: IE00B0M63060. TER: 0.40%)",
+  	"LSE:JEPG": "Dividendos de todo el mundo (7-8%) con gestión activa (call cubierta). Paga mensualmente. Baja volatilidad: baja y sube menos que el mercado. London USD (isin: IE0003UVYC20. TER:0.35%)",
+  	"LSE:JEPI": "Dividendos del USA (7-8%) con gestión activa (call cubierta). Paga mensualmente. Baja volatilidad: baja y sube menos que el mercado. London USD (isin: IE000U5MJOZ6. TER:0.35%)",
+  	"XETR:JEQP": "Dividendos del Nasdaq (9-10%) con gestión activa (call cubierta). Paga mensualmente. Baja volatilidad: baja y sube menos que el mercado. Xetra EUR (isin: IE000U9J8HX9. TER:0.35%)",
+	"XETR:SMLD": "Busca replicar el índice Morningstar MLP Composite. Este índice replica las Sociedades Limitadas Maestras (MLP) estadounidenses que operan en infraestructura energética estadounidense. (isin: IE00B8CJW150. TER: 0.50%)",
+	"XETR:SPYD": "Aristocratas de Dividendos en el SP500, Xetra. The S&P High Yield Dividend Aristocrats index tracks the stocks of the S&P Composite 1500 index that have increased dividends every year for at least 20 consecutive years. (isin: IE00B6YX5D40. TER: 0.35%)",
+  	"XETR:SPYW": "The S&P Euro High Yield Dividend Aristocrats index tracks the EUROZONE companies whose dividends have risen in the last 10 consecutive years. (isin: IE00B5M1WJ87. TER: 0.30%)",
+	"XETR:UDIV": "Tracks the Solactive Global SuperDividend index tracks stocks with high dividend yields from around the world (isin:IE00077FRP95, TER: 0.45/0.60%)",
+	"XETR:VDIV": "ETFs de dividendos de todo el mundo (aparentemente peor rendimiento que el ISPA, pero mas barato). The Morningstar Developed Markets Large Cap Dividend Leaders index tracks the performance of companies that display consistency and sustainability in dividend payment patterns and is composed of the top yielding securities which satisfy the screening criteria. Only stocks from developed countries are included in the index.(isin: NL0011683594. TER: 0.38%)",
+	"EURONEXT:VEUR": "Dividendos en Europa, Amsterdam (isin: IE00B945VV12, TER: 0.10%)",
+	"LSE:VHYL": "The FTSE All-World High Dividend Yield index tracks high dividend yielding equity globally. (isin: IE00B8GKDB10. TER: 0.29%)",
+	"XETR:XGSD": "Altos dividendos, Xetra (isin: LU0292096186, TER: 0.50%)",
 };
 const arrEtfVariableIncomeDividend = convertToArrayObjects(etfVariableIncomeDividendObj);
 
@@ -2591,6 +2594,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
