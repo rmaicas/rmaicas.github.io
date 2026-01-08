@@ -356,6 +356,7 @@ const basicMaterialsFuturesObj = {
   "NYMEX:PL1!": "(ETF: MIL:PHPD)",
   "NYMEX:RB1!": "",
   "ICEUS:SB1!": "",
+	"LME:SN1!": "Futuros Estaño (Tin)",
   "NYMEX:TTF1!": "(Gas Europeo (No ingles))",
   "COMEX:UX1!": "",
   "CBOT:ZC1!": "",
@@ -368,6 +369,7 @@ const arrBasicMaterialsFutures = convertToArrayObjects(basicMaterialsFuturesObj)
 
 
 const basicMaterialsSpotObj = {
+	"LME:SN": "Tin (Estaño) future Cash Outright",
   	"OANDA:XAUUSD": "Gold",
   	"OANDA:XAGUSD": ["Silver CFD", "TVC:SILVER"],
 	"OANDA:XCUUSD": "Copper [EUR LSE:COPA]",
@@ -839,6 +841,7 @@ const europeStocksObj = {
   	"LSE:BTRW": "Constructora de casas. Barratt se ha fusionado con otra llamada Redrow",
 	"EURONEXT:BVI": "Testeo, inspección y certificación. Paris",
 	"BME:CAF": "",
+	"LSE:CBA": "Fondo que invierte en Bienes raices cubanos (isin: GG00BFMDJH11)",
   	"LSE:CCT": "Diseña y comercializa juguetes con propiedad intelectual de terceros",
   	"OMXSTO:CHEF": "Empresa sueca de baja capitalización",
   	"LSE:CHRT": "Aeroespacial y Defensa",
@@ -2628,6 +2631,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
