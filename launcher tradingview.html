@@ -1072,7 +1072,8 @@ const othersStocksObj = {
 	};
 const arrOthersStocks = convertToArrayObjects(othersStocksObj);
 
-<!---- ETFs   ---->
+	
+<!--------------------------------------------------- ETFs   ------------------------------------------------------------->
 
 const etfFixedIncomeObj = {
 	"AMEX:AGG": "Es un índice amplio y representativo del mercado de bonos en EE.UU., abarcando bonos del Tesoro, bonos corporativos de grado de inversión, bonos respaldados por hipotecas (MBS), valores respaldados por activos (ABS) y bonos municipales, excluyendo solo high-yield y TIPS",
@@ -1092,7 +1093,8 @@ const etfFixedIncomeObj = {
   	"LSE:IUCB": "isin: IE00BYV12Y75, London. The objective of the Fund is to track the performance of the intermediate maturity, fixed-rate, investment-grade U.S. Dollar-denominated corporate bond market.",
   	"LSE:LQDA": "(Acc) (isin: IE00BYXYYJ35), London",
   	"XETR:LYS4": "Bonos gubernamentales zona Euro a corto plazo 1-3 años y con altas calificaciones crediticias",
-  	"XETR:SXRM": "Replicate the performance of the Benchmark Index (being the ICE U.S. Treasury 7-10 Year Bond Index), less the fees and expenses of the Fund. (Tar:0.07%, isin: IE00B3VWN518)",
+	"XETR:SXRH": "Refleja el retorno del  the ICE U.S. Treasury Inflation Linked Bond Index 0-5 Years (isin: IE00BDQYWQ65. TER: 0.10%)",
+  	"XETR:SXRM": "Replicate the performance of the Benchmark Index (being the ICE U.S. Treasury 7-10 Year Bond Index), less the fees and expenses of the Fund. (isin: IE00B3VWN518. TER:0.07%)",
   	"XETR:SYBR": "Xetra (USD)",
   	"XETR:VECA": "Bonos Corporativos Europa, Xetra (isin: IE00BGYWT403. TER:0.09%)",
   	"XETR:VGEA": "isin: IE00BH04GL39, Xetra",
@@ -1109,6 +1111,7 @@ const etfVariableIncomeObj = {
   	"XETR:2B76": "(isin: IE00BYZK4552. TER: 0.40%), Xetra",
 	"XETR:BBCK": "Sigue el índice Nasdaq Global Buyback Achievers. El índice Nasdaq Global Buyback Achievers sigue a las acciones internacionales que llevan a cabo programas de recompra de acciones por razones financieramente sólidas. (isin: IE00BLSNMW37. TER: 0.39%)",
   	"XETR:CEMS": "Europe Value. Xetra (isin: IE00BQN1K901. TER: 0.25%)",
+	"LSE:DGRA": "Tracks dividend-paying US stocks with a high quality factor. (isin:IE00BZ56RG20. TER: 0.33%)",
   "HAM:GANN": "Es un FONDO de volatilidad (simula un Vix pero mucho mas estable y lento). Investigar cual se puede comprar en IB. isin: LU0272941971 (Amundi Funds - Volatility World A EUR LU0557872479, no existe en TView)",
   "GETTEX:GAN3": "INVESTIGAR... isin: LU0319687124",
   "XETR:DFEN": "Defensa Global. Xetra (isin: IE000YYE6WK5. TER: 0.55%)",
@@ -1133,12 +1136,15 @@ const etfVariableIncomeObj = {
   	"XETR:EXV9": "Xetra",
   	"XETR:LYX4": "Xetra",
   	"NASDAQ:FINX": "",
+	"XETR:FLXC": "Invierte en acciones de gran y mediana capitalización en China y busca replicar el desempeño del índice FTSE China 30/18 Capped (isin:IE00BHZRR147. TER: 0.19%)",
   	"LSE:GDX": "London (isin:IE00BQQP9F84. TER:0.53%)",
   	"LSE:GDXJ": "Más volátil que el GDX, extrema el sentimiento del mercado de Oro. London (isin:IE00BQQP9G91. TER:0.55%)",
   	"AMEX:HACK": "USA. (EUR: A2QGAH - WisdomTree Cybersecurity UCITS ETF USD Acc (isin: IE00BLPK3577))",
   	"LSE:HEAL": "Healthcare Global. London (isin: IE00BYZK4776. TER:0.40%)",
 	"AMEX:HVAC": "Invests in US-listed equities and ADRs of companies operating in the heating, ventilation, and air conditioning (HVAC) and industrial sectors",
-  "LSE:ISAG": "Empresas mundiales del sector agrícola. London (isin: IE00B6R52143. TER:0.55%)",
+	"XETR:IQQA": "Refleja el retorno del EURO STOXX Select Dividend 30 Index (isin: IE00B0M62S72. TER: 0.40%)",
+  	"LSE:ISAG": "Empresas mundiales del sector agrícola. London (isin: IE00B6R52143. TER:0.55%)",
+	"XETR:JGPI": "ETF de gestión activa (covered call). Invierte en empresas de mercados desarrollados de todo el mundo. A las empresas infravaloradas se les da un peso más alto. Además, se busca ingresos adicionales mediante el uso de una estrategia de superposición con instrumentos financieros derivados. El ETF busca generar un rendimiento superior al índice MSCI World. (isin: IE0003UVYC20. TER: 0.35%)",
   "NASDAQ:IBB": "USA. (EUR: XETR:2B70 - IShares NASDAQ US Biotechnology UCITS ETF (isin: IE00BYXG2H39))",
   "LSE:IEVL": "Factor Value: Se enfoca en acciones europeas que están infravaloradas según métricas como el precio sobre el valor en libros (PBV) o el precio sobre ganancias (PER)",
   "AMEX:IGV": "(Software USA), USA",
@@ -2638,6 +2644,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
