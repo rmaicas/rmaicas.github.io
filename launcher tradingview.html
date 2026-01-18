@@ -2180,7 +2180,7 @@ function setTabContentListTV(tabId, listTV, arrListTV){
 		commentFound = arrayComments.find(itemComment => itemComment.id === item.id);
 		listTV.innerHTML += `<tr class="prTableRow"><td style="width: 180px;max-width: 300px;"><button type="button" class="flag" onclick="setFlag('${item.id}', '${item.refDataTV}', '${item.desc}');">&#11036;</button>`
 			+`&nbsp;<img src="" logoid="${item.refDataTV}" class="firstImage"/><img src="" class="secondImage"/>`
-			+`<span class="pointAndCall" onclick="enviarATV('${item.id}')" id="${item.id}" style="font-size: small;">${item.id}</span></td>`
+			+`<span class="pointAndCall" onclick="liClick('${item.id}')" id="${item.id}" style="font-size: small;">${item.id}</span></td>`
 			+`<td style="width: 220px; text-align: right;"> <span style="font-size: xx-small;">${(item.id!=item.refDataTV?item.refDataTV:'')}</span>&nbsp;<span class="${tabId}" refDataTV="${item.refDataTV}" style="font-size: small;"></span></td>`
 			+`<td style="font-size: small; text-align: right;" refMonthlyDataTV="${item.refDataTV}"></td>`
 			+`<td style="font-size: small; text-align: right;" refYearlyDataTV="${item.refDataTV}"></td>`
@@ -2651,6 +2651,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
