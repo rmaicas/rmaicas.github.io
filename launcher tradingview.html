@@ -2132,7 +2132,7 @@ function setFlagTableContent(listId, array, charFlag) {
 		for (ticket of array) {
 			setFlagToTicket(ticket.id, charFlag)
 		}
-		colorList.innerHTML = `<tr style="font-size: small;"><th style="width: 12%;" class="header-table">Name</th><th style="width: 5%;" class="header-table">Change</th>
+		colorList.innerHTML = `<tr style="font-size: small;"><th style="width: 12%;" class="header-table">Name</th><th style="width: 4%;" class="header-table">Change</th>
 		<th style="width: 2%;" class="header-table">Ch.M</th><th style="width: 2%;" class="header-table">Ch.Y</th>
 		<th class="header-table tooltip" style="width: 7%;">Div.<span class="tooltiplittletext">${dividendsTooltip}</span></th>
 		<th class="header-table tooltip" style="width: 1%;">Gral.Data<span class="tooltiplittletext">D: Porcentaje Drawdown desde maximos de todos los tiempos (ATH)<br>RS: Relative Strength (aproximado)</span></th>
@@ -2673,5 +2673,6 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
