@@ -197,10 +197,10 @@ const marketTimmingEconomyObj = {
 	"TVC:US10Y-FRED:EFFR": "Interes bonos a 10 años - Tasa de la reserva federal (Cuando sube, problemas de liquidez)",
 	"FRED:SOFR-FRED:IORB": "Secured Overnight Financing Rate - Interest Overnight Reserves (si sube, problemas de liquidez en el mercado)",
 	"FRED:TOTRESNS-FRED:RRPONTSYD": "Reserves + Reverse Repo (si baja, problemas de liquidez en el mercado)",
-	"FRED:WALCL": "🔄 WALCL → Total de activos del Balance de la Fed (Total Assets). La Fed tiene un balance grande (o en expansión) → sugiere estímulo o al menos mantenimiento de liquidez alta.",
-	"FRED:RRPONTSYD": "💰 RRPONTSYD (Volumen de acuerdos de recompra inversa (reverse repo) del Fed.) → absorbe liquidez del sistema<br>Un actor presta dinero tomando como garantía títulos valores. Es una forma de invertir excedentes de liquidez con seguridad. Si baja, no hay liquidez, si sube hay liquidez y sube la bolsa. Cuando sube drena las reservas de la FED, cuando baja devuelve las reservas a la FED.<br>RRPONTSYD alto → la Fed está absorbiendo liquidez mediante el mecanismo de reverse repo → liquidez del sistema tiende a estar más contenida.<br>Si observas:<br>- WRESBAL bajando y RRPONTSYD alto = condición de ajuste de liquidez.<br>- WRESBAL subiendo y RRPONTSYD bajando = condición de expansión de liquidez.",
-	"FRED:WTREGEN": "🏦 TGA (Treasury General Account) → cuenta del Tesoro, también quita o añade reservas",
-	"FRED:WALCL-FRED:RRPONTSYD-FRED:WTREGEN": "⚖️ Liquidez neta ≈ WALCL − (RRP + TGA). El WRESBAL tiende a moverse en consonancia con esta métrica.<br>Ajustar los intervalos de tiempo (ej. últimos 2-3 años) para ver bien las tendencias de subida o bajada.",
+	"FRED:WALCL": "?? WALCL ? Total de activos del Balance de la Fed (Total Assets). La Fed tiene un balance grande (o en expansión) ? sugiere estímulo o al menos mantenimiento de liquidez alta.",
+	"FRED:RRPONTSYD": "?? RRPONTSYD (Volumen de acuerdos de recompra inversa (reverse repo) del Fed.) ? absorbe liquidez del sistema<br>Un actor presta dinero tomando como garantía títulos valores. Es una forma de invertir excedentes de liquidez con seguridad. Si baja, no hay liquidez, si sube hay liquidez y sube la bolsa. Cuando sube drena las reservas de la FED, cuando baja devuelve las reservas a la FED.<br>RRPONTSYD alto ? la Fed está absorbiendo liquidez mediante el mecanismo de reverse repo ? liquidez del sistema tiende a estar más contenida.<br>Si observas:<br>- WRESBAL bajando y RRPONTSYD alto = condición de ajuste de liquidez.<br>- WRESBAL subiendo y RRPONTSYD bajando = condición de expansión de liquidez.",
+	"FRED:WTREGEN": "?? TGA (Treasury General Account) ? cuenta del Tesoro, también quita o añade reservas",
+	"FRED:WALCL-FRED:RRPONTSYD-FRED:WTREGEN": "?? Liquidez neta ˜ WALCL - (RRP + TGA). El WRESBAL tiende a moverse en consonancia con esta métrica.<br>Ajustar los intervalos de tiempo (ej. últimos 2-3 años) para ver bien las tendencias de subida o bajada.",
 
 	"----------- CREDITO -----------": "------------------------------------- CREDITO -----------------------------------------",
 	"FRED:BAMLH0A0HYM2EY": "Diferencial ajustado de opciones de Alto Rendimiento. Prima de riesgo de los bonos basura. Otra opcion: AMEX:HYG-TVC:US10Y.<br>Representa el spread promedio (prima de riesgo) de los bonos corporativos high yield estadounidenses (bonos basura o de alto rendimiento) frente a los bonos del Tesoro de EE. UU. Se suele mover junto con el VIX. Si sube, malo... Si sube, os inversores piden más prima para mantener deuda high yield. Si baja, Mayor confianza, mejora del apetito por riesgo.",
@@ -1513,6 +1513,10 @@ select option {
 	<button onclick="restoreLocalStorageFromClipboard()">Restore Local Storage from Clipboard</button>
 	<a target="develop" href="https://github.com/rmaicas/rmaicas.github.io/tree/main">Develop</a>
 	<a target="tvList" href="https://tvdb.brianthe.dev/">TradingView List</a>
+	<label>
+		<input type="checkbox" id="hasExtension" checked>
+		Launcher extension activo
+	</label>
   </div>
 
 	<div style="clear: both;"></div>
@@ -1976,9 +1980,22 @@ function openTab(evt, tabItem) {
 }
 
 
-function liClick(ticket){
-	// window.open("https://www.tradingview.com/chart/kyevUdU1/?symbol="+encodeURIComponent(ticket), "tvf");
-	window.open("https://www.tradingview.com/chart/"+selectTV.options[selectTV.selectedIndex].value+"/?symbol="+encodeURIComponent(ticket), "tv");
+// function liClick(ticket){
+// 	// window.open("https://www.tradingview.com/chart/kyevUdU1/?symbol="+encodeURIComponent(ticket), "tvf");
+// 	window.open("https://www.tradingview.com/chart/"+selectTV.options[selectTV.selectedIndex].value+"/?symbol="+encodeURIComponent(ticket), "tv");
+// }
+
+function liClick(ticket) {
+  const hasExtension = document.getElementById('hasExtension').checked;
+  const layout = selectTV.options[selectTV.selectedIndex].value
+  if (hasExtension) {
+    // Solo enviamos mensaje a la extensión
+    window.postMessage({ type: "OPEN_TV", layout:layout, symbol: ticket }, "*");
+  } else {
+    // Si no hay extensión, abrimos TradingView en una nueva pestaña
+	const url = "https://www.tradingview.com/chart/"+selectTV.options[selectTV.selectedIndex].value+"/?symbol="+encodeURIComponent(ticket);
+    window.open(url, "tv");
+  }
 }
 
 function getNote() {
@@ -2651,59 +2668,4 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
