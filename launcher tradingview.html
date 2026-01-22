@@ -2536,7 +2536,7 @@ function callTV(symbol, tabItem) {
 	//console.log(symbol)
 	callApiTV(symbol)
 	if (tabItem == currentTab){
-		setTimeout(callTV, 20000, symbol, tabItem);
+		setTimeout(callTV, 30000, symbol, tabItem);
 	}
 };
 
@@ -2570,7 +2570,7 @@ const getUSAMarketData = async () => {
 	USAMarket.Perf3M = (jsonResponseNASDAQ['Perf.3M']+jsonResponseNYSE['Perf.3M'])*0.5;
 	USAMarket.Perf6M = (jsonResponseNASDAQ['Perf.6M']+jsonResponseNYSE['Perf.6M'])*0.5;
 	USAMarket.PerfY = (jsonResponseNASDAQ['Perf.Y']+jsonResponseNYSE['Perf.Y'])*0.5;
-	setTimeout(getUSAMarketData, 20000);
+	setTimeout(getUSAMarketData, 60000);
 }
 
 <!-- //////////////////////////   SPLITTER   /////////////////////////////////// -->
@@ -2677,6 +2677,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
