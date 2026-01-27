@@ -2174,12 +2174,12 @@ function setFlagTableContent(listId, array, charFlag) {
 		<th style="width: 2%;" class="header-table"></th><th style="width: 1%;" class="header-table"><th style="width: 1%;" class="header-table"><th style="width: 1%;" class="header-table"></th></tr>`
 		for(var i = 0; i < array.length; i++) {
 			var item = array[i];
-			if ((typeof item.refDataTV == 'undefined') || (item.refDataTV == 'undefined') || (item.refDataTV == '')) {
+			if (item.refDataTV == '') {
 				item.refDataTV = item.id
 			}
-			if ((typeof item.desc == 'undefined') || (item.desc == 'undefined')){
-				item.desc = ""
-			}
+			// if ((typeof item.desc == 'undefined') || (item.desc == 'undefined')){
+			// 	item.desc = ""
+			// }
 			commentFound = arrayComments.find(itemComment => itemComment.id === item.id);
 			colorList.innerHTML += `<tr class="prTableRow"><td style="width: 160px;">&nbsp;<img src="" logoid="${item.refDataTV}" class="firstImage"/><img src="" class="secondImage"/>`
 				+`<span class="pointAndCall" onclick="liClick('`+item.id+`')" style="font-size: small;">`+item.id+`</span></td>`
@@ -2224,7 +2224,7 @@ function setTabContentListTV(tabId, listTV, arrListTV){
 				<th style="width: 22%;" class="header-table">Comment</th></tr>`
 	
 	for (item of arrListTV) {
-		if (typeof item.refDataTV == 'undefined') {
+		if (item.refDataTV == '') {
 			item.refDataTV = item.id
 		}
 		
@@ -2702,6 +2702,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
