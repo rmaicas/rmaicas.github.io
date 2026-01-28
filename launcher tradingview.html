@@ -2571,7 +2571,7 @@ function setCallsTVForTab(tabItem){
 	for (i = 0; i < tabcontent.length; i++) {
 		callTV(tabcontent[i].getAttribute('refDataTV'), tabItem);
 		// Pequeña pausa entre requests
-        await new Promise(resolve => setTimeout(resolve, 300));
+        new Promise(resolve => setTimeout(resolve, 300));
 	}
 }
 
@@ -2704,6 +2704,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
