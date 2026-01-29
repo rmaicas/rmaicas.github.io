@@ -1989,15 +1989,22 @@ function onLoad() {
 	
 	
 	const el = document.querySelector('#mainTab');
-	currentTab='tabNotes';
+	//currentTab='tabNotes';
+	var event = {
+        currentTarget: document.getElementById('tabNotes')
+    };
+	openTab(event, 'tabNotes');
 	callsTVForTab(currentTab)
-	el.dispatchEvent(new PointerEvent("click"));
+	
+	//el.dispatchEvent(new PointerEvent("click"));
 }
 
 
 
 function openTab(evt, tabItem) {
 	saveNote();
+	if (currentTab === tabItem) return;
+	
 	var i, tabcontent, tablinks;
 	tabcontent = document.getElementsByClassName("tabcontent");
 	for (i = 0; i < tabcontent.length; i++) {
@@ -2009,6 +2016,15 @@ function openTab(evt, tabItem) {
 	}
 	document.getElementById(tabItem).style.display = "block";
 	evt.currentTarget.className += " active";
+	
+	// Cancelar timeouts del tab actual
+	cancelarTimeoutsDelTab(currentTab);
+	
+	// NUEVO: Cancelar peticiones HTTP del tab anterior
+	if (currentTab) {
+		stockService.cancelTabRequests(currentTab);
+	}
+	
 	currentTab=tabItem;
 	setCallsTVForTab(tabItem)
 }
@@ -2174,7 +2190,7 @@ function setFlagTableContent(listId, array, charFlag) {
 		<th style="width: 2%;" class="header-table"></th><th style="width: 1%;" class="header-table"><th style="width: 1%;" class="header-table"><th style="width: 1%;" class="header-table"></th></tr>`
 		for(var i = 0; i < array.length; i++) {
 			var item = array[i];
-			if (item.refDataTV == '') {
+			if (item.refDataTV == '' && item.id[0]!="-") {
 				item.refDataTV = item.id
 			}
 			// if ((typeof item.desc == 'undefined') || (item.desc == 'undefined')){
@@ -2224,7 +2240,7 @@ function setTabContentListTV(tabId, listTV, arrListTV){
 				<th style="width: 22%;" class="header-table">Comment</th></tr>`
 	
 	for (item of arrListTV) {
-		if (item.refDataTV == '') {
+		if (item.refDataTV == '' && item.id[1]!="-") {
 			item.refDataTV = item.id
 		}
 		
@@ -2316,10 +2332,9 @@ function restoreLocalStorageFromClipboard() {
 	
 }
 
-const callApiTV = async (symbol) => {
-	if ((symbol!= null) && (symbol!=="")){
-		const response = await fetch('https://scanner.tradingview.com/symbol?symbol='+symbol+'&fields=close,change,logoid,description,price_52_week_high,price_52_week_low,sector,industry,country,market,Low.1M,High.1M,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y,High.All,dps_common_stock_prim_issue_fy,dividend_yield_recent,dividends_yield,dividends_yield_current,dps_common_stock_prim_issue_yoy_growth_fy,continuous_dividend_growth,dividend_payout_ratio_ttm,continuous_dividend_payout,MACD.macd,MACD.signal,ATR,Recommend.MA,Recommend.Other,Recommend.All,MACD.macd|1W,MACD.signal|1W,ATR|1W,price_earnings_ttm,return_on_invested_capital,return_on_equity,operating_margin,net_debt_to_ebitda_fq,Recommend.MA|1W,Recommend.Other|1W,Recommend.All|1W,relative_volume_intraday|5,relative_volume_10d_calc|1W&no_404=true');
-		const jsonResponse = await response.json(); //extract JSON from the http response
+
+		
+function updateUI(symbol, jsonResponse){
 		if (jsonResponse!=null){
 			// do something with jsonResponse
 			arrPrices = document.querySelectorAll('[refDataTV="'+symbol+'"]');
@@ -2554,18 +2569,384 @@ const callApiTV = async (symbol) => {
 				}
 			}
 		}
+	
+}
+
+/////////////////////////////////////////////  Llamadas a TV   //////////////////////////////////////////////////////////////////////////////
+class AdvancedRateLimiter {
+  constructor(config = {}) {
+    this.maxRequests = config.maxRequests || 5;
+    this.timeWindow = config.timeWindow || 60000; // 1 minuto por defecto
+    this.maxRetries = config.maxRetries || 3;
+    this.baseDelay = config.baseDelay || 300000; // 1 segundo
+    this.requests = [];
+    this.queue = [];
+    this.isProcessing = false;
+	this.isPaused = false;
+    this.pauseUntil = 0;
+	this.activeRequests = new Map(); // Para rastrear requests activos por tab
+  }
+
+  async execute(requestFn, tabId = 'tabNotes') {
+    return new Promise((resolve, reject) => {
+      const requestId = Date.now() + Math.random(); // ID único
+      this.queue.push({ 
+        requestFn, 
+        resolve, 
+        reject, 
+        retries: 0,
+        tabId,
+        requestId
+      });
+	  
+	  // Registrar en activeRequests
+      if (!this.activeRequests.has(tabId)) {
+        this.activeRequests.set(tabId, new Set());
+      }
+      this.activeRequests.get(tabId).add(requestId);
+	  
+      this.processQueue();
+    });
+  }
+  
+  // Cancelar todas las peticiones de un tab
+  cancelTabRequests(tabId) {
+    if (this.activeRequests.has(tabId)) {
+      console.log(`??? Cancelando ${this.activeRequests.get(tabId).size} peticiones del tab "${tabId}"`);
+      this.activeRequests.delete(tabId);
+    }
+    
+    // Filtrar la cola para eliminar peticiones de este tab
+    const originalLength = this.queue.length;
+    this.queue = this.queue.filter(item => item.tabId !== tabId);
+    const removed = originalLength - this.queue.length;
+    
+    if (removed > 0) {
+      console.log(`??? Eliminadas ${removed} peticiones en cola del tab "${tabId}"`);
+    }
+  }
+
+  async processQueue() {
+	  if (this.isProcessing || this.queue.length === 0) return;
+	  
+	  this.isProcessing = true;
+	  
+	  while (this.queue.length > 0) {
+		const now = Date.now();
+		
+		if (this.isPaused && now < this.pauseUntil) {
+		  const waitTime = this.pauseUntil - now;
+		  console.log(`?? Pausa por rate limit. Esperando ${Math.round(waitTime/1000)}s...`);
+		  await new Promise(resolve => setTimeout(resolve, waitTime));
+		  this.isPaused = false; // Reanudar después de la espera
+		  continue;
+		}
+		
+		// Limpiar requests antiguos
+		this.requests = this.requests.filter(
+		  timestamp => now - timestamp < this.timeWindow
+		);
+		
+		// Si hay espacio para más requests
+		if (this.requests.length < this.maxRequests) {
+		  const { requestFn, resolve, reject, retries, tabId, requestId } = this.queue.shift();
+		  
+		  // Verificar si esta petición fue cancelada
+		  if (!this.isRequestActive(tabId, requestId)) {
+			console.log(`?? Petición cancelada para tab "${tabId}", saltando...`);
+			continue;
+		  }
+			
+		  try {
+			// Registrar el request
+			this.requests.push(now);
+			
+			// Ejecutar la función
+			const result = await requestFn();
+			
+			// Solo resolver si la petición sigue activa
+			if (this.isRequestActive(tabId, requestId)) {
+				resolve(result);
+			}
+			
+		  } catch (error) {
+			
+			// Solo manejar error si la petición sigue activa
+			if (!this.isRequestActive(tabId, requestId)) {
+				continue;
+			}
+			  
+			if (this.shouldRetry(error)) {
+			  // Si es error 429, activar pausa y NO reintentar
+			  console.log(`? Error 429 detectado. Pausando por ${Math.round(this.baseDelay/1000)}s`);
+			  this.isPaused = true;
+			  this.pauseUntil = now + this.baseDelay;
+			  reject(new Error(`RATE_LIMIT_PAUSED: Espera ${Math.round(this.baseDelay/1000)}s`));
+			  continue; // salir sin reintentar
+			} 
+			// Para otros errores, hacer retry normal
+			else if (retries < this.maxRetries) {
+			  const delay = 1000 * Math.pow(2, retries);
+			  console.log(`Reintentando en ${delay}ms...`);
+			  
+			  setTimeout(() => {
+				// Verificar que la petición siga activa antes de reintentar
+				if (this.isRequestActive(tabId, requestId)) {
+					this.queue.unshift({ 
+					  requestFn, 
+					  resolve, 
+					  reject, 
+					  retries: retries + 1,
+					  tabId,
+					  requestId
+					});
+					this.processQueue();
+				}
+			  }, delay);
+			} else {
+			  reject(error);
+			}
+		  } finally {
+			  // Limpiar request ID después de procesar
+			  this.cleanupRequest(tabId, requestId);
+		  }
+		} else {
+		  const oldestRequest = this.requests[0];
+		  const waitTime = this.timeWindow - (now - oldestRequest);
+		  await new Promise(resolve => setTimeout(resolve, waitTime));
+		}
+	  }
+	  
+	  this.isProcessing = false;
+  }
+
+  // Verificar si un request sigue activo
+  isRequestActive(tabId, requestId) {
+    if (!tabId || !requestId) return true; // Para compatibilidad
+    return this.activeRequests.has(tabId) && 
+           this.activeRequests.get(tabId).has(requestId);
+  }
+
+  // Limpiar request ID
+  cleanupRequest(tabId, requestId) {
+    if (this.activeRequests.has(tabId)) {
+      this.activeRequests.get(tabId).delete(requestId);
+      if (this.activeRequests.get(tabId).size === 0) {
+        this.activeRequests.delete(tabId);
+      }
+    }
+  }
+  
+  shouldRetry(error) {
+		// Detectar si es un error de rate limiting
+		return error.message?.includes('429') ||
+				error.message?.includes('Too Many Requests') ||
+				error.message?.includes('rate limit') ||
+				error.message?.includes('too many requests') ||
+				error.message?.includes('Failed to fetch') ||
+				error.message?.includes('CORS policy') ||
+				error.status === 0;
+  }
+
+  getStatus() {
+    const now = Date.now();
+    this.requests = this.requests.filter(
+      timestamp => now - timestamp < this.timeWindow
+    );
+    
+    return {
+      remaining: this.maxRequests - this.requests.length,
+      used: this.requests.length,
+      queueLength: this.queue.length,
+	  activeTabs: Array.from(this.activeRequests.keys()),
+      resetIn: this.requests.length > 0 ? 
+        this.timeWindow - (now - this.requests[0]) : 0
+    };
+  }
+}
+
+
+
+
+class StockDataService {
+  constructor() {
+    this.rateLimiter = new AdvancedRateLimiter({
+      maxRequests: 100,
+      timeWindow: 20000,
+      maxRetries: 1
+    });
+    
+    this.cache = new Map();
+    this.cacheDuration = 300000; // 5 minutos
+    
+    this.requestQueue = new Map(); // Para evitar requests duplicados
+  }
+  
+  async getStockData(symbol, tabId = 'tabNotes', forceRefresh = false) {
+    // Verificar caché primero
+    const cached = this.cache.get(symbol);
+    const now = Date.now();
+    
+    if (!forceRefresh && cached && (now - cached.timestamp) < this.cacheDuration) {
+      console.log(`Usando datos cacheados para ${symbol}`);
+      return cached.data;
+    }
+		
+	if (this.rateLimiter.isPaused) {
+	  console.log(`Espera ${Math.ceil((this.rateLimiter.pauseUntil - now)/1000)} segundos`);
+	  return;
 	}
+    
+	const requestKey = `${symbol}-${tabId}`;
+	
+    // Evitar requests duplicados
+    if (this.requestQueue.has(requestKey)) {
+      console.log(`Ya hay un request en curso para ${symbol}, esperando...`);
+      return await this.requestQueue.get(requestKey);
+    }
+    
+    // Crear nueva promesa para este símbolo
+    const requestPromise = this.rateLimiter.execute(async () => {
+      try {
+        const data = await this.fetchFromTradingView(symbol);
+        
+        // Actualizar caché
+        this.cache.set(symbol, {
+          data,
+          timestamp: now
+        });
+        
+        return data;
+      } finally {
+        // Limpiar la cola cuando termine
+        this.requestQueue.delete(requestKey);
+      }
+    }, tabId);  // se pasa el tabId aqui
+    
+    this.requestQueue.set(requestKey, requestPromise);
+    return await requestPromise;
+  }
+  
+  // Cancelar todas las peticiones de un tab
+  cancelTabRequests(tabId) {
+    this.rateLimiter.cancelTabRequests(tabId);
+    
+    // También limpiar requestQueue para este tab
+    const keysToDelete = [];
+    for (const [key, promise] of this.requestQueue.entries()) {
+      if (key.endsWith(`-${tabId}`)) {
+        keysToDelete.push(key);
+      }
+    }
+    
+    keysToDelete.forEach(key => {
+      this.requestQueue.delete(key);
+    });
+    
+    if (keysToDelete.length > 0) {
+      console.log(`??? Limpiadas ${keysToDelete.length} promesas del tab "${tabId}"`);
+    }
+  }
+  
+  async fetchFromTradingView(symbol) {
+    const url = `https://scanner.tradingview.com/symbol?symbol=${symbol}&fields=close,change,logoid,description,price_52_week_high,price_52_week_low,sector,industry,country,market,Low.1M,High.1M,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y,High.All,dps_common_stock_prim_issue_fy,dividend_yield_recent,dividends_yield,dividends_yield_current,dps_common_stock_prim_issue_yoy_growth_fy,continuous_dividend_growth,dividend_payout_ratio_ttm,continuous_dividend_payout,MACD.macd,MACD.signal,ATR,Recommend.MA,Recommend.Other,Recommend.All,MACD.macd|1W,MACD.signal|1W,ATR|1W,price_earnings_ttm,return_on_invested_capital,return_on_equity,operating_margin,net_debt_to_ebitda_fq,Recommend.MA|1W,Recommend.Other|1W,Recommend.All|1W,relative_volume_intraday|5,relative_volume_10d_calc|1W&no_404=true`;
+    
+    const response = await fetch(url);
+    
+    // if (!response.ok) {
+		// error = new Error(`HTTP ${response.status}: ${response.statusText}`);
+		// error.status = response.status;  // Añadir el status code al error
+		// error.statusText = response.statusText;
+		// throw error;
+    // }
+    
+    return await response.json();
+  }
+  
+  getRateLimitStatus() {
+    return this.rateLimiter.getStatus();
+  }
+  
+  clearCache() {
+    this.cache.clear();
+  }
+  
+  precacheSymbols(symbols) {
+    // Pre-cargar símbolos importantes
+    symbols.forEach(symbol => {
+      this.getStockData(symbol).catch(console.error);
+    });
+  }
+}
+
+/////////////////////////////////////////
+
+const stockService = new StockDataService();
+
+// Actualizar datos periódicamente
+async function updateAllStocks(symbol, tabItem = 'tabNotes') {
+  try {
+    if (symbol == "") return;
+    const data = await stockService.getStockData(symbol, tabItem);
+    //if (data) {
+    updateUI(symbol, data);
+    //}
+	// pequeña pausa entre llamadas
+    await new Promise(resolve => setTimeout(resolve, 500));
+  } catch (error) {
+    console.error(`Error actualizando ${symbol} (tab: ${tabItem}):`, error);
+  }
+}
+
+
+
+/////////////
+
+// Almacenar arrays de timeoutIds por tab
+const timeoutsPorTab = {}; // {tabItem: [timeoutId1, timeoutId2, ...]}
+
+// Cancelar todos los timeouts de un tab
+function cancelarTimeoutsDelTab(tabItem) {
+  if (timeoutsPorTab[tabItem]) {
+    // Cancelar cada timeout
+    timeoutsPorTab[tabItem].forEach(timeoutId => {
+      clearTimeout(timeoutId);
+    });
+    
+    // Limpiar el array
+    timeoutsPorTab[tabItem] = [];
+    
+    console.log(`Timeouts del tab "${tabItem}" cancelados`);
+  }
 }
 
 function callTV(symbol, tabItem) {
+	
+	// Cancelar llamadas anteriores si las hay
+	if (timeoutsPorTab[tabItem] && timeoutsPorTab[tabItem].length > 0) {
+		console.log(`?? Cambiando a tab "${tabItem}", cancelando llamadas previas...`);
+	}
+	
 	//console.log(symbol)
-	callApiTV(symbol)
+	//callApiTV(symbol)
+	updateAllStocks(symbol, tabItem)
 	if (tabItem == currentTab){
-		setTimeout(callTV, 30000, symbol, tabItem);
+		// Programar siguiente actualización
+		const timeoutId = setTimeout(() => callTV(symbol, tabItem), 60000);
+		// Guardar en el array del tab
+		if (!timeoutsPorTab[tabItem]) {
+		  timeoutsPorTab[tabItem] = [];
+		}
+		timeoutsPorTab[tabItem].push(timeoutId);
 	}
 };
 
-function setCallsTVForTab(tabItem){
+function setCallsTVForTab(tabItem){  // Se llama cuando entro a un TAB
+	// NUEVO: Cancelar peticiones del tab anterior
+	if (currentTab) {
+		stockService.cancelTabRequests(currentTab);
+		console.log(`?? Cambiando de tab "${currentTab}" a "${tabItem}"`);
+	}
 	var i, tabcontent;
 	tabcontent = document.getElementsByClassName(tabItem);
 	for (i = 0; i < tabcontent.length; i++) {
@@ -2573,21 +2954,25 @@ function setCallsTVForTab(tabItem){
 	}
 }
 
-function callsTVForTab(tabItem){
+function callsTVForTab(tabItem){  // Se llama cada vez que se edita un item o al cargar la pagina principal (con TAB note)
 	var i, tabcontent;
 	tabcontent = document.getElementsByClassName(tabItem);
 	for (i = 0; i < tabcontent.length; i++) {
-		callApiTV(tabcontent[i].getAttribute('refDataTV'))
+		//callApiTV(tabcontent[i].getAttribute('refDataTV'))
+		updateAllStocks(tabcontent[i].getAttribute('refDataTV'))
 	}
 }
 
 
 const getUSAMarketData = async () => {
 	//(NASDAQ:IXIC+TVC:NYA)*0.5
-	const responseNASDAQ = await fetch('https://scanner.tradingview.com/symbol?symbol=TVC:IXIC&fields=close,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y&no_404=true');
-	jsonResponseNASDAQ = await responseNASDAQ.json(); //extract JSON from the http response
-	const responseNYSE = await fetch('https://scanner.tradingview.com/symbol?symbol=TVC:NYA&fields=close,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y&no_404=true');
-	jsonResponseNYSE = await responseNYSE.json(); //extract JSON from the http response
+	
+	jsonResponseNASDAQ = await stockService.getStockData("TVC:IXIC");
+    jsonResponseNYSE = await stockService.getStockData("TVC:NYA");
+	//const responseNASDAQ = await fetch('https://scanner.tradingview.com/symbol?symbol=TVC:IXIC&fields=close,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y&no_404=true');
+	//jsonResponseNASDAQ = await responseNASDAQ.json(); //extract JSON from the http response
+	//const responseNYSE = await fetch('https://scanner.tradingview.com/symbol?symbol=TVC:NYA&fields=close,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y&no_404=true');
+	//jsonResponseNYSE = await responseNYSE.json(); //extract JSON from the http response
 	
 	USAMarket.close = (jsonResponseNASDAQ['close']+jsonResponseNYSE['close'])*0.5;
 	USAMarket.PerfW = (jsonResponseNASDAQ['Perf.W']+jsonResponseNYSE['Perf.W'])*0.5;
@@ -2595,7 +2980,7 @@ const getUSAMarketData = async () => {
 	USAMarket.Perf3M = (jsonResponseNASDAQ['Perf.3M']+jsonResponseNYSE['Perf.3M'])*0.5;
 	USAMarket.Perf6M = (jsonResponseNASDAQ['Perf.6M']+jsonResponseNYSE['Perf.6M'])*0.5;
 	USAMarket.PerfY = (jsonResponseNASDAQ['Perf.Y']+jsonResponseNYSE['Perf.Y'])*0.5;
-	setTimeout(getUSAMarketData, 60000);
+	setTimeout(getUSAMarketData, 300000);
 }
 
 <!-- //////////////////////////   SPLITTER   /////////////////////////////////// -->
@@ -2702,7 +3087,6 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
-
 
 
 
