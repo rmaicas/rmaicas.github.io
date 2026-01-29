@@ -117,7 +117,7 @@ const arrEtfIndices = convertToArrayObjects(etfIndicesArray);
 const marketTimmingStocksArray = [
   "FRED:NFCI|Indice de condiciones financieras. Cuando sube, hay mas restricciones economicas y por lo tanto bajadas en bolsa",
   "MULTPL:SHILLER_PE_RATIO_MONTH|The Shiller P/E Ratio helps investors understand whether the stock market as a whole is overvalued or undervalued...",
-  "FRED:BAMLH0A0HYM2|Diferencia de rendimiento entre bonos no gubernamentales y los bonos gubernamentales...",
+  "FRED:BAMLH0A0HYM2|Diferencia de rendimiento entre bonos no gubernamentales y los bonos gubernamentales. Si sube, el mercado ve riesgos en la economia; si baja, no hay riesgos.",
   "AMEX:SPY/TVC:DXY|SP500 / Dollar...",
   "USI:PCCE|Put / Call Ratio Equities",
   "INDEX:HIGN-INDEX:LOWN|New Highs - New Lows (NYSE market) ( >0 = bullish / <0 = bearish)",
@@ -2210,7 +2210,7 @@ function setFlagTableContent(listId, array, charFlag) {
 				+`<td style="font-size: smaller; text-align: center;" refRecommendsW="${item.refDataTV}"></td>`
 				+`<td style="font-size: smaller; text-align: center;" refRecommendsD="${item.refDataTV}"></td>`
 				+`<td style="font-size: smaller; text-align: left;" refSectorIndustryDataTV="${item.refDataTV}"></td>`
-				+`<td style="font-size: x-small;" refDescription="${item.refDataTV}" additionalDescription="${item.desc}">${item.desc}</td>`
+				+`<td style="font-size: x-small;" refDescription="${item.refDataTV}" additionalDescription="${item.desc}"><i>${item.desc}</i></td>`
 				+`<td><div style="background-color: #363535;color: gainsboro;" contenteditable onblur="changeComment( '${item.id}', innerText)">${commentFound?.comment || ""}</div></td>`
 				+`<td style="font-size: x-small; text-align: right;" >
 					<select id="${'select_'+item.id}" onChange="changeFlag( '${item.id}', '${item.refDataTV}', '${item.desc}', '${charFlag}', document.getElementById('${'select_'+item.id}').value)" style="border: 0;background-color: transparent;color: lightgray;">
@@ -2260,7 +2260,7 @@ function setTabContentListTV(tabId, listTV, arrListTV){
 			+`<td style="font-size: smaller; text-align: center;" refRecommendsD="${item.refDataTV}"></td>`
 			
 			+`<td style="font-size: smaller; text-align: left;" refSectorIndustryDataTV="${item.refDataTV}"></td>`
-			+`<td style="font-size: small;" refDescription="${item.refDataTV}" additionalDescription="${item.desc}">${item.desc}</td>`
+			+`<td style="font-size: small;" refDescription="${item.refDataTV}" additionalDescription="${item.desc}"><i>${item.desc}</i></td>`
 			+`<td><div style="background-color: #363535;color: gainsboro;" contenteditable onblur="changeComment( '${item.id}', innerText)">${commentFound?.comment || ""}</div></td></tr>`;
 	}
 }
@@ -2546,7 +2546,7 @@ function updateUI(symbol, jsonResponse){
 					if ((additionalDescription===undefined) || (additionalDescription==="")){
 						item.innerHTML = `${description}`;
 					} else {
-						item.innerHTML = `${description} (${additionalDescription})`;
+						item.innerHTML = `${description}<br><i>${additionalDescription}</i>`;
 					}
 				}
 			}
@@ -2567,7 +2567,7 @@ function updateUI(symbol, jsonResponse){
 			for (item of arrDescription) {
 				additionalDescription = item.getAttribute("additionalDescription")
 				if ((additionalDescription!=undefined) && (additionalDescription!=="")){
-					item.innerHTML = `(${additionalDescription})`;
+					item.innerHTML = `<i>${additionalDescription}</i>`;
 				}
 			}
 		}
@@ -3089,6 +3089,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
