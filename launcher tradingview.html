@@ -2208,7 +2208,7 @@ function setFlagTableContent(listId, array, charFlag) {
 				+`<td style="font-size: smaller; text-align: center;" refRecommendsW="${item.refDataTV}"></td>`
 				+`<td style="font-size: smaller; text-align: center;" refRecommendsD="${item.refDataTV}"></td>`
 				+`<td style="font-size: smaller; text-align: left;" refSectorIndustryDataTV="${item.refDataTV}"></td>`
-				+`<td style="font-size: x-small;" refDescription="${item.refDataTV}" additionalDescription="${item.desc}"></td>`
+				+`<td style="font-size: x-small;" refDescription="${item.refDataTV}" additionalDescription="${item.desc}">${item.desc}</td>`
 				+`<td><div style="background-color: #363535;color: gainsboro;" contenteditable onblur="changeComment( '${item.id}', innerText)">${commentFound?.comment || ""}</div></td>`
 				+`<td style="font-size: x-small; text-align: right;" >
 					<select id="${'select_'+item.id}" onChange="changeFlag( '${item.id}', '${item.refDataTV}', '${item.desc}', '${charFlag}', document.getElementById('${'select_'+item.id}').value)" style="border: 0;background-color: transparent;color: lightgray;">
@@ -2258,7 +2258,7 @@ function setTabContentListTV(tabId, listTV, arrListTV){
 			+`<td style="font-size: smaller; text-align: center;" refRecommendsD="${item.refDataTV}"></td>`
 			
 			+`<td style="font-size: smaller; text-align: left;" refSectorIndustryDataTV="${item.refDataTV}"></td>`
-			+`<td style="font-size: small;" refDescription="${item.refDataTV}" additionalDescription="${item.desc}"></td>`
+			+`<td style="font-size: small;" refDescription="${item.refDataTV}" additionalDescription="${item.desc}">${item.desc}</td>`
 			+`<td><div style="background-color: #363535;color: gainsboro;" contenteditable onblur="changeComment( '${item.id}', innerText)">${commentFound?.comment || ""}</div></td></tr>`;
 	}
 }
@@ -3087,11 +3087,5 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
-
-
-
-
-
-
 
 
