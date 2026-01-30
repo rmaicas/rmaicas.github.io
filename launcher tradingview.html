@@ -1987,11 +1987,12 @@ function onLoad() {
 	setAllTabContentListTV();
 	setAllFlagsOnPage();
 	
+		
 	getUSAMarketData();
 	
 	
 	const el = document.querySelector('#mainTab');
-	//currentTab='tabNotes';
+	
 	var event = {
         currentTarget: document.getElementById('tabNotes')
     };
@@ -2334,7 +2335,13 @@ function restoreLocalStorageFromClipboard() {
 	
 }
 
-
+function amountShort(numero) {
+    if (Math.abs(numero) >= 1e12) return (numero / 1e12).toFixed(1) + ' T';
+    if (Math.abs(numero) >= 1e9) return (numero / 1e9).toFixed(1) + ' B';
+    if (Math.abs(numero) >= 1e6) return (numero / 1e6).toFixed(1) + ' M';
+    if (Math.abs(numero) >= 1e3) return (numero / 1e3).toFixed(1) + ' K';
+    return numero.toString();
+}
 		
 function updateUI(symbol, jsonResponse){
 		if (jsonResponse!=null){
@@ -2543,10 +2550,16 @@ function updateUI(symbol, jsonResponse){
 				additionalDescription = item.getAttribute("additionalDescription")
 				if ((jsonResponse["description"]!=null) && (jsonResponse["description"]!=="")){
 					description = jsonResponse["description"]
+					capitalization = null;
+					if (jsonResponse["market_cap_basic"] != null)
+						capitalization= amountShort(jsonResponse["market_cap_basic"]);
+					else
+						capitalization= amountShort(jsonResponse["close"]*jsonResponse["shares_outstanding"]);
+					
 					if ((additionalDescription===undefined) || (additionalDescription==="")){
-						item.innerHTML = `${description}`;
+						item.innerHTML = `${description} (Cap: ${capitalization})`;
 					} else {
-						item.innerHTML = `${description}<br><i>${additionalDescription}</i>`;
+						item.innerHTML = `${description} (Cap: ${capitalization})<br><i>${additionalDescription}</i>`;
 					}
 				}
 			}
@@ -2851,7 +2864,7 @@ class StockDataService {
   }
   
   async fetchFromTradingView(symbol) {
-    const url = `https://scanner.tradingview.com/symbol?symbol=${symbol}&fields=close,change,logoid,description,price_52_week_high,price_52_week_low,sector,industry,country,market,Low.1M,High.1M,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y,High.All,dps_common_stock_prim_issue_fy,dividend_yield_recent,dividends_yield,dividends_yield_current,dps_common_stock_prim_issue_yoy_growth_fy,continuous_dividend_growth,dividend_payout_ratio_ttm,continuous_dividend_payout,MACD.macd,MACD.signal,ATR,Recommend.MA,Recommend.Other,Recommend.All,MACD.macd|1W,MACD.signal|1W,ATR|1W,price_earnings_ttm,return_on_invested_capital,return_on_equity,operating_margin,net_debt_to_ebitda_fq,Recommend.MA|1W,Recommend.Other|1W,Recommend.All|1W,relative_volume_intraday|5,relative_volume_10d_calc|1W&no_404=true`;
+    const url = `https://scanner.tradingview.com/symbol?symbol=${symbol}&fields=close,change,logoid,description,price_52_week_high,price_52_week_low,sector,industry,country,market,Low.1M,High.1M,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y,High.All,market_cap_basic,shares_outstanding,dps_common_stock_prim_issue_fy,dividend_yield_recent,dividends_yield,dividends_yield_current,dps_common_stock_prim_issue_yoy_growth_fy,continuous_dividend_growth,dividend_payout_ratio_ttm,continuous_dividend_payout,MACD.macd,MACD.signal,ATR,Recommend.MA,Recommend.Other,Recommend.All,MACD.macd|1W,MACD.signal|1W,ATR|1W,price_earnings_ttm,return_on_invested_capital,return_on_equity,operating_margin,net_debt_to_ebitda_fq,Recommend.MA|1W,Recommend.Other|1W,Recommend.All|1W,relative_volume_intraday|5,relative_volume_10d_calc|1W&no_404=true`;
     
     const response = await fetch(url);
     
@@ -2966,24 +2979,34 @@ function callsTVForTab(tabItem){  // Se llama cada vez que se edita un item o al
 }
 
 
-const getUSAMarketData = async () => {
-	//(NASDAQ:IXIC+TVC:NYA)*0.5
-	
-	jsonResponseNASDAQ = await stockService.getStockData("TVC:IXIC");
-    jsonResponseNYSE = await stockService.getStockData("TVC:NYA");
-	//const responseNASDAQ = await fetch('https://scanner.tradingview.com/symbol?symbol=TVC:IXIC&fields=close,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y&no_404=true');
-	//jsonResponseNASDAQ = await responseNASDAQ.json(); //extract JSON from the http response
-	//const responseNYSE = await fetch('https://scanner.tradingview.com/symbol?symbol=TVC:NYA&fields=close,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y&no_404=true');
-	//jsonResponseNYSE = await responseNYSE.json(); //extract JSON from the http response
-	
-	USAMarket.close = (jsonResponseNASDAQ['close']+jsonResponseNYSE['close'])*0.5;
-	USAMarket.PerfW = (jsonResponseNASDAQ['Perf.W']+jsonResponseNYSE['Perf.W'])*0.5;
-	USAMarket.Perf1M = (jsonResponseNASDAQ['Perf.1M']+jsonResponseNYSE['Perf.1M'])*0.5;
-	USAMarket.Perf3M = (jsonResponseNASDAQ['Perf.3M']+jsonResponseNYSE['Perf.3M'])*0.5;
-	USAMarket.Perf6M = (jsonResponseNASDAQ['Perf.6M']+jsonResponseNYSE['Perf.6M'])*0.5;
-	USAMarket.PerfY = (jsonResponseNASDAQ['Perf.Y']+jsonResponseNYSE['Perf.Y'])*0.5;
-	setTimeout(getUSAMarketData, 300000);
+const getUSAMarketData = async () => {	
+    try {
+        // Ejecutar ambas promesas en paralelo
+        const [jsonResponseNASDAQ, jsonResponseNYSE] = await Promise.all([
+            stockService.getStockData("TVC:IXIC", "GLOBAL"),
+            stockService.getStockData("TVC:NYA", "GLOBAL")
+        ]);
+		// const responseNASDAQ = await fetch('https://scanner.tradingview.com/symbol?symbol=TVC:IXIC&fields=close,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y&no_404=true');
+		// jsonResponseNASDAQ = await responseNASDAQ.json(); //extract JSON from the http response
+		// const responseNYSE = await fetch('https://scanner.tradingview.com/symbol?symbol=TVC:NYA&fields=close,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y&no_404=true');
+		// jsonResponseNYSE = await responseNYSE.json(); //extract JSON from the http response
+        
+        // Calcular valores
+        USAMarket.close = (jsonResponseNASDAQ['close'] + jsonResponseNYSE['close']) * 0.5;
+        USAMarket.PerfW = (jsonResponseNASDAQ['Perf.W'] + jsonResponseNYSE['Perf.W']) * 0.5;
+        USAMarket.Perf1M = (jsonResponseNASDAQ['Perf.1M'] + jsonResponseNYSE['Perf.1M']) * 0.5;
+        USAMarket.Perf3M = (jsonResponseNASDAQ['Perf.3M'] + jsonResponseNYSE['Perf.3M']) * 0.5;
+        USAMarket.Perf6M = (jsonResponseNASDAQ['Perf.6M'] + jsonResponseNYSE['Perf.6M']) * 0.5;
+        USAMarket.PerfY = (jsonResponseNASDAQ['Perf.Y'] + jsonResponseNYSE['Perf.Y']) * 0.5;
+        
+    } catch (error) {
+        console.error('Error obteniendo datos del mercado:', error);
+    } finally {
+        setTimeout(getUSAMarketData, 300000);
+    }
 }
+
+
 
 <!-- //////////////////////////   SPLITTER   /////////////////////////////////// -->
 
@@ -3089,7 +3112,6 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
-
 
 
 
