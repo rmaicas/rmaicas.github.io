@@ -344,12 +344,14 @@ const arrBasicMaterialsIndices = convertToArrayObjects(basicMaterialsIndicesArra
 
 // Basic Materials Timing
 const basicMaterialsTimmingArray = [
-  "COMEX:SI1!/COMEX:GC1!|Ratio Silver/Gold (Si el ratio sube -> Mercado alcista para los metales preciosos...)",
-  "COMEX:GC1!/COMEX:SI1!|Ratio Gold/Silver (La relación oro/plata ha fluctuado entre aproximadamente 40 y 120...)",
-  "AMEX:GDX/COMEX:GC1!|VanEck Gold Miners ETF/Gold (Referencia guia para el oro...)",
-  "AMEX:SIL/COMEX:SI1!|Global X Silver Miners ETF/Silver (Referencia guia para la plata...)",
-  "CBOT:ZM1!/CBOT:ZL1!|CBOT:ZM1!(Meal)/CBOT:ZL1!(Oil)(Cuando baja desde sus maximos hasta 6.0-5.9...)",
-  "CBOT:ZS1!/CBOT:ZC1!|Ratio Soybean/Corn (Históricamente, la proporción de soja/maíz ha oscilado...)"
+	"CBOE:GVZ|'Gold VIX' o el índice de volatilidad del oro. Es el 'barómetro del miedo' del mercado del oro, que cuantifica cuánta volatilidad esperan los inversores en el precio del metal en el próximo mes, basándose en la actividad del mercado de opciones del ETF GLD.",
+	"CBOE:VXSLV|'Silver VIX' o el índice de volatilidad de la plata. Es el 'barómetro del miedo' del mercado de la plata, que cuantifica cuánta volatilidad esperan los inversores en el precio del metal en el próximo mes, basándose en la actividad del mercado de opciones del ETF SLV.",
+	"COMEX:SI1!/COMEX:GC1!|Ratio Silver/Gold (Si el ratio sube -> Mercado alcista para los metales preciosos...)",
+	"COMEX:GC1!/COMEX:SI1!|Ratio Gold/Silver (La relación oro/plata ha fluctuado entre aproximadamente 40 y 120...)",
+	"AMEX:GDX/COMEX:GC1!|VanEck Gold Miners ETF/Gold (Referencia guia para el oro...)",
+	"AMEX:SIL/COMEX:SI1!|Global X Silver Miners ETF/Silver (Referencia guia para la plata...)",
+	"CBOT:ZM1!/CBOT:ZL1!|CBOT:ZM1!(Meal)/CBOT:ZL1!(Oil)(Cuando baja desde sus maximos hasta 6.0-5.9...)",
+	"CBOT:ZS1!/CBOT:ZC1!|Ratio Soybean/Corn (Históricamente, la proporción de soja/maíz ha oscilado...)"
 ];
 const arrBasicMaterialsTimming = convertToArrayObjects(basicMaterialsTimmingArray);
 
@@ -472,6 +474,7 @@ const usaStocksArray = [
 	"NYSE:ALV|Automotive safety systems",
 	"NASDAQ:AMAT",
 	"NASDAQ:AMD",
+	"NYSE:AME|Conglomerado industrial de tecnología diversificada que opera a través de dos grandes grupos estratégicos. Su fortaleza radica en crear instrumentación analítica de alta precisión y sistemas de automatización complejos",
 	"NYSE:AMX",
 	"NASDAQ:AMZN",
 	"NYSE:ANET",
@@ -604,6 +607,7 @@ const usaStocksArray = [
 	"NASDAQ:INTU|Software financiero, con un enfoque muy claro en contabilidad, impuestos y gestión económica para particulares, autónomos y pequeñas empresas.",
 	"NYSE:IP",
 	"NASDAQ:IREN|Data centers for Bitcoin, AI and beyond with renewable energy",
+	"NASDAQ:ISRG|Desarrollo, fabricación y comercialización de la plataforma da Vinci®, un sistema de cirugía mínimamente invasiva que amplifica las capacidades del cirujano.",
 	"NYSE:JCI|Maquinaria Industrial",
 	"NYSE:JNJ",
 	"NYSE:JPM",
@@ -624,6 +628,7 @@ const usaStocksArray = [
 	"NYSE:LLY",
 	"NYSE:LMT",
 	"NYSE:LNG|Engages in liquefied natural gas (LNG) related businesses",
+	"NYSE:LOW|Cadena de tiendas minoristas que vende una amplia gama de productos para la construcción, remodelación, decoración y mantenimiento del hogar y de espacios exteriores.",
 	"NASDAQ:LRCX|Diseño, fabricación, comercialización... de equipos de procesamiento de semiconductores...",
 	"NASDAQ:LULU",
 	"NYSE:LUMN|Infraestructuras de telecomunicaciones. Fibra óptica.",
@@ -642,6 +647,7 @@ const usaStocksArray = [
 	"NASDAQ:META",
 	"NYSE:MGA|Autopartes",
 	"NYSE:MGM|Casinos, principalmente en varios lugares de USA, pero tambien en China(MGM Macau and MGM Cotai). Tambien casinos online.",
+	"NYSE:MKC|Fabricación, comercialización y distribución de especias, mezclas de condimentos, condimentos y otros productos con sabor a establecimientos minoristas, fabricantes de alimentos y empresas de servicios de restauración.",
 	"NASDAQ:MKTX|Opera una plataforma electrónica de negociación que permite negociar bonos corporativos y otros tipos de instrumentos de renta fija. También ofrece productos de trading automatizados y algorítmicos en acciones y divisas.",
 	"NASDAQ:MLCO|Sede:Hong Kong. Casinos en Macau, the Philippines, Cyprus, and Other",
 	"NYSE:MMM",
@@ -686,6 +692,7 @@ const usaStocksArray = [
 	"NASDAQ:PEP",
 	"NYSE:PFE",
 	"NYSE:PG",
+	"NYSE:PH|Diseño, fabricación y venta de sistemas y componentes de ingeniería de precisión esenciales para el movimiento y control de fluidos, gases y materiales en maquinaria y equipos industriales.",
 	"NYSE:PKX|Minera Hierro, Corea Sur",
 	"NASDAQ:PLTR",
 	"NYSE:PM|Las empresas de Tabaco dan altos dividendos, pero suelen tener mucha deuda...",
@@ -752,6 +759,7 @@ const usaStocksArray = [
 	"NYSE:WES|div",
 	"NYSE:WM|Basura",
 	"NYSE:WMT",
+	"NYSE:WST|Fabricación y comercialización de productos farmacéuticos, biológicos, vacunas y productos sanitarios para el consumidor.",
 	"NYSE:WY|Industria de la madera. Manufacture, distribution, and sale of forest products",
 	"NASDAQ:WYNN|Casinos en Las Vegas, Boston y Macao",
 	"NYSE:XOM",
@@ -3141,6 +3149,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
