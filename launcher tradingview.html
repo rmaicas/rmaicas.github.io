@@ -705,7 +705,7 @@ const usaStocksArray = [
 	"NASDAQ:ROKU",
 	"NASDAQ:ROST|Ropa barata (sentimiento de la población de bajos ingresos)",
 	"NASDAQ:RRR|Casinos de Las Vegas y Nativos Americanos",
-	"NYSE:RS",
+	"NYSE:RS|No es un productor minero ni una gran acería integrada, sino un distribuidor de metales que actúa como un 'supermercado industrial' para una amplia gama de clientes manufactureros.",
 	"NASDAQ:SBLK|Transporte marítimo de granel seco (minerales, fertilizantes y grano). Cíclica",
 	"NASDAQ:SBUX",
 	"NYSE:SCI|Prestación de bienes y servicios funerarios.",
@@ -903,6 +903,7 @@ const europeStocksArray = [
 	"LSE:CSN",
 	"LSE:CVSG|Mascotas",
 	"LSE:CWK",
+	"XETR:DB1|Bolsa de Frankfurt",
 	"LSE:DGE|Bebidas alcoholicas (marcas de alcohol muy conocidas: Guinness, Johnnie Walker, Tanqueray)",
 	"LSE:DNLM|Minorista de muebles y artículos para el hogar",
 	"LSE:DPLM|Distribución de productos y servicios especializados en mercados de nicho. Su estrategia se basa en un modelo de 'adquisición y desarrollo'. Opera en ciencias de la vida (consumibles e instrumentales para laboratorios, hospitales y fabricantes de dispositivos médicos), sellados (juntas, empaquetaduras), controles y servicios (instrumentos y servicio de mantenimiento para infraestructuras tipo ferrocarriles, redes de agua, servicios publicos)",
@@ -976,6 +977,7 @@ const europeStocksArray = [
 	"LSE:PHNX",
 	"LSE:PHP",
 	"LSE:PLUS|div",
+	"OMXCOP:PNDORA|Diseño, fabricación y venta de joyería terminada a mano y moderna.",
 	"LSE:POLR",
 	"BME:PRM",
 	"EURONEXT:PRX|Ofrece servicio tecnologico a empresas de distintos segmentos: Clasificados, Pagos y Fintech, Entrega de Comida, Comercio Electrónico, Edtech y Otros. (Entre las 50 empresas de mayor capitalizacion del mundo y la segunda de holanda)",
@@ -1018,6 +1020,7 @@ const europeStocksArray = [
 	"LSE:TW.|Constructora de casas",
 	"LSE:UKW|Fondo de inversión.",
 	"LSE:ULVR|Consumo Defensivo. Cuidado personal y alimentación. London",
+	"EURONEXT:UMG|Se dedica al negocio del entretenimiento musical. La empresa identifica y desarrolla artistas, además de producir y distribuir música.",
 	"EURONEXT:UNA|Consumo Defensivo. Cuidado personal y alimentación. Amsterdam (Si la compramos aqui, nos ahorramos el cambio de divisa)",
 	"BME:UNI",
 	"LSE:UU.",
@@ -1029,6 +1032,7 @@ const europeStocksArray = [
 	"GPW:VOX|Polonia",
 	"XETR:VOW3|Xetra",
 	"EURONEXT:VPK|Logistica. Manipulacion de productos quimicos, combustibles, gases, aceites vegetales. Ubicaciones en muchas partes del mundo. Amsterdam.",
+	"EURONEXT:WKL|Empresa global de servicios de información, software y soluciones profesionales en Servicios Legales, Finanzas, riesgo y cumplimiento, salud y soluciones corporativas.",
 	"OSL:YAR|Fertilizantes. El mayor productor de fertilizantes a base de nitrógeno del mundo. Tiene una fuerte presencia en Europa, América y África, y es líder en soluciones de nutrición de precisión.",
 	"XETR:ZAL|Xetra"
 ];
@@ -1057,33 +1061,34 @@ const arrEuropeREITs = convertToArrayObjects(europeREITsArray);
 
 // Canada Stocks
 const canadaStocksArray = [
-  "TSX:ABX|Barrick Gold. Una de las principales mineras de oro. Posee muchas minas en paises emergentes con muchas problematicas.",
-  "TSX:AEM|Segunda minera de oro por capitalizacion (2025). Mineras en lugares mas 'seguros'.",
-  "TSXV:AFM|(Minera de estaño (Tin))",
-  "TSX:AG|Production, development, exploration and acquisition of mineral properties. It owns and operates producing mines in México",
-  "TSX:AGI|Minera de oro",
-  "TSX:ARE|REIT: Oficinas",
-  "TSX:ARG|(Producción y venta de cobre y molybdenum)",
-  "TSX:ARIS|Minera de oro",
-  "TSX:BIR",
-  "TSX:CNQ",
-  "TSX:CNR|Ferrocarriles canadienses",
-  "TSX:CSU|Conglomerado de empresas de software vertical",
-  "TSX:DNG|Minera de oro y plata. Minas en zonas 'complicadas'.",
-  "TSX:ENB|Dividendos",
-  "TSX:FN",
-  "TSX:FNV|Compounder de oro, ofrece servicios financieros a mineras de oro. No tiene el riesgo de una minera. Hacen prestamos a empresas mineras a cambio de un royalty (acuerdan un % de la extracción del oro) o stream (acuerdan un precio de compra del metal)",
-  "TSX:GOOS|Chaquetas de abrigo",
-  "TSX:IMO",
-  "TSX:LUN|Minería, exploración y desarrollo de propiedades minerales, principalmente en Chile, Estados Unidos, Portugal y Suecia",
-  "TSX:NTR|Fertilizantes. La más grande del mundo.  Líder en potasio y un importante productor de nitrógeno y fósforo, con una red masiva de distribución minorista en Norteamérica.",
-  "TSX:SGY",
-  "TSX:TECK.A|Exploración, adquisición, desarrollo, producción y venta de recursos naturales. Sus productos incluyen carbón siderúrgico, cobre, zinc, productos industriales, fertilizantes y otros metales. Canada, Peru, USA, y Chile",
-  "TSX:TOT",
-  "TSX:TOU",
-  "TSX:TPZ",
-  "TSX:U.UN|Fondo de Inversión en Uranio. Compra y almacena uranio fisico",
-  "TSX:WPM|Compounder de oro, ofrece servicios financieros a mineras de oro. No tiene el riesgo de una minera. Hacen prestamos a empresas mineras a cambio de un royalty (acuerdan un % de la extracción del oro) o stream (acuerdan un precio de compra del metal)"
+	"TSX:ABX|Barrick Gold. Una de las principales mineras de oro. Posee muchas minas en paises emergentes con muchas problematicas.",
+	"TSX:AEM|Segunda minera de oro por capitalizacion (2025). Mineras en lugares mas 'seguros'.",
+	"TSXV:AFM|(Minera de estaño (Tin))",
+	"TSX:AG|Production, development, exploration and acquisition of mineral properties. It owns and operates producing mines in México",
+	"TSX:AGI|Minera de oro",
+	"TSX:ARE|REIT: Oficinas",
+	"TSX:ARG|(Producción y venta de cobre y molybdenum)",
+	"TSX:ARIS|Minera de oro",
+	"TSX:BIR",
+	"TSX:CNQ",
+	"TSX:CNR|Ferrocarriles canadienses",
+	"TSX:CSU|Conglomerado de empresas de software vertical",
+	"TSX:DNG|Minera de oro y plata. Minas en zonas 'complicadas'.",
+	"TSX:ENB|Dividendos",
+	"TSX:FN",
+	"TSX:FNV|Compounder de oro, ofrece servicios financieros a mineras de oro. No tiene el riesgo de una minera. Hacen prestamos a empresas mineras a cambio de un royalty (acuerdan un % de la extracción del oro) o stream (acuerdan un precio de compra del metal)",
+	"TSX:GOOS|Chaquetas de abrigo",
+	"TSX:IMO",
+	"TSX:IVN|Empresa de desarrollo minero dedicada a la exploración y desarrollo de propiedades minerales. Principalmente cobre y ademas metales preciosos. Minas en Congo, Sudafrica",
+	"TSX:LUN|Minería, exploración y desarrollo de propiedades minerales, principalmente en Chile, Estados Unidos, Portugal y Suecia",
+	"TSX:NTR|Fertilizantes. La más grande del mundo.  Líder en potasio y un importante productor de nitrógeno y fósforo, con una red masiva de distribución minorista en Norteamérica.",
+	"TSX:SGY",
+	"TSX:TECK.A|Exploración, adquisición, desarrollo, producción y venta de recursos naturales. Sus productos incluyen carbón siderúrgico, cobre, zinc, productos industriales, fertilizantes y otros metales. Canada, Peru, USA, y Chile",
+	"TSX:TOT",
+	"TSX:TOU",
+	"TSX:TPZ",
+	"TSX:U.UN|Fondo de Inversión en Uranio. Compra y almacena uranio fisico",
+	"TSX:WPM|Compounder de oro, ofrece servicios financieros a mineras de oro. No tiene el riesgo de una minera. Hacen prestamos a empresas mineras a cambio de un royalty (acuerdan un % de la extracción del oro) o stream (acuerdan un precio de compra del metal)"
 ];
 const arrCanadaStocks = convertToArrayObjects(canadaStocksArray);
 
@@ -1114,7 +1119,9 @@ const othersStocksArray = [
 	"NASDAQ:GGAL",
 	"ASX:GQG|Ofrece fondos mutuos y otras estructuras, incluyendo vehículos de inversión agrupados.",
 	"SGX:J36|Conglomerado de empresas (Construcción, Aeropuerto y gestion de tráfico aereo Hong Kong, Restaurantes, Ascensores, Locales comerciales, REIT (oficinas, retails y viviendas), Automóviles, Cemento, Mineria, Hoteles, etc.). Sudeste Asiatico. Singapore",
+	"ASX:JIN|Apuestas. Pequeña empresa. Apuestas en digital y no digital.",
 	"NASDAQ:KSPI|Kazajistan",
+	"ASX:LNW|Apuestas. Maquinas en casinos, software, casino online y no online.",
 	"ASX:MLX|Minas de Estaño. Australia",
 	"SGX:O39|Banco. Singapore",
 	"NYSE:PBR",
@@ -3130,6 +3137,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
