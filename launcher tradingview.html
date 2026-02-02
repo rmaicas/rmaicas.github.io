@@ -388,44 +388,60 @@ const arrBasicMaterialsFutures = convertToArrayObjects(basicMaterialsFuturesArra
 
 // Basic Materials Spot
 const basicMaterialsSpotArray = [
-  "LME:SN|Tin (Estaño) future Cash Outright",
-  "OANDA:XAUUSD|Gold",
-  "OANDA:XAGUSD|Silver CFD|TVC:SILVER",
-  "OANDA:XCUUSD|Copper [EUR LSE:COPA]",
-  "OANDA:WTICOUSD|Oil West Texas [EUR LSE:CRUD]|FX:USOIL",
-  "OANDA:BCOUSD|Oil Brent Crude|FX:UKOIL",
-  "OANDA:XPTUSD|Platinum CFD|TVC:PLATINUM",
-  "OANDA:XPDUSD|Palladium Spot|TVC:PALLADIUM"
+  	"LME:SN|Tin (Estaño) future Cash Outright",
+  	"OANDA:XAUUSD|Gold",
+  	"OANDA:XAGUSD|Silver CFD|TVC:SILVER",
+	"FX:ALUMSPOT"
+  	"OANDA:XCUUSD|Copper [EUR LSE:COPA]",
+  	"OANDA:WTICOUSD|Oil West Texas [EUR LSE:CRUD]|FX:USOIL",
+  	"OANDA:BCOUSD|Oil Brent Crude|FX:UKOIL",
+  	"OANDA:XPTUSD|Platinum CFD|TVC:PLATINUM",
+  	"OANDA:XPDUSD|Palladium Spot|TVC:PALLADIUM",
+	"PEPPERSTONE:COCOA",
+	"PEPPERSTONE:COTTON",
+	"PEPPERSTONE:COFFEE",
+	"CAPITALCOM:LUMBER",
+	"PEPPERSTONE:CATTLE",
+	"OANDA:NATGASUSD",
+	"PEPPERSTONE:NICKEL",
+	"PEPPERSTONE:GASOLINE",
+	"PEPPERSTONE:SUGAR",
+	"FX:URANIUM",
+	"OANDA:CORNUSD",
+	"PEPPERSTONE:ZINC",
+	"OANDA:SOYBNUSD",
+	"OANDA:WHEATUSD",
 ];
 const arrBasicMaterialsSpot = convertToArrayObjects(basicMaterialsSpotArray);
 
 // Basic Materials ETF
 const basicMaterialsEtfArray = [
-  "LSE:ICOM|(GBP), London",
-  "LSE:CRUD|WTI OIL Futures, London (isin: GB00B15KXV33. TER: 0.49%)",
-  "LSE:ISLN|London (isin: IE00B4NCWG09. TER: 0.20%)",
-  "LSE:SGLD|London (isin:IE00B579F325. TER:0.12%)",
-  "XETR:PPFB|ETF Oro físico en Euros. Mas volumen, un pelín más caro el TER. (isin: IE00B4ND3602, TER: 0.12%)",
-  "LSE:IGLN|ETF Oro físico en Dolares. Mas volumen, un pelín más caro el TER. (isin: IE00B4ND3602, TER: 0.12%)",
-  "XETR:XGDU|Oro Fisico EUR. TER más barato. Xetra (isin: DE000A2T0VU5. TER: 0.11%)",
-  "XETR:XGDE|Oro físico con cobertura de divisa EUR/USD. Es mas caro que el XETR:XGDU. NO ME CONVENCE ESA COBERTURA.  (isin: DE000A2T5DZ1. TER: 0.28%)",
-  "MIL:GBSE|Milano",
-  "LSE:IPLT|Platino Fisico, London(isin: IE00B4LHWP62. TER: 0.20%)",
-  "LSE:GDX|London (isin:IE00BQQP9F84. TER:0.53%)",
-  "LSE:GDXJ|Más volátil que el GDX, extrema el sentimiento del mercado de Oro. London (isin:IE00BQQP9G91. TER:0.55%)",
-  "XETR:SLVR|Mineras de Plata mas grandes del mundo. Xetra (isin:IE000UL6CLP7. TER:0.65%",
-  "MIL:PHAG|Milano (isin: JE00B1VS3333. TER: 0.49%)",
-  "LSE:TINM|ETF Estaño, London",
-  "LSE:COPA|London (isin: GB00B15KXQ89. TER: 0.49%)",
-  "LSE:ALUM|(isin: GB00B15KXN58), London",
-  "EURONEXT:NICK|Nickel, Paris (isin: GB00B15KY211. TER: 0.49%)",
-  "EURONEXT:PHPD|Paladio, Amsterdam (isin:JE00B1VS3002. TER: 0.49%)",
-  "LSE:AIGG|London USD (isin: GB00B15KYL00. TER: 0.49%)",
-  "LSE:AIGA|Sigue el índice Bloomberg Agriculture Subindex, que incluye futuros de productos agrícolas. London USD (isin: GB00B15KYH63. TER: 0.54%)",
-  "LSE:CORN|Maiz (Tracking the Bloomberg Corn Subindex). London (Para la proxima vez, usar XETRA) (isin: JE00BN7KB441. TER: 0.99%)",
-  "LSE:WOOD|Industria de la madera Global. Track the S&P Global Timber&Forestry index (25 largest and most liquid companies). London (isin:IE00B27YCF74. TER:0.65%)",
-  "XETR:NUKL|The MarketVector Global Uranium and Nuclear Energy Infrastructure index tracks companies worldwide that are involved in the uranium mining and nuclear energy infrastructure industries. Xetra (isin: IE000M7V94E1)",
-  "XETR:LI7U|Track the Solactive Global Lithium index (the largest companies worldwide that are active in the exploration and mining of Lithium or the production of Lithium batteries). Xetra (isin:IE00BLCHJN13. TER:0.60%)"
+	"LSE:ICOM|(GBP), London",
+	"LSE:CRUD|WTI OIL Futures, London (isin: GB00B15KXV33. TER: 0.49%)",
+	"LSE:ISLN|London (isin: IE00B4NCWG09. TER: 0.20%)",
+	"LSE:SGLD|London (isin:IE00B579F325. TER:0.12%)",
+	"XETR:PPFB|ETF Oro físico en Euros. Mas volumen, un pelín más caro el TER. (isin: IE00B4ND3602, TER: 0.12%)",
+	"LSE:IGLN|ETF Oro físico en Dolares. Mas volumen, un pelín más caro el TER. (isin: IE00B4ND3602, TER: 0.12%)",
+	"XETR:XGDU|Oro Fisico EUR. TER más barato. Xetra (isin: DE000A2T0VU5. TER: 0.11%)",
+	"XETR:XGDE|Oro físico con cobertura de divisa EUR/USD. Es mas caro que el XETR:XGDU. NO ME CONVENCE ESA COBERTURA.  (isin: DE000A2T5DZ1. TER: 0.28%)",
+	"MIL:GBSE|Milano",
+	"LSE:IPLT|Platino Fisico, London(isin: IE00B4LHWP62. TER: 0.20%)",
+	"LSE:GDX|London (isin:IE00BQQP9F84. TER:0.53%)",
+	"LSE:GDXJ|Más volátil que el GDX, extrema el sentimiento del mercado de Oro. London (isin:IE00BQQP9G91. TER:0.55%)",
+	"XETR:SLVR|Mineras de Plata mas grandes del mundo. Xetra (isin:IE000UL6CLP7. TER:0.65%",
+	"MIL:PHAG|Milano (isin: JE00B1VS3333. TER: 0.49%)",
+	"LSE:TINM|ETF Estaño, London",
+	"LSE:COPA|London (isin: GB00B15KXQ89. TER: 0.49%)",
+  	"LSE:ALUM|(isin: GB00B15KXN58), London",
+  	"EURONEXT:NICK|Nickel, Paris (isin: GB00B15KY211. TER: 0.49%)",
+  	"EURONEXT:PHPD|Paladio, Amsterdam (isin:JE00B1VS3002. TER: 0.49%)",
+  	"LSE:AIGG|London USD (isin: GB00B15KYL00. TER: 0.49%)",
+  	"LSE:AIGA|Sigue el índice Bloomberg Agriculture Subindex, que incluye futuros de productos agrícolas. London USD (isin: GB00B15KYH63. TER: 0.54%)",
+  	"LSE:CORN|Maiz (Tracking the Bloomberg Corn Subindex). London (Para la proxima vez, usar XETRA) (isin: JE00BN7KB441. TER: 0.99%)",
+  	"LSE:WOOD|Industria de la madera Global. Track the S&P Global Timber&Forestry index (25 largest and most liquid companies). London (isin:IE00B27YCF74. TER:0.65%)",
+  	"XETR:NUKL|The MarketVector Global Uranium and Nuclear Energy Infrastructure index tracks companies worldwide that are involved in the uranium mining and nuclear energy infrastructure industries. Xetra (isin: IE000M7V94E1)",
+  	"XETR:LI7U|Track the Solactive Global Lithium index (the largest companies worldwide that are active in the exploration and mining of Lithium or the production of Lithium batteries). Xetra (isin:IE00BLCHJN13. TER:0.60%)",
+	"LSE:CATL|Sigue el índice Bloomberg Live Cattle. El ETC replica sintéticamente el rendimiento del índice subyacente mediante un swap. (isin: GB00B15KY096. TER: 0.45%)",
 ];
 const arrBasicMaterialsEtf = convertToArrayObjects(basicMaterialsEtfArray);
 
@@ -459,7 +475,7 @@ const usaStocksArray = [
 	"NYSE:AA",
 	"NASDAQ:AAL",
 	"NASDAQ:AAPL",
-	"NYSE:AB|div",
+	"NYSE:AB|Gestora de activos y de inversiones",
 	"NYSE:ABBV",
 	"NYSE:ABEV",
 	"NYSE:ABT",
@@ -763,6 +779,7 @@ const usaStocksArray = [
 	"NYSE:VEEV|Soluciones de gestión en la nube para la industria global de las ciencias de la vida",
 	"NYSE:VMC|Aridos, asfalto y hormigón. Transporte caro. Mono/oligopolio local. Licencias lentas y oposición social brutal. Demanda ligada a infraestructura básica. Insustituible (los áridos) y con foso geográfico.",
 	"NYSE:VRT|Servicio de refrigeracion en Centros de datos",
+	"NYSE:VST|Combina generación de energía a gran escala con la venta directa de electricidad a consumidores finales",
 	"NYSE:VZ",
 	"NYSE:WES|div",
 	"NYSE:WM|Basura",
@@ -3160,6 +3177,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
