@@ -449,24 +449,26 @@ const arrBasicMaterialsEtf = convertToArrayObjects(basicMaterialsEtfArray);
 <!---- Sectors   OK---->
 // Sectors
 const sectorsArray = [
-	"AMEX:XHB|Homebuilders",
 	"AMEX:XLY/AMEX:XLP|Consumer Discretionary/Consumer Staples",
+	"AMEX:XHB|Homebuilders",
 	"AMEX:XLB|Materials (EUR: LSE:IUMS)",
 	"AMEX:XLC|Communication Services (EUR: LSE:IUCM)",
 	"AMEX:XLE|Energy (EUR: LSE:IUES)",
 	"AMEX:XLF|Financial (EUR: LSE:IUFS)",
 	"AMEX:XLI|Industrial (EUR: LSE:IUIS)",
 	"AMEX:XLK|Technology",
-	"AMEX:XLP|Consumer Staples (EUR: LSE:IUCS)",
+	"AMEX:XLP|Consumer Staples/Consumo Básico (EUR: LSE:IUCS)",
+	"AMEX:XLRE|REIT/Bienes Raíces",
 	"AMEX:XLU|Utilities (EUR: LSE:IUUS)",
 	"AMEX:XLV|Health Care (EUR: LSE:IUHC)",
-	"AMEX:XLY|Consumer Discretionary (EUR: LSE:IUCD)",
+	"AMEX:XLY|Consumer Discretionary/Consumo Discrecional (EUR: LSE:IUCD)",
 	"AMEX:GDX|VanEck Gold Miners ETF",
 	"AMEX:XTN|SPDR S&P Transportation ET",
 	"AMEX:XHB|Sector de constructoras USA. En escenarios bajistas del S&P500 (por ejemplo cuando rompe la media de 200), si el sector de la construccion infrapondera al SP500 (XHB/SPX), la tendencia bajista se confirmo.",
 	"AMEX:XBI|Biotecnologia",
 	"AMEX:BOAT|Transporte Maritimo (Cíclico, comprar en ciclo bajo). Réplica el índice Solactive Global Shipping, con exposición pura al transporte marítimo (portacontenedores, buques secos, petroleros, etc.) (A dia 08/06/2025 no se existe nada parecido en Europa",
 	"CBOE:IGV|Software Sector",
+	"AMEX:XRT|Retails/Comercio Minorista (EUR: EURONEXT:SC05)"
 ];
 const arrSectors = convertToArrayObjects(sectorsArray);
 
@@ -1214,7 +1216,7 @@ const etfVariableIncomeArray = [
 	"EURONEXT:CETH_XAMS|Ethereum. Euronext-Amsterdam (isin: GB00BLD4ZM24. TER: 0% (reducido hasta nuevo aviso, se observo comisiones de hasta 1.59%)",
 	"XETR:2B76|(isin: IE00BYZK4552. TER: 0.40%), Xetra",
 	"XETR:BBCK|Sigue el índice Nasdaq Global Buyback Achievers. El índice Nasdaq Global Buyback Achievers sigue a las acciones internacionales que llevan a cabo programas de recompra de acciones por razones financieramente sólidas. (isin: IE00BLSNMW37. TER: 0.39%)",
-	"XETR:CBUK|(Acc) China Tech (isin:IE000NFR7C63 TER:0.45%)",
+	"XETR:CBUK|China Tech (Acum. isin:IE000NFR7C63 TER:0.45%)",
 	"XETR:CEMS|Europe Value. Xetra (isin: IE00BQN1K901. TER: 0.25%)",
 	"LSE:DGRA|Tracks dividend-paying US stocks with a high quality factor. (isin:IE00BZ56RG20. TER: 0.33%)",
 	"HAM:GANN|Es un FONDO de volatilidad (simula un Vix pero mucho mas estable y lento). Investigar cual se puede comprar en IB. isin: LU0272941971 (Amundi Funds - Volatility World A EUR LU0557872479, no existe en TView)",
@@ -1224,19 +1226,26 @@ const etfVariableIncomeArray = [
 	"XETR:EXH1|Xetra (isin: DE000A0H08M3. TER: 0.46%)",
 	"XETR:EXH2|Xetra",
 	"XETR:EXH3|Xetra",
-	"XETR:EXH4|Xetra",
+	"EURONEXT:IND|Industrial (Acum. isin: LU1834987890. TER:030%)",
+	"XETR:EXH4|Bienes y Servicios Industriales (Dist. isin: DE000A0H08J9. TER: 0.46%)",
 	"XETR:EXH5|Xetra",
 	"XETR:EXH6|Xetra",
 	"XETR:EXH7|Xetra (isin: DE000A0H08N1. TER: 0.46%)",
 	"XETR:EXH8|Xetra",
-	"XETR:EXH9|Xetra (isin: DE000A0Q4R02. TER: 0.46%)",
-	"XETR:EXV1|Xetra",
-	"XETR:EXV2|Xetra",
+	"EURONEXT:ENRG|Energia (Acum. isin: LU1834988278. TER:0.30%",
+	"EURONEXT:UTI|Utilities/Servicios Públicos (Acum. isin: LU1834988864. TER: 0.30%)",
+	"XETR:EXH9|Utilities/Servicios Públicos (Dist. isin: DE000A0Q4R02. TER: 0.46%)",
+	"EURONEXT:BNK|Bancos (Acum. isin: LU1834983477. TER: 0.30%)",
+	"XETR:EXV1|Bancos (Dist. isin: DE000A0F5UJ7. TER: 0.48%)",
+	"EURONEXT:TELE|Telecomunicaciones (Acum. isin: LU1834988609. TER: 0.30%),
+	"XETR:EXV2|Telecomunicaciones (Dist. isin: DE000A0H08R2. TER: 0.46%)",
 	"XETR:EXV3|Xetra",
 	"XETR:EXV4|Xetra",
 	"XETR:EXV5|Xetra",
-	"XETR:EXV6|Xetra",
-	"XETR:EXV7|Xetra (isin: DE000A0H08E0. TER: 0.46%)",
+	"EURONEXT:BRES|Recursos Básicos (Acum. isin: LU1834983550. TER:0.30%)",
+	"XETR:EXV6|Recursos Básicos (Dist. isin: DE000A0F5UK5. TER:0.46%)",
+	"EURONEXT:CHM|Quimicas (Acum. isin: LU1834983634. TER: 0.30%)",
+	"XETR:EXV7|Quimicas (Dist. isin: DE000A0H08E0. TER: 0.46%)",
 	"XETR:EXV8|Xetra (isin: DE000A0H08F7. TER: 0.46%)",
 	"XETR:EXV9|Xetra",
 	"XETR:LYX4|Xetra",
@@ -3178,6 +3187,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
