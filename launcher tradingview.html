@@ -469,7 +469,10 @@ const sectorsArray = [
 	"AMEX:XBI|Biotecnologia",
 	"AMEX:BOAT|Transporte Maritimo (Cíclico, comprar en ciclo bajo). Réplica el índice Solactive Global Shipping, con exposición pura al transporte marítimo (portacontenedores, buques secos, petroleros, etc.) (A dia 08/06/2025 no se existe nada parecido en Europa",
 	"CBOE:IGV|Software Sector",
-	"AMEX:XRT|Retails/Comercio Minorista (EUR: EURONEXT:SC05)"
+	"AMEX:XRT|Retails/Comercio Minorista (EUR: EURONEXT:SC05)",
+	"CBOE:PAVE|Infraestructuras USA",
+	"AMEX:OIH|Oil Services",
+	"AMEX:FCG|Natural Gas",
 ];
 const arrSectors = convertToArrayObjects(sectorsArray);
 
@@ -587,6 +590,7 @@ const usaStocksArray = [
 	"NYSE:ETN|Servicios electricos en Centros de datos",
 	"NASDAQ:EXE",
 	"NYSE:EXK|Evaluation, acquisition, development and exploitation of precious metal properties in Mexico and Chile.",
+	"NASDAQ:EZPW|Red de tiendas físicas (principalmente bajo las marcas 'EZPawn' y 'EZMoney') donde ofrece: Préstamos prendarios, Venta al por menor de articulos no redimidos y Prestamos de consumo",
 	"NYSE:F",
 	"NASDAQ:FAST|Distribución de productos industriales de mantenimiento, reparación y operaciones (MRO), así como de seguridad, con un enfoque histórico y central en sujetadores (tornillos, tuercas, pernos, arandelas, etc.). Es esencialmente un 'supermercado industrial' para fabricantes y empresas de servicios.",
 	"NASDAQ:FCEL",
@@ -608,6 +612,7 @@ const usaStocksArray = [
 	"NYSE:GM",
 	"NASDAQ:GOOGL",
 	"NYSE:GPN",
+	"NASDAQ:GRAB|'superapp' del sudeste asiático, con sede en Singapur. Servicios bajo demanda: entrega de comida, pagos móviles, servicios financieros y mensajería.",
 	"NYSE:GS",
 	"NYSE:GSL",
 	"NYSE:HAL|Servicios petrolíferos",
@@ -734,6 +739,7 @@ const usaStocksArray = [
 	"NASDAQ:PZZA",
 	"NASDAQ:QCOM",
 	"NYSE:RBC|Rodamientos de ingeniería de alta precisión y componentes mecánicos que son esenciales para el funcionamiento de maquinaria y equipos en condiciones exigentes, donde el fallo no es una opción.",
+	"NYSE:RBRK|Seguridad de datos y ciberresiliencia",
 	"NASDAQ:RCAT|Software para drones",
 	"NASDAQ:RGLD|Empresa que financia operaciones de oro. No es una minera",
 	"NYSE:RIG|(Empresa Suiza) Flota que presta servicios de perforación por contrato offshore para pozos de petróleo y gas. Especialista en aguas profundas y ambientes hostiles.",
@@ -1230,6 +1236,7 @@ const etfVariableIncomeArray = [
 	"XETR:BBCK|Sigue el índice Nasdaq Global Buyback Achievers. El índice Nasdaq Global Buyback Achievers sigue a las acciones internacionales que llevan a cabo programas de recompra de acciones por razones financieramente sólidas. (isin: IE00BLSNMW37. TER: 0.39%)",
 	"XETR:CBUK|China Tech (Acum. isin:IE000NFR7C63 TER:0.45%)",
 	"XETR:CEMS|Europe Value. Xetra (isin: IE00BQN1K901. TER: 0.25%)",
+	"LSE:COPX|Mineras de Cobre (Acum. isin: IE0003Z9E2Y3. TER: 0.55/0.90%)",
 	"LSE:DGRA|Tracks dividend-paying US stocks with a high quality factor. (isin:IE00BZ56RG20. TER: 0.33%)",
 	"HAM:GANN|Es un FONDO de volatilidad (simula un Vix pero mucho mas estable y lento). Investigar cual se puede comprar en IB. isin: LU0272941971 (Amundi Funds - Volatility World A EUR LU0557872479, no existe en TView)",
 	"GETTEX:GAN3|INVESTIGAR... isin: LU0319687124",
@@ -1311,6 +1318,7 @@ const etfVariableIncomeArray = [
 	"XETR:NUKL|(isin: IE000M7V94E1)",
 	"LSE:R2US|London (isin: IE00BJ38QD84. TER:0.30%)",
 	"AMEX:REET|USA (EUR: iShares US Property Yield UCITS (IUSP) - Londres - en dólares - IE00B1FZSF77, CONFIRMAR.!!!!)",
+	"EURONEXT:SAOT|Automoviles y Autopartes (Acum. isin: DE000A2QP4A8. TER: 0.46%)",
 	"NASDAQ:SOXX|USA",
 	"XETR:SXRV|(Acc), Xetra",
 	"LSE:URNP|Cesta de Mineras de Uranio (como Cameco y Kazacompon) (isin:IE0005YK6564. TER: 0.85%). Hay otro en Irlanda con ticket U308 ???",
@@ -3206,6 +3214,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
