@@ -2157,6 +2157,20 @@ function liClick(ticket) {
   }
 }
 
+function liChatClick(ticket) {
+  const hasExtension = document.getElementById('hasExtension').checked;
+  const layout = selectTV.options[selectTV.selectedIndex].value
+  if (hasExtension) {
+    // Solo enviamos mensaje a la extensión
+    window.postMessage({ type: "OPEN_CHAT", layout:layout, symbol: ticket }, "*");
+  } else {
+    // Si no hay extensión, abrimos Chat en una nueva pestaña
+	const url = "https://chatgpt.com/?q="+encodeURIComponent('Resumen de la empresa '+ticket);
+    window.open(url, "chat");
+  }
+}
+
+
 function getNote() {
 	document.getElementById("note").value = localStorage.getItem("note");
 }
@@ -2317,7 +2331,7 @@ function setFlagTableContent(listId, array, charFlag) {
 				+`<td style="font-size: smaller; text-align: center;" refRecommendsW="${item.refDataTV}"></td>`
 				+`<td style="font-size: smaller; text-align: center;" refRecommendsD="${item.refDataTV}"></td>`
 				+`<td style="font-size: smaller; text-align: left;" refSectorIndustryDataTV="${item.refDataTV}"></td>`
-				+`<td style="font-size: x-small;" refDescription="${item.refDataTV}" additionalDescription="${item.desc}"><i>${item.desc}</i></td>`
+				+`<td style="font-size: x-small;" refDescription="${item.refDataTV}" additionalDescription="${item.desc}"><span class="pointAndCall" onclick="liChatClick('${item.id}')">ℹ️</span><i>${item.desc}</i></td>`
 				+`<td><div style="background-color: #363535;color: gainsboro;" contenteditable onblur="changeComment( '${item.id}', innerText)">${commentFound?.comment || ""}</div></td>`
 				+`<td style="font-size: x-small; text-align: right;" >
 					<select id="${'select_'+item.id}" onChange="changeFlag( '${item.id}', '${item.refDataTV}', '${item.desc}', '${charFlag}', document.getElementById('${'select_'+item.id}').value)" style="border: 0;background-color: transparent;color: lightgray;">
@@ -2367,7 +2381,7 @@ function setTabContentListTV(tabId, listTV, arrListTV){
 			+`<td style="font-size: smaller; text-align: center;" refRecommendsD="${item.refDataTV}"></td>`
 			
 			+`<td style="font-size: smaller; text-align: left;" refSectorIndustryDataTV="${item.refDataTV}"></td>`
-			+`<td style="font-size: small;" refDescription="${item.refDataTV}" additionalDescription="${item.desc}"><i>${item.desc}</i></td>`
+			+`<td style="font-size: small;" refDescription="${item.refDataTV}" additionalDescription="${item.desc}"><span class="pointAndCall" onclick="liChatClick('${item.id}')">ℹ️</span><br><i>${item.desc}</i></td>`
 			+`<td><div style="background-color: #363535;color: gainsboro;" contenteditable onblur="changeComment( '${item.id}', innerText)">${commentFound?.comment || ""}</div></td></tr>`;
 	}
 }
@@ -2663,9 +2677,9 @@ function updateUI(symbol, jsonResponse){
 						capitalization= amountShort(jsonResponse["close"]*jsonResponse["shares_outstanding"]);
 					
 					if ((additionalDescription===undefined) || (additionalDescription==="")){
-						item.innerHTML = `${description} (Cap: ${capitalization})`;
+						item.innerHTML = `${description} <span class="pointAndCall" onclick="liChatClick('${symbol}')">ℹ️</span> (Cap: ${capitalization})`;
 					} else {
-						item.innerHTML = `${description} (Cap: ${capitalization})<br><i>${additionalDescription}</i>`;
+						item.innerHTML = `${description} <span class="pointAndCall" onclick="liChatClick('${symbol}')">ℹ️</span> (Cap: ${capitalization})<br><i>${additionalDescription}</i>`;
 					}
 				}
 			}
@@ -2686,7 +2700,7 @@ function updateUI(symbol, jsonResponse){
 			for (item of arrDescription) {
 				additionalDescription = item.getAttribute("additionalDescription")
 				if ((additionalDescription!=undefined) && (additionalDescription!=="")){
-					item.innerHTML = `<i>${additionalDescription}</i>`;
+					item.innerHTML = `<a href="https://chatgpt.com/?q=Resumen+de+la+empresa+${symbol}" target="_blank">ℹ️</a><br><i>${additionalDescription}</i>`;
 				}
 			}
 		}
@@ -3216,4 +3230,3 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
-
