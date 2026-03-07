@@ -194,14 +194,16 @@ const marketTimmingEconomyArray = [
   "AMEX:RSPD/AMEX:RSPS|ETF Discretionary / Staples (Igual ponderacion)",
   "NASDAQ:PEZ/NASDAQ:PSL|Consumer Ciclicas/ Defensivas = PMI",
   "AMEX:IWM/AMEX:SPY|Small Caps / Big Caps...",
-  "----------- INFLACIÓN -----------|------------------------------------- INFLACIÓN -----------------------------------------",
-  "FRED:T5YIE|5-Year Breakeven Inflation Rate ((Expectativas de inflación futura))",
-  "CME:CCI1!|Core commodity: Se habla de core commodities para: Analizar inflación estructural, Evaluar ciclos económicos, Construir carteras defensivas vs inflación",
+  	"----------- INFLACIÓN -----------|------------------------------------- INFLACIÓN -----------------------------------------",
+	"FRED:WUDSHO|mide las presiones inflacionarias en tiempo real a través del seguimiento de los precios de más de 500,000 productos de consumo en línea. Es una alternativa más moderna y de alta frecuencia a los índices de precios al consumo tradicionales (IPC), que se publican con retraso.",
+  	"FRED:T5YIE|5-Year Breakeven Inflation Rate ((Expectativas de inflación futura))",
+  	"CME:CCI1!|Core commodity: Se habla de core commodities para: Analizar inflación estructural, Evaluar ciclos económicos, Construir carteras defensivas vs inflación",
   "----------- LIQUIDEZ -----------|------------------------------------- LIQUIDEZ -----------------------------------------",
   "FRED:WALCL + FRED:ECBASSETSW*1.07 + ECONOMICS:GBCBBS*OANDA:GBPUSD + FRED:JPNASSETS/OANDA:USDJPY + ECONOMICS:CNCBBS*FX_IDC:CNYUSD - (FRED:WTREGEN+FRED:RRPONTSYD)|Liquidez Global ( USA + EURO + UK + JP + CH)",
   "ECONOMICS:USM2 + ECONOMICS:CNM2*FX_IDC:CNYUSD + ECONOMICS:EUM2*FX_IDC:EURUSD + ECONOMICS:JPM2*FX_IDC:JPYUSD + ECONOMICS:GBM2*FX_IDC:GBPUSD|Liquidez M2 Global (USA + CHINA + EURO + JAPAN + UK)",
   "AMEX:SPY/ECONOMICS:USM2|Cotizacion SPY / Liquidez M2  (Cuanto mas arriba -> mas caro, cuanto mas abajo -> mas barato)",
   "FRED:WRESBAL|Liabilities and Capital: Other Factors Draining Reserve Balances: Reserve Balances with Federal Reserve Banks: Week Average. Reservas totales que tienen los bancos comerciales depositadas en la Fed.<br>Aumenta: La Fed está inyectando liquidez (por ejemplo, comprando activos o reduciendo el reverse repo). Los bancos tienen más reservas, mayor liquidez; normalmente apoyo a los mercados de riesgo.<br>Disminuye: La Fed está retirando liquidez (quantitative tightening, TGA sube, RRP absorbe fondos). Menos reservas bancarias, condiciones más ajustadas; suele presionar la liquidez y los activos de riesgo.<br>Si observas:<br>- WRESBAL bajando y RRPONTSYD alto = condición de ajuste de liquidez.<br>- WRESBAL subiendo y RRPONTSYD bajando = condición de expansión de liquidez.",
+	"FRED:WSHOBL|Los U.S. Treasury bills (letras del Tesoro) que la Fed mantiene de forma directa en su cartera de inversiones (Securities Held Outright) a una fecha específica de miércoles.<br>“Assets” → activos del balance de la Fed.<br>“Securities Held Outright” → títulos que la Fed ha comprado y mantiene hasta vencimiento o venta.<br>“U.S. Treasury Securities: Bills” → Treasury bills (T-bills), es decir, deuda pública a muy corto plazo (menos de 1 año) emitida por el Departamento del Tesoro de EE. UU.<br>“Wednesday Level” → valor contabilizado el miércoles de cada semana (es el dato oficial de la serie).<br>Cuando la Fed compra T-bills, aumenta su base monetaria y la liquidez en el sistema financiero.Aumenta la liquidez en el sistema financiero.<br>Operación técnica, no “QE clásico”. Suele buscar:estabilizar el mercado monetario, mantener el nivel de reservas bancarias, evitar tensiones tipo repo market<br>Impacto típico:<br>📉 Tipos a corto plazo más estables<br>📈 Activos de riesgo suelen agradecerlo (acciones, crypto)<br>💵 USD ligeramente más débil o estable<br>🪙 Oro / plata → positivo indirecto<br>🧠 Clave: no es estímulo “macro”, es lubricante del sistema.<br><br>Cuando vende o deja vencer sin reemplazo T-bills, reduce los activos que posee y puede estar retirando liquidez del mercado (quantitative tightening).La Fed deja vencer Bills sin reinvertir o los vende.<br>Esto significa: Drenaje de liquidez, Parte (aunque suave) del QT (Quantitative Tightening), menos soporte al sistema monetario<br>Impacto típico:<br>📈 Tipos cortos con presión al alza<br>📉 Riesgo de estrés en money markets<br>📉 Riesgo-assets más frágiles<br>💵 USD algo más fuerte<br>🧠 Si esto coincide con: caída de reservas bancarias, subida del SOFR / repo 👉 ojo, puede preceder a volatilidad.<br>Bills = lubricante. Cambios en Bills → timing<br>Bonds/MBS = política monetaria. Cambios en Bonds/MBS → tendencia macro",
   "ECONOMICS:USM2|Liquidez M2 USA",
   "ECONOMICS:CNM2*FX_IDC:CNYUSD|Liquidez M2 CHINA (en dolares)",
   "ECONOMICS:EUM2*FX_IDC:EURUSD|Liquidez M2 EURO (en dolares)",
@@ -3296,6 +3298,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
