@@ -118,10 +118,9 @@ const marketTimmingStocksArray = [
   "FRED:NFCI|Indice de condiciones financieras. Cuando sube, hay mas restricciones economicas y por lo tanto bajadas en bolsa",
   "MULTPL:SHILLER_PE_RATIO_MONTH|The Shiller P/E Ratio helps investors understand whether the stock market as a whole is overvalued or undervalued...",
   "FRED:BAMLH0A0HYM2|Diferencia de rendimiento entre bonos no gubernamentales y los bonos gubernamentales. Si sube, el mercado ve riesgos en la economia; si baja, no hay riesgos.",
-  "AMEX:SPY/TVC:DXY|SP500 / Dollar...",
+  
   "USI:PCCE|Put / Call Ratio Equities",
   "INDEX:HIGN-INDEX:LOWN|New Highs - New Lows (NYSE market) ( >0 = bullish / <0 = bearish)",
-  "AMEX:HYG/AMEX:LQD|Bonos High Yield / Bonos 'seguros'. Representa un poco el estado de la economía.",
   "NASDAQ:SDEX|NATIONS SKEWDEX.<br>El índice está diseñado para capturar alguna medida de 'skew', 'sesgo' o 'distorsión' del mercado<br>Puede servir como un indicador del apetito por riesgo global o del \"miedo / incertidumbre\" en los mercados.<br>MIDE EXPECTATIVAS, NO CERTEZAS !!!",
   "INDEX:S5TW|S&P 500 Stocks Above 20-Day Average",
   "INDEX:S5FI|S&P 500 Stocks Above 50-Day Average",
@@ -131,13 +130,18 @@ const marketTimmingStocksArray = [
   "AMEX:RSP/AMEX:SPY|SP500 equal weight / SP500",
   "NASDAQ:QQEW/NASDAQ:QQQ|QQQ equal weight / QQQ",
   "AMEX:SPHB",
-  "AMEX:SPHB/AMEX:SPLV|ETF High Beta / Low Volatility",
+	
   "AMEX:VUG/AMEX:VTV|ETF Vanguard Growth / Value",
   "NASDAQ:QQEW",
   "NASDAQ:SQQQ",
   "AMEX:ARKK/AMEX:XLK|Tecnologia con perdida / Sector Tecnologico",
   "CBOE:MAGS",
   "CBOE:SKEW/CBOE:VIX|Si baja, peligro para la bolsa, sino todo bien",
+	"----------- TENDENCIA -----------|------------------------ CANARIOS DE LA TENDENCIA DEL MERCADO ----------------------------",
+	"AMEX:HYG/AMEX:LQD|Bonos High Yield / Bonos corporativos en grado de inversión (Bonos 'seguros'). Representa un poco el estado de la economía.",
+  	"AMEX:SPHB/AMEX:SPLV|ETF High Beta / Low Volatility",
+	"AMEX:SPY/TVC:DXY|SP500 / Dollar...",
+	"AMEX:XLY/AMEX:XLP|Consumer Discretionary/Consumer Staples",
   "----------- VOLATILIDAD -----------|------------------------------------- VOLATILIDAD -----------------------------------------",
   "GETTEX:GAN3|Volatilidad Mundial. Tiene poco o nulo volumen, por lo que no seria buena idea invertir alli. Quizas sirva como referente de la situacion de volatilidad general.",
   "CBOE:VIX|$VIX = volatilidad implícita de 30 días para $SPX. Truco: dividir $VIX por 16...<br>MIDE EXPECTATIVAS, NO CERTEZAS !!!",
@@ -535,6 +539,7 @@ const usaStocksArray = [
 	"NYSE:BX",
 	"NYSE:C",
 	"NYSE:CAG|Alimentos, principalmente productos congelados.",
+	"NASDAQ:CALM|Mayor productor de huevos de USA",
 	"NASDAQ:CASY|Cadena de tiendas de conveniencia. Medio Oeste de USA",
 	"NYSE:CAT",
 	"NYSE:CB|Seguros de propiedad y accidentes mas grande del mundo (Suiza)",
@@ -589,7 +594,7 @@ const usaStocksArray = [
 	"NASDAQ:EBAY",
 	"NYSE:ECL",
 	"NYSE:EFX|Servicio de consulta de situacion financiera. Se lo considera como un lead indicator de la economia",
-	"NYSE:EIX",
+	"NYSE:EIX|Utility electrico sur de California. Aristocrata del dividendo",
 	"NYSE:EL",
 	"NYSE:ELF|Productor de cosméticos",
 	"NYSE:EMR|Global technology and software company, which engages in the provision of solutions. It operates through the following segments: Final Control, Measurement and Analytical, Discrete Automation, Safety and Productivity, Intelligent Devices, and Software and Control.",
@@ -1025,6 +1030,7 @@ const europeStocksArray = [
 	"EURONEXT:GLE|Banca francesa",
 	"LSE:GLEN|London (La primera empresa privada del mundo dedicada a la compraventa y producción de materias primas y alimentos.)",
 	"OMXCOP:GMAB|Biotecnológica danesa líder mundial en el desarrollo de terapias de anticuerpos monoclonales para el tratamiento del cáncer y otras enfermedades graves.",
+	"LSE:GRG|Cadena de panaderías y minorista de comida para llevar del Reino Unido",
 	"LSE:GSK|London",
 	"LSE:HBR",
 	"EURONEXT:HEIA|Amsterdam",
@@ -1146,6 +1152,7 @@ const arrEuropeStocks = convertToArrayObjects(europeStocksArray);
 // Europe REITs
 const europeREITsArray = [
 	"EURONEXT:AED|Especialización en el sector sanitario, particularmente en residencias para personas mayores. Apartamentos y hoteles",
+	"LSE:BBOX|REIT: Almacenes logisticos que alquilan a grandes empresas, como Amazon",
   	"LSE:BLND|REIT: diversificado",
   	"LSE:BYG|REIT: trasteros",
   	"BME:COL|REIT: Oficinas centricas, la mayoria en Paris (Tienen en Paris, Madrid y Barcelona)",
@@ -1228,7 +1235,7 @@ const othersStocksArray = [
 	"SGX:F34|Alimentación. Singapore",
 	"SGX:G13|Opera un gigantesco Resort Turistico, el único parque temático de Universal del Sudeste Asiatico, ademas de Casinos, Restaurantes, etc. Singapore",
 	"NASDAQ:GGAL",
-	"ASX:GQG|Ofrece fondos mutuos y otras estructuras, incluyendo vehículos de inversión agrupados.",
+	"ASX:GQG|Ofrece fondos mutuos y otras estructuras, incluyendo vehículos de inversión agrupados. Gestora de Fondo de autor. El dueño tiene el 70% de la empresa.",
 	"NASDAQ:GRAB|'superapp' del sudeste asiático, con sede en Singapur. Servicios bajo demanda: entrega de comida, pagos móviles, servicios financieros y mensajería.",
 	"SGX:J36|Conglomerado de empresas (Construcción, Aeropuerto y gestion de tráfico aereo Hong Kong, Restaurantes, Ascensores, Locales comerciales, REIT (oficinas, retails y viviendas), Automóviles, Cemento, Mineria, Hoteles, etc.). Sudeste Asiatico. Singapore",
 	"ASX:JIN|Apuestas. Pequeña empresa. Apuestas en digital y no digital.",
@@ -1253,6 +1260,7 @@ const arrOthersStocks = convertToArrayObjects(othersStocksArray);
 <!--------------------------------------------------- ETFs   ------------------------------------------------------------->
 
 const etfFixedIncomeArray = [
+	"AMEX:UUP|'largo' en el dólar estadounidense y 'corto' en un grupo de divisas de países desarrollados (G10), como el euro, el yen japonés, la libra esterlina, el dólar canadiense, el franco suizo y la corona sueca . Su valor sube cuando el dólar se fortalece y baja cuando se debilita.",
   	"AMEX:AGG|Es un índice amplio y representativo del mercado de bonos en EE.UU., abarcando bonos del Tesoro, bonos corporativos de grado de inversión, bonos respaldados por hipotecas (MBS), valores respaldados por activos (ABS) y bonos municipales, excluyendo solo high-yield y TIPS",
   	"NASDAQ:BND|broad US investment-grade fixed-income coverage, Nasdaq  //(EUR: EUNE - iShares US Aggregate Bond UCITS ETF EUR Hedged (Acc). POCA LIQUIDEZ!!!)",
   	"NASDAQ:IEF|7-10 year treasury Bond (EU: XETR:SXRM)",
@@ -1341,7 +1349,7 @@ const etfVariableIncomeArray = [
 	"XETR:JGPI|ETF de gestión activa (covered call). Invierte en empresas de mercados desarrollados de todo el mundo. A las empresas infravaloradas se les da un peso más alto. Además, se busca ingresos adicionales mediante el uso de una estrategia de superposición con instrumentos financieros derivados. El ETF busca generar un rendimiento superior al índice MSCI World. (isin: IE0003UVYC20. TER: 0.35%)",
 	"NASDAQ:IBB|USA. (EUR: XETR:2B70 - IShares NASDAQ US Biotechnology UCITS ETF (isin: IE00BYXG2H39))",
 	"LSE:IEVL|Factor Value: Se enfoca en acciones europeas que están infravaloradas según métricas como el precio sobre el valor en libros (PBV) o el precio sobre ganancias (PER)",
-	"AMEX:IGV|(Software USA), USA",
+	"CBOE:IGV|(Software USA), USA",
 	"XETR:IQQH|Xetra",
 	"XETR:IQQQ|Xetra (isin:IE00B1TXK627. TER:0.65%)",
 	"XETR:IS3N|(Acc), Xetra (IE00BKM4GZ66)",
@@ -3288,6 +3296,7 @@ function attachRowClickHandlers() {
    
 </body>
 </html> 
+
 
 
 
