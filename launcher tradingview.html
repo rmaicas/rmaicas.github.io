@@ -465,12 +465,13 @@ const arrBasicMaterialsEtf = convertToArrayObjects(basicMaterialsEtfArray);
 
 	
 
-<!------------------------------------------------------------------ Sectors   OK----------------------------------------------------------->
+<!--------------------------------------------------------------------- Sectors   OK--------------------------------------------------------------->
 // Sectors
 const sectorsArray = [
 	"AMEX:XLY/AMEX:XLP|Consumer Discretionary/Consumer Staples",
 
 	"AMEX:AMLP|Master Limited Partnerships (MLPs) de infraestructura energetica que transporta y almacena energía. los MLP cobran por transportar, almacenar o procesar petróleo y gas natural, sin importar si el precio de estos es alto o bajo. Están obligados a distribuir la mayor parte de su flujo de caja entre los inversores",
+	"AMEX:AWAY|Viajes y turismo centrada en la tecnología (alcance global). Compuesta por empresas que, a través de internet y dispositivos conectados a internet, facilitan las reservas de viajes, el uso compartido de vehículos, la comparación de precios y el asesoramiento turístico.",
 	"AMEX:BIZD|Su enfoque es pasivo, lo que significa que busca replicar el rendimiento de un índice específico de BDCs (el MVIS US Business Development Companies Index), ponderando a las compañías por su capitalización bursátil. OJO: su TER es altisimo. (isin: US92189F4110, TER: 12.86%)",
 	"NASDAQ:BJK|Gaming (alcance global) (50% de sus ingresos de actividades dedicadas a la industria global del juego)",
 	"AMEX:BOAT|Transporte Maritimo (Cíclico, comprar en ciclo bajo). Réplica el índice Solactive Global Shipping, con exposición pura al transporte marítimo (portacontenedores, buques secos, petroleros, etc.) (A dia 08/06/2025 no se existe nada parecido en Europa",
@@ -483,6 +484,7 @@ const sectorsArray = [
 	"AMEX:EVX|Servicios ambientales: empresas dedicadas a la gestión de residuos, reciclaje, remediación ambiental y tratamiento de agua",
 	"AMEX:FCG|Natural Gas",
 	"AMEX:FDN|Empresas de internet (el 50% de sus ingresos debe provenir de Internet)",
+	"NASDAQ:FTXG|Alimentos (47%) y bebidas de EE.UU.",
 	"AMEX:GDX|VanEck Gold Miners ETF. Mineras de oro",
 	"AMEX:GDXJ|Mineras de oro juniors",
 	"AMEX:IAI|Corredores de bolsa (brokers) y firmas de trading estadounidenses. Subconjunto de la industria financiera, excluye otros sectores como bancos y otras instituciones financieras",
@@ -491,8 +493,10 @@ const sectorsArray = [
 	"AMEX:IDRV|Enfoque en el ecosistema de vehículos eléctricos y autónomos (Más enfocado en materiales y baterías, pero también con fuerte componente tecnológico)",
 	"CBOE:IGV|Software Sector",
 	"AMEX:IHE|Farmaceuticas",
+	"AMEX:IHF|Proveedores de servicios de salud: managed care, hospitales, instalaciones sanitarias",
 	"AMEX:IHI|Medical devices",
 	"CBOE:ITA|Aeronaves y piezas de aeronaves utilizadas en transporte aereo y componentes y equipos para la industria de defensa, incluyendo aeronaves militares, equipos de radar y armamento.",
+	"AMEX:IYG|Servicios Financieros ( incluye bancos, gestores de activos, financiación al consumo, financiación especializada, servicios de inversión y financiación hipotecaria.)",
 	"CBOE:IYT|Transporte. (incluye: transporte aéreo y logística, aerolíneas, servicios aeroportuarios, autopistas y vías férreas, marítimo, puertos y servicios marítimos, ferrocarriles y transporte por carretera.)",
 	"CBOE:IYZ|Telecomunicaciones. Operadoras tradicionales",
 	"AMEX:JETS|Aerolineas",
@@ -502,13 +506,17 @@ const sectorsArray = [
 	"AMEX:KIE|Compañía de seguros. Todo el sector asegurador",
 	"LSE:LUXU|Lujo Global",
 	"AMEX:MOO|Agroindustria",
+	"NASDAQ:NQUSB15102010LMT|Empresas de televisión por cable de gran y mediana capitalización en EE.UU.",
 	"AMEX:OIH|Servicios petroleros",
 	"CBOE:PAVE|Infraestructuras USA",
 	"AMEX:PBD|Energías renovables (alcance global)",
 	"AMEX:PBJ|Alimentos y bebidas",
 	"AMEX:PEJ|Ocio y entretenimiento",
 	"NASDAQ:PHO|Infraestructura hídrica, equipos y servicios (Enfoque en EE.UU.)",
+	"CBOE:PICK|Acciones de empresas mineras: incluye productores de aluminio, acero, cobre y otros metales (excluye oro y plata)",
 	"AMEX:PKB|Construcción, incluye fabricantes de materiales para mejoras del hogar, proveedores especializados de maquinaria, servicios de instalación/mantenimiento y promotores inmobiliarios.",
+	"CBOE:PRNT|Impresión 3D",
+	"NASDAQ:RTH|Minoristas más grandes de EE.UU. (Sigue el MVIS US Listed Retail 25 Index (25 mayores minoristas))",
 	"AMEX:SEA|Carga marítima y aérea de todo el mundo, incluidos los mercados emergentes",
 	"NASDAQ:SIXG|Tecnologías de conectividad. 5G/6G y tecnologías de conectividad: equipos de red, semiconductores, operadores móviles, centros de datos",
 	"AMEX:SLX|Acero",
@@ -537,6 +545,7 @@ const sectorsArray = [
 	"AMEX:XLY|Consumer Discretionary/Consumo Discrecional (EUR: LSE:IUCD)",
 	"AMEX:XME|Metales y minería. Segmentos compuestos por aluminio, carbón y combustibles consumibles, cobre, metales y minería diversificados, oro, metales y minerales preciosos, plata y acero. El fondo tiene una ponderación igual.",
 	"AMEX:XOP|Oil & Gas Exploration and Production",
+	"AMEX:XPH|Farmaceuticas (Equal-weight). Al no estar dominado por mega-cap, da mayor peso a empresas medianas de genéricos.",
 	"AMEX:XRT|Retails/Comercio Minorista (equal-weight) (EUR: EURONEXT:SC05)",
 	"AMEX:XTL|Telecomunicaciones. Diversificado en toda la cadena de telecomunicaciones (operadoras + equipos + infraestructura) (Equal-weight)",
 	"AMEX:XTN|SPDR S&P Transportation ETF (equal-weight)",
