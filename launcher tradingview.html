@@ -76,7 +76,7 @@ const indicesArray = [
   "FTSE:XIN9|(chosen from Shanghai Stock Exchange and Shenzhen Stock Exchange)",
   "AMEX:FXI",
   "AMEX:EWY",
-  "AMEX:EWT",
+  "AMEX:EWT|Taiwan",
   "AMEX:ARGT|Argentina",
   "BCBA:IMV/(BCBA:GGAL/NASDAQ:GGAL*10)|Simula un Merval en dolares",
   "AMEX:EWZ|Brazil [EUR XETR:4BRZ (isin: DE000A0Q4R85. TER: 0.33%)]",
@@ -478,6 +478,7 @@ const sectorsArray = [
 
 	"AMEX:AMLP|Master Limited Partnerships (MLPs) de infraestructura energetica que transporta y almacena energía. los MLP cobran por transportar, almacenar o procesar petróleo y gas natural, sin importar si el precio de estos es alto o bajo. Están obligados a distribuir la mayor parte de su flujo de caja entre los inversores",
 	"AMEX:AWAY|Viajes y turismo centrada en la tecnología (alcance global). Compuesta por empresas que, a través de internet y dispositivos conectados a internet, facilitan las reservas de viajes, el uso compartido de vehículos, la comparación de precios y el asesoramiento turístico.",
+	"AMEX:BAI|Invierte al menos el 80% de sus activos netos en inteligencia artificial (IA). Se centra en la innovación en IA y busca invertir en empresas que cumplan con los umbrales de ingresos o beneficios netos o que se proyecta como futuras líderes del mercado en tecnología de IA. Global",
 	"AMEX:BETZ|Apuestas deportivas e iGaming (juego online). Enfoque global. Sigue el índice Morningstar Sports Betting & iGaming Select Index.",
 	"AMEX:BIZD|Su enfoque es pasivo, lo que significa que busca replicar el rendimiento de un índice específico de BDCs (el MVIS US Business Development Companies Index), ponderando a las compañías por su capitalización bursátil. OJO: su TER es altisimo. (isin: US92189F4110, TER: 12.86%)",
 	"AMEX:BOAT|Transporte Maritimo (Cíclico, comprar en ciclo bajo). Réplica el índice Solactive Global Shipping, con exposición pura al transporte marítimo (portacontenedores, buques secos, petroleros, etc.) (A dia 08/06/2025 no se existe nada parecido en Europa",
@@ -516,6 +517,7 @@ const sectorsArray = [
 	"AMEX:KCE|Gestores de Inversión (Investment Managers)",
 	"AMEX:KIE|Compañía de seguros. Todo el sector asegurador",
 	"AMEX:KRE|Bancos Regionales",
+	"AMEX:KWEB|Grandes tecnológicas Chinas (softwatre, tecnologia e internet)",
 	"LSE:LUXU|Lujo Global",
 	"AMEX:MOO|Agroindustria",
 	"NASDAQ:NQUSB15102010LMT|Empresas de televisión por cable de gran y mediana capitalización en EE.UU.",
@@ -545,6 +547,7 @@ const sectorsArray = [
 	"AMEX:REM|Mortgage Real Estate",
 	"NASDAQ:RTH|Minoristas más grandes de EE.UU. (Sigue el MVIS US Listed Retail 25 Index (25 mayores minoristas))",
 	"AMEX:SEA|Carga marítima y aérea de todo el mundo, incluidos los mercados emergentes",
+	"AMEX:SHLD|Tecnología de defensa global.",
 	"NASDAQ:SIXG|Tecnologías de conectividad. 5G/6G y tecnologías de conectividad: equipos de red, semiconductores, operadores móviles, centros de datos",
 	"AMEX:SLX|Acero",
 	"NASDAQ:SMH|Semiconductores (incluye empresas de producción y equipos de semiconductores)",
@@ -645,6 +648,7 @@ const usaStocksArray = [
 	"NASDAQ:CASY|Cadena de tiendas de conveniencia. Medio Oeste de USA",
 	"NYSE:CAT",
 	"NYSE:CB|Seguros de propiedad y accidentes mas grande del mundo (Suiza)",
+	"CBOE:CBOE|Chicago Board Options Exchange. Empresa propietaria de la bolsa de opciones y derivados más grande del mundo. Cboe no invierte en los mercados, sino que es la infraestructura sobre la que otros invierten — cobra por cada transacción que pasa por sus plataformas.",
 	"NYSE:CBRE|Actuan como brókeres y consultores de bienes raíces comerciales.",
 	"NYSE:CCJ|Suministro de uranio. Exploración, extracción, molturación, compra y venta de concentrado de uranio...",
 	"NYSE:CCL",
@@ -728,6 +732,7 @@ const usaStocksArray = [
 	"NYSE:FLO|div",
 	"NYSE:FLUT|Apuestas. Empresa global. Tiene parte digital (pokerstar, Betfair) y parte no digital. Mucho fondo de comercio e intangibles",
 	"NASDAQ:FLY|Ofrece soluciones integrales de misión (cualquier operación espacial) para clientes de seguridad nacional, gubernamentales y comerciales. Ha diseñado, desarrollado y desplegado vehículos y soluciones de naves espaciales para misiones críticas en el dominio espacial.",
+	"NASDAQ:FSLR|La mayor empresa de energía solar de fabricación 100% americana y la única gran productora de paneles solares de EE.UU. que no depende de China. Tecnología propia de telururo de cadmio (CdTe), en teoria es mejor que el silicio.",
 	"NASDAQ:FTNT|Empresa de ciberseguridad",
 	"NASDAQ:GAIN|Altos dividendos",
 	"NYSE:GBX",
@@ -797,6 +802,7 @@ const usaStocksArray = [
 	"NYSE:LNG|Engages in liquefied natural gas (LNG) related businesses",
 	"NYSE:LOW|Cadena de tiendas minoristas que vende una amplia gama de productos para la construcción, remodelación, decoración y mantenimiento del hogar y de espacios exteriores.",
 	"NASDAQ:LRCX|Diseño, fabricación, comercialización... de equipos de procesamiento de semiconductores...",
+	"NASDAQ:LSTR|Soluciones de gestión del transporte en Estados Unidos, Canadá, México e internacionalmente. Opera en 2 segmentos: Logística de Transporte y Seguros. Lo que la hace especial es su modelo sin camiones propios: Landstar no posee prácticamente ningún vehículo, modelo asset-light (sin activos pesados propios). Opera a través de una red de agentes independientes y transportistas autónomos, lo que le permite ser muy flexible en ciclos económicos difíciles. Especialidades: cargas especiales y sobredimensionadas (heavy haul), carga general, transporte multimodal y logística internacional. Dato curioso: Los clientes relacionados con centros de datos representan aproximadamente el 12% del total de ingresos de la compañía, lo que le da una exposición indirecta interesante al boom de infraestructura de IA",
 	"NASDAQ:LULU",
 	"NYSE:LUMN|Infraestructuras de telecomunicaciones. Fibra óptica.",
 	"NYSE:LVS|Casinos en Macao and Singapore (2025: vendieron sus posiciones en USA)",
@@ -846,7 +852,7 @@ const usaStocksArray = [
 	"NYSE:NRG|Energía y servicios de hogar inteligente",
 	"NYSE:NSC",
 	"NYSE:NU|Servicios financieros 100% digitales más grande del mundo fuera de Asia. Sin sucursales físicas",
-	"NYSE:NUE",
+	"NYSE:NUE|La mayor productora de acero de Estados Unidos",
 	"NASDAQ:NVDA",
 	"NYSE:NVO",
 	"NASDAQ:NXPI",
@@ -1462,7 +1468,8 @@ const etfFixedIncomeArray = [
   	"XETR:VGEA|isin: IE00BH04GL39, Xetra",
   	"LSE:XDGU|(USD)",
   	"LSE:XUHY|Bonos Corporativos de alto rendimiento USD, London (isin: IE00BDR5HM97. TER: 0.20%)",
-  	"XETR:XHYA|Bonos Corporativos de alto Rendimiento EUR, Xetra (isin: LU1109943388. TER:0.20%)"
+  	"XETR:XHYA|Bonos Corporativos de alto Rendimiento EUR, Xetra (isin: LU1109943388. TER:0.20%)",
+	"AMEX:ZROZ|US. Treasury Cupon año 0.  Un bono cupón cero no paga nada durante su vida — se compra con un gran descuento y solo paga su valor nominal al vencimiento. Es uno de los ETFs de bonos más volátiles que existen (más sensible a los tipos de interés que existe, por dos razones combinadas: Vencimiento ultralargo (+25 años) y cupon cero (sin pagos intermedios, toda la sensibilidad se concentra en el precio))."
 ];
 const arrEtfFixedIncome = convertToArrayObjects(etfFixedIncomeArray);
 
