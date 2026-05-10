@@ -84,12 +84,14 @@ const indicesArray = [
 	"AMEX:EWY|Corea del Sur",
   "AMEX:EWZ|Brazil [EUR XETR:4BRZ (isin: DE000A0Q4R85. TER: 0.33%)]",
   "AMEX:EZA|South Africa iShares MSCI South Africa Index Fund",
-	"AMEX:FXI",
+	"AMEX:FXI|China large cap (más líquido que KWEB)",
   "XETR:IUSW|Saudi Arabia (iShares MSCI Saudi Arabia Capped)",
   "TADAWUL:MT30USD|Indice Arabia Saudita en usd - No real volume",
   "ASX:XJO|Indice Australia - No real volume",
-  "NSE:NIFTY",
-  "MIL:XNIF|India"
+	"AMEX:INDA|India",
+  	"NSE:NIFTY",
+	"AMEX:VEA|Mercados desarrollados ex-USA (Europa, Japón, Australia)",
+  	"MIL:XNIF|India"
 ];
 const arrIndices = convertToArrayObjects(indicesArray);
 
@@ -508,7 +510,6 @@ const sectorsArray = [
 	"AMEX:FDN|Empresas de internet (el 50% de sus ingresos debe provenir de Internet)",
 	"NASDAQ:FINX|Tecnología financiera (fintech), como plataformas de pagos digitales, banca en línea, préstamos P2P y análisis financiero (alcance global). Busca replicar el índice Indxx Global FinTech Thematic Index",
 	"NASDAQ:FTXG|Alimentos (47%) y bebidas de EE.UU.",
-	"AMEX:FXI|China large cap (más líquido que KWEB)",
 	"AMEX:GDXJ|Mineras de oro juniors",
 	"AMEX:GDX|VanEck Gold Miners ETF. Mineras de oro",
 	"AMEX:GRID|Infraestructura eléctrica y smart grid (First Trust NASDAQ Clean Edge Smart Grid)",
@@ -527,7 +528,6 @@ const sectorsArray = [
 	"AMEX:IHE|Farmaceuticas",
 	"AMEX:IHF|Proveedores de servicios de salud: managed care, hospitales, instalaciones sanitarias",
 	"AMEX:IHI|Medical devices",
-	"AMEX:INDA|India",
 	"AMEX:INDS|REITs industriales y logísticos (almacenes, centros de distribución — beneficiarios del e-commerce)",
 	"CBOE:ITA|Aeronaves y piezas de aeronaves utilizadas en transporte aereo y componentes y equipos para la industria de defensa, incluyendo aeronaves militares, equipos de radar y armamento.",
 	"AMEX:IYG|Servicios Financieros (incluye bancos, gestores de activos, financiación al consumo, financiación especializada, servicios de inversión y financiación hipotecaria.)",
@@ -591,7 +591,6 @@ const sectorsArray = [
 	"AMEX:URA|Minería global de uranio y la producción de componentes nucleares.",
 	"AMEX:USO|Petróleo crudo (commodity puro — futuros sobre WTI, no empresas)",
 	"AMEX:VAW|Materiales básicos de EE. UU. que abarcan múltiples subindustrias desde el ámbito ampliamente definido (incluye empresas que fabrican productos químicos, materiales de construcción, vidrio, papel, productos forestales y productos de envasado, así como empresas de metales, minerales y mineras.)",
-	"AMEX:VEA|Mercados desarrollados ex-USA (Europa, Japón, Australia)",
 	"AMEX:VEGI|Producción de materias primas, dentro del ámbito agrícola global",
 	"AMEX:VGT|Tecnología (componentes) de la información en Estados Unidos",
 	"AMEX:VICE|Bebidas Alcoholicas, tabaco y juegos (Empresas estadounidenses que generan al menos el 50% de ingresos de alcohol, tabaco o juegos de azar)",
