@@ -440,7 +440,7 @@ const basicMaterialsEtfArray = [
 // Sectors
 const sectorsArray = [
 	"AMEX:XLY/AMEX:XLP|Consumer Discretionary/Consumer Staples",
-
+	"NASDAQ:AIRR|First Trust RBA American Industrial Renaissance ETF. Invierte en empresas industriales estadounidenses beneficiadas por la relocalización de la producción (reshoring), el aumento del gasto en infraestructuras y la modernización de la industria. Tiene una elevada exposición a fabricantes, maquinaria y componentes industriales. (Dist. ISIN: US33738R6059. TER: 0.70%) EUR: XETR:XDWT",
 	"AMEX:AMLP|Master Limited Partnerships (MLPs) de infraestructura energetica que transporta y almacena energía. los MLP cobran por transportar, almacenar o procesar petróleo y gas natural, sin importar si el precio de estos es alto o bajo. Están obligados a distribuir la mayor parte de su flujo de caja entre los inversores",
 	"CBOE:ARKG|Genómica e innovación biológica (activo, ARK Invest)",
 	"CBOE:ARKK|Innovación disruptiva (activo, Cathie Wood — alto riesgo/alta volatilidad)",
@@ -483,6 +483,7 @@ const sectorsArray = [
 	"NASDAQ:ICOP|Copper and metals mining ETF",
 	"AMEX:IDNA|Genómica e inmunoterapia (iShares)",
 	"AMEX:IDRV|Enfoque en el ecosistema de vehículos eléctricos y autónomos (Más enfocado en materiales y baterías, pero también con fuerte componente tecnológico)",
+	"CBOE:IFRA|iShares U.S. Infrastructure ETF. Invierte en empresas estadounidenses relacionadas con infraestructuras, incluyendo construcción, ingeniería, materiales, maquinaria, transporte y servicios públicos. Se beneficia del incremento de la inversión pública y privada en infraestructuras. (Dist. ISIN: US46435U7707. TER: 0.30%) EUR: LSE:INFR",
 	"CBOE:IGV|Software Sector",
 	"AMEX:IHAK|Ciberseguridad (iShares, alternativa a HACK)",
 	"AMEX:IHE|Farmaceuticas",
@@ -554,6 +555,7 @@ const sectorsArray = [
 	"AMEX:VEGI|Producción de materias primas, dentro del ámbito agrícola global",
 	"AMEX:VGT|Tecnología (componentes) de la información en Estados Unidos",
 	"AMEX:VICE|Bebidas Alcoholicas, tabaco y juegos (Empresas estadounidenses que generan al menos el 50% de ingresos de alcohol, tabaco o juegos de azar)",
+	"AMEX:VIS|Vanguard Industrials ETF. Invierte en empresas industriales estadounidenses de gran, mediana y pequeña capitalización, incluyendo fabricantes, transporte, maquinaria, defensa y servicios industriales. Ofrece una exposición amplia y diversificada al sector industrial de EE.UU. (Dist. ISIN: US92204A7028. TER: 0.09%) EUR: XETR:XDWT",
 	"AMEX:VNQ|Real Estate, principalmente REITs (Real Estate Investment Trusts)",
 	"NASDAQ:WCLD|Cloud Computing (WisdomTree, equal-weight, más diversificado)",
 	"NASDAQ:WOOD|Empresas globales de timberland (terrenos forestales para la producción de madera), productos forestales y papel",
