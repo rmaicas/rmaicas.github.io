@@ -1079,7 +1079,7 @@ const usaBDCsArray = [
 	"NASDAQ:PSEC|BDC",
 	"NYSE:SAR|BDC: Financiación personalizada a empresas de mediano tamaño ('middle-market') en Estados Unidos",
 	"NASDAQ:SLRC|BDC: Financiación personalizada a empresas de mediano tamaño ('middle-market') en Estados Unidos",
-	"NASDAQ:TRIN|BDC: Financiación personalizada a empresas en etapas de crecimiento, especialmente en sectores tecnológicos",
+	"NYSE:TRIN|BDC: Financiación personalizada a empresas en etapas de crecimiento, especialmente en sectores tecnológicos",
 	"NYSE:TSLX|BDC: Financiación de deuda flexibles a empresas de mediana capitalización ('middle-market') en Estados Unidos.",
 	"NASDAQ:WHF|BDC: Financiación personalizadas a empresas de mediano tamaño ('middle-market') en Estados Unidos.",
 ];
