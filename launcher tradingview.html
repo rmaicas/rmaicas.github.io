@@ -115,16 +115,40 @@ li:active {
   text-decoration: underline;
 }
 
-table, th, td {
+table{
   border: 1px solid silver;
-  border-collapse: collapse;
+  /* border-collapse: collapse; */
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+th, td {
+  border: 1px solid silver;
+  /* border-collapse: collapse; */
+  border-collapse: separate;
+  border-spacing: 0;
   padding-left: 5px;
   padding-right: 5px;
 }
 
 .header-table {
-  background-color: dimgrey;
-  color: whitesmoke;
+	background-color: #2C3E50;
+	color: #ECF0F1;
+}
+
+th.header-table {
+  position: sticky;
+  top: var(--sticky-header-height, 90px);
+  z-index: 50;
+  padding-top: 10px;      /* ajusta a gusto: 8–16px */
+  padding-bottom: 10px;
+  line-height: 1.25;      /* opcional: más aire entre líneas si el texto va en 2 líneas */
+  /* min-height: 44px;   /* alternativa si quieres altura mínima fija */
+  border-bottom: 2px solid #F2A12E; /* eco de la pestaña activa, solo una línea */
+}
+
+th.header-table.tooltip:hover {
+  z-index: 100;  /* mayor que 50 de los demás th; ver nota del pageHeader abajo */
 }
 
 .prTableRow:hover {
@@ -139,38 +163,42 @@ body {
 
 .list-group {
   list-style-type: none;
-  padding-left: 15px;
+  /*padding-left: 15px;*/
 }
-
 
 /* Style the tab */
 .tab {
   overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: lightsteelblue;
-  margin-top: 0px;
+  border: none;
+  background-color:  #2C3E50;  /* o #2C3E50 */
+  width: 100%;
+  margin-top: 0;
 }
 
 /* Style the buttons inside the tab */
 .tab button {
-  background-color: inherit;
+  background-color: #2C3E50;
+  color: #fff;
   float: left;
   border: none;
+  border-radius: 0;
   outline: none;
   cursor: pointer;
   padding: 14px 16px;
-  transition: 0.3s;
+  transition: background-color 0.2s, color 0.2s;
   font-size: 17px;
+  font-weight: 500;
 }
 
 /* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #ddd;
+.tab button:hover:not(.active) {
+  background-color: #34495E;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-  background-color: #ccc;
+  background-color: #F2A12E;
+  color: #2D3436;
 }
 
 /* Style the tab content */
@@ -261,11 +289,12 @@ select option {
 
 /* Tooltip text */
 .tooltip .tooltiplittletext {
-  top: -10px;
+  top: 100%; /*-10px;*/
   visibility: hidden;
   width: 600px; /* Adjust the width as needed */
   background-color: black;
   color: #fff;
+  font-weight: normal;
   text-align: left;
   padding: 5px 0;
   border-radius: 6px;
@@ -279,13 +308,14 @@ select option {
 }
 
 .tooltip .tooltiptext {
-  top: -150px;
+  top: 100%; /*-150px;*/
   visibility: hidden;
-  width: 600px; /* Adjust the width as needed */
+  width: 800px; /* Adjust the width as needed */
   background-color: black;
   color: #fff;
+  font-weight: normal;
   text-align: left;
-  padding: 5px 0;
+  /* padding: 5px 0; */
   border-radius: 6px;
   position: absolute;
   z-index: 99999999 !important;
@@ -294,6 +324,12 @@ select option {
   margin-left: -600px; /* Center the tooltip */
   opacity: 0;
   transition: opacity 0.3s;
+
+  max-height: calc(100vh - var(--sticky-header-height, 90px) - 24px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 8px 12px;   /* mejor que solo padding vertical; espacio para la barra de scroll */
+  box-sizing: border-box;
 }
 
 /* Show the tooltip text when hovering over the tooltip container */
@@ -333,8 +369,8 @@ select option {
 </style>
 
 <!---- Cabecera ---->
-<div style="width:100%;position: sticky;top: 0;background-color: black;z-index: 99;">
-  <div style="width:50%; float:left;"><h2>Launcher of Trading View</h2></div>
+<div id="pageHeader" style="width:100%;position: sticky;top: 0;background-color: black;z-index: 99;">
+  <div style="width:50%; float:left;"><h2>Alquimia</h2></div>
   <div style="width:50%; float:right;padding-top: 0px;">
 	User: 
 	<select id="selectTV" >
@@ -395,18 +431,6 @@ select option {
 			
 			
 				<div>
-					<div style="width:100%;padding-top:0px;">
-						<div class="flagList">
-							<label for="purpleList">&#129002; Purple List:</label>
-							<table class="list-group" name="purpleList" id="purpleList" style="font-size: small;"></table>
-						</div>
-					</div>	
-					<div style="width:100%;padding-top:10px;">	
-						<div class="flagList"">
-							<label for="blueList">&#128998; Blue List:</label>
-							<table class="list-group" name="blueList" id="blueList" style="font-size: small;"></table>
-						</div>
-					</div>
 					<div style="width:100%;padding-top:10px;">		
 						<div class="flagList">
 							<label for="greenList">&#129001; Green List:</label>
@@ -417,6 +441,18 @@ select option {
 						<div class="flagList">
 							<label for="redList">&#128997; Red List:</label>
 							<table class="list-group" name="redList" id="redList" style="font-size: small;"></table>
+						</div>
+					</div>
+					<div style="width:100%;padding-top:0px;">
+						<div class="flagList">
+							<label for="purpleList">&#129002; Purple List:</label>
+							<table class="list-group" name="purpleList" id="purpleList" style="font-size: small;"></table>
+						</div>
+					</div>	
+					<div style="width:100%;padding-top:10px;">	
+						<div class="flagList"">
+							<label for="blueList">&#128998; Blue List:</label>
+							<table class="list-group" name="blueList" id="blueList" style="font-size: small;"></table>
 						</div>
 					</div>
 				</div>
@@ -1113,8 +1149,16 @@ var USAMarket = {
   PerfY: undefined        // Rendimiento a 1 año
 };
 
+
+function updateStickyHeaderOffset() {
+	const header = document.getElementById('pageHeader');
+	if (header) {
+		document.documentElement.style.setProperty('--sticky-header-height', header.offsetHeight + 'px');
+	}
+}
+window.addEventListener('resize', updateStickyHeaderOffset);
+
 function onLoad() {
-	//getNote();
 	getFlags();
 	activeSplitters();
 	setAllTabContentListTV();
@@ -1122,9 +1166,10 @@ function onLoad() {
 	
 	getUSAMarketData();
 	
-	// openTab ya se encarga de arrancar el fetch + el refresco periódico de la pestaña inicial
+	updateStickyHeaderOffset(); 
+	
 	var event = {
-        currentTarget: document.getElementById('tabNotes')
+        currentTarget: document.getElementById('mainTab')
     };
 	openTab(event, 'tabNotes');
 }
@@ -1302,6 +1347,7 @@ function formatCommentForDisplay(comment) {
 }
 
 function changeComment(ticket, comment){
+	comment = comment.trim();
 	setCommentInArray(ticket, comment);
 	saveFlags();
 	setAllFlagsOnPage();
@@ -1330,7 +1376,7 @@ function setFlagToTicket(ticket, charFlag) {
 function setCommentToTicket(ticket, comment) {
 	let nodeList = document.querySelectorAll("#"+ticket.replaceAll(":", "\\:").replaceAll("!", "\\!").replaceAll("/", "\\/"));
 	for (let i = 0; i < nodeList.length; i++) {
-		nodeList[i].closest('tr').querySelector('[data-cell="comment"]').childNodes[0].innerText = comment;
+		nodeList[i].closest('tr').querySelector('[data-cell="comment"]').childNodes[0].innerHTML = comment;
 	}
 }
 
@@ -1962,36 +2008,24 @@ function extractPxValue(str) {
 var currentlyHighlightedRow = null;
 
 // Function to handle row clicks
-function handleRowClick(event) {
-  // If the click is on a button or select element, don't change highlighting
-  if (event.target.tagName === 'BUTTON' || event.target.tagName === 'SELECT') {
-    return;
-  }
-
-  const clickedRow = event.currentTarget;
-  
-  // If there's a previously highlighted row, restore its original color
+function handleRowClick(clickedRow) {
   if (currentlyHighlightedRow) {
-    currentlyHighlightedRow.style.backgroundColor = ''; // Reset to default
+    currentlyHighlightedRow.style.backgroundColor = '';
   }
-  
-  // Highlight the clicked row in darkslategrey
   clickedRow.style.backgroundColor = 'darkslategrey';
-  
-  // Update the currently highlighted row
   currentlyHighlightedRow = clickedRow;
 }
 
 // Function to attach click handlers to all table rows
 function attachRowClickHandlers() {
-  // Get all table rows in the document
-  const allRows = document.querySelectorAll('table tr');
-  
-  // Add click handler to each row
-  allRows.forEach(row => {
-    row.addEventListener('click', handleRowClick);
+  document.body.addEventListener('click', function(event) {
+    const row = event.target.closest('tr.prTableRow');
+    if (row) {
+      handleRowClick(row);
+    }
   });
 }
+
 // //////////////////////////   END HIGHLIGHTING ROW   /////////////////////////////////// 
 
 </script>
