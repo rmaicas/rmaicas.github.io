@@ -1406,7 +1406,7 @@ const europeREITsArray = [
 // Canada Stocks
 const canadaStocksArray = [
 	"TSX:ABX|Barrick Gold. Una de las principales mineras de oro. Posee muchas minas en paises emergentes con muchas problematicas.",
-	"TSX:AEM|Segunda minera de oro por capitalizacion (2025). Mineras en lugares mas 'seguros'.",
+	"TSX:AEM|Segunda minera de oro por capitalizacion (2025). Mineras en lugares mas seguros.",
 	"TSXV:AFM|Alphamin Resources. Productor de estaño (Tin) con operaciones en la República Democrática del Congo. Opera la mina Bisie, uno de los yacimientos de estaño de mayor ley del mundo, beneficiándose de la creciente demanda de soldaduras y electrónica.",
 	"TSX:AG|Production, development, exploration and acquisition of mineral properties. It owns and operates producing mines in México",
 	"TSX:AGI|Minera de oro",
