@@ -924,7 +924,7 @@ const usaStocksArray = [
 	"NASDAQ:RCAT|Software para drones",
 	"NYSE:RDDT|Reddit. Plataforma global de comunidades y foros online. Genera ingresos mediante publicidad, licencias de datos para entrenamiento de IA y servicios de suscripción premium.",
 	"NASDAQ:REGN|Medicamentos innovadores para tratar enfermedades serias.",
-	"NASDAQ:RGLD|Empresa que financia operaciones de oro. No es una minera",
+	"NASDAQ:RGLD|Empresa que financia operaciones de oro. No es una minera. Prioriza calidad de activo sobre volumen. Estructura organizativa: menos de 35 empleados gestionando activos multimillonarios",
 	"NYSE:RHI|ETT. Recursos humanos y Staffing",
 	"NYSE:RIG|(Empresa Suiza) Flota que presta servicios de perforación por contrato offshore para pozos de petróleo y gas. Especialista en aguas profundas y ambientes hostiles.",
 	"NASDAQ:RKLB|Cohetes espaciales y defensa",
@@ -1425,7 +1425,7 @@ const canadaStocksArray = [
 	"TSX:DSG|Software para logistica (enrutar, programar, rastrear y medir recursos de entrega; planificar, asignar y ejecutar envíos; tasar, auditar y pagar facturas de transporte; acceder a datos comerciales globales; archivar documentos aduaneros y de seguridad para importaciones y exportaciones; y completar numerosos otros procesos logísticos)",
 	"TSX:ENB|Dividendos",
 	"TSX:FN",
-	"TSX:FNV|Compounder de oro, ofrece servicios financieros a mineras de oro. No tiene el riesgo de una minera. Hacen prestamos a empresas mineras a cambio de un royalty (acuerdan un % de la extracción del oro) o stream (acuerdan un precio de compra del metal)",
+	"TSX:FNV|Compounder de oro, ofrece servicios financieros a mineras de oro. No tiene el riesgo de una minera. Hacen prestamos a empresas mineras a cambio de un royalty (acuerdan un % de la extracción del oro) o stream (acuerdan un precio de compra del metal). Es sustancialmente más diversificada que TSX:WPM no es puro precious metals, mezcla oro/plata/PGM con exposición a energía",
 	"TSX:GOOS|Chaquetas de abrigo",
 	"TSX:IMO",
 	"TSX:IVN|Empresa de desarrollo minero dedicada a la exploración y desarrollo de propiedades minerales. Principalmente cobre y ademas metales preciosos. Minas en Congo, Sudafrica",
@@ -1439,7 +1439,7 @@ const canadaStocksArray = [
 	"TSX:TPZ",
 	"TSX:U.UN|Fondo de Inversión en Uranio. Compra y almacena uranio fisico",
 	"TSX:WCP|Exploración, producción y desarrollo de petróleo y gas natural (sus operaciones se concentran en el oeste de Canadá). Tambien captura y almacena carbono que luego utiliza para extraer más petróleo de sus campos maduros.",
-	"TSX:WPM|Compounder de oro, ofrece servicios financieros a mineras de oro. No tiene el riesgo de una minera. Hacen prestamos a empresas mineras a cambio de un royalty (acuerdan un % de la extracción del oro) o stream (acuerdan un precio de compra del metal)"
+	"TSX:WPM|Compounder de oro, ofrece servicios financieros a mineras de oro. No tiene el riesgo de una minera. Hacen prestamos a empresas mineras a cambio de un royalty (acuerdan un % de la extracción del oro) o stream (acuerdan un precio de compra del metal). Es mayoritariamente streaming puro."
 ];
 
 // Japan Stocks
