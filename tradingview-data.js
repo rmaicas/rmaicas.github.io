@@ -1424,7 +1424,6 @@ const canadaStocksArray = [
 	"TSX:DNG|Minera de oro y plata. Minas en zonas 'complicadas'.",
 	"TSX:DSG|Software para logistica (enrutar, programar, rastrear y medir recursos de entrega; planificar, asignar y ejecutar envíos; tasar, auditar y pagar facturas de transporte; acceder a datos comerciales globales; archivar documentos aduaneros y de seguridad para importaciones y exportaciones; y completar numerosos otros procesos logísticos)",
 	"TSX:ENB|Dividendos",
-	"TSX:FN",
 	"TSX:FNV|Compounder de oro, ofrece servicios financieros a mineras de oro. No tiene el riesgo de una minera. Hacen prestamos a empresas mineras a cambio de un royalty (acuerdan un % de la extracción del oro) o stream (acuerdan un precio de compra del metal). Es sustancialmente más diversificada que TSX:WPM no es puro precious metals, mezcla oro/plata/PGM con exposición a energía",
 	"TSX:GOOS|Chaquetas de abrigo",
 	"TSX:IMO",
