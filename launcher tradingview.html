@@ -1336,6 +1336,22 @@ function escapeHtml(str) {
 		.replaceAll("'", '&#39;');
 }
 
+// Escapa un valor para poder incrustarlo de forma segura dentro de un literal
+// JavaScript delimitado por comillas simples (') que a su vez esta dentro de
+// un atributo HTML delimitado por comillas dobles ("), como los onclick/onChange
+// generados en buildRowHTML (setFlag/changeFlag/liClick/liChatClick). Sin esto,
+// un item.id/refDataTV/desc con una comilla simple (p.ej. "Moody's") o una
+// comilla doble rompe el literal JS o el propio atributo, y el evento deja de
+// dispararse.
+function escapeJsAttr(str) {
+	return String(str)
+		.replaceAll('\\', '\\\\')
+		.replaceAll("'", "\\'")
+		.replaceAll('"', '&quot;')
+		.replaceAll('\n', '\\n')
+		.replaceAll('\r', '');
+}
+
 // Punto unico de formateo de comentarios para mostrar en pantalla: escapa el texto
 // (asi cualquier "<", ">" etc. tecleado o pegado se ve como texto, nunca se ejecuta)
 // y solo despues convierte los saltos de linea en <br> reales. Los comentarios se
@@ -1439,24 +1455,35 @@ function buildRowHTML(item, index, opts) {
 
 	var commentFound = arrayComments.find(itemComment => itemComment.id === item.id);
 
+	// Valores pre-escapados para uso seguro dentro de literales JS embebidos en
+	// atributos onclick/onChange (comillas simples y dobles no rompen el markup).
+	var idJs = escapeJsAttr(item.id);
+	var refDataTVJs = escapeJsAttr(item.refDataTV);
+	var descJs = escapeJsAttr(item.desc);
+
 	// Primera celda: logo + ticker. Difiere en ancho, boton de flag y si el span lleva id.
 	var firstCellHTML;
 	if (opts.mode === 'flag') {
 		firstCellHTML = `<td style="width: 160px;">&nbsp;<img src="" logoid="${item.refDataTV}" class="firstImage"/><img src="" class="secondImage"/>`
-			+`<span class="pointAndCall" onclick="liClick('${item.id}')" style="font-size: small;">${item.id}</span></td>`
+			+`<span class="pointAndCall" onclick="liClick('${idJs}')" style="font-size: small;">${item.id}</span></td>`
 	} else {
-		firstCellHTML = `<td style="width: 180px;max-width: 300px;"><button type="button" class="flag" data-cell="flag" onclick="setFlag('${item.id}', '${item.refDataTV}', '${item.desc}');">&#11036;</button>`
+		firstCellHTML = `<td style="width: 180px;max-width: 300px;"><button type="button" class="flag" data-cell="flag" onclick="setFlag('${idJs}', '${refDataTVJs}', '${descJs}');">&#11036;</button>`
 			+`&nbsp;<img src="" logoid="${item.refDataTV}" class="firstImage"/><img src="" class="secondImage"/>`
-			+`<span class="pointAndCall" onclick="liClick('${item.id}')" id="${item.id}" style="font-size: small;">${item.id}</span></td>`
+			+`<span class="pointAndCall" onclick="liClick('${idJs}')" id="${item.id}" style="font-size: small;">${item.id}</span></td>`
 	}
 
 	// Clase del span de refDataTV: fija "tabNotes" en la tabla de flags, por-pestana en la tabla TV.
 	var refDataTVClass = opts.mode === 'flag' ? 'tabNotes' : opts.tabId;
 
 	// Celda de descripcion: TODO revisar por que difieren font-size y el <br>.
+	// refDescription/additionalDescription son atributos HTML "normales" (no van dentro de
+	// una llamada JS), asi que se escapan con escapeHtml (igual que los comentarios), no con
+	// escapeJsAttr. El contenido visible <i>${item.desc}</i> tambien se escapa: item.desc son
+	// datos de configuracion, no texto de usuario, pero escaparlo aqui evita que una descripcion
+	// con "<" o "&" rompa el marcado al pintarla.
 	var descriptionCellHTML = opts.mode === 'flag'
-		? `<td style="font-size: x-small;" refDescription="${item.refDataTV}" additionalDescription="${item.desc}"><span class="pointAndCall" onclick="liChatClick('${item.id}')">ℹ️</span><i>${item.desc}</i></td>`
-		: `<td style="font-size: small;" refDescription="${item.refDataTV}" additionalDescription="${item.desc}"><span class="pointAndCall" onclick="liChatClick('${item.id}')">ℹ️</span><br><i>${item.desc}</i></td>`
+		? `<td style="font-size: x-small;" refDescription="${escapeHtml(item.refDataTV)}" additionalDescription="${escapeHtml(item.desc)}"><span class="pointAndCall" onclick="liChatClick('${idJs}')">ℹ️</span><i>${escapeHtml(item.desc)}</i></td>`
+		: `<td style="font-size: small;" refDescription="${escapeHtml(item.refDataTV)}" additionalDescription="${escapeHtml(item.desc)}"><span class="pointAndCall" onclick="liChatClick('${idJs}')">ℹ️</span><br><i>${escapeHtml(item.desc)}</i></td>`
 
 	var rowHTML = `<tr class="prTableRow">${firstCellHTML}`
 		+`<td style="width: 220px; text-align: right;"> <span style="font-size: xx-small;">${(item.id!=item.refDataTV?item.refDataTV:'')}</span>&nbsp;<span class="${refDataTVClass}" refDataTV="${item.refDataTV}" style="font-size: small;"></span></td>`
@@ -1469,12 +1496,12 @@ function buildRowHTML(item, index, opts) {
 		+`<td style="font-size: smaller; text-align: center;" refRecommendsD="${item.refDataTV}"></td>`
 		+`<td style="font-size: smaller; text-align: left;" refSectorIndustryDataTV="${item.refDataTV}"></td>`
 		+descriptionCellHTML
-		+`<td data-cell="comment"><div style="background-color: #363535;color: gainsboro;" contenteditable onblur="changeComment( '${item.id}', innerText)">${commentFound?.comment ? formatCommentForDisplay(commentFound.comment) : ""}</div></td>`
+		+`<td data-cell="comment"><div style="background-color: #363535;color: gainsboro;" contenteditable onblur="changeComment( '${idJs}', innerText)">${commentFound?.comment ? formatCommentForDisplay(commentFound.comment) : ""}</div></td>`
 
 	if (opts.mode === 'flag') {
 		var charFlag = opts.charFlag;
 		rowHTML += `<td style="font-size: x-small; text-align: right;" >
-					<select id="${'select_'+item.id}" onChange="changeFlag( '${item.id}', '${item.refDataTV}', '${item.desc}', '${charFlag}', document.getElementById('${'select_'+item.id}').value)" style="border: 0;background-color: transparent;color: lightgray;">
+					<select id="${'select_'+item.id}" onChange="changeFlag( '${idJs}', '${refDataTVJs}', '${descJs}', '${charFlag}', document.getElementById('${'select_'+item.id}').value)" style="border: 0;background-color: transparent;color: lightgray;">
 						<option value="${CHAR_RED}"    ${charFlag == CHAR_RED? "selected":""}>${CHAR_RED}</option>
 						<option value="${CHAR_GREEN}"  ${charFlag == CHAR_GREEN? "selected":""}>${CHAR_GREEN}</option>
 						<option value="${CHAR_BLUE}"   ${charFlag == CHAR_BLUE? "selected":""}>${CHAR_BLUE}</option>
@@ -1483,7 +1510,7 @@ function buildRowHTML(item, index, opts) {
 				</td>`
 			+`<td><button type="button" class="flag" ${(index==0)? 'disabled' : ''} onclick="moveItem('${charFlag}', ${index}, ${index-1})" style="font-size: smaller;">&#9650;</button></td>`
 			+`<td><button type="button" class="flag" ${(index==opts.arrayLength-1)? 'disabled' : ''} onclick="moveItem('${charFlag}', ${index}, ${index+1})" style="font-size: smaller;">&#9660;</button></td>`
-			+`<td><button type="button" class="flag" onclick="removeFlag('${item.id}')" style="font-size: smaller;">&#10006;</button></td></tr>`;
+			+`<td><button type="button" class="flag" onclick="removeFlag('${idJs}')" style="font-size: smaller;">&#10006;</button></td></tr>`;
 	} else {
 		rowHTML += `</tr>`;
 	}
@@ -1807,8 +1834,8 @@ function updateUI(symbol, jsonResponse) {
 					: amountShort(jsonResponse["close"] * jsonResponse["shares_outstanding"]);
 
 				item.innerHTML = ((additionalDescription === undefined) || (additionalDescription === ""))
-					? `${description} <span class="pointAndCall" onclick="liChatClick('${symbol}')">ℹ️</span> (Cap: ${capitalization})`
-					: `${description} <span class="pointAndCall" onclick="liChatClick('${symbol}')">ℹ️</span> (Cap: ${capitalization})<br><i>${additionalDescription}</i>`;
+					? `${description} <span class="pointAndCall" onclick="liChatClick('${symbol.replaceAll("'", "\\'").replaceAll('"','&quot;')}')">ℹ️</span> (Cap: ${capitalization})`
+					: `${description} <span class="pointAndCall" onclick="liChatClick('${symbol.replaceAll("'", "\\'").replaceAll('"','&quot;')}')">ℹ️</span> (Cap: ${capitalization})<br><i>${escapeHtml(additionalDescription)}</i>`;
 			}
 		}
 
@@ -1825,7 +1852,7 @@ function updateUI(symbol, jsonResponse) {
 		for (const item of descriptionNodes) {
 			const additionalDescription = item.getAttribute("additionalDescription");
 			if ((additionalDescription != undefined) && (additionalDescription !== "")) {
-				item.innerHTML = `<a href="https://chatgpt.com/?q=Resumen+de+la+empresa+${symbol}" target="_blank">ℹ️</a><br><i>${additionalDescription}</i>`;
+				item.innerHTML = `<a href="https://chatgpt.com/?q=Resumen+de+la+empresa+${symbol}" target="_blank">ℹ️</a><br><i>${escapeHtml(additionalDescription)}</i>`;
 			}
 		}
 	}
