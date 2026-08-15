@@ -1124,6 +1124,7 @@ const chinaStocksArray = [
 	"HKEX:1982|div, Textil, tejidos de punto y calzado.",
 	"HKEX:2020|Anta Sport. Marca de ropa deportiva china.",
 	"HKEX:2678|Holding de inversión, que se dedica a la fabricación y distribución de hilos, tejidos grises, tejidos no son de algodon y tejidos para prendas de vestir.",
+	"HKEX:2688|ENN Energy Holdings Limited. Opera redes de distribución de gas natural en China y comercializa gas y otros productos energéticos, además de desarrollar soluciones energéticas integradas.",
 	"HKEX:3306|Diseño, promoción y venta de ropa, calzado y accesorios para mujeres, hombres, niños y adolescentes, así como productos para el hogar. Casa de modas multimarca.",
 	"HKEX:3998|Ropa de plumas (plumíferos) más grande de China y una de las marcas de moda más reconocidas del país",
 	"HKEX:6198|div",
@@ -1135,6 +1136,8 @@ const chinaStocksArray = [
 	"HKEX:9919|Eventos de marketing",
 	"HKEX:9987|Comida rapida de USA en China. En USA: NYSE:YUMC",
 	"HKEX:9988|En USA: NYSE:BABA",
+	"SZSE:300124|Shenzhen Inovance Technology Co., Ltd. Desarrolla sistemas de automatización industrial, control de movimiento, variadores y servomotores, además de soluciones para vehículos eléctricos. Combina exposición a la automatización industrial con la electrificación y los vehículos de nueva energía.",
+	"SZSE:300757|RoboTechnik Intelligent Technology Co., Ltd. Desarrolla equipos y sistemas de fabricación inteligente para sectores como energía solar, semiconductores, electrónica y automoción. Está especializada en automatización de procesos y líneas de producción.",
 	"SSE:600026|Transporte de petroleo y gas. Filial del grupo estatal chino China COSCO Shipping Corporation. Es el brazo principal del grupo para el transporte de energía.",
 	"SSE:600600|Cervecería Tsingtao. Es la empresa cervecera más antigua y una de las más reconocidas de China",
 	"SSE:600809|Vino chino",
@@ -1157,7 +1160,7 @@ const chinaStocksArray = [
 
 const europeStocksArray = [
 	"EURONEXT:AALB|Industrial: Eficiencia energetica de edificios: Tuberias, pinturas, etc.",
-	"SIX:ABBN|Electrificación, automatización de procesos y robotica.",
+	"SIX:ABBN|ABB Ltd. Desarrolla tecnologías de electrificación, automatización industrial, accionamientos, robotica, motores y soluciones digitales para industria e infraestructuras. Tiene una exposición diversificada a tendencias como electrificación, eficiencia energética y automatización industrial.",
 	"EURONEXT:AI|Air Liquide. Líder mundial en gases industriales y medicinales. Suministra oxígeno, nitrógeno, hidrógeno y otros gases para industrias como semiconductores, salud, energía y fabricación avanzada. Es uno de los principales beneficiarios del crecimiento del hidrógeno y de la fabricación de chips.",
 	"EURONEXT:AIR|Paris",
 	"LSE:ABDN|Inversión y gestión de patrimonios",
@@ -1447,8 +1450,12 @@ const canadaStocksArray = [
 const japanStocksArray = [
 	"TSE:4063|Shin-Etsu Chemical. Una de las mayores químicas japonesas. Líder mundial en obleas de silicio para semiconductores, PVC, materiales electrónicos y químicos especializados. Muy expuesta a la industria semiconductor.",
 	"TSE:5401|Nippon Steel. Una de las mayores acereras del mundo. Produce acero para automoción, construcción, infraestructuras y maquinaria industrial. Para el mercado estadounidense (ADR): OTC:NPSCY.",
+	"TSE:6273|SMC Corporation. Fabrica componentes y sistemas de automatización neumática, como cilindros, válvulas, actuadores y equipos de control. Es uno de los líderes mundiales en tecnología neumática industrial.",
 	"TSE:6367|Daikin Industries. Líder mundial en aire acondicionado, climatización HVAC y refrigeración industrial/comercial. Muy fuerte en eficiencia energética y expansión global.",
+	"TSE:6383|Daifuku Co., Ltd. Desarrolla sistemas automatizados de manipulación y almacenamiento de materiales para fábricas, almacenes, aeropuertos y otros centros logísticos. Es uno de los principales especialistas mundiales en intralogística automatizada.",
 	"TSE:6857|Advantest. Equipos de prueba y medición para la industria de semiconductores. Especializada en testeo de chips avanzados y muy expuesta a IA, GPUs y semiconductores de alto rendimiento.",
+	"TSE:6861|KEYENCE CORPORATION. Desarrolla sensores, sistemas de visión artificial, instrumentos de medición y otros equipos para automatización industrial. Destaca por su elevada especialización tecnológica y su amplio catálogo de productos de alta precisión.",
+	"TSE:6954|FANUC CORPORATION. Fabrica sistemas CNC, robots industriales y máquinas-herramienta automatizadas. Es uno de los principales referentes mundiales en automatización industrial y robótica de fábrica.",
 	"TSE:7203|Toyota Motor. Uno de los mayores fabricantes de automóviles del mundo. Líder en híbridos, automoción global y fabricación eficiente. También desarrolla baterías, hidrógeno y conducción autónoma.",
 	"TSE:7974|Nintendo. Empresa japonesa de videojuegos y entretenimiento digital. Desarrolla consolas, videojuegos y franquicias icónicas como Mario, Zelda y Pokémon. Negocio basado en propiedad intelectual extremadamente fuerte.",
 	"TSE:8002|Marubeni. Conglomerado japonés (sogo shosha). Opera en real estate, gestión de activos, agricultura, química, metales, energía, transporte, alimentación e infraestructuras. Fundada en 1858.",
