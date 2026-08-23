@@ -960,6 +960,13 @@ class StockDataService {
     }
 		
 	if (this.rateLimiter.isPaused) {
+	  if (cached) {
+	    // Aunque la cache haya caducado, durante una pausa por rate-limit es preferible
+	    // servir un dato desactualizado que devolver undefined: eso evita que updateUI
+	    // borre contenido ya pintado con exito (p.ej. description/capitalizacion).
+	    console.log(`Pausado: usando datos cacheados (posiblemente desactualizados) para ${symbol}`);
+	    return cached.data;
+	  }
 	  console.log(`Espera ${Math.ceil((this.rateLimiter.pauseUntil - now)/1000)} segundos`);
 	  return;
 	}
@@ -1836,6 +1843,7 @@ function updateUI(symbol, jsonResponse) {
 				item.innerHTML = ((additionalDescription === undefined) || (additionalDescription === ""))
 					? `${description} <span class="pointAndCall" onclick="liChatClick('${symbol.replaceAll("'", "\\'").replaceAll('"','&quot;')}')">ℹ️</span> (Cap: ${capitalization})`
 					: `${description} <span class="pointAndCall" onclick="liChatClick('${symbol.replaceAll("'", "\\'").replaceAll('"','&quot;')}')">ℹ️</span> (Cap: ${capitalization})<br><i>${escapeHtml(additionalDescription)}</i>`;
+				item.dataset.tvLoaded = "1"; // NUEVO: marca que este simbolo ya tuvo alguna vez un dato real de TradingView
 			}
 		}
 
@@ -1847,9 +1855,14 @@ function updateUI(symbol, jsonResponse) {
 			}
 		}
 	} else {
-		// Sin datos de TradingView: solo conservamos la descripción manual que ya hubiera, con enlace a ChatGPT.
+		// Sin datos de TradingView (p.ej. rate limiter pausado y sin cache disponible, o fallo puntual):
+		// si el simbolo ya llego a tener una descripcion real de TradingView en una actualizacion previa,
+		// NO la pisamos con el fallback reducido (ℹ️ + descripcion manual), para no "perder" datos ya
+		// cargados (description + capitalizacion) por un fallo transitorio. El fallback solo se aplica
+		// mientras el simbolo nunca haya tenido datos reales.
 		const descriptionNodes = document.querySelectorAll(`[refDescription="${symbol}"]`);
 		for (const item of descriptionNodes) {
+			if (item.dataset.tvLoaded === "1") continue;
 			const additionalDescription = item.getAttribute("additionalDescription");
 			if ((additionalDescription != undefined) && (additionalDescription !== "")) {
 				item.innerHTML = `<a href="https://chatgpt.com/?q=Resumen+de+la+empresa+${symbol}" target="_blank">ℹ️</a><br><i>${escapeHtml(additionalDescription)}</i>`;
