@@ -1682,7 +1682,11 @@ const etfVariableIncomeDividendArray = [
 	"LSE:DGRA|WisdomTree US Quality Dividend Growth UCITS ETF - USD Acc. Invierte en acciones estadounidenses con dividendos, seleccionando empresas de calidad y potencial de crecimiento mediante factores como crecimiento esperado de beneficios y rentabilidad sobre recursos propios y activos. (USD Acum. ISIN: IE00BZ56RG20. TER: 0.33%)",
   	"LSE:EDVD|El índice S&P Emerging Markets High Yield Dividend Aristocrats sigue la rentabilidad de las empresas con alta rentabilidad por dividendo del índice S&P Emerging Plus LargeMidCap que han aumentado o mantenido sus dividendos durante al menos cinco años consecutivos.(isin: IE00B6YX5B26. TER: 0.55%)",
   	"XETR:EHDL|Dividendos en paises emergentes, Xetra (isin: IE00BYYXBF44, TER: 0.49%)",
+	"EURONEXT:FGBL|First Trust Global Equity Income UCITS ETF Acc. Invierte globalmente en acciones con elevado potencial de rentas, seleccionadas por liquidez, rentabilidad por dividendo y calidad; sigue el Nasdaq Global High Equity Income Index. Es la clase de acumulación del mismo fondo que <LSE:GINC>, cotiza en EUR aunque su divisa base es USD. (USD Acum. ISIN: IE00BYTH6121. TER: 0.60%)",
+	"LSE:FGEU|Fidelity Global Quality Income UCITS ETF Income EUR (Hedged) Shares. Invierte en acciones de gran y mediana capitalización de mercados desarrollados con sólidos fundamentales y elevada rentabilidad por dividendo. Es la clase cubierta a EUR de <LSE:FGQI>, reduciendo el impacto de las fluctuaciones EUR/USD. (EUR Dist. ISIN: IE00BYV1YH46. TER: 0.45%)",
+	"LSE:FGQI|Fidelity Global Quality Income UCITS ETF Income Shares. Invierte en acciones de gran y mediana capitalización de mercados desarrollados que combinan calidad financiera y dividendos elevados, utilizando factores como margen de flujo de caja libre, ROIC y estabilidad del flujo de caja. (USD Dist. ISIN: IE00BYXVGZ48. TER: 0.40%)",
 	"LSE:FUSD|Replicar el rendimiento del índice Fidelity U.S. Quality Income Index. Dividendos y revalorización del capital invirtiendo en empresas estadounidenses de alta calidad (isin: IE00BYXVGX24. TER: 0.25%)",
+	"LSE:GINC|First Trust Global Equity Income UCITS ETF Dist. Invierte globalmente en acciones seleccionadas por liquidez, rentabilidad por dividendo y calidad mediante el Nasdaq Global High Equity Income Index. Es la clase de distribución del mismo fondo que <EURONEXT:FGBL>; GINC distribuye los dividendos mientras FGBL los reinvierte. (USD Dist. ISIN: IE00BD842Y21. TER: 0.60%)",
   	"LSE:GLDV|The S&P Global Dividend Aristocrats index tracks high dividend yielding equities globally. (isin: IE00B9CQXS71. TER: 0.45%)",
   	"LSE:HDLV|Tracks the 50 least-volatile high dividend-yielding stocks in the S&P 500. (isin: IE00BWTN6Y99, TER: 0.30%)",
   	"LSE:IEDL|Dividendos aceptables (4.5% aprox) con un crecimiento sostenido (isin: IE00BG13YH41, TER: 0.25%)",
@@ -1695,15 +1699,19 @@ const etfVariableIncomeDividendArray = [
   	"XETR:SMLD|Busca replicar el índice Morningstar MLP Composite. Este índice replica las Sociedades Limitadas Maestras (MLP) estadounidenses que operan en infraestructura energética estadounidense. (isin: IE00B8CJW150. TER: 0.50%)",
   	"XETR:SPYD|Aristocratas de Dividendos en el SP500, Xetra. The S&P High Yield Dividend Aristocrats index tracks the stocks of the S&P Composite 1500 index that have increased dividends every year for at least 20 consecutive years. (isin: IE00B6YX5D40. TER: 0.35%)",
   	"XETR:SPYW|The S&P Euro High Yield Dividend Aristocrats index tracks the EUROZONE companies whose dividends have risen in the last 10 consecutive years. (isin: IE00B5M1WJ87. TER: 0.30%)",
+	"LSE:TDIV|seguir al Morningstar Developed Markets Large Cap Dividend Leaders Index (índice de reinversión bruta) (isin: NL0011683594. TER:0.38%)",
   	"XETR:UDIV|Tracks the Solactive Global SuperDividend index tracks stocks with high dividend yields from around the world (isin:IE00B77FRP95, TER: 0.45/0.60%)",
   	"XETR:VDIV|ETFs de dividendos de todo el mundo (aparentemente peor rendimiento que el ISPA, pero mas barato). The Morningstar Developed Markets Large Cap Dividend Leaders index tracks the performance of companies that display consistency and sustainability in dividend payment patterns and is composed of the top yielding securities which satisfy the screening criteria. Only stocks from developed countries are included in the index.(isin: NL0011683594. TER: 0.38%)",
-	"LSE:TDIV|seguir al Morningstar Developed Markets Large Cap Dividend Leaders Index (índice de reinversión bruta) (isin: NL0011683594. TER:0.38%)",
+	
+	
   	"EURONEXT:VEUR|Dividendos en Europa, Amsterdam (isin: IE00B945VV12, TER: 0.10%)",
   	"LSE:VHYL|The FTSE All-World High Dividend Yield index tracks high dividend yielding equity globally. (isin: IE00B8GKDB10. TER: 0.29%)",
+	"LSE:WQDV|iShares MSCI World Quality Dividend Advanced UCITS ETF. Invierte en acciones globales de mercados desarrollados seleccionadas por dividendos y factores de calidad, siguiendo el MSCI World High Dividend Yield Advanced Select Index. Mantiene una cartera de unas 194 compañías y distribuye dividendos trimestralmente. (USD Dist. ISIN: IE00BYYHSQ67. TER: 0.38%)",
+	"XETR:WTEM|WisdomTree Global Quality Dividend Growth UCITS ETF - USD Acc. Invierte en acciones de mercados desarrollados de todo el mundo, seleccionadas por calidad y crecimiento del dividendo. Pondera las compañías según los dividendos pagados en lugar de por capitalización bursátil y reinvierte los dividendos. (USD Acum. ISIN: IE00BZ56SW52. TER: 0.38%)",
   	"XETR:XGSD|Exposure to 100 equities from global developed market s with historically high dividend payments - Smart Beta Methodology, Xetra (isin: LU0292096186, TER: 0.50%)",
 	"XETR:VGWD|DIST Sigue al índice FTSE All-World High Dividend Yield sigue a nivel global a las acciones con altos rendimientos por dividendo. (isin: IE00B8GKDB10. TER: 0.29%)",
 	"XETR:VGWE|ACUM Sigue al índice FTSE All-World High Dividend Yield sigue a nivel global a las acciones con altos rendimientos por dividendo. (isin: IE00BK5BR626. TER: 0.29%)",
-	"XETR:WTEM|WisdomTree Global Quality Dividend Growth UCITS ETF - USD Acc. Invierte en acciones de mercados desarrollados de todo el mundo, seleccionando empresas de calidad con dividendos y potencial de crecimiento. Combina factores de calidad y crecimiento y pondera las compañías según los dividendos pagados, en lugar de por capitalización bursátil. (USD Acum. ISIN: IE00BZ56SW52. TER: 0.38%)",
+	
 ];
 
 // ETF Real Estate
