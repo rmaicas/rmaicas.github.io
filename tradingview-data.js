@@ -840,11 +840,11 @@ const usaStocksArray = [
 	"NYSE:JPM",
 	"NYSE:KD|Diseño, operación, gestión y modernización de las infraestructuras tecnológicas críticas y complejas de sus clientes, que son principalmente grandes empresas y organizaciones gubernamentales. Se escindió de IBM en 2021",
 	"NYSE:KEP|monopolio eléctrico de Corea del Sur y la empresa de servicios públicos más grande del país. El gobierno de Corea del Sur es su principal accionista.",
-	"NASDAQ:KHC",
+	"NYSE:KHC|Kraft Heinz. Multinacional de alimentación y bebidas propietaria de marcas como Heinz, Kraft, Philadelphia, Oscar Mayer y Capri Sun. Su negocio está centrado en productos de consumo básico, con una elevada presencia en supermercados y canales de alimentación.",
 	"NYSE:KKR|Firma de inversión",
 	"NASDAQ:KLAC|Semiconductores",
 	"NASDAQ:KMB|Consumo basico. Dodots, cleanex, scottex, etc. Negocio Defensivo.",
-	"NYSE:KMI",
+	"NYSE:KMI|Kinder Morgan. Una de las mayores compañías de infraestructura energética de Norteamérica. Opera extensas redes de gasoductos, terminales y almacenamiento de gas natural, petróleo y productos refinados, generando gran parte de sus ingresos mediante tarifas por transporte y almacenamiento.",
 	"NYSE:KNOP|Shipping",
 	"NYSE:KNSL|Compania de Seguros, especializada en seguros de propiedad y accidentes (Property & Casualty) con enfoque en nichos más especializados y de mayor riesgo",
 	"NYSE:KO",
@@ -1479,6 +1479,7 @@ const canadaStocksArray = [
 	"TSX:CNQ",
 	"TSX:CNR|Canadian National Railway. Mayor red ferroviaria de Canadá, con conexiones desde la costa del Pacífico hasta el Atlántico y el Golfo de México. Transporta una amplia variedad de mercancías entre Canadá y Estados Unidos.",
 	"TSX:CP|Canadian Pacific Kansas City. Ferrocarril de mercancías que conecta Canadá, Estados Unidos y México tras la adquisición de Kansas City Southern. Es la única red ferroviaria que une de forma directa los tres países del T-MEC. En USA: NYSE:CP",
+	"TSX:CRON|Cronos Group. Empresa de cannabis con operaciones principalmente en Canadá. Desarrolla, produce y comercializa productos de cannabis para uso recreativo y medicinal, incluyendo flores, extractos y productos derivados.",
 	"TSX:CSU|Conglomerado de empresas de software vertical",
 	"NASDAQ:DLO|DLocal Limited. Proporciona infraestructura de pagos para conectar empresas globales con consumidores de mercados emergentes, especialmente en América Latina, África y Asia. Su plataforma permite gestionar cobros, pagos, divisas y métodos de pago locales mediante una única integración. Empresa uruguaya.",
 	"TSX:DNG|Minera de oro y plata. Minas en zonas 'complicadas'.",
@@ -1710,7 +1711,7 @@ const etfVariableIncomeArray = [
 	"EURONEXT:WTAI-ETFP|WisdomTree Artificial Intelligence UCITS ETF. Invierte en empresas globales relacionadas con inteligencia artificial, infraestructura de IA, semiconductores y software avanzado. Replica el WisdomTree Artificial Intelligence Index. (Acum. ISIN: IE0007EL0WG9. TER: 0.40%)",
 	"XETR:XAIX|Invierte en empresas globales relacionadas con inteligencia artificial, aprendizaje automático, computación avanzada y análisis de Big Data. (Acum. ISIN: IE00BGV5VN51. TER: 0.35%)",
 	"XETR:XDEV|ETF global de factor Value. Replica el índice MSCI World Enhanced Value y busca empresas desarrolladas con valoraciones atractivas según métricas fundamentales. (Acum. ISIN: IE00BL25JM42. TER: 0.25%)",
-	"XETR:XDW0|Xetra",
+	"XETR:XDW0|Xtrackers MSCI World Energy UCITS ETF 1C. Invierte en empresas del sector energético de mercados desarrollados, incluyendo principalmente compañías de petróleo, gas y servicios energéticos. Sigue el MSCI World Energy Total Return Net Index y ofrece una exposición global concentrada exclusivamente en energía. (Acum. ISIN: IE00BM67HM91. TER: 0,25%)",
 	"XETR:ZPRX|Empresas de pequeña capitalización europeas. Pondera las empresas según métricas de valor fundamental (precio/beneficio, precio/valor contable, etc.), dando más peso a las empresas más baratas en términos relativos.(isin: IE00BSPLC298, TER: 0.30%)"
 ];
 
