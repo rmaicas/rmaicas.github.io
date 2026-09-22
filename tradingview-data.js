@@ -984,7 +984,7 @@ const usaStocksArray = [
 	"NASDAQ:SBUX",
 	"NYSE:SCHW|Charles Schwab. Uno de los mayores brokers y gestores patrimoniales de Estados Unidos. Ofrece corretaje, banca, gestión de activos, ETFs y servicios financieros para inversores minoristas e institucionales.",
 	"NYSE:SCI|Prestación de bienes y servicios funerarios.",
-	"NASDAQ:SCCO|Southern Copper Corporation. Productor integrado de cobre con operaciones mineras principalmente en Perú y México. Extrae y procesa cobre y también produce subproductos como molibdeno, plata y zinc, por lo que sus resultados están muy ligados a los precios de los metales. Minas a cielo abierto sin tener que hacer tuneles o excavar.",
+	"NYSE:SCCO|Southern Copper Corporation. Productor integrado de cobre con operaciones mineras principalmente en Perú y México. Extrae y procesa cobre y también produce subproductos como molibdeno, plata y zinc, por lo que sus resultados están muy ligados a los precios de los metales. Minas a cielo abierto sin tener que hacer tuneles o excavar.",
 	"NYSE:SE|Sea Limited. Opera tres grandes negocios digitales: videojuegos mediante Garena, comercio electrónico mediante Shopee y pagos y servicios financieros mediante Monee. Su principal exposición geográfica está en el Sudeste Asiático, aunque Shopee también tiene una presencia relevante en Brasil.",
 	"NASDAQ:SEZL|Sezzle. Plataforma Buy Now Pay Later (BNPL) enfocada en consumidores jóvenes. Permite financiar compras en cuotas sin intereses y obtiene ingresos de comercios y servicios financieros asociados.",
 	"NYSE:SF|Stifel Financial. Banco de inversión y firma de gestión patrimonial. Ofrece brokerage, asesoramiento financiero, banca de inversión, research y gestión de activos para clientes institucionales y particulares.",
