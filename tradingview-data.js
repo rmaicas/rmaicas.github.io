@@ -644,6 +644,7 @@ const usaStocksArray = [
 	"NASDAQ:APLD|Prestación de servicios de desarrollo y operación de centros de datos",
 	"NYSE:APO|Firma de Inversiones",
 	"NASDAQ:APP|Marketing y monetización de contenido para apps",
+	"NASDAQ:ARM|Arm Holdings. Diseña y licencia propiedad intelectual para procesadores CPU, GPU, sistemas y subsistemas de cómputo que otras compañías incorporan en sus propios chips. Su modelo combina pagos por licencias con royalties por cada chip fabricado que utiliza tecnología Arm, lo que genera ingresos recurrentes a medida que aumenta el volumen de chips vendidos. Su arquitectura está presente en más del 99% de los smartphones y la compañía está ampliando su actividad hacia chips propios para centros de datos e inteligencia artificial con el Arm AGI CPU. ",
 	"NASDAQ:ASPS",
 	"NASDAQ:ASST|Strive, Inc. Desarrolla servicios de gestión de activos y productos financieros orientados a Bitcoin y otros activos digitales. Busca combinar la gestión de inversiones con una estrategia de acumulación de Bitcoin como activo de reserva.",
 	"NASDAQ:ASTS|Está construyendo la primera y única red de banda ancha celular espacial accesible directamente desde smartphones convencionales sin modificar, diseñada tanto para aplicaciones comerciales como gubernamentales.",
