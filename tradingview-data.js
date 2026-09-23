@@ -54,7 +54,6 @@ const indicesArray = [
 	"AMEX:INDA|iShares MSCI India ETF. Invierte en acciones indias de gran y mediana capitalización, proporcionando exposición diversificada a la economía de India. EUR: EURONEXT:NDIA / MIL:XNIF. (USD Dist. ISIN: US46429B5982. TER: 0.61%)",
 	"AMEX:KSA|iShares MSCI Saudi Arabia ETF. Invierte en acciones saudíes, proporcionando exposición directa al mercado de Arabia Saudita. EUR: LSE:IKSA / XETR:IUSW. (USD Dist. ISIN: US46434V2159. TER: 0.59%)",
 	"AMEX:TUR|iShares MSCI Turkey ETF. Invierte en acciones turcas, con exposición diversificada a los principales sectores de la economía turca. EUR: XETR:IQQ5. (USD Dist. ISIN: US4642868215. TER: 0.59%)",
-	"NYSE:KWEB|KraneShares CSI China Internet ETF. Invierte en empresas chinas de Internet, comercio electrónico, tecnología y servicios digitales, con fuerte exposición a gigantes como Tencent, Alibaba y PDD. EUR: LSE:KWBE. (USD Dist. ISIN: US5007673065. TER: 0.69%)",
 	
   "TVC:SX5E",
   "EURONEXT:PX1|CAC 40. Índice bursátil que representa las 40 principales compañías cotizadas de Francia.",
@@ -523,7 +522,8 @@ const sectorsArray = [
 	"AMEX:KCE|Gestores de Inversión (Investment Managers)",
 	"AMEX:KIE|Compañía de seguros. Todo el sector asegurador",
 	"AMEX:KRE|Bancos Regionales",
-	"AMEX:KWEB|Grandes tecnológicas Chinas (software, tecnologia e internet)",
+	"AMEX:KSTR|KraneShares China Technology & Semiconductor STAR 50 Index ETF. Invierte en las 50 mayores empresas del mercado chino STAR de Shanghái, centrado en compañías de tecnología, semiconductores, biomedicina, nuevas energías y otras industrias de alta tecnología. Es una exposición directa a acciones A de China continental y sigue el SSE Science and Technology Innovation Board 50 Index. (Semiconductores, hardware y tecnología avanzada) (ISIN: US5007676944. TER: 0,89%) EUR: XETR:KSRE",
+	"NYSE:KWEB|KraneShares CSI China Internet ETF. Invierte en empresas chinas de Internet, comercio electrónico, tecnología y servicios digitales, con fuerte exposición a gigantes como Tencent, Alibaba y PDD. (Internet, plataformas y consumo digital.) EUR: LSE:KWBE. (USD Dist. ISIN: US5007673065. TER: 0.69%)",
 	"AMEX:LNGZ|GNL / Gas Natural Licuado (cadena de valor completa: productores, terminales, transportistas)",
 	"LSE:LUXU|Lujo Global",
 	"AMEX:MJ|Cannabis global (AdvisorShares Pure Cannabis ETF — el más líquido del sector)",
