@@ -1690,7 +1690,7 @@ function atrProximityMark(deviationPct, atrp) {
 	if (atrp == null) return '';
 	const absDeviation = Math.abs(deviationPct);
 	if (absDeviation <= atrp) return ' <span style="color:white;">**</span>';
-	if (absDeviation <= 2 * atrp) return ' <span style="color:white;">*</span>';
+	if (absDeviation <= 2 * atrp) return ' <span style="color:white;font-size:1.4em;line-height:1;">*</span>';
 	return '';
 }
 
