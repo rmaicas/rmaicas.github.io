@@ -1023,7 +1023,7 @@ class StockDataService {
   }
   
   async fetchFromTradingView(symbol) {
-    const url = `https://scanner.tradingview.com/symbol?symbol=${symbol}&fields=close,change,logoid,description,price_52_week_high,price_52_week_low,sector,industry,country,market,Low.1M,High.1M,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y,High.All,market_cap_basic,shares_outstanding,dps_common_stock_prim_issue_fy,dividend_yield_recent,dividends_yield,dividends_yield_current,dps_common_stock_prim_issue_yoy_growth_fy,continuous_dividend_growth,dividend_payout_ratio_ttm,continuous_dividend_payout,MACD.macd,MACD.signal,ATR,Recommend.MA,Recommend.Other,Recommend.All,MACD.macd|1W,MACD.signal|1W,ATR|1W,price_earnings_ttm,return_on_invested_capital,return_on_equity,operating_margin,net_debt_to_ebitda_fq,Recommend.MA|1W,Recommend.Other|1W,Recommend.All|1W,relative_volume_intraday|5,relative_volume_10d_calc|1W&no_404=true`;
+    const url = `https://scanner.tradingview.com/symbol?symbol=${symbol}&fields=close,change,logoid,description,price_52_week_high,price_52_week_low,sector,industry,country,market,Low.1M,High.1M,Perf.W,Perf.1M,Perf.3M,Perf.6M,Perf.Y,High.All,market_cap_basic,shares_outstanding,dps_common_stock_prim_issue_fy,dividend_yield_recent,dividends_yield,dividends_yield_current,dps_common_stock_prim_issue_yoy_growth_fy,continuous_dividend_growth,dividend_payout_ratio_ttm,continuous_dividend_payout,MACD.macd,MACD.signal,ATR,Recommend.MA,Recommend.Other,Recommend.All,MACD.macd|1W,MACD.signal|1W,ATR|1W,price_earnings_ttm,return_on_invested_capital,return_on_equity,operating_margin,net_debt_to_ebitda_fq,Recommend.MA|1W,Recommend.Other|1W,Recommend.All|1W,relative_volume_intraday|5,relative_volume_10d_calc|1W,SMA200,EMA50&no_404=true`;
     
     const response = await fetch(url);
     
@@ -1801,6 +1801,28 @@ function updateUI(symbol, jsonResponse) {
 				recommendsD += ` M: <span class="colorData ${infoD.color}">${formatNum(infoD.macdNormal)}</span>`;
 			} else {
 				recommendsD = ' M: -';
+			}
+
+			// ---- Desviación respecto a MA200 ----
+			if (jsonResponse["SMA200"] != null &&
+				jsonResponse["EMA50"] != null &&
+				jsonResponse["close"] != null) {
+
+				const close = +jsonResponse["close"];
+				const sma200 = +jsonResponse["SMA200"];
+				const ema50 = +jsonResponse["EMA50"];
+
+				const deviationPct_MA200 = (close - sma200) / sma200 * 100;
+
+				const color_MA200 =
+					deviationPct_MA200 > 0
+						? (close >= ema50 ? 'green' : 'orange')
+						: (close <= ema50 ? 'red' : 'blue');
+
+				recommendsD += `<br><span style="white-space: nowrap;">MA200: <span class="colorData ${color_MA200}">${formatNum(deviationPct_MA200)}%</span></span>`;
+
+			} else {
+				recommendsD += '<br>MA200: -';
 			}
 
 			if (jsonResponse["relative_volume_intraday|5"] != null) {
