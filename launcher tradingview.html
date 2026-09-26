@@ -1689,8 +1689,8 @@ function relativeVolumeBadge(value) {
 function atrProximityMark(deviationPct, atrp) {
 	if (atrp == null) return '';
 	const absDeviation = Math.abs(deviationPct);
-	if (absDeviation <= atrp) return ' <span style="color:white;">**</span>';
-	if (absDeviation <= 2 * atrp) return ' <span style="color:white;font-size:1.4em;line-height:1;">*</span>';
+	if (absDeviation <= atrp) return ' <span style="color:yellow;font-weight: bold;">**</span>';
+	if (absDeviation <= 2 * atrp) return ' <span style="color:yellow;font-size:1.4em;line-height:0.8;vertical-align: middle;font-weight: bold;">*</span>';
 	return '';
 }
 
