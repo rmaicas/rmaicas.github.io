@@ -870,7 +870,7 @@ const usaStocksArray = [
 	"NASDAQ:LRCX|Lam Research. Uno de los mayores fabricantes de equipos para fabricación de semiconductores. Especializado en procesos de grabado (etch), deposición y limpieza de obleas, esenciales para chips avanzados y memorias.",
 	"NASDAQ:LSTR|Soluciones de gestión del transporte en Estados Unidos, Canadá, México e internacionalmente. Opera en 2 segmentos: Logística de Transporte y Seguros. Lo que la hace especial es su modelo sin camiones propios: Landstar no posee prácticamente ningún vehículo, modelo asset-light (sin activos pesados propios). Opera a través de una red de agentes independientes y transportistas autónomos, lo que le permite ser muy flexible en ciclos económicos difíciles. Especialidades: cargas especiales y sobredimensionadas (heavy haul), carga general, transporte multimodal y logística internacional. Dato curioso: Los clientes relacionados con centros de datos representan aproximadamente el 12% del total de ingresos de la compañía, lo que le da una exposición indirecta interesante al boom de infraestructura de IA",
 	"NASDAQ:LULU",
-	"NYSE:LUMN|Infraestructuras de telecomunicaciones. Fibra óptica.",
+	"NASDAQ:LUMN|Infraestructuras de telecomunicaciones. Fibra óptica.",
 	"NYSE:LVS|Casinos en Macao and Singapore (2025: vendieron sus posiciones en USA)",
 	"NYSE:LW|Elaboración, congelación y comercialización de una amplia gama de productos de patata procesada para el mercado global de servicios alimentarios (foodservice) y retail (venta al por menor).",
 	"NYSE:M",
