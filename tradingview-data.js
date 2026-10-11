@@ -1110,7 +1110,6 @@ const usaREITsArray = [
   	"NYSE:PSA|REIT: Trasteros y almacenaje. Instalaciones de autoalmacenamiento (trasteros individuales). 03/24:Tiene menos deuda",
   	"NYSE:PSTL|REIT: Alquila inmuebles al US Post",
   	"NASDAQ:SBRA|REIT: Adquisición, financiación y tenencia de bienes inmuebles. (altos dividendos)",
-  	"NYSE:SILA|REIT: High-quality healthcare facilities",
   	"NYSE:SPG|REIT: Comercial Retail. Centros Comerciales principalmente en Estados Unidos, con una presencia estratégica más pequeña en Asia y Europa.",
   	"NYSE:STAG|REIT: Industrial",
 	"NASDAQ:SUNS|mREIT: Préstamos inmobiliarios comerciales diversificados en Estados Unidos",
